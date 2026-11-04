@@ -498,7 +498,7 @@ Object.assign(window, { W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).
-const FAIXAS_TORCIDA = [['beira', 60], ['muro', 40], ['arvore', 40], ['laje', 120]];
+const FAIXAS_TORCIDA = [['beira', 60], ['muro', 40], ['arvore', 40], ['laje', 200]];
 const bonecos = n => Math.round(3 * Math.sqrt(Math.max(n, 0)));
 
 // geometria do campo em perspectiva

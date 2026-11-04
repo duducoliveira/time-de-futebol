@@ -89,7 +89,7 @@ def _artilheiro(e: dict, rng: random.Random) -> dict:
 # Torcida desenhada: cada boneco vale ~ (n/9)^0.5 torcedores; quem não cabe na
 # arquibancada vai para a beira do campo, o muro, as árvores e as lajes do morro.
 # O renderizador (video/cenas.js: niveisTorcida) usa exatamente as mesmas faixas.
-FAIXAS = [("beira", 60), ("muro", 40), ("arvore", 40), ("laje", 120)]
+FAIXAS = [("beira", 60), ("muro", 40), ("arvore", 40), ("laje", 200)]
 
 
 def bonecos(n: int) -> int:
