@@ -7,3 +7,4 @@ render/
 .cache/
 episodios/*/narracao.mp3
 episodios/*/render.json
+!videos/*.mp4

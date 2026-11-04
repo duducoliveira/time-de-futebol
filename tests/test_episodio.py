@@ -67,3 +67,20 @@ def test_tres_dias():
     assert "12" in e["elenco"] and e["elenco"]["12"]["posicao"] == "GOL"
     assert sum(l["j"] for l in tabela(list(e["liga"]["times"]), e["liga"]["resultados"])) == 20
     assert round(sum(x["valor"] for x in e["extrato"]), 2) == e["caixa"]
+
+
+def test_niveis_da_torcida_e_gancho():
+    assert ep.nivel_torcida(0, 500) == "vazio"
+    assert ep.nivel_torcida(200, 500) == "enchendo"
+    assert ep.nivel_torcida(1500, 500) == "beira"
+    assert ep.nivel_torcida(3745, 500) == "arvore"
+    assert ep.nivel_torcida(13200, 500) == "laje"
+    assert ep.nivel_torcida(10**6, 500) == "tudo"
+    e = _estado()
+    e, r = ep.fechar(e, ep.preparar(e, 0, None, []))
+    assert [c["tipo"] for c in r["cenas"][:3]] == ["abertura", "regras", "estadio"]
+    e, r = ep.fechar(e, ep.preparar(e, 3745, {"like_count": 4732}, []))
+    evo = r["cenas"][0]
+    assert evo["tipo"] == "evolucao" and evo["dados"]["caixa"] == 4732 and evo["dados"]["antes"] == 0
+    assert r["cenas"][1]["tipo"] == "estadio" and r["cenas"][1]["dados"]["nivel"] == "arvore"
+    assert all("hud" in c["dados"] and "estrutura" in c["dados"] for c in r["cenas"])

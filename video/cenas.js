@@ -233,6 +233,88 @@ const TIPOS = {
   },
 };
 
+
+// instante em que a narração fala uma palavra (para sincronizar elementos com a voz)
+function quando(c, palavra, padrao = 0, ultima = false) {
+  const ws = (c.palavras || []).filter(w => w.texto.toLowerCase().replace(/[^a-zà-ú]/g, '').startsWith(palavra));
+  const p = ultima ? ws[ws.length - 1] : ws[0];
+  return p ? p.t0 : padrao;
+}
+
+function contador(valor, antes, p) { return antes + (valor - antes) * easeOut(clamp(p)); }
+
+function cartaoNumero(rotulo, valor, { regra = '', delta = '', cor = CORES.laranja, moeda = '' } = {}) {
+  const txt = (moeda ? moeda + ' ' : '') + Math.round(valor).toLocaleString('pt-BR');
+  const tam = txt.length > 8 ? 88 : 110;
+  return cartao(480, 330, `
+    <rect x="-240" y="-165" width="480" height="70" rx="30" fill="${CORES.marinho}"/><rect x="-240" y="-125" width="480" height="30" fill="${CORES.marinho}"/>
+    <text y="-115" text-anchor="middle" font-family="Anton" font-size="40" fill="#fff" letter-spacing="3">${esc(rotulo)}</text>
+    <text y="10" text-anchor="middle" font-family="Anton" font-size="${tam}" fill="${cor}" stroke="${OUT}" stroke-width="6" paint-order="stroke">${esc(txt)}</text>
+    ${delta ? `<text y="72" text-anchor="middle" font-family="Anton" font-size="42" fill="${CORES.verde}">${esc(delta)}</text>` : ''}
+    <text y="${delta ? 130 : 110}" text-anchor="middle" font-family="Anton" font-size="30" fill="${OUT}" letter-spacing="1">${esc(regra)}</text>`, { bg: CORES.creme });
+}
+
+Object.assign(TIPOS, {
+  regras(t, d, c, E) {
+    let s = camera(t, d, estadioAereo(E.estrutura, 0, { t, nome: NOME(E) }), { z0: 1.0, z1: 1.05 });
+    s += `<rect width="${W}" height="${H}" fill="${CORES.marinho}" opacity=".45"/>`;
+    s += pop(t, 0.05, W / 2, 230, pilula(c.texto_tela[0] || 'COMO FUNCIONA', { tam: 60, bg: CORES.laranja, cor: OUT, rot: -2 }));
+    const regras = [['seguidor', '👤', '1 SEGUIDOR', '= 1 TORCEDOR NO ESTÁDIO', '#3a86ff'],
+      ['curtida', '❤️', '1 CURTIDA', '= R$ 1 NO CAIXA DO CLUBE', '#e63946'],
+      ['comentário', '💬', 'COMENTÁRIO MAIS CURTIDO', 'DECIDE O QUE O CLUBE FAZ', '#2e8b57']];
+    regras.forEach(([chave, ic, a, b, cor], i) => {
+      const t0 = quando(c, chave, 0.6 + i * 2);
+      s += pop(t, t0 - 0.15, W / 2, 430 + i * 210, cartao(900, 170, `
+        <circle cx="-360" r="58" fill="${cor}" stroke="${OUT}" stroke-width="6"/><text x="-360" y="22" text-anchor="middle" font-size="58">${ic}</text>
+        <text x="-270" y="-8" font-family="Anton" font-size="${a.length > 12 ? 52 : 64}" fill="${OUT}">${esc(a)}</text>
+        <text x="-270" y="50" font-family="Anton" font-size="38" fill="${cor}">${esc(b)}</text>`, { bg: CORES.creme }));
+    });
+    return s;
+  },
+  estadio(t, d, c, E) {
+    const dd = c.dados;
+    const rev = easeOut(prog(t, 0.4, Math.min(3, d * 0.6)));
+    let s = camera(t, d, estadioAereo(E.estrutura, dd.torcida, { t, revelar: rev, torcidaAntes: dd.antes || 0, nome: NOME(E) }),
+      { z0: 1.12, z1: 1.0, cy: 900 });
+    const v = contador(dd.torcida, dd.antes || 0, rev);
+    s += pop(t, 0.1, W / 2, 250, pilula(`${Math.round(v).toLocaleString('pt-BR')} TORCEDORES`, { tam: 66, bg: CORES.laranja, cor: OUT, rot: -2 }));
+    if (c.texto_tela[1]) s += pop(t, 1.6, W / 2, 380, pilula(c.texto_tela[1], { tam: 52, bg: '#e63946', rot: 3 }));
+    else if (c.texto_tela[0] && !dd.torcida) s += pop(t, 0.5, W / 2, 380, pilula(c.texto_tela[0], { tam: 44, bg: CORES.marinho, rot: 2 }));
+    return s;
+  },
+  evolucao(t, d, c, E) {
+    const dd = c.dados;
+    const tT = quando(c, 'hoje', 1.2, true), tC = quando(c, 'caixa', 3, true);
+    let s = camera(t, d, estadioAereo(E.estrutura, dd.torcida, { t, revelar: easeOut(prog(t, tT, 1.6)), torcidaAntes: dd.antes, nome: NOME(E) }), { z0: 1.0, z1: 1.04 });
+    s += `<rect width="${W}" height="${H}" fill="${CORES.marinho}" opacity=".35"/>`;
+    s += pop(t, 0.05, W / 2, 230, tituloGrande(c.texto_tela[0] || '', { tam: 170 }));
+    const pT = prog(t, tT, 1.6), pC = prog(t, tC, 1.6);
+    const dT = dd.torcida - dd.antes, dC = dd.caixa - dd.caixa_antes;
+    s += pop(t, 0.4, 290, 600, cartaoNumero('TORCIDA', contador(dd.torcida, dd.antes, pT),
+      { regra: '1 SEGUIDOR = 1 TORCEDOR', delta: pT > 0 ? `+${dT.toLocaleString('pt-BR')} HOJE` : `ONTEM`, cor: '#3a86ff' }));
+    s += pop(t, 0.6, 790, 600, cartaoNumero('CAIXA', contador(dd.caixa, dd.caixa_antes, pC),
+      { regra: '1 CURTIDA = R$ 1', delta: pC > 0 ? `+R$ ${dC.toLocaleString('pt-BR')}` : 'ONTEM', cor: CORES.verde, moeda: E.moeda }));
+    for (let i = 0; i < 6 && t > tC; i++) {
+      const tt = (t * 0.9 + i * 0.37) % 2.2;
+      s += `<text x="${640 + i * 60}" y="${900 - tt * 260}" font-size="54" fill="#e63946" opacity="${clamp(1 - tt / 2.2)}">♥</text>`;
+    }
+    return s;
+  },
+});
+
+// contador fixo no canto: a lógica do perfil sempre visível
+const SEM_HUD = new Set(['abertura', 'regras', 'evolucao', 'estadio', 'encerramento']);
+function hud(c, E) {
+  if (SEM_HUD.has(c.tipo) || !c.dados.hud) return '';
+  const h = c.dados.hud, y = c.tipo === 'gol' ? 320 : 40;
+  const item = (x, ic, txt) => { const w = medir(txt, 34) + 86; return `<g transform="translate(${x} ${y})">
+    <rect width="${w}" height="58" rx="29" fill="${CORES.marinho}" stroke="${OUT}" stroke-width="4" opacity=".92"/>
+    <text x="34" y="42" text-anchor="middle" font-size="30">${ic}</text>
+    <text x="62" y="43" font-family="Anton" font-size="34" fill="#fff">${esc(txt)}</text></g>`; };
+  const tor = `${Math.round(h.torcida).toLocaleString('pt-BR')}`;
+  return item(30, '👥', tor) + item(30 + medir(tor, 34) + 104, '💰', `${E.moeda} ${Math.round(h.caixa).toLocaleString('pt-BR')}`);
+}
+
 // ------------------------------------------------------------ legenda karaokê
 function blocos(palavras) {
   const out = []; let atual = [];
@@ -279,6 +361,7 @@ let DADOS = null;
 window.preparar = dados => {
   DADOS = dados;
   DADOS.estado._torcida = dados.torcida;
+  window._sigla = dados.estado.clube.sigla;
   let t = 0;
   for (const c of DADOS.cenas) { c.inicio = t; t += c.duracao; }
   DADOS.total = t;
@@ -289,10 +372,11 @@ window.quadro = tGlobal => {
   const cenas = DADOS.cenas;
   let i = cenas.findIndex(c => tGlobal < c.inicio + c.duracao);
   if (i < 0) i = cenas.length - 1;
-  const c = cenas[i], t = tGlobal - c.inicio, E = DADOS.estado;
+  const c = cenas[i], t = tGlobal - c.inicio;
+  const E = c.dados.estrutura ? { ...DADOS.estado, estrutura: c.dados.estrutura } : DADOS.estado;
   const fn = TIPOS[c.tipo] || TIPOS.abertura;
   let svg = fn(t, c.duracao, c, E);
-  svg += marcaDagua(E) + legenda(t, c);
+  svg += marcaDagua(E) + hud(c, E) + legenda(t, c);
   // corte com "flash" curto entre cenas
   if (t < 0.12 && i > 0) svg += `<rect width="${W}" height="${H}" fill="#fff" opacity="${(0.12 - t) / 0.12 * 0.5}"/>`;
   document.getElementById('palco').innerHTML = svg;

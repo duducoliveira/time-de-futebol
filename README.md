@@ -17,8 +17,8 @@ python -m timefc preparar     # lê seguidores, curtidas e comentários do epis�
 python -m timefc fechar       # aplica a decisão, simula a rodada e calcula a bilheteria
                               # → episodios/dia-NNN/roteiro.md / roteiro.json (cenas + narração)
 python -m timefc video        # narra (ElevenLabs) e renderiza → episodios/dia-NNN/dia-NNN.mp4
-# suba o MP4 numa URL pública e publique:
-python -m timefc postar https://cdn.exemplo.com/dia-002.mp4   # legenda e 1º comentário vêm do roteiro
+python -m timefc postar       # versiona o MP4 em videos/, faz push e manda o link raw do GitHub pro Buffer
+                              # (legenda e 1º comentário vêm do roteiro)
 ```
 
 **Comentário viável:** o pedido precisa estar no catálogo, ainda não ter sido feito e caber no caixa do dia. Se o mais curtido não for viável (por exemplo, "estádio de 50 mil lugares"), vale o próximo. Pedidos criativos fora do catálogo aparecem como "revisar" no briefing. Para escolher um deles, edite a `decisao` à mão, como no exemplo:
@@ -85,6 +85,12 @@ O vídeo é 100% gerado por código, sem banco de imagens. Arte vetorial em SVG 
 - `python -m timefc video --preview` gera só um PNG por cena, para revisar rápido.
 - Trilha de fundo: `video/audio/trilha.mp3`, um loop de samba gerado pela ElevenLabs. O áudio final é normalizado para cerca de -14 LUFS.
 - Um episódio de 90 s leva uns 3 minutos para renderizar.
+
+### Estrutura dos episódios
+
+- **Dia 1:** abertura, depois **as regras logo no início** (seguidor = torcedor, curtida = R$ 1, comentário decide). Em seguida o estádio vazio, a presidente, o elenco, a liga, a primeira decisão e o encerramento, que repete as regras.
+- **Dia 2 em diante:** começa sempre pela **evolução**: torcida e caixa de ontem → hoje, com contadores subindo e as regras na tela. Depois vem a vista aérea do estádio com a torcida crescendo. Quando a arquibancada lota, o excesso vai para a beira do campo, depois para o muro, as árvores e, por fim, as lajes do morro. Cada faixa tem uma fala própria. Na sequência: comentário vencedor, obra, jogo, bilheteria, tabela, próxima decisão e encerramento.
+- Em todas as cenas, um contador no canto mostra 👥 torcida e 💰 caixa.
 
 ## Enquetes A/B
 

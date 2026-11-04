@@ -4,7 +4,7 @@
   coletar                seguidores + métricas de todos os posts -> dados/metricas/AAAA-MM-DD.json
   preparar [--offline ARQ]   lê o episódio de ontem e gera episodios/dia-NNN/briefing.json
   fechar                     aplica o briefing, simula a rodada e gera o roteiro do vídeo
-  postar VIDEO_URL [--legenda TXT] [--agendar ISO] [--comentario TXT] [--rascunho]
+  postar [VIDEO_URL] [--dia N] [--legenda TXT] [--agendar ISO] [--comentario TXT] [--rascunho]
                              sem --legenda, usa a legenda/1º comentário do último roteiro
   video [--dia N] [--preview]  narra (ElevenLabs) e renderiza o MP4 do episódio
   renovar-token          renova o token do Instagram (rodar a cada ~50 dias)
@@ -131,12 +131,19 @@ def cmd_fechar(_):
 
 
 def cmd_postar(args):
+    """Sem VIDEO_URL: hospeda episodios/dia-NNN/dia-NNN.mp4 no GitHub (videos/) e usa o link raw."""
+    estado = est.carregar()
+    dia = args.dia or estado["dia"]
+    url = args.video_url
+    if not url:
+        from .hospedagem import publicar_video
+        url = publicar_video(_pasta_dia(dia) / f"dia-{dia:03d}.mp4", dia)
+        print(f"Vídeo hospedado: {url}")
     legenda, comentario = args.legenda, args.comentario
     if not legenda:
-        estado = est.carregar()
-        r = json.loads((_pasta_dia(estado["dia"]) / "roteiro.json").read_text(encoding="utf-8"))
+        r = json.loads((_pasta_dia(dia) / "roteiro.json").read_text(encoding="utf-8"))
         legenda, comentario = r["legenda"], comentario or r["primeiro_comentario"]
-    post = buffer().postar_reel(canal_ig(), args.video_url, legenda,
+    post = buffer().postar_reel(canal_ig(), url, legenda,
                                 agendar_para=args.agendar, primeiro_comentario=comentario,
                                 rascunho=args.rascunho)
     print(json.dumps(post, ensure_ascii=False, indent=2))
@@ -168,7 +175,8 @@ def main():
     pr.set_defaults(f=cmd_preparar)
     sub.add_parser("fechar").set_defaults(f=cmd_fechar)
     po = sub.add_parser("postar")
-    po.add_argument("video_url")
+    po.add_argument("video_url", nargs="?", help="omita para hospedar o MP4 no próprio repositório")
+    po.add_argument("--dia", type=int)
     po.add_argument("--legenda")
     po.add_argument("--agendar")
     po.add_argument("--comentario")

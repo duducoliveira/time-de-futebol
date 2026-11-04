@@ -358,6 +358,7 @@ function bairro(yBase = 780) {
     }
   }
   casas.sort((a, b) => a[1] - b[1]);
+  window._lajes = casas.map(([x, y, w, h]) => [x, y - h, w]);
   for (const [x, y, w, h, cor, caixa, q] of casas) {
     s += `<rect x="${x}" y="${y - h}" width="${w}" height="${h}" fill="${cor}" stroke="${OUT}" stroke-width="4"/>
       <rect x="${x + w * 0.2}" y="${y - h * 0.7}" width="${w * 0.22}" height="${h * 0.28}" fill="#264653" stroke="${OUT}" stroke-width="3"/>
@@ -461,7 +462,7 @@ function sede(estrutura, { t = 0 } = {}) {
     <circle cx="700" cy="640" r="10" fill="${OUT}"/><circle cx="300" cy="655" r="8" fill="${OUT}"/>`;
   s += `<rect x="260" y="700" width="560" height="110" rx="14" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="7"/>
     <text x="540" y="785" text-anchor="middle" font-family="Anton" font-size="74" fill="${CORES.vinho}">BAR DA CIDA</text>
-    <text x="540" y="860" text-anchor="middle" font-family="Anton" font-size="36" fill="${OUT}" letter-spacing="4">SEDE SOCIAL · U.D.T.</text>
+    <text x="540" y="860" text-anchor="middle" font-family="Anton" font-size="36" fill="${OUT}" letter-spacing="4">SEDE SOCIAL · ${esc(window._sigla || '')}</text>
     <path d="M200,880 H880 L860,940 H220Z" fill="#e63946" stroke="${OUT}" stroke-width="6"/>
     ${[0, 1, 2, 3, 4, 5].map(i => `<path d="M${215 + i * 113},882 h56 l-6,56 h-46z" fill="#fff"/>`).join('')}
     <rect x="460" y="960" width="160" height="240" fill="#6f4518" stroke="${OUT}" stroke-width="6"/>
@@ -494,3 +495,95 @@ function fundoEscuro() {
 Object.assign(window, { W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
   escudo, sigla, pessoa, PERSONAGENS, jogador, campo, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+
+// ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
+// Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).
+const FAIXAS_TORCIDA = [['beira', 60], ['muro', 40], ['arvore', 40], ['laje', 120]];
+const bonecos = n => Math.round(3 * Math.sqrt(Math.max(n, 0)));
+
+// geometria do campo em perspectiva
+const CAMPO = { yTopo: 760, yBase: 1700, xTopo: [330, 750], xBase: [70, 1010] };
+const xBorda = (y, lado) => {
+  const k = (y - CAMPO.yTopo) / (CAMPO.yBase - CAMPO.yTopo);
+  return lado < 0 ? CAMPO.xTopo[0] + (CAMPO.xBase[0] - CAMPO.xTopo[0]) * k : CAMPO.xTopo[1] + (CAMPO.xBase[1] - CAMPO.xTopo[1]) * k;
+};
+const escalaY = y => 0.55 + (y - 560) / 1300 * 0.75;
+
+function boneco(x, y, r, { torcendo = false, t = 0, i = 0, zoom = 1 } = {}) {
+  const k = escalaY(y) * zoom;
+  const pele = PELES[Math.floor(r() * PELES.length)];
+  const camisa = r() > 0.35 ? CORES.vinho : CAMISAS_SORTIDAS[Math.floor(r() * CAMISAS_SORTIDAS.length)];
+  const pulo = torcendo ? Math.abs(Math.sin(t * 7 + i)) * 6 * k : 0;
+  const bracos = torcendo && i % 3 === 0 ? `<path d="M${-11 * k},${-4 * k} l${-7 * k},${-16 * k} M${11 * k},${-4 * k} l${7 * k},${-16 * k}" stroke="${pele}" stroke-width="${6 * k}" stroke-linecap="round"/>` : '';
+  return `<g transform="translate(${x.toFixed(1)} ${(y - pulo).toFixed(1)})">${bracos}
+    <rect x="${-12 * k}" y="${-6 * k}" width="${24 * k}" height="${26 * k}" rx="${8 * k}" fill="${camisa}" stroke="${OUT}" stroke-width="${2.5 * k}"/>
+    <circle cy="${-14 * k}" r="${11 * k}" fill="${pele}" stroke="${OUT}" stroke-width="${2.5 * k}"/></g>`;
+}
+
+// posições de assento conforme a capacidade (dois bancos -> arquibancada em volta)
+function assentos(cap) {
+  const pos = [];
+  if (cap <= 500) {  // dois bancos de madeira atrás do gol
+    for (const [x0, x1] of [[250, 500], [580, 830]]) for (let i = 0; i < 17; i++) for (const y of [700, 728]) pos.push([x0 + (i + 0.5) * (x1 - x0) / 17, y]);
+    return pos;
+  }
+  const filasFundo = cap > 2000 ? 4 : 2;
+  for (let f = 0; f < filasFundo; f++) for (let i = 0; i < 30; i++) pos.push([240 + (i + 0.5) * 600 / 30, 725 - f * 30]);
+  for (const lado of [-1, 1]) for (let f = 0; f < (cap > 2000 ? 3 : 2); f++)
+    for (let y = 800; y < 1650; y += 46) pos.push([xBorda(y, lado) + lado * (55 + f * 36 * escalaY(y)), y]);
+  return pos;
+}
+
+function posicoesExtras() {
+  const r = rng('extras'), beira = [], muro = [], arvore = [], laje = [];
+  for (let y = 820; y < 1680; y += 30) for (const lado of [-1, 1]) beira.push([xBorda(y, lado) + lado * 18, y + r() * 6]);
+  for (let x = 20; x < 1060; x += 26) muro.push([x, 618]);
+  for (const [cx, cy] of ARVORES_ESTADIO) for (let i = 0; i < 7; i++) { const a = r() * Math.PI * 2, d = r() * 45; arvore.push([cx + Math.cos(a) * d, cy + Math.sin(a) * d * 0.7]); }
+  for (const [x, y, w] of LAJES) for (let i = 0; i < Math.max(1, Math.floor(w / 28)); i++) laje.push([x + 12 + i * 26, y - 2]);
+  return { beira, muro, arvore, laje };
+}
+const ARVORES_ESTADIO = [[70, 560], [190, 600], [890, 600], [1010, 560], [520, 540]];
+let LAJES = [];
+
+function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0, nome = '' } = {}) {
+  const cap = estrutura.capacidade || 500;
+  const grama = estrutura.gramado === 'grama';
+  let s = ceu(t);
+  // morro ao fundo (as lajes viram arquibancada quando lota)
+  s += `<g transform="translate(0 -230)">${bairro(780)}</g>`;
+  LAJES = (window._lajes || []).map(([x, y, w]) => [x, y - 230, w]).filter(([, y]) => y > 150 && y < 540).sort((a, b) => b[1] - a[1]);
+  s += `<rect x="-10" y="560" width="${W + 20}" height="${H - 560}" fill="#8a9a5b"/>`;
+  s += ARVORES_ESTADIO.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${62 + (i % 2) * 10}" fill="${i % 2 ? '#3a7d44' : '#4f9d55'}" stroke="${OUT}" stroke-width="5"/>`).join('');
+  s += `<rect x="-10" y="610" width="${W + 20}" height="34" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
+    <text x="${W / 2}" y="638" text-anchor="middle" font-family="Anton" font-size="26" fill="${CORES.vinho}" letter-spacing="6">${esc(nome.toUpperCase())}</text>`;
+  // arquibancada
+  if (cap <= 500) s += [[250, 500], [580, 830]].map(([a, b]) => `<rect x="${a}" y="712" width="${b - a}" height="12" fill="#b08968" stroke="${OUT}" stroke-width="4"/><rect x="${a}" y="740" width="${b - a}" height="12" fill="#b08968" stroke="${OUT}" stroke-width="4"/>`).join('');
+  else {
+    s += `<path d="M230,${cap > 2000 ? 620 : 680} H850 L840,750 H240Z" fill="${cap > 2000 ? '#adb5bd' : '#b08968'}" stroke="${OUT}" stroke-width="5"/>`;
+    for (const lado of [-1, 1]) s += `<path d="M${xBorda(790, lado) + lado * 30},790 L${xBorda(790, lado) + lado * (cap > 2000 ? 150 : 110)},790 L${xBorda(1680, lado) + lado * (cap > 2000 ? 190 : 140)},1680 L${xBorda(1680, lado) + lado * 30},1680Z" fill="${cap > 2000 ? '#adb5bd' : '#b08968'}" stroke="${OUT}" stroke-width="5"/>`;
+  }
+  // campo
+  const { yTopo, yBase, xTopo, xBase } = CAMPO;
+  s += `<path d="M${xTopo[0]},${yTopo} H${xTopo[1]} L${xBase[1]},${yBase} H${xBase[0]}Z" fill="${grama ? CORES.grama1 : CORES.terra1}" stroke="${OUT}" stroke-width="6"/>`;
+  if (grama) for (let i = 0; i < 6; i++) { const y0 = yTopo + i * (yBase - yTopo) / 6, y1 = y0 + (yBase - yTopo) / 12; s += `<path d="M${xBorda(y0, -1)},${y0} H${xBorda(y0, 1)} L${xBorda(y1, 1)},${y1} H${xBorda(y1, -1)}Z" fill="${CORES.grama2}"/>`; }
+  else { const r = rng('aereo'); for (let i = 0; i < 18; i++) s += `<ellipse cx="${200 + r() * 680}" cy="${800 + r() * 850}" rx="${12 + r() * 26}" ry="${4 + r() * 7}" fill="#8b4a22" opacity=".45"/>`; }
+  const lc = grama ? '#ffffffdd' : '#ffffff77', ym = (yTopo + yBase) / 2 + 40;
+  s += `<path d="M${xBorda(ym, -1)},${ym} H${xBorda(ym, 1)}" stroke="${lc}" stroke-width="6"/>
+    <ellipse cx="${W / 2}" cy="${ym}" rx="150" ry="60" fill="none" stroke="${lc}" stroke-width="6"/>
+    <path d="M420,${yTopo} L405,${yTopo + 90} H675 L660,${yTopo}" fill="none" stroke="${lc}" stroke-width="5"/>
+    <path d="M300,${yBase} L330,${yBase - 160} H750 L780,${yBase}" fill="none" stroke="${lc}" stroke-width="6"/>
+    <path d="M490,${yTopo} V${yTopo - 40} H590 V${yTopo}" fill="none" stroke="#fff" stroke-width="7"/>`;
+  // torcida desenhada: assentos primeiro, depois as faixas de "não cabe mais"
+  const total = bonecos(Math.min(torcida, 1e7));
+  const visiveis = Math.round(bonecos(torcidaAntes) + (total - bonecos(torcidaAntes)) * revelar);
+  const seats = assentos(cap), lugares = bonecos(cap);
+  const ex = posicoesExtras();
+  const ordem = [...seats.slice(0, Math.min(seats.length, lugares)).map(p => [...p, 'arq'])];
+  for (const [faixa, tam] of FAIXAS_TORCIDA) ordem.push(...ex[faixa].slice(0, tam).map(p => [...p, faixa]));
+  const r = rng('povo');
+  const pessoas = ordem.slice(0, visiveis).map((p, i) => ({ x: p[0], y: p[1], i, faixa: p[2], rr: rng('p' + i) }));
+  pessoas.sort((a, b) => a.y - b.y);
+  s += pessoas.map(p => boneco(p.x, p.y, p.rr, { torcendo: true, t, i: p.i, zoom: { arvore: 1.35, laje: 1.5, muro: 1.15 }[p.faixa] || 1 })).join('');
+  return s;
+}
+Object.assign(window, { estadioAereo, bonecos, FAIXAS_TORCIDA });

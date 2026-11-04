@@ -86,6 +86,42 @@ def _artilheiro(e: dict, rng: random.Random) -> dict:
     return {"numero": n, **j}
 
 
+# Torcida desenhada: cada boneco vale ~ (n/9)^0.5 torcedores; quem não cabe na
+# arquibancada vai para a beira do campo, o muro, as árvores e as lajes do morro.
+# O renderizador (video/cenas.js: niveisTorcida) usa exatamente as mesmas faixas.
+FAIXAS = [("beira", 60), ("muro", 40), ("arvore", 40), ("laje", 120)]
+
+
+def bonecos(n: int) -> int:
+    return round(3 * (max(n, 0) ** 0.5))
+
+
+def nivel_torcida(torcida: int, capacidade: int) -> str:
+    if torcida == 0:
+        return "vazio"
+    if torcida <= capacidade:
+        return "enchendo" if torcida < capacidade * 0.7 else "quase"
+    sobra = bonecos(torcida) - bonecos(capacidade)
+    for nome, tam in FAIXAS:
+        if sobra <= tam:
+            return nome
+        sobra -= tam
+    return "tudo"
+
+
+FALAS_TORCIDA = {
+    "vazio": "A arquibancada continua vazia. Chama os amigos!",
+    "enchendo": "Olha a arquibancada começando a encher!",
+    "quase": "A arquibancada está quase lotada!",
+    "beira": "Lotou! Já tem gente em pé na beira do campo.",
+    "muro": "Lotou tanto que tem torcedor sentado em cima do muro.",
+    "arvore": "Não cabe mais ninguém! Tem gente assistindo de cima da árvore!",
+    "laje": "O estádio não comporta! O pessoal do morro está assistindo da laje!",
+    "tudo": "Tem torcedor na árvore, no muro, na laje e no poste. O bairro inteiro parou!",
+}
+ROTULO_NIVEL = {"beira": "LOTADO", "muro": "GENTE NO MURO", "arvore": "TEM GENTE NA ÁRVORE",
+                "laje": "TORCIDA NA LAJE", "tudo": "O BAIRRO PAROU"}
+
 PIADAS_GOL_CONTRA = [
     "O Baixinho pulou. Pulou bonito. Mas pulou pro lado errado.",
     "A zaga parou pra ver. Literalmente parou.",
@@ -115,33 +151,37 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     cenas: list[dict] = []
 
     def cena(tipo: str, narracao: str, tela: list[str] | None = None, **dados: Any) -> None:
+        dados.setdefault("hud", {"torcida": e["torcida"]["seguidores"], "caixa": e["caixa"]})
+        dados.setdefault("estrutura", copy.deepcopy(e["estrutura"]))  # o clube como está NESTA cena
         cenas.append({"id": f"{len(cenas) + 1:02d}-{tipo}", "tipo": tipo, "narracao": narracao,
                       "texto_tela": [t for t in (tela or []) if t], "dados": dados})
 
     antes, hoje = briefing["seguidores_ontem"], briefing["seguidores_hoje"]
-    e["torcida"]["seguidores"] = hoje
+    e["torcida"]["seguidores"] = hoje  # (o HUD das cenas já mostra a torcida de hoje)
     e["torcida"]["historico"].append({"dia": dia, "seguidores": hoje, "data": est.agora()})
     cal = calendario(list(e["liga"]["times"]))
 
+    caixa_ontem = e["caixa"]
+    pres = e["personagens"]["presidente"]["nome"]
+    estadio = e["clube"].get("estadio") or f"Campo do {nome}"
+
     # ================================================================ DIA 1
     if dia == 1:
-        pres = e["personagens"]["presidente"]["nome"]
-        cena("abertura", f"Alô, alô, torcida! Aqui é o {e['personagens']['narrador']['nome']}, e hoje é o "
-             f"dia um. Acabou de nascer o {nome}!", ["DIA 1", "CLUBE FUNDADO"])
-        cena("campo", "Esse é o nosso estádio. Um campo de terra, dois bancos de madeira e uma trave "
-             "que já foi reta um dia.", ["ESTÁDIO DO TERRÃO"])
-        cena("presidente", f"Essa é a {pres}. Dona do bar da esquina, presidente, tesoureira e roupeira "
+        cena("abertura", f"Dia um do {nome}: um time de várzea que vai crescer com você!",
+             ["DIA 1", "CLUBE FUNDADO"])
+        cena("regras", "Funciona assim: cada seguidor vira um torcedor no nosso estádio. Cada curtida vira "
+             "um real no caixa do clube. E o comentário mais curtido decide o que a gente faz com o dinheiro.",
+             ["COMO FUNCIONA"], torcida=0, caixa=0)
+        cena("estadio", f"Hoje a gente tem zero torcedores e zero reais. O estádio é isso aqui: um campo de "
+             "terra e dois bancos de madeira. Vazios.", [estadio.upper(), "0 TORCEDORES"],
+             antes=0, torcida=0, nivel=nivel_torcida(0, e["estrutura"]["capacidade"]))
+        cena("presidente", f"Eu sou o {e['personagens']['narrador']['nome']}, o locutor. E essa é a {pres}. Dona do bar da esquina, presidente, tesoureira e roupeira "
              "do clube. Tudo ao mesmo tempo.", [pres.upper(), "PRESIDENTE · TESOUREIRA · ROUPEIRA"])
         cena("elenco", "E esse é o elenco. Vamos dizer que... é o que tem.", ["O ELENCO"])
         for num in ("1", "9", "10"):
             j = e["elenco"][num]
             cena("jogador", f"O camisa {num}, {j['nome']}: {j['traco']}.",
                  [f"#{num} {j['nome'].upper()}", j["traco"].upper()], numero=num)
-        cena("regra_torcida", "Torcida? Zero. Ninguém. Mas aqui funciona assim: cada pessoa que seguir "
-             "a página vira um torcedor de verdade, aqui na arquibancada.",
-             ["0 TORCEDORES", "1 SEGUIDOR = 1 TORCEDOR"], torcida=0)
-        cena("regra_caixa", f"Dinheiro? Também zero. Mas cada curtida vale um real no caixa do clube.",
-             ["CAIXA: R$ 0", "1 CURTIDA = +R$ 1"], caixa=0)
         primeiro = next(j for j in cal[0] if nome in j)
         adv = primeiro[1] if primeiro[0] == nome else primeiro[0]
         cena("liga", f"A gente vai disputar a {e['liga']['nome']}. Dez times, e a estreia é amanhã, "
@@ -151,26 +191,23 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
 
     # ================================================================ DIA 2+
     else:
-        cena("abertura", f"Dia {dia}! Ontem o {nome} tinha {_n(antes)} torcedores. Hoje? {_n(hoje)}!",
-             [f"DIA {dia}", f"ONTEM: {_n(antes)}"], antes=antes, torcida=hoje)
-        if hoje > antes:
-            cheio = hoje > e["estrutura"]["capacidade"]
-            cena("torcida", "Olha isso! " + (f"Não cabe mais ninguém: o estádio só tem "
-                 f"{_n(e['estrutura']['capacidade'])} lugares." if cheio else "A arquibancada está enchendo."),
-                 [f"{_n(hoje)} TORCEDORES"] + (["LOTADO"] if cheio else []), torcida=hoje)
         if briefing["receita_curtidas"]:
             est.lancar(e, briefing["receita_curtidas"], f"curtidas do dia {dia - 1}")
-            cena("caixa", f"E as curtidas de ontem? {_n(briefing['curtidas'])}. Ou seja, "
-                 f"{_n(briefing['receita_curtidas'])} reais no caixa! A Dona Cida contou nota por nota.",
-                 ["1 CURTIDA = +R$ 1", f"{_n(briefing['curtidas'])} CURTIDAS"],
-                 de=e["caixa"] - briefing["receita_curtidas"], caixa=e["caixa"],
-                 curtidas=briefing["curtidas"])
+        cena("evolucao", f"Dia {dia}! Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. "
+             f"Ontem, {_n(antes)} torcedores. Hoje: {_n(hoje)}! E o caixa saiu de {_moeda(e, caixa_ontem)} "
+             f"pra {_moeda(e, e['caixa'])}!", [f"DIA {dia}"], antes=antes, torcida=hoje,
+             caixa_antes=caixa_ontem, caixa=e["caixa"], curtidas=briefing["curtidas"])
+        nivel = nivel_torcida(hoje, e["estrutura"]["capacidade"])
+        nivel_ontem = nivel_torcida(antes, e["estrutura"]["capacidade"])
+        cena("estadio", FALAS_TORCIDA[nivel] + (" Isso é novidade!" if nivel != nivel_ontem and nivel in
+             ("arvore", "laje", "tudo") else ""), [f"{_n(hoje)} TORCEDORES", ROTULO_NIVEL.get(nivel, "")],
+             antes=antes, torcida=hoje, nivel=nivel)
 
         d = briefing.get("decisao")
         if d and d.get("comentario") is not None:
             c = briefing["top_comentarios"][d["comentario"]]
             custo = float(d.get("custo") or 0)
-            cena("comentario", f"O comentário mais curtido de ontem foi do arroba {c['usuario']}: "
+            cena("comentario", f"O comentário mais curtido de ontem foi do @{c['usuario']}: "
                  f"\"{c['texto']}\"", ["COMENTÁRIO MAIS CURTIDO"], comentario=c)
             antes_obra = copy.deepcopy(e["estrutura"])
             if custo:
@@ -304,7 +341,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     prox_jogo = None
     if liga["rodada"] < len(cal):
         prox_jogo = next(j for j in cal[liga["rodada"]] if nome in j)
-    fala = "Segue a página pra entrar no estádio, curte pra encher o caixa, e comenta. Até amanhã!"
+    fala = ("Então já sabe: segue pra virar torcedor, curte pra encher o caixa, e comenta o que a gente faz. "
+            + ("Amanhã tem estreia!" if dia == 1 else "Até amanhã!"))
     if prox_jogo and dia > 1:
         advp = prox_jogo[1] if prox_jogo[0] == nome else prox_jogo[0]
         fala = f"Amanhã tem {nome} contra o {advp}. " + fala
