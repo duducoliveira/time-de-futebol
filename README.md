@@ -38,7 +38,7 @@ Exemplo de `decisao` no briefing:
         │            postar ...)           │ métricas (1x/dia)      │ comentários (texto)
         │                                  ▼                        ▼ + seguidores
         │                         ┌──────────────────────────────────────┐
-        └──── próximo vídeo ◄─────┤ GitHub Actions diário: coletar/apurar│
+        └──── próximo vídeo ◄─────┤ GitHub Actions: coletar + preparar   │
              usa o estado         │ → dados/estado_time.json (versionado)│
                                   └──────────────────────────────────────┘
 ```
@@ -69,10 +69,8 @@ pip install -r requirements.txt
 export PYTHONPATH=src
 python -m timefc canais        # descobre o ID do canal Instagram no Buffer
 python -m timefc coletar       # seguidores + métricas → dados/metricas/AAAA-MM-DD.json
-python -m timefc apurar        # parcial das votações abertas
-python -m timefc apurar --encerrar   # aplica o vencedor no estado do time
-python -m timefc postar "https://cdn.exemplo.com/ep01.mp4" "Episódio 1: escolham o nome! Comente A, B ou C" \
-    --agendar 2026-11-10T21:00:00Z --comentario "Vote: A, B ou C 👇"
+python -m timefc postar "https://cdn.exemplo.com/ep01.mp4" --legenda "Dia 1 do Unidos do Terrão" \
+    --agendar 2026-11-10T21:00:00Z --comentario "O comentário mais curtido decide 👇"
 ```
 
 O vídeo precisa estar numa **URL pública** (Cloudflare R2, S3, Google Cloud Storage…). O Buffer baixa o arquivo de lá.
