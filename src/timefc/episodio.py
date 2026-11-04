@@ -1,22 +1,24 @@
 """Ciclo diário de um episódio.
 
-  1. preparar(): lê seguidores, curtidas e comentários do episódio de ontem e gera
-     o briefing (ranking dos comentários + campos de decisão a preencher).
-  2. Uma pessoa (ou o Claude) preenche a "decisao" do briefing: como o comentário
-     vencedor vira ação no clube, quanto custa e o que muda.
+  1. preparar(): lê seguidores, curtidas e comentários do episódio de ontem, escolhe
+     o COMENTÁRIO VIÁVEL MAIS CURTIDO (catalogo.py) e gera o briefing.
+  2. (opcional) Uma pessoa revisa o briefing: pode trocar a decisão, por exemplo
+     para um pedido criativo fora do catálogo.
   3. fechar(): aplica tudo, simula a rodada, calcula a bilheteria e gera o
-     roteiro do vídeo de hoje.
+     roteiro do vídeo de hoje (cenas tipadas, que o renderizador transforma em vídeo).
 
 Regras do formato:
   * 1 seguidor = 1 torcedor (limitado pela capacidade do estádio no dia do jogo)
   * 1 curtida no episódio anterior = +R$1 no caixa
-  * O comentário mais curtido do episódio anterior decide o que o clube faz
+  * O comentário viável mais curtido decide o que o clube faz
 """
 from __future__ import annotations
 
 import copy
+import random
 from typing import Any
 
+from . import catalogo
 from . import estado as est
 from .comentarios import ranking
 from .liga import calendario, simular, tabela
@@ -29,7 +31,7 @@ def _moeda(estado: dict, v: float) -> str:
 
 
 def _n(v: int) -> str:
-    return f"{v:,}".replace(",", ".")
+    return f"{int(v):,}".replace(",", ".")
 
 
 # --------------------------------------------------------------------- etapa 1
@@ -37,119 +39,179 @@ def preparar(estado: dict, seguidores: int, post_anterior: dict | None,
              comentarios: list[dict], usuario_proprio: str = "") -> dict:
     """`post_anterior`: {"id","permalink","like_count"} do último episódio (ou None no dia 1)."""
     curtidas = int((post_anterior or {}).get("like_count") or 0)
-    top = ranking(comentarios, n=5, ignorar_usuarios={usuario_proprio})
+    receita = curtidas * estado["regras"]["por_curtida"]
+    caixa_hoje = estado["caixa"] + receita
+    dia = estado["dia"] + 1
+    top = ranking(comentarios, n=10, ignorar_usuarios={usuario_proprio})
+    decisao, avaliacoes = catalogo.escolher(estado, top, caixa_hoje, dia)
+
     enquetes = []
     for e in estado.get("enquetes", []):
         if e.get("status") == "aberta":
             enquetes.append({"id": e["id"], "pergunta": e["pergunta"],
                              "parcial": apurar(comentarios, e["opcoes"], e.get("peso_curtidas", 0),
                                                {usuario_proprio})})
-    ultima = estado["episodios"][-1] if estado["episodios"] else None
+    caixa_previsto = caixa_hoje - (decisao or {}).get("custo", 0)
+    pergunta = ("Primeira decisão: o que a gente faz com o dinheiro?" if dia == 1
+                else "O que a gente faz agora?")
     return {
-        "dia": estado["dia"] + 1,
+        "dia": dia,
         "seguidores_ontem": estado["torcida"]["seguidores"],
         "seguidores_hoje": seguidores,
         "post_anterior": post_anterior,
         "curtidas": curtidas,
-        "receita_curtidas": curtidas * estado["regras"]["por_curtida"],
+        "receita_curtidas": receita,
         "caixa_atual": estado["caixa"],
-        "opcoes_ontem": (ultima or {}).get("proxima_decisao", {}).get("opcoes"),
+        "caixa_com_curtidas": caixa_hoje,
         "top_comentarios": top,
+        "avaliacao_comentarios": avaliacoes,
         "enquetes": enquetes,
-        # ---- PREENCHER antes de fechar o dia ----
-        "decisao": {
-            "comentario": 0 if top else None,  # índice em top_comentarios (o 1º é o mais curtido)
-            "titulo": "",            # texto curto na tela, ex: "LANCHONETE DO @fulano"
-            "interpretacao": "",     # o que o clube fez de fato
-            "custo": 0,
-            "efeitos": {},           # ex: {"estrutura.gramado": "grama", "clube.forca": "+4"}
-        },
-        "encerrar_enquetes": [],     # ids das enquetes a encerrar hoje
-        "nova_enquete": None,        # {"id","pergunta","atributo","opcoes":{"A":[..]},"valores":{"A":..}}
+        # Decisão automática (comentário viável mais curtido). Pode ser editada.
+        "decisao": decisao,
+        # Enquetes abertas há 1+ dia são encerradas automaticamente.
+        "encerrar_enquetes": [q["id"] for q in enquetes],
+        "nova_enquete": None,
         "proxima_decisao": {
-            "pergunta": "O que a gente faz com o dinheiro?",
-            "opcoes": ["Opção 1", "Opção 2", "Outra ideia?"],
+            "pergunta": pergunta,
+            "opcoes": catalogo.sugerir_opcoes(estado, caixa_previsto + 3000) + ["Outra ideia?"],
         },
     }
 
 
 # --------------------------------------------------------------------- etapa 2
+def _artilheiro(e: dict, rng: random.Random) -> dict:
+    pesos = {"CA": 6, "PD": 3, "PE": 3, "MEI": 3, "VOL": 1, "LD": 1, "LE": 1, "ZAG": 1, "GOL": 0}
+    jogadores = [(n, j) for n, j in e["elenco"].items() if pesos.get(j["posicao"], 1)]
+    n, j = rng.choices(jogadores, weights=[pesos.get(j["posicao"], 1) for _, j in jogadores])[0]
+    return {"numero": n, **j}
+
+
+PIADAS_GOL_CONTRA = [
+    "O Baixinho pulou. Pulou bonito. Mas pulou pro lado errado.",
+    "A zaga parou pra ver. Literalmente parou.",
+    "O Professor disse que estava se posicionando.",
+    "Ninguém marcou ninguém. Foi democrático.",
+]
+PIADAS_ADVERSARIO = {
+    "Veteranos do Bairro": "média de idade: sessenta e oito anos.",
+    "Atlético Padaria": "o time inteiro trabalha na mesma padaria. Chegam cheirando a pão.",
+    "Amigos do Churrasco FC": "o jogo só começa depois que a picanha sai.",
+    "Juventude do Asfalto": "o time mais forte da divisão. Nunca pisaram em terra.",
+    "Leões do Brejo": "jogam no brejo. Literalmente.",
+    "Ferro-Velho EC": "o uniforme é feito de lona de caminhão.",
+    "Real Laje": "treinam em cima de uma laje. Ninguém sabe como.",
+    "Estrela da Feira": "patrocinados pela banca de pastel.",
+    "Grêmio Vila Poeira": "o único campo pior que o nosso.",
+}
+
+
 def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     """Aplica o briefing ao estado. Retorna (novo_estado, roteiro)."""
     e = copy.deepcopy(estado)
-    e["dia"] = briefing["dia"]
+    e["dia"] = dia = briefing["dia"]
+    e.setdefault("decisoes", [])
     nome = e["clube"]["nome"]
+    rng = random.Random(f"roteiro-{dia}")
     cenas: list[dict] = []
 
-    def cena(cid, narracao, tela=(), cenario="campo", personagens=(), **extra):
-        cenas.append({"id": cid, "cenario": cenario, "personagens": list(personagens),
-                      "texto_tela": list(tela), "narracao": narracao, **extra})
+    def cena(tipo: str, narracao: str, tela: list[str] | None = None, **dados: Any) -> None:
+        cenas.append({"id": f"{len(cenas) + 1:02d}-{tipo}", "tipo": tipo, "narracao": narracao,
+                      "texto_tela": [t for t in (tela or []) if t], "dados": dados})
 
-    # --- abertura / torcida
     antes, hoje = briefing["seguidores_ontem"], briefing["seguidores_hoje"]
     e["torcida"]["seguidores"] = hoje
-    e["torcida"]["historico"].append({"dia": e["dia"], "seguidores": hoje, "data": est.agora()})
-    if e["dia"] == 1:
-        cena("abertura", f"Dia 1. A gente acabou de fundar o {nome}. Zero torcedores, campo de terra "
-             "e um sonho. Aqui funciona assim: cada pessoa que seguir vira um torcedor de verdade, "
-             "no nosso estádio.", ["DIA 1", "CLUBE FUNDADO", "1 SEGUIDOR = 1 TORCEDOR"],
-             personagens=["narrador"])
+    e["torcida"]["historico"].append({"dia": dia, "seguidores": hoje, "data": est.agora()})
+    cal = calendario(list(e["liga"]["times"]))
+
+    # ================================================================ DIA 1
+    if dia == 1:
+        pres = e["personagens"]["presidente"]["nome"]
+        cena("abertura", f"Alô, alô, torcida! Aqui é o {e['personagens']['narrador']['nome']}, e hoje é o "
+             f"dia um. Acabou de nascer o {nome}!", ["DIA 1", "CLUBE FUNDADO"])
+        cena("campo", "Esse é o nosso estádio. Um campo de terra, dois bancos de madeira e uma trave "
+             "que já foi reta um dia.", ["ESTÁDIO DO TERRÃO"])
+        cena("presidente", f"Essa é a {pres}. Dona do bar da esquina, presidente, tesoureira e roupeira "
+             "do clube. Tudo ao mesmo tempo.", [pres.upper(), "PRESIDENTE · TESOUREIRA · ROUPEIRA"])
+        cena("elenco", "E esse é o elenco. Vamos dizer que... é o que tem.", ["O ELENCO"])
+        for num in ("1", "9", "10"):
+            j = e["elenco"][num]
+            cena("jogador", f"O camisa {num}, {j['nome']}: {j['traco']}.",
+                 [f"#{num} {j['nome'].upper()}", j["traco"].upper()], numero=num)
+        cena("regra_torcida", "Torcida? Zero. Ninguém. Mas aqui funciona assim: cada pessoa que seguir "
+             "a página vira um torcedor de verdade, aqui na arquibancada.",
+             ["0 TORCEDORES", "1 SEGUIDOR = 1 TORCEDOR"], torcida=0)
+        cena("regra_caixa", f"Dinheiro? Também zero. Mas cada curtida vale um real no caixa do clube.",
+             ["CAIXA: R$ 0", "1 CURTIDA = +R$ 1"], caixa=0)
+        primeiro = next(j for j in cal[0] if nome in j)
+        adv = primeiro[1] if primeiro[0] == nome else primeiro[0]
+        cena("liga", f"A gente vai disputar a {e['liga']['nome']}. Dez times, e a estreia é amanhã, "
+             f"contra o {adv}.", [e["liga"]["nome"].upper(), "ESTREIA AMANHÃ"], adversario=adv,
+             tabela=tabela(list(e["liga"]["times"]), []))
+        est.evento(e, f"Fundação do {nome}")
+
+    # ================================================================ DIA 2+
     else:
-        cena("abertura", f"Dia {e['dia']}. Ontem o {nome} tinha {_n(antes)} torcedores. "
-             f"Hoje? {_n(hoje)}!", [f"DIA {e['dia']}", f"ONTEM: {_n(antes)}", f"{_n(hoje)} TORCEDORES"],
-             cenario="estadio_torcida", personagens=["narrador"], torcida=hoje)
+        cena("abertura", f"Dia {dia}! Ontem o {nome} tinha {_n(antes)} torcedores. Hoje? {_n(hoje)}!",
+             [f"DIA {dia}", f"ONTEM: {_n(antes)}"], antes=antes, torcida=hoje)
+        if hoje > antes:
+            cheio = hoje > e["estrutura"]["capacidade"]
+            cena("torcida", "Olha isso! " + (f"Não cabe mais ninguém: o estádio só tem "
+                 f"{_n(e['estrutura']['capacidade'])} lugares." if cheio else "A arquibancada está enchendo."),
+                 [f"{_n(hoje)} TORCEDORES"] + (["LOTADO"] if cheio else []), torcida=hoje)
+        if briefing["receita_curtidas"]:
+            est.lancar(e, briefing["receita_curtidas"], f"curtidas do dia {dia - 1}")
+            cena("caixa", f"E as curtidas de ontem? {_n(briefing['curtidas'])}. Ou seja, "
+                 f"{_n(briefing['receita_curtidas'])} reais no caixa! A Dona Cida contou nota por nota.",
+                 ["1 CURTIDA = +R$ 1", f"{_n(briefing['curtidas'])} CURTIDAS"],
+                 de=e["caixa"] - briefing["receita_curtidas"], caixa=e["caixa"],
+                 curtidas=briefing["curtidas"])
 
-    # --- caixa pelas curtidas
-    if briefing["receita_curtidas"]:
-        est.lancar(e, briefing["receita_curtidas"], f"curtidas do dia {e['dia'] - 1}")
-        cena("caixa", f"{_n(briefing['curtidas'])} curtidas viraram {_moeda(e, briefing['receita_curtidas'])} "
-             f"no caixa. A Dona Cida contou nota por nota.",
-             ["1 CURTIDA = +" + _moeda(e, e['regras']['por_curtida']),
-              f"{_n(briefing['curtidas'])} CURTIDAS", f"CAIXA: {_moeda(e, e['caixa'])}"],
-             cenario="sede", personagens=["presidente"], caixa=e["caixa"])
+        d = briefing.get("decisao")
+        if d and d.get("comentario") is not None:
+            c = briefing["top_comentarios"][d["comentario"]]
+            custo = float(d.get("custo") or 0)
+            cena("comentario", f"O comentário mais curtido de ontem foi do arroba {c['usuario']}: "
+                 f"\"{c['texto']}\"", ["COMENTÁRIO MAIS CURTIDO"], comentario=c)
+            antes_obra = copy.deepcopy(e["estrutura"])
+            if custo:
+                est.lancar(e, -custo, d.get("titulo") or "decisão da torcida")
+            for caminho, valor in (d.get("efeitos") or {}).items():
+                est.definir(e, caminho, valor)
+            e["liga"]["times"][nome] = e["clube"]["forca"]
+            for acao in d.get("acoes") or [None]:
+                e["decisoes"].append({"dia": dia, "acao": acao, "autor": c["usuario"],
+                                      "curtidas": c["curtidas"], "texto": c["texto"]})
+            est.evento(e, d.get("interpretacao") or c["texto"], autor=c["usuario"])
+            novos = [v for k, v in (d.get("efeitos") or {}).items() if k.startswith("elenco.")]
+            cena("obra", f"Pedido aceito! {d.get('interpretacao', '')}",
+                 [(d.get("titulo") or "").upper(), f"-{_moeda(e, custo)}" if custo else ""],
+                 acoes=d.get("acoes") or [], custo=custo, caixa=e["caixa"], antes=antes_obra,
+                 depois=copy.deepcopy(e["estrutura"]), novos_jogadores=novos,
+                 autor=c["usuario"])
 
-    # --- comentário vencedor
-    d = briefing.get("decisao") or {}
-    idx = d.get("comentario")
-    if idx is not None and briefing["top_comentarios"]:
-        c = briefing["top_comentarios"][idx]
-        custo = float(d.get("custo") or 0)
-        if custo:
-            est.lancar(e, -custo, d.get("titulo") or "decisão da torcida")
-        for caminho, valor in (d.get("efeitos") or {}).items():
-            est.definir(e, caminho, valor)
-        e["liga"]["times"][nome] = e["clube"]["forca"]
-        est.evento(e, d.get("interpretacao") or c["texto"], autor=c["usuario"], curtidas=c["curtidas"])
-        cena("comentario", f"O comentário mais curtido de ontem foi do @{c['usuario']}: \"{c['texto']}\". "
-             f"{d.get('interpretacao', '')}".strip(),
-             ["COMENTÁRIO MAIS CURTIDO", f"@{c['usuario']} · ♥ {_n(c['curtidas'])}", c["texto"],
-              d.get("titulo", "").upper()] + ([f"-{_moeda(e, custo)}"] if custo else []),
-             cenario="sede", comentario=c)
+        for eid in briefing.get("encerrar_enquetes", []):
+            enq = next(x for x in e["enquetes"] if x["id"] == eid)
+            parc = next(x["parcial"] for x in briefing["enquetes"] if x["id"] == eid)
+            est.aplicar_enquete(e, enq, parc)
+            if enq["status"] == "encerrada":
+                v = enq["valores"][parc["vencedor"]]
+                cena("enquete_resultado", f"E a votação de ontem: {enq['pergunta']} Deu {v}, com "
+                     f"{round(parc['percentual'][parc['vencedor']])} por cento.",
+                     [enq["pergunta"].upper(), str(v).upper()], resultado=parc, valores=enq["valores"])
 
-    # --- enquetes
-    for eid in briefing.get("encerrar_enquetes", []):
-        enq = next(x for x in e["enquetes"] if x["id"] == eid)
-        parc = next(x["parcial"] for x in briefing["enquetes"] if x["id"] == eid)
-        est.aplicar_enquete(e, enq, parc)
-        if enq["status"] == "encerrada":
-            cena(f"enquete_{eid}", f"E a votação de ontem: {enq['pergunta']} Venceu "
-                 f"{enq['valores'][parc['vencedor']]}, com {parc['percentual'][parc['vencedor']]}%.",
-                 [enq["pergunta"].upper(), str(enq["valores"][parc["vencedor"]]).upper()])
-
-    # --- rodada
+    # ================================================================ RODADA
     liga = e["liga"]
     times = list(liga["times"])
-    cal = calendario(times)
     partida = None
-    if e["dia"] > 1 and liga["rodada"] < len(cal):  # dia 1 é só a fundação; estreia no dia 2
-        resultados_rodada = []
+    if dia > 1 and liga["rodada"] < len(cal):
+        rodada = []
         for m, v in cal[liga["rodada"]]:
-            r = simular(m, v, liga["times"], semente=f"{e['dia']}-{m}-{v}")
+            r = simular(m, v, liga["times"], semente=f"{dia}-{m}-{v}")
             r["rodada"] = liga["rodada"] + 1
-            resultados_rodada.append(r)
+            rodada.append(r)
             if nome in (m, v):
                 partida = r
-        liga["resultados"] += resultados_rodada
+        liga["resultados"] += rodada
         liga["rodada"] += 1
 
     if partida:
@@ -157,25 +219,43 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         adv = partida["visitante"] if casa else partida["mandante"]
         nossos = partida["gols_mandante"] if casa else partida["gols_visitante"]
         deles = partida["gols_visitante"] if casa else partida["gols_mandante"]
-        placar = f"{partida['gols_mandante']} x {partida['gols_visitante']}"
-        placar_completo = f"{partida['mandante']} {placar} {partida['visitante']}"
-        cena("pre_jogo", f"Rodada {liga['rodada']}: {nome} contra o {adv}"
-             f"{', em casa' if casa else ', fora de casa'}.",
-             [f"RODADA {liga['rodada']}", f"{partida['mandante']} x {partida['visitante']}"],
-             cenario="campo_dia_de_jogo")
-        for g in partida["gols"]:
+        placar_completo = f"{partida['mandante']} {partida['gols_mandante']} x {partida['gols_visitante']} {partida['visitante']}"
+        piada = PIADAS_ADVERSARIO.get(adv, "ninguém sabe nada sobre eles.")
+        cena("pre_jogo", f"Rodada {liga['rodada']}{', em casa' if casa else ', fora de casa'}, contra o "
+             f"{adv}. Detalhe: {piada}", [f"RODADA {liga['rodada']}", "EM CASA" if casa else "FORA DE CASA"],
+             mandante=partida["mandante"], visitante=partida["visitante"])
+        gm = gv = 0
+        gols = partida["gols"]
+        for i, g in enumerate(gols):
             nosso = g["time"] == nome
-            cena(f"gol_{g['minuto']}", ("GOOOOOL DO " + nome.upper() + "!") if nosso
-                 else f"Gol do {adv}. Não dá pra explicar.",
-                 [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"],
-                 cenario="gol", minuto=g["minuto"], nosso=nosso)
+            if g["time"] == partida["mandante"]:
+                gm += 1
+            else:
+                gv += 1
+            if len(gols) > 4 and 0 < i < len(gols) - 1:
+                continue  # jogo com muitos gols: narra o primeiro e o último
+            if nosso:
+                art = _artilheiro(e, rng)
+                g["autor"] = art["nome"]
+                txt = f"GOOOOOL! É do {nome}! {art['nome']}, aos {g['minuto']} minutos!"
+            else:
+                txt = f"Gol do {adv}, aos {g['minuto']}. {rng.choice(PIADAS_GOL_CONTRA)}"
+            cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"],
+                 minuto=g["minuto"], nosso=nosso, autor=g.get("autor"), placar=[gm, gv],
+                 mandante=partida["mandante"], visitante=partida["visitante"])
+        if not gols:
+            cena("gol", "Noventa minutos de muita vontade e nenhuma pontaria.", ["0 x 0"], minuto=90,
+                 nosso=None, placar=[0, 0], mandante=partida["mandante"], visitante=partida["visitante"])
         resultado = "vitória" if nossos > deles else "empate" if nossos == deles else "derrota"
-        frase = {"vitória": f"Vitória do {nome} por {nossos} a {deles}!",
-                 "empate": f"Empate em {nossos} a {deles}.",
-                 "derrota": f"Derrota por {deles} a {nossos}."}[resultado]
-        cena("fim_de_jogo", f"Fim de jogo. {frase}",
-             ["FIM DE JOGO", placar_completo], cenario="campo_dia_de_jogo", resultado=resultado)
-        est.evento(e, f"Rodada {liga['rodada']}: {placar_completo}")
+        frase = {"vitória": f"Vitória do {nome}, {nossos} a {deles}!",
+                 "empate": f"Empate em {nossos} a {deles}. Um ponto é um ponto.",
+                 "derrota": f"Derrota por {deles} a {nossos}. Faz parte."}[resultado]
+        if resultado == "vitória" and not any(r for r in e["linha_do_tempo"] if "vitória" in r.get("evento", "")):
+            frase = f"Primeira vitória da história do {nome}! {nossos} a {deles}!"
+        cena("fim_de_jogo", f"Apita o árbitro! {frase}", ["FIM DE JOGO", placar_completo],
+             resultado=resultado, placar=[partida["gols_mandante"], partida["gols_visitante"]],
+             mandante=partida["mandante"], visitante=partida["visitante"])
+        est.evento(e, f"Rodada {liga['rodada']}: {placar_completo} ({resultado})")
 
         if casa:
             publico = min(hoje, e["estrutura"]["capacidade"])
@@ -185,62 +265,77 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 est.lancar(e, bilheteria, f"bilheteria rodada {liga['rodada']} ({publico} pagantes)")
             if lanche:
                 est.lancar(e, lanche, f"lanchonete rodada {liga['rodada']}")
-            lotado = hoje > e["estrutura"]["capacidade"]
             if publico:
-                cena("bilheteria", f"{_n(publico)} pagantes a {_moeda(e, e['regras']['ingresso'])}: "
-                 f"{_moeda(e, bilheteria + lanche)} pro clube."
-                     + (f" E ficou gente de fora: o estádio só cabe {_n(e['estrutura']['capacidade'])}." if lotado else ""),
-                     [f"{_n(publico)} × {_moeda(e, e['regras']['ingresso'])} = {_moeda(e, bilheteria)}"]
-                     + (["LOTADO"] if lotado else []), cenario="estadio_torcida", torcida=publico)
+                extra = f" Mais {_n(lanche)} da lanchonete." if lanche else ""
+                cena("bilheteria", f"Na bilheteria: {_n(publico)} pagantes, a {e['regras']['ingresso']} reais "
+                     f"cada. {_n(bilheteria)} reais pro clube!{extra}",
+                     [f"{_n(publico)} × R$ {e['regras']['ingresso']} = {_moeda(e, bilheteria)}"],
+                     publico=publico, ingresso=e["regras"]["ingresso"], receita=bilheteria + lanche,
+                     caixa=e["caixa"])
 
-    tab = tabela(times, liga["resultados"])
-    liga["tabela"] = tab
-    pos = next(l["pos"] for l in tab if l["time"] == nome)
-    if partida:
-        cena("tabela", f"Na tabela, o {nome} está em {pos}º.", [liga["nome"].upper(), f"{pos}º LUGAR"],
-             cenario="tabela", tabela=tab)
+        tab = tabela(times, liga["resultados"])
+        liga["tabela"] = tab
+        pos = next(l["pos"] for l in tab if l["time"] == nome)
+        comentario_pos = ("Lanterna. Mas lanterna também ilumina." if pos == len(tab)
+                          else "Zona de classificação!" if pos <= 2 else "")
+        cena("tabela", f"Na tabela, o {nome} está em {pos}º lugar. {comentario_pos}".strip(),
+             [e["liga"]["nome"].upper(), f"{pos}º LUGAR"], tabela=tab, posicao=pos)
+    else:
+        tab = tabela(times, liga["resultados"])
+        pos = next(l["pos"] for l in tab if l["time"] == nome)
 
-    # --- nova enquete e próxima decisão
+    # ================================================================ FECHAMENTO
     if briefing.get("nova_enquete"):
-        nova = dict(briefing["nova_enquete"], status="aberta", aberta_no_dia=e["dia"])
+        nova = dict(briefing["nova_enquete"], status="aberta", aberta_no_dia=dia)
         e["enquetes"].append(nova)
         cena("enquete_nova", f"E tem votação: {nova['pergunta']} "
              + " ou ".join(f"{k}, {v}" for k, v in nova["valores"].items()) + "? Comenta aí.",
-             [nova["pergunta"].upper()] + [f"{k}: {v}" for k, v in nova["valores"].items()])
+             [nova["pergunta"].upper()], valores=nova["valores"])
+
     prox = briefing["proxima_decisao"]
-    cena("decisao", f"Sobrou {_moeda(e, e['caixa'])} no caixa. {prox['pergunta']} "
-         "O comentário mais curtido decide.",
-         [f"CAIXA: {_moeda(e, e['caixa'])}", *[o.upper() for o in prox["opcoes"]],
-          f"DECISÃO #{e['dia']}", "COMENTÁRIO MAIS CURTIDO DECIDE"],
-         cenario="sede", personagens=["narrador", "presidente"])
+    if dia == 1:
+        txt = ("E quem manda no clube é você. O comentário viável mais curtido decide o que a gente faz. "
+               f"{prox['pergunta']}")
+    else:
+        txt = f"No caixa, {_n(e['caixa'])} reais. {prox['pergunta']} O comentário mais curtido decide."
+    cena("decisao", txt, [f"DECISÃO #{dia}", "COMENTÁRIO MAIS CURTIDO DECIDE"],
+         opcoes=prox["opcoes"], caixa=e["caixa"])
 
+    prox_jogo = None
     if liga["rodada"] < len(cal):
-        m, v = next(j for j in cal[liga["rodada"]] if nome in j)
-        adv = v if m == nome else m
-        cena("proximo", f"Amanhã: {nome} contra o {adv}. Segue pra entrar no estádio, curte pra encher o caixa.",
-             ["PRÓXIMO JOGO", f"{m} x {v}", e["clube"]["instagram"]], cenario="sede")
+        prox_jogo = next(j for j in cal[liga["rodada"]] if nome in j)
+    fala = "Segue a página pra entrar no estádio, curte pra encher o caixa, e comenta. Até amanhã!"
+    if prox_jogo and dia > 1:
+        advp = prox_jogo[1] if prox_jogo[0] == nome else prox_jogo[0]
+        fala = f"Amanhã tem {nome} contra o {advp}. " + fala
+    cena("encerramento", fala, [e["clube"]["instagram"]],
+         proximo=list(prox_jogo) if prox_jogo and dia > 1 else None)
 
-    roteiro = {"dia": e["dia"], "clube": nome, "caixa": e["caixa"], "torcida": hoje,
-               "posicao": pos, "partida": partida, "cenas": cenas,
+    roteiro = {"dia": dia, "clube": nome, "caixa": e["caixa"], "torcida": hoje, "posicao": pos,
+               "partida": partida, "cenas": cenas, "estado": _resumo_visual(e),
                "legenda": legenda(e, prox), "primeiro_comentario": prox["pergunta"] + " 👇"}
-    e["episodios"].append({"dia": e["dia"], "data": est.agora(), "proxima_decisao": prox,
-                           "post": None})
+    e["episodios"].append({"dia": dia, "data": est.agora(), "proxima_decisao": prox, "post": None})
     return e, roteiro
+
+
+def _resumo_visual(e: dict) -> dict:
+    """O que o renderizador precisa saber para desenhar o clube como ele está hoje."""
+    return {"clube": e["clube"], "estrutura": e["estrutura"], "elenco": e["elenco"],
+            "personagens": e["personagens"], "liga": e["liga"]["nome"], "moeda": e["moeda"]}
 
 
 def legenda(estado: dict, prox: dict) -> str:
     return (f"DIA {estado['dia']} do {estado['clube']['nome']} ⚽\n\n"
-            f"{prox['pergunta']} O comentário mais curtido decide.\n\n"
+            f"{prox['pergunta']} O comentário viável mais curtido decide.\n\n"
             f"1 seguidor = 1 torcedor no estádio\n1 curtida = +{_moeda(estado, estado['regras']['por_curtida'])} no caixa\n\n"
-            "#futebol #varzea #futebolamador")
+            "#futebol #varzea #futebolamador #futebolraiz")
 
 
 def roteiro_markdown(r: dict) -> str:
     linhas = [f"# Roteiro do dia {r['dia']}: {r['clube']}", "",
-              f"Torcida: {_n(r['torcida'])} · Caixa: R$ {_n(int(r['caixa']))} · Posição: {r['posicao']}º", ""]
-    for i, c in enumerate(r["cenas"], 1):
-        linhas += [f"## {i}. {c['id']}  ·  cenário: `{c['cenario']}`",
-                   f"**Na tela:** {' | '.join(t for t in c['texto_tela'] if t)}", "",
+              f"Torcida: {_n(r['torcida'])} · Caixa: R$ {_n(r['caixa'])} · Posição: {r['posicao']}º", ""]
+    for c in r["cenas"]:
+        linhas += [f"## {c['id']}", f"**Na tela:** {' | '.join(c['texto_tela'])}", "",
                    f"> {c['narracao']}", ""]
     linhas += ["---", "**Legenda do post:**", "", r["legenda"], "",
                f"**Primeiro comentário:** {r['primeiro_comentario']}"]

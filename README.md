@@ -13,14 +13,15 @@ Além disso, o time joga uma liga simulada (turno e returno, com tabela). Format
 ```bash
 python -m timefc preparar     # lê seguidores, curtidas e comentários do episódio de ontem
                               # → episodios/dia-NNN/briefing.json (ranking dos comentários)
-# edite o briefing: como o comentário vencedor vira ação, custo e efeitos
+                              #   e já escolhe o COMENTÁRIO VIÁVEL MAIS CURTIDO (src/timefc/catalogo.py)
 python -m timefc fechar       # aplica a decisão, simula a rodada e calcula a bilheteria
                               # → episodios/dia-NNN/roteiro.md / roteiro.json (cenas + narração)
-# produza o vídeo a partir do roteiro e suba numa URL pública
+python -m timefc video        # narra (ElevenLabs) e renderiza → episodios/dia-NNN/dia-NNN.mp4
+# suba o MP4 numa URL pública e publique:
 python -m timefc postar https://cdn.exemplo.com/dia-002.mp4   # legenda e 1º comentário vêm do roteiro
 ```
 
-Exemplo de `decisao` no briefing:
+**Comentário viável:** o pedido precisa estar no catálogo, ainda não ter sido feito e caber no caixa do dia. Se o mais curtido não for viável (por exemplo, "estádio de 50 mil lugares"), vale o próximo. Pedidos criativos fora do catálogo aparecem como "revisar" no briefing. Para escolher um deles, edite a `decisao` à mão, como no exemplo:
 
 ```json
 "decisao": { "comentario": 0, "titulo": "Lanchonete do @fulano",
@@ -75,6 +76,16 @@ python -m timefc postar "https://cdn.exemplo.com/ep01.mp4" --legenda "Dia 1 do U
 
 O vídeo precisa estar numa **URL pública** (Cloudflare R2, S3, Google Cloud Storage…). O Buffer baixa o arquivo de lá.
 
+## Vídeo
+
+O vídeo é 100% gerado por código, sem banco de imagens. Arte vetorial em SVG (`video/arte.js`), cenas (`video/cenas.js`), render com Chromium + ffmpeg (`video/render.mjs`) e narração na voz configurada da ElevenLabs, com legenda karaokê sincronizada por palavra. O visual acompanha o estado do clube: o gramado vira grama, o telhado é trocado, a lanchonete aparece e a arquibancada enche conforme os seguidores.
+
+- Requisitos: `ffmpeg`, Node 18+ com `playwright` (Chromium) e as variáveis `ELEVENLABS_API_KEY` / `ELEVENLABS_VOICE_ID`.
+- A narração fica em cache em `.cache/tts`, então re-renderizar não gasta créditos.
+- `python -m timefc video --preview` gera só um PNG por cena, para revisar rápido.
+- Trilha de fundo: `video/audio/trilha.mp3`, um loop de samba gerado pela ElevenLabs. O áudio final é normalizado para cerca de -14 LUFS.
+- Um episódio de 90 s leva uns 3 minutos para renderizar.
+
 ## Enquetes A/B
 
 Além do comentário mais curtido, dá para abrir enquetes rápidas (ex: o apelido do goleiro) pelo campo `nova_enquete` do briefing. Depois elas são encerradas com `encerrar_enquetes`. Regras da apuração (`src/timefc/votacao.py`):
@@ -90,8 +101,7 @@ Todo dia às 08:17 (Brasília), o GitHub Actions roda `coletar` e `preparar` e f
 
 - [x] Formato a partir dos vídeos de referência (`docs/FORMATO.md`)
 - [x] Motor do jogo: torcida, caixa, comentário vencedor, liga simulada, roteiro
-- [ ] Bater o martelo no nome, nos personagens e no estilo visual
-- [ ] Biblioteca de arte (personagens e cenários)
-- [ ] Narração TTS + legendas karaokê
-- [ ] Templates de cena em Remotion, renderizados a partir do `roteiro.json`
-- [ ] Hospedagem dos vídeos (R2) e publicação automática
+- [x] Comentário viável mais curtido escolhido automaticamente
+- [x] Vídeo gerado automaticamente: arte vetorial, narração ElevenLabs, legendas karaokê, trilha
+- [ ] Hospedagem dos vídeos (R2) e publicação automática pelo Buffer
+- [ ] Rodar o ciclo completo (preparar → fechar → video → postar) no GitHub Actions

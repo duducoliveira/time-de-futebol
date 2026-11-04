@@ -26,31 +26,44 @@ def test_ranking_ignora_proprio_perfil_e_spam():
     assert [c["usuario"] for c in top] == ["bia", "ana"]  # empate: quem comentou primeiro
 
 
+def test_comentario_viavel_mais_curtido():
+    from timefc import catalogo
+    e = _estado()
+    top = [{"usuario": "rico", "texto": "faz refletores e grama!", "curtidas": 900},
+           {"usuario": "nada", "texto": "vai corinthians", "curtidas": 500},
+           {"usuario": "fulano", "texto": "uma lanchonete com meu nome", "curtidas": 200}]
+    d, av = catalogo.escolher(e, top, caixa=4732, dia=2)
+    assert not av[0]["viavel"] and "caixa" in av[0]["motivo"]
+    assert av[1]["revisar"]
+    assert d["comentario"] == 2 and d["acoes"] == ["lanchonete"] and d["custo"] == 2500
+    assert d["efeitos"]["estrutura.lanchonete"] == "Lanchonete do @fulano"
+
+
 def test_tres_dias():
     e = _estado()
     b = ep.preparar(e, 0, None, [])
     e, r = ep.fechar(e, b)
     assert e["dia"] == 1 and r["partida"] is None and e["liga"]["rodada"] == 0
+    assert any(c["tipo"] == "jogador" for c in r["cenas"])
 
-    coms = [{"id": "1", "username": "fulano", "text": "lanchonete com meu nome", "like_count": 206, "timestamp": "1"}]
+    coms = [{"id": "1", "username": "fulano", "text": "lanchonete com meu nome", "like_count": 206, "timestamp": "1"},
+            {"id": "0", "username": "sonhador", "text": "estadio de 50 mil lugares e refletores", "like_count": 300, "timestamp": "1"}]
     b = ep.preparar(e, 3745, {"id": "x", "permalink": "p", "like_count": 4732}, coms, "clube")
-    b["decisao"].update(titulo="Lanchonete", interpretacao="Lanchonete do @fulano.", custo=800,
-                        efeitos={"regras.gasto_lanchonete_por_torcedor": 1, "clube.forca": "+2"})
+    assert b["decisao"]["acoes"] == ["lanchonete"]
     b["nova_enquete"] = {"id": "apelido", "pergunta": "Apelido do goleiro?", "atributo": "elenco.1.apelido",
                          "opcoes": {"A": ["muralha"], "B": ["gato"]}, "valores": {"A": "Muralha", "B": "Gato"}}
     e, r = ep.fechar(e, b)
-    assert e["caixa"] >= 4732 - 800
-    assert e["clube"]["forca"] == 30 and e["liga"]["times"]["Unidos do Terrão"] == 30
-    assert r["partida"] and e["liga"]["rodada"] == 1
-    assert len(e["liga"]["resultados"]) == 5
+    assert e["regras"]["gasto_lanchonete_por_torcedor"] == 1
+    assert r["partida"] and e["liga"]["rodada"] == 1 and len(e["liga"]["resultados"]) == 5
 
     coms = [{"id": "2", "username": "x", "text": "A", "like_count": 1, "timestamp": "1"},
-            {"id": "3", "username": "y", "text": "muralha!", "like_count": 1, "timestamp": "1"}]
-    b = ep.preparar(e, 13200, {"id": "y", "permalink": "q", "like_count": 100}, coms, "clube")
-    b["decisao"].update(interpretacao="ok")
-    b["encerrar_enquetes"] = ["apelido"]
+            {"id": "3", "username": "y", "text": "muralha! e um goleiro novo", "like_count": 5, "timestamp": "1"},
+            {"id": "4", "username": "z", "text": "outra lanchonete", "like_count": 9, "timestamp": "1"}]
+    b = ep.preparar(e, 13200, {"id": "y", "permalink": "q", "like_count": 16000}, coms, "clube")
+    assert b["avaliacao_comentarios"][0]["motivo"].endswith("já foi feito")
+    assert b["decisao"]["acoes"] == ["goleiro"]
     e, r = ep.fechar(e, b)
     assert e["elenco"]["1"]["apelido"] == "Muralha"
+    assert "12" in e["elenco"] and e["elenco"]["12"]["posicao"] == "GOL"
     assert sum(l["j"] for l in tabela(list(e["liga"]["times"]), e["liga"]["resultados"])) == 20
-    extrato_ok = round(sum(x["valor"] for x in e["extrato"]), 2) == e["caixa"]
-    assert extrato_ok
+    assert round(sum(x["valor"] for x in e["extrato"]), 2) == e["caixa"]

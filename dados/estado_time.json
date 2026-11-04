@@ -23,9 +23,15 @@
     "gramado": "terrão",
     "capacidade": 500,
     "arquibancada": "dois bancos de madeira",
+    "telhado": false,
     "vestiario": "um banheiro sem porta",
+    "uniforme": "cada um com uma camisa",
+    "rede": false,
+    "bolas": false,
     "iluminacao": false,
-    "lanchonete": null
+    "lanchonete": null,
+    "tecnico": false,
+    "kombi": false
   },
   "personagens": {
     "narrador": {
@@ -38,17 +44,61 @@
     }
   },
   "elenco": {
-    "1": {"nome": "Baixinho", "posicao": "GOL", "traco": "1,63 m; pula muito, alcança pouco"},
-    "2": {"nome": "Zé Marmita", "posicao": "LD", "traco": "entregador; sai no intervalo pra fazer entrega"},
-    "3": {"nome": "Tonhão", "posicao": "ZAG", "traco": "pedreiro; nunca perdeu uma dividida, nunca acertou um passe"},
-    "4": {"nome": "Professor", "posicao": "ZAG", "traco": "51 anos; não corre, se posiciona"},
-    "5": {"nome": "Padeiro", "posicao": "VOL", "traco": "chega direto do forno, com pão pra todo mundo"},
-    "6": {"nome": "Chinelinho", "posicao": "LE", "traco": "joga com chuteira emprestada dois números maior"},
-    "7": {"nome": "Foguete", "posicao": "PD", "traco": "o mais rápido do bairro; não tem freio"},
-    "8": {"nome": "Nenê", "posicao": "MEI", "traco": "16 anos, filho da Dona Cida; o único que sabe jogar"},
-    "9": {"nome": "Bujão", "posicao": "CA", "traco": "118 kg; finaliza muito bem, parado"},
-    "10": {"nome": "Maestro", "posicao": "MEI", "traco": "44 anos; conta do teste que fez num time grande em 98"},
-    "11": {"nome": "Sumido", "posicao": "PE", "traco": "ninguém sabe onde mora; aparece só no jogo"}
+    "1": {
+      "nome": "Baixinho",
+      "posicao": "GOL",
+      "traco": "1,63 m; pula muito, alcança pouco"
+    },
+    "2": {
+      "nome": "Zé Marmita",
+      "posicao": "LD",
+      "traco": "entregador; sai no intervalo pra fazer entrega"
+    },
+    "3": {
+      "nome": "Tonhão",
+      "posicao": "ZAG",
+      "traco": "pedreiro; nunca perdeu uma dividida, nunca acertou um passe"
+    },
+    "4": {
+      "nome": "Professor",
+      "posicao": "ZAG",
+      "traco": "51 anos; não corre, se posiciona"
+    },
+    "5": {
+      "nome": "Padeiro",
+      "posicao": "VOL",
+      "traco": "chega direto do forno, com pão pra todo mundo"
+    },
+    "6": {
+      "nome": "Chinelinho",
+      "posicao": "LE",
+      "traco": "joga com chuteira emprestada dois números maior"
+    },
+    "7": {
+      "nome": "Foguete",
+      "posicao": "PD",
+      "traco": "o mais rápido do bairro; não tem freio"
+    },
+    "8": {
+      "nome": "Nenê",
+      "posicao": "MEI",
+      "traco": "16 anos, filho da Dona Cida; o único que sabe jogar"
+    },
+    "9": {
+      "nome": "Bujão",
+      "posicao": "CA",
+      "traco": "118 kg; finaliza muito bem, parado"
+    },
+    "10": {
+      "nome": "Maestro",
+      "posicao": "MEI",
+      "traco": "44 anos; conta do teste que fez num time grande em 98"
+    },
+    "11": {
+      "nome": "Sumido",
+      "posicao": "PE",
+      "traco": "ninguém sabe onde mora; aparece só no jogo"
+    }
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
@@ -68,6 +118,7 @@
     "resultados": []
   },
   "episodios": [],
+  "decisoes": [],
   "enquetes": [],
   "extrato": [],
   "linha_do_tempo": [],

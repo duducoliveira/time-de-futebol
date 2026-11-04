@@ -42,23 +42,16 @@ O formato (regras e ritmo) é a referência. **Nome, personagens, visual e liga 
 - **Liga:** *Terceira Divisão da Várzea*, com 10 times caricatos (Atlético Padaria, Veteranos do Bairro, Amigos do Churrasco FC…).
 - **Moeda:** 1 curtida = R$ 1. Ingresso: R$ 2.
 
-## Pipeline de produção
+## Pipeline de produção (implementado)
 
 ```
-briefing.json ──(decisão humana)──► fechar ──► roteiro.json ──► narração (TTS + tempos por palavra)
-                                                     │                    │
-                                                     ▼                    ▼
-                                    cenas: arte fixa + cartões gerados  ──► montagem ──► MP4 1080×1920
-                                                                                              │
-                                                                    hospedagem pública (R2) ──► Buffer
+briefing.json ──► fechar ──► roteiro.json ──► narração ElevenLabs (cache, tempo por palavra)
+ (comentário viável                │                         │
+  escolhido sozinho)               ▼                         ▼
+                        cenas SVG geradas a partir do estado ──► Chromium quadro a quadro ──► ffmpeg ──► MP4 1080×1920
 ```
 
-| Etapa | Ferramenta sugerida | Observação |
-|---|---|---|
-| Arte (personagens/cenários) | Gerador de imagem com referência de personagem | Criar uma **biblioteca fixa** uma vez e gerar só as novidades de cada dia (ex: a lanchonete). A consistência dos personagens é o que mais pesa. |
-| Narração | TTS em PT-BR com timestamps por palavra (ex: ElevenLabs) | Os timestamps alimentam a legenda karaokê. |
-| Montagem | Remotion (React → MP4), com um template por tipo de cena | Placar, caixa, tabela e comentários são gerados **a partir do `roteiro.json`**, então os números saem sempre certos. |
-| Hospedagem | Cloudflare R2 / S3 | O Buffer exige uma URL pública. |
-| Publicação | `python -m timefc postar URL` | Usa a legenda e o 1º comentário do roteiro. |
-
-O texto de narração do `roteiro.json` é um rascunho gerado por template. O ideal é passar por um redator (pessoa ou Claude) para ganhar piadas e ritmo antes do TTS.
+- **Arte:** `video/arte.js`. Personagens paramétricos, que são sempre os mesmos, e cenários que mudam com o estado: terrão ou grama, telhado, lanchonete, arquibancada, refletores e uniforme.
+- **Cenas:** `video/cenas.js`, uma função por tipo de cena do roteiro (abertura, caixa, comentário, obra, gol, tabela, decisão…).
+- **Legenda:** karaokê com a palavra falada em amarelo. Os números aparecem escritos ("R$ 4.732") e o TTS recebe a forma falada ("quatro mil setecentos e trinta e dois reais").
+- **Fontes:** Anton e Nunito, ambas com licença OFL (`video/fontes/`).

@@ -6,6 +6,7 @@
   fechar                     aplica o briefing, simula a rodada e gera o roteiro do vídeo
   postar VIDEO_URL [--legenda TXT] [--agendar ISO] [--comentario TXT] [--rascunho]
                              sem --legenda, usa a legenda/1º comentário do último roteiro
+  video [--dia N] [--preview]  narra (ElevenLabs) e renderiza o MP4 do episódio
   renovar-token          renova o token do Instagram (rodar a cada ~50 dias)
 """
 from __future__ import annotations
@@ -104,19 +105,23 @@ def cmd_preparar(args):
     arq.write_text(json.dumps(b, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Dia {b['dia']}: {b['seguidores_ontem']} → {b['seguidores_hoje']} seguidores, "
           f"{b['curtidas']} curtidas (+R$ {b['receita_curtidas']})")
-    for i, c in enumerate(b["top_comentarios"]):
-        print(f"  [{i}] ♥{c['curtidas']:>5}  @{c['usuario']}: {c['texto']}")
+    for c, av in zip(b["top_comentarios"], b["avaliacao_comentarios"]):
+        marca = "✔" if av["viavel"] else "✘"
+        print(f"  {marca} ♥{c['curtidas']:>5}  @{c['usuario']}: {c['texto']}"
+              + ("" if av["viavel"] else f"   ({av['motivo']})"))
+    d = b["decisao"]
+    print(f"\nDecisão automática: {d['titulo']} (R$ {d['custo']})" if d else "\nNenhum comentário viável.")
     for q in b["enquetes"]:
         print(f"  enquete {q['id']}: {q['parcial']['percentual']}")
-    print(f"\nPreencha 'decisao' e 'proxima_decisao' em {arq.relative_to(RAIZ)} e rode: fechar")
+    print(f"Revise (opcional) {arq.relative_to(RAIZ)} e rode: fechar")
 
 
 def cmd_fechar(_):
     estado = est.carregar()
     pasta = _pasta_dia(estado["dia"] + 1)
     b = json.loads((pasta / "briefing.json").read_text(encoding="utf-8"))
-    d = b.get("decisao") or {}
-    if b["top_comentarios"] and not d.get("interpretacao"):
+    d = b.get("decisao")
+    if d and not d.get("interpretacao"):
         sys.exit("Preencha decisao.interpretacao no briefing antes de fechar o dia.")
     novo, roteiro = ep.fechar(estado, b)
     (pasta / "roteiro.json").write_text(json.dumps(roteiro, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -135,6 +140,16 @@ def cmd_postar(args):
                                 agendar_para=args.agendar, primeiro_comentario=comentario,
                                 rascunho=args.rascunho)
     print(json.dumps(post, ensure_ascii=False, indent=2))
+
+
+def cmd_video(args):
+    from .video import gerar
+    estado = est.carregar()
+    dia = args.dia or estado["dia"]
+    pasta = _pasta_dia(dia)
+    saida = pasta / f"dia-{dia:03d}.mp4"
+    gerar(pasta / "roteiro.json", saida, preview=args.preview)
+    print(f"Vídeo: {saida.relative_to(RAIZ)}")
 
 
 def cmd_renovar(_):
@@ -159,6 +174,10 @@ def main():
     po.add_argument("--comentario")
     po.add_argument("--rascunho", action="store_true")
     po.set_defaults(f=cmd_postar)
+    vi = sub.add_parser("video", help="gera o MP4 do episódio a partir do roteiro")
+    vi.add_argument("--dia", type=int)
+    vi.add_argument("--preview", action="store_true", help="só quadros PNG de cada cena")
+    vi.set_defaults(f=cmd_video)
     sub.add_parser("renovar-token").set_defaults(f=cmd_renovar)
     args = p.parse_args()
     args.f(args)

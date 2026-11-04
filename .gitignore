@@ -4,3 +4,6 @@ __pycache__/
 .venv/
 render/
 *.mp4
+.cache/
+episodios/*/narracao.mp3
+episodios/*/render.json

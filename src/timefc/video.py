@@ -1,0 +1,61 @@
+"""Gera o MP4 de um episódio a partir do roteiro.json.
+
+  1. Narra cada cena (ElevenLabs, com cache) e mede a duração.
+  2. Monta a faixa de áudio: as narrações em sequência, com pausas, e uma trilha
+     de fundo opcional (video/audio/trilha.mp3, em volume baixo e em loop).
+  3. Chama o renderizador (video/render.mjs: Chromium + SVG -> quadros -> ffmpeg).
+"""
+from __future__ import annotations
+
+import json
+import subprocess
+from pathlib import Path
+
+from .narracao import narrar
+
+RAIZ = Path(__file__).resolve().parents[2]
+CACHE = RAIZ / ".cache" / "tts"
+PAUSA = {"gol": 0.7, "fim_de_jogo": 0.5, "encerramento": 1.8, "abertura": 0.4, "obra": 0.5}
+
+
+def montar_audio(cenas: list[dict], saida: Path, trilha: Path | None = None) -> None:
+    args = ["ffmpeg", "-y", "-loglevel", "error"]
+    filtros, rotulos = [], []
+    for i, c in enumerate(cenas):
+        args += ["-i", c["audio"]]
+        filtros.append(f"[{i}:a]aresample=44100,apad,atrim=0:{c['duracao']:.3f},asetpts=N/SR/TB[a{i}]")
+        rotulos.append(f"[a{i}]")
+    filtros.append(f"{''.join(rotulos)}concat=n={len(cenas)}:v=0:a=1[voz]")
+    saida_rot = "[voz]"
+    if trilha and trilha.exists():
+        args += ["-stream_loop", "-1", "-i", str(trilha)]
+        total = sum(c["duracao"] for c in cenas)
+        filtros.append(f"[{len(cenas)}:a]volume=0.12,atrim=0:{total:.3f},afade=t=out:st={total - 2:.3f}:d=2[bg]")
+        filtros.append("[voz][bg]amix=inputs=2:duration=first:normalize=0[mix]")
+        saida_rot = "[mix]"
+    filtros.append(f"{saida_rot}loudnorm=I=-14:TP=-1.5:LRA=11,aresample=44100[final]")  # volume padrão de Reels
+    args += ["-filter_complex", ";".join(filtros), "-map", "[final]", "-c:a", "libmp3lame", "-b:a", "192k", str(saida)]
+    subprocess.run(args, check=True)
+
+
+def gerar(roteiro_path: Path, saida: Path, preview: bool = False) -> Path:
+    r = json.loads(roteiro_path.read_text(encoding="utf-8"))
+    pasta = saida.parent
+    cenas = []
+    for c in r["cenas"]:
+        n = narrar(c["narracao"], CACHE)
+        cenas.append({**c, "audio": n["audio"], "palavras": n["palavras"],
+                      "duracao": round(n["duracao"] + PAUSA.get(c["tipo"], 0.3), 3)})
+        print(f"  {c['id']:<22} {cenas[-1]['duracao']:5.1f}s")
+    total = sum(c["duracao"] for c in cenas)
+    print(f"  total: {total:.1f}s")
+    audio = pasta / "narracao.mp3"
+    montar_audio(cenas, audio, RAIZ / "video" / "audio" / "trilha.mp3")
+    entrada = pasta / "render.json"
+    entrada.write_text(json.dumps({"cenas": cenas, "estado": r["estado"], "torcida": r["torcida"],
+                                   "audio": str(audio)}, ensure_ascii=False), encoding="utf-8")
+    cmd = ["node", str(RAIZ / "video" / "render.mjs"), str(entrada), str(saida)]
+    if preview:
+        cmd.append("--preview")
+    subprocess.run(cmd, check=True)
+    return saida
