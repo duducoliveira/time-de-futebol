@@ -1,0 +1,43 @@
+{
+  "time": {
+    "identidade": {
+      "nome": null,
+      "cidade": null,
+      "cores": null,
+      "mascote": null,
+      "escudo": null
+    },
+    "uniforme": {
+      "principal": null,
+      "reserva": null
+    },
+    "elenco": [],
+    "tecnico": null,
+    "estadio": null
+  },
+  "seguidores": {
+    "historico": []
+  },
+  "votacoes": [
+    {
+      "id": "v001-nome",
+      "status": "rascunho",
+      "pergunta": "Qual vai ser o nome do time?",
+      "atributo": "identidade.nome",
+      "post_permalink": null,
+      "opcoes": {
+        "A": ["exemplo um"],
+        "B": ["exemplo dois"],
+        "C": ["exemplo tres"]
+      },
+      "valores": {
+        "A": "Exemplo Um FC",
+        "B": "Exemplo Dois EC",
+        "C": "Exemplo Três SC"
+      },
+      "peso_curtidas": 0
+    }
+  ],
+  "linha_do_tempo": [],
+  "atualizado_em": null
+}
