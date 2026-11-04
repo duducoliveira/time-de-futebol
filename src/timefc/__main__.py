@@ -2,8 +2,10 @@
 
   canais                 lista canais do Buffer (para achar o ID do Instagram)
   coletar                seguidores + métricas de todos os posts -> dados/metricas/AAAA-MM-DD.json
-  apurar                 lê comentários dos posts com votação aberta e atualiza o estado do time
-  postar VIDEO_URL LEGENDA [--agendar ISO] [--comentario TXT] [--rascunho]
+  preparar [--offline ARQ]   lê o episódio de ontem e gera episodios/dia-NNN/briefing.json
+  fechar                     aplica o briefing, simula a rodada e gera o roteiro do vídeo
+  postar VIDEO_URL [--legenda TXT] [--agendar ISO] [--comentario TXT] [--rascunho]
+                             sem --legenda, usa a legenda/1º comentário do último roteiro
   renovar-token          renova o token do Instagram (rodar a cada ~50 dias)
 """
 from __future__ import annotations
@@ -20,7 +22,7 @@ from dotenv import load_dotenv
 from . import estado as est
 from .buffer_client import BufferClient
 from .instagram_client import InstagramClient
-from .votacao import apurar
+from . import episodio as ep
 
 RAIZ = Path(__file__).resolve().parents[2]
 load_dotenv(RAIZ / ".env")
@@ -71,41 +73,66 @@ def cmd_coletar(_):
     (pasta / f"{date.today().isoformat()}.json").write_text(
         json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    estado = est.carregar()
-    estado["seguidores"]["historico"].append(
-        {"data": snapshot["data"], "seguidores": perfil.get("followers_count")})
-    est.salvar(estado)
     print(f"@{perfil.get('username')}: {perfil.get('followers_count')} seguidores, {len(midias)} posts coletados")
 
 
-def cmd_apurar(args):
-    ig = instagram()
+EPISODIOS = RAIZ / "episodios"
+
+
+def _pasta_dia(dia: int) -> Path:
+    p = EPISODIOS / f"dia-{dia:03d}"
+    p.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def cmd_preparar(args):
     estado = est.carregar()
-    abertas = [v for v in estado["votacoes"] if v["status"] == "aberta"]
-    if not abertas:
-        print("Nenhuma votação aberta.")
-        return
-    midias = {m["permalink"]: m for m in ig.midias(limite=50)}
-    usuario_proprio = ig.perfil().get("username", "")
-    for v in abertas:
-        m = midias.get(v["post_permalink"])
-        if not m:
-            print(f"[{v['id']}] post não encontrado: {v['post_permalink']}")
-            continue
-        comentarios = ig.comentarios(m["id"])
-        res = apurar(comentarios, v["opcoes"], v.get("peso_curtidas", 0), {usuario_proprio})
-        print(f"[{v['id']}] {v['pergunta']}\n  {res['percentual']}  votantes={res['votantes']}"
-              f"  vencedor={res['vencedor'] or '-'}{'  (EMPATE)' if res['empate'] else ''}")
-        if args.encerrar:
-            est.aplicar_resultado(estado, v, res)
-        else:
-            v["parcial"] = res
-    est.salvar(estado)
+    if args.offline:
+        seguidores, post, comentarios, usuario = ep.dados_offline(json.loads(Path(args.offline).read_text()))
+    else:
+        ig = instagram()
+        perfil = ig.perfil()
+        seguidores, usuario = perfil.get("followers_count", 0), perfil.get("username", "")
+        reels = [m for m in ig.midias(limite=10) if m.get("media_product_type") == "REELS"]
+        post = reels[0] if reels and estado["episodios"] else None
+        comentarios = ig.comentarios(post["id"]) if post else []
+        if post and estado["episodios"]:
+            estado["episodios"][-1]["post"] = {"id": post["id"], "permalink": post["permalink"]}
+            est.salvar(estado)
+    b = ep.preparar(estado, seguidores, post, comentarios, usuario)
+    arq = _pasta_dia(b["dia"]) / "briefing.json"
+    arq.write_text(json.dumps(b, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Dia {b['dia']}: {b['seguidores_ontem']} → {b['seguidores_hoje']} seguidores, "
+          f"{b['curtidas']} curtidas (+R$ {b['receita_curtidas']})")
+    for i, c in enumerate(b["top_comentarios"]):
+        print(f"  [{i}] ♥{c['curtidas']:>5}  @{c['usuario']}: {c['texto']}")
+    for q in b["enquetes"]:
+        print(f"  enquete {q['id']}: {q['parcial']['percentual']}")
+    print(f"\nPreencha 'decisao' e 'proxima_decisao' em {arq.relative_to(RAIZ)} e rode: fechar")
+
+
+def cmd_fechar(_):
+    estado = est.carregar()
+    pasta = _pasta_dia(estado["dia"] + 1)
+    b = json.loads((pasta / "briefing.json").read_text(encoding="utf-8"))
+    d = b.get("decisao") or {}
+    if b["top_comentarios"] and not d.get("interpretacao"):
+        sys.exit("Preencha decisao.interpretacao no briefing antes de fechar o dia.")
+    novo, roteiro = ep.fechar(estado, b)
+    (pasta / "roteiro.json").write_text(json.dumps(roteiro, ensure_ascii=False, indent=2), encoding="utf-8")
+    (pasta / "roteiro.md").write_text(ep.roteiro_markdown(roteiro), encoding="utf-8")
+    est.salvar(novo)
+    print(f"Dia {novo['dia']} fechado. Caixa: R$ {novo['caixa']}. Roteiro: {(pasta / 'roteiro.md').relative_to(RAIZ)}")
 
 
 def cmd_postar(args):
-    post = buffer().postar_reel(canal_ig(), args.video_url, args.legenda,
-                                agendar_para=args.agendar, primeiro_comentario=args.comentario,
+    legenda, comentario = args.legenda, args.comentario
+    if not legenda:
+        estado = est.carregar()
+        r = json.loads((_pasta_dia(estado["dia"]) / "roteiro.json").read_text(encoding="utf-8"))
+        legenda, comentario = r["legenda"], comentario or r["primeiro_comentario"]
+    post = buffer().postar_reel(canal_ig(), args.video_url, legenda,
+                                agendar_para=args.agendar, primeiro_comentario=comentario,
                                 rascunho=args.rascunho)
     print(json.dumps(post, ensure_ascii=False, indent=2))
 
@@ -121,12 +148,13 @@ def main():
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("canais").set_defaults(f=cmd_canais)
     sub.add_parser("coletar").set_defaults(f=cmd_coletar)
-    a = sub.add_parser("apurar")
-    a.add_argument("--encerrar", action="store_true", help="grava o vencedor no estado do time")
-    a.set_defaults(f=cmd_apurar)
+    pr = sub.add_parser("preparar")
+    pr.add_argument("--offline", help="JSON com seguidores/post/comentarios (teste sem API)")
+    pr.set_defaults(f=cmd_preparar)
+    sub.add_parser("fechar").set_defaults(f=cmd_fechar)
     po = sub.add_parser("postar")
     po.add_argument("video_url")
-    po.add_argument("legenda")
+    po.add_argument("--legenda")
     po.add_argument("--agendar")
     po.add_argument("--comentario")
     po.add_argument("--rascunho", action="store_true")

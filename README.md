@@ -1,6 +1,35 @@
-# Time de Futebol: um clube construído pelos seguidores
+# Unidos do Terrão: um clube de várzea construído pelos seguidores
 
-Um perfil de Instagram de um time de futebol fictício que **evolui com a interação dos seguidores**. Cada Reel abre uma decisão (nome, cores, escudo, mascote, uniforme, contratações, escalação…). Os comentários são apurados automaticamente, o vencedor passa a fazer parte do estado do time e o vídeo seguinte mostra o resultado.
+Um perfil de Instagram com episódios diários de um time fictício da última divisão da várzea. Três regras movem tudo:
+
+- **1 seguidor = 1 torcedor** no estádio
+- **1 curtida = +R$ 1** no caixa do clube
+- **O comentário mais curtido decide** o que o clube faz no dia seguinte
+
+Além disso, o time joga uma liga simulada (turno e returno, com tabela). Formato, personagens e pipeline de vídeo estão em [`docs/FORMATO.md`](docs/FORMATO.md).
+
+## Ciclo diário
+
+```bash
+python -m timefc preparar     # lê seguidores, curtidas e comentários do episódio de ontem
+                              # → episodios/dia-NNN/briefing.json (ranking dos comentários)
+# edite o briefing: como o comentário vencedor vira ação, custo e efeitos
+python -m timefc fechar       # aplica a decisão, simula a rodada e calcula a bilheteria
+                              # → episodios/dia-NNN/roteiro.md / roteiro.json (cenas + narração)
+# produza o vídeo a partir do roteiro e suba numa URL pública
+python -m timefc postar https://cdn.exemplo.com/dia-002.mp4   # legenda e 1º comentário vêm do roteiro
+```
+
+Exemplo de `decisao` no briefing:
+
+```json
+"decisao": { "comentario": 0, "titulo": "Lanchonete do @fulano",
+  "interpretacao": "Construímos a Lanchonete do Fulano: cada torcedor gasta R$1 por jogo.",
+  "custo": 800,
+  "efeitos": { "estrutura.lanchonete": "Lanchonete do @fulano", "regras.gasto_lanchonete_por_torcedor": 1, "clube.forca": "+2" } }
+```
+
+`clube.forca` (0–100) entra na simulação das partidas. `+N`/`-N` soma ao valor atual. Para testar sem API, use `preparar --offline dados.json` com `{"seguidores":..,"post":{"like_count":..},"comentarios":[..]}`.
 
 ```
  ┌──────────────┐   Reel + legenda    ┌─────────┐   publica   ┌───────────┐
@@ -48,31 +77,23 @@ python -m timefc postar "https://cdn.exemplo.com/ep01.mp4" "Episódio 1: escolha
 
 O vídeo precisa estar numa **URL pública** (Cloudflare R2, S3, Google Cloud Storage…). O Buffer baixa o arquivo de lá.
 
-## Como funciona uma votação
+## Enquetes A/B
 
-Em `dados/estado_time.json`, cada votação liga um post a um atributo do time:
+Além do comentário mais curtido, dá para abrir enquetes rápidas (ex: o apelido do goleiro) pelo campo `nova_enquete` do briefing. Depois elas são encerradas com `encerrar_enquetes`. Regras da apuração (`src/timefc/votacao.py`):
 
-```json
-{ "id": "v001-nome", "status": "aberta", "pergunta": "Qual vai ser o nome do time?",
-  "atributo": "identidade.nome", "post_permalink": "https://www.instagram.com/reel/XXXX/",
-  "opcoes":  { "A": ["exemplo um"], "B": ["exemplo dois"] },
-  "valores": { "A": "Exemplo Um FC", "B": "Exemplo Dois EC" }, "peso_curtidas": 0 }
-```
+- Vale 1 voto por usuário, e conta o comentário mais recente.
+- Aceita a letra (`A`, `#a`, `voto b`) ou uma palavra-chave da opção, sem ligar para acento.
+- Comentários ambíguos são descartados.
+- Em caso de empate, a enquete continua aberta.
 
-As regras da apuração estão em `src/timefc/votacao.py` e são cobertas por `tests/`:
-
-- Vale **1 voto por usuário**, e conta o comentário mais recente.
-- Aceita a letra (`A`, `#a`, `voto b`) ou uma palavra-chave da opção. Acentos e maiúsculas não importam.
-- Comentários ambíguos (com duas opções) ou que não votam são descartados.
-- Os comentários do próprio perfil são ignorados.
-- Com `peso_curtidas`, curtidas no comentário viram votos extras.
-- Em caso de empate, a votação continua aberta.
-
-O GitHub Actions (`.github/workflows/coleta.yml`) roda todo dia às 08:17 (Brasília). Ele coleta os dados, mostra a parcial e faz commit do resultado. Para encerrar uma votação, dispare o workflow manualmente marcando "encerrar". O histórico do git vira a linha do tempo do clube.
+Todo dia às 08:17 (Brasília), o GitHub Actions roda `coletar` e `preparar` e faz commit do briefing, que fica pronto para alguém decidir.
 
 ## Próximos passos
 
-- [ ] Definir o formato dos vídeos a partir dos vídeos de referência
-- [ ] Identidade visual do perfil (bio, destaques, capas, template dos Reels)
-- [ ] Gerar automaticamente o "placar da votação" (imagem/vídeo) a partir do estado
-- [ ] Roteiro de temporada: ordem das decisões e cadência de posts
+- [x] Formato a partir dos vídeos de referência (`docs/FORMATO.md`)
+- [x] Motor do jogo: torcida, caixa, comentário vencedor, liga simulada, roteiro
+- [ ] Bater o martelo no nome, nos personagens e no estilo visual
+- [ ] Biblioteca de arte (personagens e cenários)
+- [ ] Narração TTS + legendas karaokê
+- [ ] Templates de cena em Remotion, renderizados a partir do `roteiro.json`
+- [ ] Hospedagem dos vídeos (R2) e publicação automática

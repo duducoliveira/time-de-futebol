@@ -1,14 +1,9 @@
-name: Coleta diária e apuração
+name: Coleta diária e briefing do episódio
 
 on:
   schedule:
     - cron: "17 11 * * *"   # 08:17 em Brasília
   workflow_dispatch:
-    inputs:
-      encerrar:
-        description: "Encerrar votações abertas e aplicar o vencedor?"
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -28,11 +23,11 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python -m timefc coletar
-      - run: python -m timefc apurar ${{ inputs.encerrar && '--encerrar' || '' }}
+      - run: python -m timefc preparar
       - name: Commit dos dados
         run: |
           git config user.name "timefc-bot"
           git config user.email "timefc-bot@users.noreply.github.com"
-          git add dados/
+          git add dados/ episodios/
           git diff --cached --quiet || git commit -m "dados: coleta $(date -u +%F)"
           git push
