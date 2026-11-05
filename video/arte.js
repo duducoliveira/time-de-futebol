@@ -302,7 +302,7 @@ const PELES = ['#f1c27d', '#e0ac69', '#c68642', '#8d5524', '#6b4226', '#d9a066',
 const CAMISAS_SORTIDAS = ['#e63946', '#3a86ff', '#ffbe0b', '#8338ec', '#06d6a0', '#ff006e', '#fb5607', '#adb5bd', '#2a9d8f', '#f4a261', '#ffffff'];
 
 const PERSONAGENS = {
-  narrador: { pele: '#d9a066', cabelo: 'curto', corCabelo: '#3b2a1e', bigode: true, bone: '#e63946', boneTxt: 'ZÉ', fone: true,
+  narrador: { pele: '#d9a066', cabelo: 'curto', corCabelo: '#3b2a1e', bigode: true, bone: '#e63946', boneTxt: 'TIÃO', fone: true,
     microfone: true, camisa: '#ffd166', listra: '#f4a261', calcao: '#495057', meiao: '#fff', pose: 'microfone', larg: 1.15, barriga: true },
   presidente: { pele: '#8d5524', cabelo: 'coque', corCabelo: '#5a5a5a', oculos: true, brinco: true, camisa: '#e76f51',
     avental: '#fff4dc', aventalTxt: 'CIDA', calcao: '#6d597a', meiao: '#e76f51', chinelo: true, expr: 'serio', larg: 1.1, alt: 0.95, idade: true },
