@@ -157,8 +157,9 @@ function sigla(nome) {
   return (p.length >= 3 ? p.slice(0, 3).map(w => w[0]).join('') : p.length === 2 ? p[0][0] + p[1].slice(0, 2) : p[0].slice(0, 3)).toUpperCase();
 }
 function coresTime(nome) {
-  const pal = [['#c1121f', '#fdf0d5'], ['#2a9d8f', '#e9c46a'], ['#6a4c93', '#f1faee'], ['#264653', '#f4a261'],
-    ['#e76f51', '#264653'], ['#3a86ff', '#ffbe0b'], ['#588157', '#dad7cd'], ['#9d0208', '#ffba08'], ['#023047', '#8ecae6']];
+  // sem vinho/vermelho: são as cores do Poeira
+  const pal = [['#1d3557', '#fdf0d5'], ['#2a9d8f', '#e9c46a'], ['#6a4c93', '#f1faee'], ['#264653', '#f4a261'],
+    ['#f77f00', '#264653'], ['#3a86ff', '#ffbe0b'], ['#588157', '#dad7cd'], ['#000000', '#ffffff'], ['#023047', '#8ecae6']];
   const r = rng(nome); return pal[Math.floor(r() * pal.length)];
 }
 function escudo(nome, { nosso = false, sg: siglaFixa = null } = {}) {
@@ -594,3 +595,51 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
   return s;
 }
 Object.assign(window, { estadioAereo, bonecos, FAIXAS_TORCIDA });
+
+// ------------------------------------------------------------ escudo oficial do Poeira FC
+// Usado na foto de perfil (video/logo.mjs) e no escudo dentro dos vídeos.
+// Centro em (0,0), cabe em ~[-200,200] x [-230,240]. "estrelas" = títulos conquistados.
+function bola(r) {
+  const pent = (cx, cy, rr, rot = -90) => 'M' + Array.from({ length: 5 }, (_, i) => {
+    const a = (rot + i * 72) * Math.PI / 180; return `${(cx + Math.cos(a) * rr).toFixed(1)},${(cy + Math.sin(a) * rr).toFixed(1)}`; }).join(' L') + 'Z';
+  let s = `<circle r="${r}" fill="#fff" stroke="${OUT}" stroke-width="${r * 0.09}"/><path d="${pent(0, 0, r * 0.34)}" fill="${OUT}"/>`;
+  for (let i = 0; i < 5; i++) {
+    const a = (-90 + i * 72) * Math.PI / 180, x1 = Math.cos(a) * r * 0.34, y1 = Math.sin(a) * r * 0.34;
+    const x2 = Math.cos(a) * r * 0.72, y2 = Math.sin(a) * r * 0.72;
+    s += `<path d="M${x1},${y1} L${x2},${y2}" stroke="${OUT}" stroke-width="${r * 0.06}"/>`;
+    s += `<path d="${pent(Math.cos(a) * r * 0.93, Math.sin(a) * r * 0.93, r * 0.2, -90 + i * 72 + 180)}" fill="${OUT}"/>`;
+  }
+  const id = 'cb' + (_idEscudo++);
+  return `<g clip-path="url(#${id})">${s}</g><defs><clipPath id="${id}"><circle r="${r}"/></clipPath></defs>
+    <circle r="${r}" fill="none" stroke="${OUT}" stroke-width="${r * 0.09}"/>`;
+}
+
+let _idEscudo = 0;
+function escudoPoeira({ estrelas = 0, nome = 'POEIRA', sub = 'FC', ano = '' } = {}) {
+  const id = 'ep' + (_idEscudo++);
+  const vinho = CORES.vinho, ouro = CORES.amarelo, creme = CORES.creme;
+  const forma = 'M-190,-200 Q0,-245 190,-200 L190,10 C190,140 90,205 0,245 C-90,205 -190,140 -190,10 Z';
+  const interna = 'M-160,-178 Q0,-214 160,-178 L160,8 C160,118 78,174 0,210 C-78,174 -160,118 -160,8 Z';
+  // poeira levantando do chão, sempre dentro do escudo
+  const poeira = [[-120, 150, 52], [-62, 168, 60], [0, 176, 64], [62, 166, 58], [118, 148, 50], [-150, 112, 34], [150, 108, 32]]
+    .map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#e9d5b3" stroke="${OUT}" stroke-width="6"/>`).join('');
+  const est = Array.from({ length: estrelas }, (_, i) => {
+    const x = (i - (estrelas - 1) / 2) * 46;
+    return `<path transform="translate(${x} -268) scale(1.1)" d="M0,-18 L5,-6 L18,-6 L8,2 L12,15 L0,7 L-12,15 L-8,2 L-18,-6 L-5,-6Z" fill="${ouro}" stroke="${OUT}" stroke-width="4"/>`; }).join('');
+  const tamNome = Math.min(64, 290 / Math.max(1, medir(nome, 1) + 0.02 * nome.length));
+  return `<g><defs><clipPath id="${id}"><path d="${interna}"/></clipPath></defs>
+    <path d="${forma}" fill="${OUT}" transform="translate(10 14)"/>
+    <path d="${forma}" fill="${vinho}" stroke="${OUT}" stroke-width="12" stroke-linejoin="round"/>
+    <g clip-path="url(#${id})">
+      <rect x="-200" y="-132" width="400" height="92" fill="${ouro}" stroke="${OUT}" stroke-width="7"/>
+      ${poeira}
+      <path d="M-150,150 q-20,-10 -40,-4 M150,140 q20,-10 40,-3" stroke="#e9d5b3" stroke-width="10" fill="none" stroke-linecap="round"/>
+    </g>
+    <path d="${interna}" fill="none" stroke="${ouro}" stroke-width="10"/>
+    <text y="${-86 + tamNome * 0.36}" text-anchor="middle" font-family="Anton" font-size="${tamNome}" fill="${vinho}" letter-spacing="5">${esc(nome)}</text>
+    <g transform="translate(0 52) rotate(-12)">${bola(70)}</g>
+    <rect x="-64" y="${ano ? 120 : 124}" width="128" height="${ano ? 58 : 54}" rx="12" fill="${creme}" stroke="${OUT}" stroke-width="6"/>
+    <text y="${ano ? 158 : 163}" text-anchor="middle" font-family="Anton" font-size="${ano ? 26 : 40}" fill="${vinho}" letter-spacing="3">${esc(ano ? sub + ' · ' + ano : sub)}</text>
+    ${est}</g>`;
+}
+Object.assign(window, { escudoPoeira, bola });

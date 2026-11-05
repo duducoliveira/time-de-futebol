@@ -2,7 +2,8 @@
 // (t, dur, cena, E) -> SVG, onde t é o tempo local em segundos e E é o estado visual.
 
 const NOME = E => E.clube.nome;
-const nossoEscudo = E => escudo(NOME(E), { nosso: true, sg: E.clube.sigla });
+// escudo oficial (o mesmo da foto de perfil), na escala do escudo genérico dos adversários
+const nossoEscudo = E => `<g transform="scale(.66)">${escudoPoeira({ estrelas: E.clube.titulos || 0 })}</g>`;
 
 function camera(t, dur, conteudo, { z0 = 1, z1 = 1.06, cx = W / 2, cy = H / 2 } = {}) {
   const z = z0 + (z1 - z0) * easeOut(clamp(t / Math.max(dur, 0.1)));
