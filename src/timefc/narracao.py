@@ -85,8 +85,10 @@ def falar_token(tok: str, anterior: str = "", proximo: str = "") -> str:
         return pre + extenso(int(nucleo.replace(".", ""))) + sufixo + pos
     if re.fullmatch(r"\d+'", nucleo):
         return f"{pre}{extenso(int(nucleo[:-1]))} minutos{pos}"
+    if nucleo == "FC":
+        return pre + "éfe cê" + pos
     if nucleo.startswith("@"):
-        return pre + "arroba " + nucleo[1:].replace("_", " ") + pos
+        return pre + "arroba " + nucleo[1:].replace("_", " ").replace(".", " ponto ") + pos
     return tok.replace(";", ".")
 
 
@@ -141,9 +143,9 @@ def duracao(mp3: Path) -> float:
     return float(out.stdout.strip())
 
 
-def narrar(texto: str, cache: Path) -> dict:
+def narrar(texto: str, cache: Path, voz: str | None = None) -> dict:
     toks, falado, spans = preparar_texto(texto)
-    mp3, a = tts(falado, cache)
+    mp3, a = tts(falado, cache, voz)
     ini, fim = a["character_start_times_seconds"], a["character_end_times_seconds"]
     palavras = []
     for t, (s, e) in zip(toks, spans):

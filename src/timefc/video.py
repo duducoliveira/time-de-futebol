@@ -43,7 +43,7 @@ def gerar(roteiro_path: Path, saida: Path, preview: bool = False, forcar: bool =
     pasta = saida.parent
     cenas = []
     for c in r["cenas"]:
-        n = narrar(c["narracao"], CACHE)
+        n = narrar(c["narracao"], CACHE, r["estado"]["personagens"]["narrador"].get("voz"))
         cenas.append({**c, "audio": n["audio"], "palavras": n["palavras"],
                       "duracao": round(n["duracao"] + PAUSA.get(c["tipo"], 0.3), 3)})
         print(f"  {c['id']:<22} {cenas[-1]['duracao']:5.1f}s")

@@ -1,4 +1,4 @@
-# Unidos do Terrão: um clube de várzea construído pelos seguidores
+# Poeira FC (@poeira.fc): um clube de várzea construído pelos seguidores
 
 Um perfil de Instagram com episódios diários de um time fictício da última divisão da várzea. Três regras movem tudo:
 
@@ -70,7 +70,7 @@ pip install -r requirements.txt
 export PYTHONPATH=src
 python -m timefc canais        # descobre o ID do canal Instagram no Buffer
 python -m timefc coletar       # seguidores + métricas → dados/metricas/AAAA-MM-DD.json
-python -m timefc postar "https://cdn.exemplo.com/ep01.mp4" --legenda "Dia 1 do Unidos do Terrão" \
+python -m timefc postar "https://cdn.exemplo.com/ep01.mp4" --legenda "Dia 1 do Poeira FC" \
     --agendar 2026-11-10T21:00:00Z --comentario "O comentário mais curtido decide 👇"
 ```
 

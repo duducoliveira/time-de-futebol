@@ -137,7 +137,7 @@ PIADAS_ADVERSARIO = {
     "Ferro-Velho EC": "o uniforme é feito de lona de caminhão.",
     "Real Laje": "treinam em cima de uma laje. Ninguém sabe como.",
     "Estrela da Feira": "patrocinados pela banca de pastel.",
-    "Grêmio Vila Poeira": "o único campo pior que o nosso.",
+    "Grêmio Vila Barro": "o único campo pior que o nosso.",
 }
 
 
@@ -173,7 +173,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
              "um real no caixa do clube. E o comentário mais curtido decide o que a gente faz com o dinheiro.",
              ["COMO FUNCIONA"], torcida=0, caixa=0)
         cena("estadio", f"Hoje a gente tem zero torcedores e zero reais. O estádio é isso aqui: um campo de "
-             "terra e dois bancos de madeira. Vazios.", [estadio.upper(), "0 TORCEDORES"],
+             "terra e dois bancos de madeira. Vazios. " + e["clube"].get("piada_estadio", ""),
+             [estadio.upper()],
              antes=0, torcida=0, nivel=nivel_torcida(0, e["estrutura"]["capacidade"]))
         cena("presidente", f"Eu sou o {e['personagens']['narrador']['nome']}, o locutor. E essa é a {pres}. Dona do bar da esquina, presidente, tesoureira e roupeira "
              "do clube. Tudo ao mesmo tempo.", [pres.upper(), "PRESIDENTE · TESOUREIRA · ROUPEIRA"])

@@ -1,10 +1,12 @@
 {
   "clube": {
-    "nome": "Unidos do Terrão",
-    "sigla": "UDT",
-    "instagram": "@unidosdoterrao",
+    "nome": "Poeira FC",
+    "sigla": "PFC",
+    "instagram": "@poeira.fc",
     "fundado_no_dia": 0,
-    "forca": 28
+    "forca": 28,
+    "estadio": "Campo do Poeira",
+    "piada_estadio": "E quando venta, você entende o nome do time."
   },
   "dia": 0,
   "caixa": 0,
@@ -36,7 +38,8 @@
   "personagens": {
     "narrador": {
       "nome": "Zé do Rádio",
-      "papel": "locutor da rádio comunitária, narra tudo como se fosse final de Copa"
+      "papel": "locutor da rádio comunitária, narra tudo como se fosse final de Copa",
+      "voz": "UP5aPvvfM4UCXZrr3fdX"
     },
     "presidente": {
       "nome": "Dona Cida",
@@ -104,7 +107,7 @@
     "nome": "Terceira Divisão da Várzea",
     "rodada": 0,
     "times": {
-      "Unidos do Terrão": 28,
+      "Poeira FC": 28,
       "Leões do Brejo": 50,
       "Atlético Padaria": 45,
       "Ferro-Velho EC": 42,
@@ -113,7 +116,7 @@
       "Real Laje": 40,
       "Estrela da Feira": 47,
       "Veteranos do Bairro": 35,
-      "Grêmio Vila Poeira": 33
+      "Grêmio Vila Barro": 33
     },
     "resultados": []
   },
