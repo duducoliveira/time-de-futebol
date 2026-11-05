@@ -63,6 +63,8 @@ def ordinal(n: int) -> str:
 
 def falar_token(tok: str, anterior: str = "", proximo: str = "") -> str:
     """Forma falada de um token da legenda ('' = não falar)."""
+    if re.fullmatch(r"\[[^\]]*\]", tok):
+        return tok  # marcação de emoção do eleven_v3, ex: [shouting]
     m = re.fullmatch(r"([(\"“]*)(.*?)([.,;:!?)\"”…]*)", tok)
     pre, nucleo, pos = m.groups()
     if nucleo in ("R$",):
@@ -113,12 +115,20 @@ def preparar_texto(texto: str) -> tuple[list[str], str, list[tuple[int, int]]]:
     return toks, " ".join(falado), spans
 
 
-def tts(texto: str, cache: Path, voz: str | None = None) -> tuple[Path, dict]:
+# Estilos de narração. "grito" usa o eleven_v3, que entende marcações como [shouting].
+ESTILOS = {
+    "normal": ("eleven_multilingual_v2", {"stability": 0.32, "similarity_boost": 0.8, "style": 0.55,
+                                          "use_speaker_boost": True, "speed": 1.08}),
+    "grito": ("eleven_v3", {"stability": 0.0, "similarity_boost": 0.8}),
+}
+
+
+def tts(texto: str, cache: Path, voz: str | None = None, estilo: str = "normal") -> tuple[Path, dict]:
     """Gera (ou reaproveita) o MP3 e o alinhamento de um texto."""
     voz = voz or os.environ["ELEVENLABS_VOICE_ID"]
-    modelo = os.environ.get("ELEVENLABS_MODEL", "eleven_multilingual_v2")
-    ajustes = {"stability": 0.32, "similarity_boost": 0.8, "style": 0.55, "use_speaker_boost": True,
-               "speed": 1.08}
+    modelo, ajustes = ESTILOS[estilo]
+    if estilo == "normal":
+        modelo = os.environ.get("ELEVENLABS_MODEL", modelo)
     chave = hashlib.sha1(json.dumps([texto, voz, modelo, ajustes]).encode()).hexdigest()[:16]
     mp3, alin = cache / f"{chave}.mp3", cache / f"{chave}.json"
     if not mp3.exists():
@@ -143,9 +153,9 @@ def duracao(mp3: Path) -> float:
     return float(out.stdout.strip())
 
 
-def narrar(texto: str, cache: Path, voz: str | None = None) -> dict:
+def narrar(texto: str, cache: Path, voz: str | None = None, estilo: str = "normal") -> dict:
     toks, falado, spans = preparar_texto(texto)
-    mp3, a = tts(falado, cache, voz)
+    mp3, a = tts(falado, cache, voz, estilo)
     ini, fim = a["character_start_times_seconds"], a["character_end_times_seconds"]
     palavras = []
     for t, (s, e) in zip(toks, spans):
@@ -159,4 +169,5 @@ def narrar(texto: str, cache: Path, voz: str | None = None) -> dict:
             viz = next((q for q in palavras[i + 1:] if q["t0"] is not None), None) or \
                   next((q for q in reversed(palavras[:i]) if q["t0"] is not None), {"t0": 0, "t1": 0})
             p["t0"], p["t1"] = viz["t0"], viz["t1"]
+    palavras = [p for p in palavras if not re.fullmatch(r"\[[^\]]*\]", p["texto"])]
     return {"audio": str(mp3), "duracao": duracao(mp3), "palavras": palavras, "falado": falado}

@@ -15,7 +15,9 @@ from .narracao import narrar
 
 RAIZ = Path(__file__).resolve().parents[2]
 CACHE = RAIZ / ".cache" / "tts"
-PAUSA = {"gol": 0.7, "fim_de_jogo": 0.5, "encerramento": 1.8, "abertura": 0.4, "obra": 0.5}
+# efeitos sonoros (video/audio/), tocados no início da cena: (arquivo, volume, atraso em s)
+EFEITOS = {"gol": ("torcida_gol.mp3", 0.55, 0.1), "fim_de_jogo": ("apito_final.mp3", 0.6, 0.0)}
+PAUSA = {"gol": 1.0, "fim_de_jogo": 0.5, "encerramento": 1.8, "abertura": 0.4, "obra": 0.5}
 
 
 def montar_audio(cenas: list[dict], saida: Path, trilha: Path | None = None) -> None:
@@ -27,11 +29,27 @@ def montar_audio(cenas: list[dict], saida: Path, trilha: Path | None = None) -> 
         rotulos.append(f"[a{i}]")
     filtros.append(f"{''.join(rotulos)}concat=n={len(cenas)}:v=0:a=1[voz]")
     saida_rot = "[voz]"
+    n_in = len(cenas)
+    inicio, efeitos = 0.0, []
+    for c in cenas:
+        ef = EFEITOS.get(c["tipo"])
+        if ef and (c["tipo"] != "gol" or c["dados"].get("nosso")):
+            arq = RAIZ / "video" / "audio" / ef[0]
+            if arq.exists():
+                args += ["-i", str(arq)]
+                ms = int((inicio + ef[2]) * 1000)
+                filtros.append(f"[{n_in}:a]aresample=44100,volume={ef[1]},adelay={ms}|{ms}[ef{n_in}]")
+                efeitos.append(f"[ef{n_in}]")
+                n_in += 1
+        inicio += c["duracao"]
+    if efeitos:
+        filtros.append(f"[voz]{''.join(efeitos)}amix=inputs={len(efeitos) + 1}:duration=first:normalize=0[vozef]")
+        saida_rot = "[vozef]"
     if trilha and trilha.exists():
         args += ["-stream_loop", "-1", "-i", str(trilha)]
         total = sum(c["duracao"] for c in cenas)
-        filtros.append(f"[{len(cenas)}:a]volume=0.12,atrim=0:{total:.3f},afade=t=out:st={total - 2:.3f}:d=2[bg]")
-        filtros.append("[voz][bg]amix=inputs=2:duration=first:normalize=0[mix]")
+        filtros.append(f"[{n_in}:a]volume=0.12,atrim=0:{total:.3f},afade=t=out:st={total - 2:.3f}:d=2[bg]")
+        filtros.append(f"{saida_rot}[bg]amix=inputs=2:duration=first:normalize=0[mix]")
         saida_rot = "[mix]"
     filtros.append(f"{saida_rot}loudnorm=I=-14:TP=-1.5:LRA=11,aresample=44100[final]")  # volume padrão de Reels
     args += ["-filter_complex", ";".join(filtros), "-map", "[final]", "-c:a", "libmp3lame", "-b:a", "192k", str(saida)]
@@ -43,7 +61,8 @@ def gerar(roteiro_path: Path, saida: Path, preview: bool = False, forcar: bool =
     pasta = saida.parent
     cenas = []
     for c in r["cenas"]:
-        n = narrar(c["narracao"], CACHE, r["estado"]["personagens"]["narrador"].get("voz"))
+        n = narrar(c["narracao"], CACHE, r["estado"]["personagens"]["narrador"].get("voz"),
+                   c["dados"].get("estilo_voz", "normal"))
         cenas.append({**c, "audio": n["audio"], "palavras": n["palavras"],
                       "duracao": round(n["duracao"] + PAUSA.get(c["tipo"], 0.3), 3)})
         print(f"  {c['id']:<22} {cenas[-1]['duracao']:5.1f}s")

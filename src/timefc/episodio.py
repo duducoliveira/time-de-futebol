@@ -122,6 +122,15 @@ FALAS_TORCIDA = {
 ROTULO_NIVEL = {"beira": "LOTADO", "muro": "GENTE NO MURO", "arvore": "TEM GENTE NA ÁRVORE",
                 "laje": "TORCIDA NA LAJE", "tudo": "O BAIRRO PAROU"}
 
+# Gritos de gol (narrados com o eleven_v3; [tags] não aparecem na legenda)
+GRITOS_GOL = [
+    "[shouting] GOOOOOOOOOL! GOL! GOL! [excited] É DO {N}! {A}, aos {m} minutos! Que golaço!",
+    "[shouting] É GOOOOOOOOL! [excited] Olha o que ele fez! {A}, aos {m}! O {N} não para!",
+    "[shouting] GOOOOOOOOL DO {N}! [excited] {A}! Aos {m} minutos! Pode comemorar, torcida!",
+    "[shouting] ENTROOOOU! [excited] GOL DO {N}! {A}, aos {m}! Que pintura!",
+    "[shouting] GOOOOOOOOOL! [excited] Chora, goleiro! {A} manda pra rede aos {m}! É DO {N}!",
+]
+
 PIADAS_GOL_CONTRA = [
     "O Baixinho pulou. Pulou bonito. Mas pulou pro lado errado.",
     "A zaga parou pra ver. Literalmente parou.",
@@ -153,7 +162,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     falado = e["clube"].get("nome_falado") or nome  # na narração o time pode ter um nome mais curto
 
     def cena(tipo: str, narracao: str, tela: list[str] | None = None, **dados: Any) -> None:
-        narracao = narracao.replace(nome, falado)
+        narracao = narracao.replace(nome, falado).replace(nome.upper(), falado.upper())
         dados.setdefault("hud", {"torcida": e["torcida"]["seguidores"], "caixa": e["caixa"]})
         dados.setdefault("estrutura", copy.deepcopy(e["estrutura"]))  # o clube como está NESTA cena
         cenas.append({"id": f"{len(cenas) + 1:02d}-{tipo}", "tipo": tipo, "narracao": narracao,
@@ -266,6 +275,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
              f"{adv}. Detalhe: {piada}", [f"RODADA {liga['rodada']}", "EM CASA" if casa else "FORA DE CASA"],
              mandante=partida["mandante"], visitante=partida["visitante"])
         gm = gv = 0
+        usados: list[str] = []
         gols = partida["gols"]
         for i, g in enumerate(gols):
             nosso = g["time"] == nome
@@ -278,11 +288,14 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             if nosso:
                 art = _artilheiro(e, rng)
                 g["autor"] = art["nome"]
-                txt = f"GOOOOOL! É do {nome}! {art['nome']}, aos {g['minuto']} minutos!"
+                gritos = [x for x in GRITOS_GOL if x not in usados] or GRITOS_GOL
+                grito = rng.choice(gritos)
+                usados.append(grito)
+                txt = grito.format(N=nome.upper(), A=art["nome"].upper(), m=g["minuto"])
             else:
                 txt = f"Gol do {adv}, aos {g['minuto']}. {rng.choice(PIADAS_GOL_CONTRA)}"
             cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"],
-                 minuto=g["minuto"], nosso=nosso, autor=g.get("autor"), placar=[gm, gv],
+                 minuto=g["minuto"], nosso=nosso, estilo_voz="grito" if nosso else "normal", autor=g.get("autor"), placar=[gm, gv],
                  mandante=partida["mandante"], visitante=partida["visitante"])
         if not gols:
             cena("gol", "Noventa minutos de muita vontade e nenhuma pontaria.", ["0 x 0"], minuto=90,
