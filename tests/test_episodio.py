@@ -84,3 +84,12 @@ def test_niveis_da_torcida_e_gancho():
     assert evo["tipo"] == "evolucao" and evo["dados"]["caixa"] == 4732 and evo["dados"]["antes"] == 0
     assert r["cenas"][1]["tipo"] == "estadio" and r["cenas"][1]["dados"]["nivel"] == "arvore"
     assert all("hud" in c["dados"] and "estrutura" in c["dados"] for c in r["cenas"])
+
+
+def test_estreia_e_derrota_roteirizada():
+    for seguidores in (50, 3745, 20000):
+        e = _estado()
+        e, _ = ep.fechar(e, ep.preparar(e, 0, None, []))
+        e, r = ep.fechar(e, ep.preparar(e, seguidores, {"like_count": 100}, []))
+        assert ep._desfecho(r["partida"], e["clube"]["nome"]) == "derrota"
+        assert any(g["time"] == e["clube"]["nome"] for g in r["partida"]["gols"])  # mas marca um golzinho

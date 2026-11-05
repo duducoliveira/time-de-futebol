@@ -107,6 +107,14 @@
   "liga": {
     "nome": "Terceira Divisão da Várzea",
     "rodada": 0,
+    "roteiro": {
+      "1": {
+        "resultado": "derrota",
+        "marca_gol": true,
+        "max_gols_sofridos": 3,
+        "motivo": "estreia sofrida: o Poeira começa perdendo e vai melhorando"
+      }
+    },
     "times": {
       "Poeira FC": 28,
       "Leões do Brejo": 50,

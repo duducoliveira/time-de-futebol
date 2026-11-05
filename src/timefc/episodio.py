@@ -150,6 +150,27 @@ PIADAS_ADVERSARIO = {
 }
 
 
+def _desfecho(r: dict, nome: str) -> str:
+    nossos = r["gols_mandante"] if r["mandante"] == nome else r["gols_visitante"]
+    deles = r["gols_visitante"] if r["mandante"] == nome else r["gols_mandante"]
+    return "vitória" if nossos > deles else "empate" if nossos == deles else "derrota"
+
+
+def _simular_com_desfecho(m: str, v: str, forca: dict, semente: str, nome: str, regra: dict) -> dict:
+    """Simula até sair o desfecho combinado (ex: perder a estreia), de forma determinística.
+    regra: {"resultado": "derrota", "max_gols_sofridos": 3, "marca_gol": true}"""
+    for i in range(500):
+        r = simular(m, v, forca, semente=f"{semente}-{i}")
+        if _desfecho(r, nome) != regra.get("resultado", _desfecho(r, nome)):
+            continue
+        deles = r["gols_visitante"] if m == nome else r["gols_mandante"]
+        nossos = r["gols_mandante"] if m == nome else r["gols_visitante"]
+        if deles > regra.get("max_gols_sofridos", 99) or (regra.get("marca_gol") and not nossos):
+            continue
+        return r
+    return simular(m, v, forca, semente=semente)
+
+
 def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     """Aplica o briefing ao estado. Retorna (novo_estado, roteiro)."""
     e = copy.deepcopy(estado)
@@ -257,6 +278,9 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         rodada = []
         for m, v in cal[liga["rodada"]]:
             r = simular(m, v, liga["times"], semente=f"{dia}-{m}-{v}")
+            roteiro_jogo = liga.get("roteiro", {}).get(str(liga["rodada"] + 1))
+            if roteiro_jogo and nome in (m, v):
+                r = _simular_com_desfecho(m, v, liga["times"], f"{dia}-{m}-{v}", nome, roteiro_jogo)
             r["rodada"] = liga["rodada"] + 1
             rodada.append(r)
             if nome in (m, v):
