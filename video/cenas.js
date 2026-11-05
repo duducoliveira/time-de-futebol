@@ -19,7 +19,7 @@ function elencoLinha(t, E, y = 1500, s = 0.9, numeros = null) {
   [[tras, y, 0.92], [frente, y + 150, 1.05]].forEach(([fila, yy, k], f) => {
     fila.forEach((n, i) => {
       const x = W / 2 + (i - (fila.length - 1) / 2) * (f ? 205 : 180);
-      out += pop(t, 0.15 + (i * 2 + f) * 0.07, x, yy, pessoa(jogador(n, E), t, { s: s * k, fase: i + f }));
+      out += popPessoa(t, 0.15 + (i * 2 + f) * 0.07, x, yy, pessoa(jogador(n, E), t, { s: s * k, fase: i + f }));
     });
   });
   return out;
@@ -102,9 +102,9 @@ const TIPOS = {
     return s;
   },
   comentario(t, d, c, E) {
-    let s = camera(t, d, sede(E.estrutura, { t }));
-    s += narrador(t, E, 280, 1760, 1.35, { pose: 'microfone' });
-    s += presidente(t, E, 800, 1760, 1.35);
+    let s = camera(t, d, sede(E.estrutura, { t, dy: 540 }));
+    s += narrador(t, E, 300, 1910, 1.22, { pose: 'microfone' });
+    s += presidente(t, E, 935, 1910, 1.22);
     s += pop(t, 0.1, W / 2, 330, pilula(c.texto_tela[0], { tam: 50, bg: '#2e8b57', rot: -2 }));
     const cm = c.dados.comentario;
     s += pop(t, 0.4, W / 2, 620, cartaoComentario(cm.usuario, cm.texto, cm.curtidas));
@@ -122,10 +122,10 @@ const TIPOS = {
     }
     (c.dados.novos_jogadores || []).forEach((j, i) => {
       const num = Object.keys(E.elenco).find(k => E.elenco[k].nome === j.nome) || '12';
-      s += pop(t, virada + 0.2, 540 + i * 200, 1880, pessoa(jogador(num, E, { pose: 'comemora' }), t, { s: 1.9 }));
+      s += popPessoa(t, virada + 0.2, 540 + i * 200, 1880, pessoa(jogador(num, E, { pose: 'comemora' }), t, { s: 1.9 }));
     });
     s += pop(t, 0.1, W / 2, 330, pilula(c.texto_tela[0] || '', { tam: 52, bg: '#2e8b57', rot: -2 }));
-    if (c.texto_tela[1]) s += pop(t, virada + 0.1, 760, 470, texto(c.texto_tela[1], { tam: 110, cor: '#e63946', bw: 16 }));
+    if (c.texto_tela[1]) s += pop(t, virada + 0.1, W / 2, 520, texto(c.texto_tela[1], { tam: 110, cor: '#e63946', bw: 16 }));
     s += pop(t, virada + 0.6, 260, 1830, `<g transform="scale(.55)">${painelCaixa(c.dados.caixa, E.moeda, 'SOBROU')}</g>`);
     return s;
   },
@@ -140,28 +140,28 @@ const TIPOS = {
     s += pop(t, 0.1, W / 2, 330, pilula(c.texto_tela[0], { tam: 66, bg: CORES.marinho, rot: -2 }));
     s += pop(t, 0.4, W / 2, 440, pilula(c.texto_tela[1] || '', { tam: 40, bg: CORES.amarelo, cor: OUT, rot: 2 }));
     const m = c.dados.mandante, v = c.dados.visitante;
-    s += pop(t, 0.7, 250, 800, `<g transform="scale(.9)">${m === NOME(E) ? nossoEscudo(E) : escudo(m)}</g>`);
-    s += pop(t, 0.9, 830, 800, `<g transform="scale(.9)">${v === NOME(E) ? nossoEscudo(E) : escudo(v)}</g>`);
-    s += pop(t, 1.1, W / 2, 840, texto('X', { tam: 140 }));
-    s += pop(t, 1.0, 250, 1010, texto(m, { tam: 40, bw: 10 })) + pop(t, 1.0, 830, 1010, texto(v, { tam: 40, bw: 10 }));
+    s += pop(t, 0.7, 250, 650, `<g transform="scale(.85)">${m === NOME(E) ? nossoEscudo(E) : escudo(m)}</g>`);
+    s += pop(t, 0.9, 830, 650, `<g transform="scale(.85)">${v === NOME(E) ? nossoEscudo(E) : escudo(v)}</g>`);
+    s += pop(t, 1.1, W / 2, 690, texto('X', { tam: 130 }));
+    s += pop(t, 1.0, 250, 845, texto(m, { tam: 38, bw: 10 })) + pop(t, 1.0, 830, 845, texto(v, { tam: 38, bw: 10 }));
     s += elencoLinha(t, E, 1560, 0.7, ['1', '3', '4', '5', '8', '9', '10']);
     return s;
   },
   gol(t, d, c, E) {
     const nosso = c.dados.nosso;
     const dd = c.dados;
-    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.5, z1: 1.6, cy: 960 });
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.12, z1: 1.2, cy: 960 });
     // bola entrando no gol
     const p = easeOut(prog(t, 0.2, 0.7));
-    const bx = 540 + (nosso === false ? -1 : 1) * 60 * p, by = 1650 - p * 700, br = 46 - p * 20;
+    const bx = 540 + (nosso === false ? -1 : 1) * 60 * p, by = 1650 - p * (1650 - 905), br = 46 - p * 24;
     if (nosso !== null) s += `<circle cx="${bx}" cy="${by}" r="${br}" fill="#fff" stroke="${OUT}" stroke-width="6"/><path d="M${bx - 10},${by - 8} l10,-8 l10,8 l-4,12 h-12z" fill="${OUT}"/>`;
     if (nosso) {
       const num = Object.keys(E.elenco).find(k => E.elenco[k].nome === dd.autor) || '9';
-      s += pop(t, 0.6, 540, 1900, pessoa(jogador(num, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.9 }));
-      s += pop(t, 0.5, W / 2, 470, tituloGrande('GOOOOL!', { tam: 200, cor: CORES.amarelo, rot: -5 }));
+      s += popPessoa(t, 0.6, 540, 1900, pessoa(jogador(num, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.9 }));
+      s += pop(t, 0.5, W / 2, 660, tituloGrande('GOOOOL!', { tam: 180, cor: CORES.amarelo, rot: -5 }));
     } else if (nosso === false) {
       s += pessoa(jogador('1', E, { pose: 'comemora', expr: 'surpreso' }), t, { x: 330 - p * 80, y: 1720, s: 1.6 });
-      s += pop(t, 0.6, W / 2, 470, pilula(c.texto_tela[1] || 'GOL DELES', { tam: 56, bg: '#6c757d', rot: 3 }));
+      s += pop(t, 0.6, W / 2, 520, pilula(c.texto_tela[1] || 'GOL DELES', { tam: 56, bg: '#6c757d', rot: 3 }));
     }
     const sg = n => n === NOME(E) ? E.clube.sigla : sigla(n);
     s += placarCanto(sg(dd.mandante), sg(dd.visitante), dd.placar[0], dd.placar[1], dd.minuto);
@@ -172,10 +172,10 @@ const TIPOS = {
     let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }));
     const exp = dd.resultado === 'vitória' ? 'feliz' : dd.resultado === 'empate' ? 'serio' : 'triste';
     s += narrador(t, E, 540, 1760, 1.6, { expr: exp, pose: dd.resultado === 'vitória' ? 'comemora' : 'microfone' });
-    s += pop(t, 0.1, W / 2, 360, pilula('FIM DE JOGO', { tam: 56, bg: CORES.marinho, rot: -2 }));
-    s += pop(t, 0.4, W / 2, 600, tituloGrande(`${dd.placar[0]} x ${dd.placar[1]}`, { tam: 220, cor: '#fff', rot: 0 }));
-    s += pop(t, 0.6, W / 2, 700, texto(`${dd.mandante}  ·  ${dd.visitante}`, { tam: 40, bw: 10 }));
-    if (dd.resultado === 'vitória') s += pop(t, 1.0, W / 2, 860, tituloGrande('VITÓRIA!', { tam: 120, cor: CORES.amarelo, rot: -6 }));
+    s += pop(t, 0.1, W / 2, 250, pilula('FIM DE JOGO', { tam: 52, bg: CORES.marinho, rot: -2 }));
+    s += pop(t, 0.4, W / 2, 545, tituloGrande(`${dd.placar[0]} x ${dd.placar[1]}`, { tam: 180, cor: '#fff', rot: 0 }));
+    s += pop(t, 0.6, W / 2, 668, pilula(`${dd.mandante}  ·  ${dd.visitante}`, { tam: 32, bg: CORES.marinho, py: 12 }));
+    if (dd.resultado === 'vitória') s += pop(t, 1.0, W / 2, 825, tituloGrande('VITÓRIA!', { tam: 96, cor: CORES.amarelo, rot: -3 }));
     return s;
   },
   bilheteria(t, d, c, E) {
@@ -198,9 +198,9 @@ const TIPOS = {
     return s;
   },
   decisao(t, d, c, E) {
-    let s = camera(t, d, sede(E.estrutura, { t }));
-    s += narrador(t, E, 280, 1770, 1.35, { pose: 'aponta' });
-    s += presidente(t, E, 800, 1770, 1.35);
+    let s = camera(t, d, sede(E.estrutura, { t, dy: 540 }));
+    s += narrador(t, E, 300, 1910, 1.22, { pose: 'aponta' });
+    s += presidente(t, E, 935, 1910, 1.22);
     const ops = c.dados.opcoes || [];
     const cores = ['#e63946', '#3a86ff', '#2e8b57'];
     ops.forEach((o, i) => s += pop(t, 0.3 + i * 0.25, 210 + i * 330, 560, `<g transform="rotate(${[-4, 2, 5][i] || 0})">${cartaoOpcao(o, iconeOpcao(o), cores[i % 3])}</g>`));
@@ -209,9 +209,9 @@ const TIPOS = {
     return s;
   },
   encerramento(t, d, c, E) {
-    let s = camera(t, d, sede(E.estrutura, { t }));
-    s += narrador(t, E, 300, 1760, 1.4, { pose: 'acena' });
-    s += presidente(t, E, 790, 1760, 1.4, { expr: 'feliz' });
+    let s = camera(t, d, sede(E.estrutura, { t, dy: 540 }));
+    s += narrador(t, E, 300, 1910, 1.22, { pose: 'acena' });
+    s += presidente(t, E, 935, 1910, 1.22, { expr: 'feliz' });
     if (c.dados.proximo) {
       const [m, v] = c.dados.proximo;
       s += pop(t, 0.2, W / 2, 330, pilula('PRÓXIMO JOGO', { tam: 54, bg: '#2e8b57' }));
@@ -307,7 +307,7 @@ const SEM_HUD = new Set(['abertura', 'regras', 'evolucao', 'estadio', 'encerrame
 function hud(c, E) {
   if (SEM_HUD.has(c.tipo) || !c.dados.hud) return '';
   const h = c.dados.hud, y = c.tipo === 'gol' ? 320 : 40;
-  const item = (x, ic, txt) => { const w = medir(txt, 34) + 86; return `<g transform="translate(${x} ${y})">
+  const item = (x, ic, txt) => { const w = medir(txt, 34) + 86; return `<g class="ui" transform="translate(${x} ${y})">
     <rect width="${w}" height="58" rx="29" fill="${CORES.marinho}" stroke="${OUT}" stroke-width="4" opacity=".92"/>
     <text x="34" y="42" text-anchor="middle" font-size="30">${ic}</text>
     <text x="62" y="43" font-family="Anton" font-size="34" fill="#fff">${esc(txt)}</text></g>`; };
@@ -348,11 +348,11 @@ function legenda(t, cena) {
     x += larguras[k] + esp;
   });
   const entrada = easeOutBack(prog(t, atual[0].t0 - 0.05, 0.18));
-  return `<g transform="translate(${W / 2} 1165) scale(${escala * (0.85 + 0.15 * entrada)})">${s}</g>`;
+  return `<g class="ui legenda" transform="translate(${W / 2} 1165) scale(${escala * (0.85 + 0.15 * entrada)})">${s}</g>`;
 }
 
 function marcaDagua(E) {
-  return `<g transform="translate(${W - 50} 110)" opacity=".85">
+  return `<g class="ui" transform="translate(${W - 50} 110)" opacity=".85">
     <text text-anchor="end" font-family="Anton" font-size="30" fill="#fff" stroke="${OUT}" stroke-width="6" paint-order="stroke">${esc(E.clube.instagram)}</text></g>`;
 }
 

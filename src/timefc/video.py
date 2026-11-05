@@ -38,7 +38,7 @@ def montar_audio(cenas: list[dict], saida: Path, trilha: Path | None = None) -> 
     subprocess.run(args, check=True)
 
 
-def gerar(roteiro_path: Path, saida: Path, preview: bool = False) -> Path:
+def gerar(roteiro_path: Path, saida: Path, preview: bool = False, forcar: bool = False) -> Path:
     r = json.loads(roteiro_path.read_text(encoding="utf-8"))
     pasta = saida.parent
     cenas = []
@@ -55,6 +55,10 @@ def gerar(roteiro_path: Path, saida: Path, preview: bool = False) -> Path:
     entrada.write_text(json.dumps({"cenas": cenas, "estado": r["estado"], "torcida": r["torcida"],
                                    "audio": str(audio)}, ensure_ascii=False), encoding="utf-8")
     cmd = ["node", str(RAIZ / "video" / "render.mjs"), str(entrada), str(saida)]
+    qa = subprocess.run(cmd + ["--qa"], capture_output=True, text=True)
+    print(qa.stdout.strip())
+    if qa.returncode and not (forcar or preview):
+        raise SystemExit("Checagem visual encontrou problemas (acima). Corrija ou rode com --forcar.")
     if preview:
         cmd.append("--preview")
     subprocess.run(cmd, check=True)

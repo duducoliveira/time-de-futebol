@@ -36,12 +36,14 @@ function quebrar(txt, tam, larg, fonte = 'Nunito') {
 }
 
 // "pop": escala com overshoot a partir do instante `ini`
-function pop(t, ini, x, y, conteudo, dur = 0.45) {
+function pop(t, ini, x, y, conteudo, dur = 0.45, ui = true) {
   const p = prog(t, ini, dur);
   if (p <= 0) return '';
   const s = easeOutBack(p);
-  return `<g transform="translate(${x} ${y}) scale(${s})" opacity="${clamp(p * 3)}">${conteudo}</g>`;
+  return `<g ${ui ? 'class="ui" ' : ''}transform="translate(${x} ${y}) scale(${s})" opacity="${clamp(p * 3)}">${conteudo}</g>`;
 }
+// personagens também "pulam" na tela, mas não são elementos de interface
+const popPessoa = (t, ini, x, y, conteudo) => pop(t, ini, x, y, conteudo, 0.45, false);
 
 // ------------------------------------------------------------ texto e UI
 function texto(txt, { tam = 80, cor = '#fff', borda = OUT, bw = 14, fonte = 'Anton', anchor = 'middle', peso = 400 } = {}) {
@@ -138,7 +140,7 @@ function tabelaCard(linhas, destaque, titulo, { rodada = null } = {}) {
 }
 
 function placarCanto(sm, sv, gm, gv, minuto) {
-  return `<g transform="translate(40 150)">
+  return `<g class="ui" transform="translate(40 150)">
     <rect width="360" height="84" rx="18" fill="${CORES.marinho}" stroke="${OUT}" stroke-width="5"/>
     <text x="70" y="58" text-anchor="middle" font-family="Anton" font-size="40" fill="#fff">${esc(sm)}</text>
     <rect x="128" y="10" width="104" height="64" rx="12" fill="#fff"/>
@@ -240,7 +242,7 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   const hy = cab + bob * 0.3;
   let c = `<circle cx="${-R + 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
     <circle cx="${R - 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
-    <circle cx="0" cy="${hy}" r="${R}" fill="${pele}" stroke="${OUT}" stroke-width="6"/>`;
+    <circle class="rosto" cx="0" cy="${hy}" r="${R}" fill="${pele}" stroke="${OUT}" stroke-width="6"/>`;
   const cc = p.corCabelo || '#2b1d14';
   const cabelos = {
     curto: `<path d="M${-R + 2},${hy - 4} C${-R + 4},${hy - R - 22} ${R - 4},${hy - R - 22} ${R - 2},${hy - 4} C${R * 0.5},${hy - R * 0.55} ${-R * 0.3},${hy - R * 0.75} ${-R + 2},${hy - 4} Z" fill="${cc}" stroke="${OUT}" stroke-width="5"/>`,
@@ -378,7 +380,8 @@ function muro(y, nome) {
   return `<rect x="-10" y="${y}" width="${W + 20}" height="90" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
     <path d="M60,${y + 18} q40,-12 90,0 t90,0" stroke="#e76f51" stroke-width="10" fill="none" opacity=".7"/>
     <path d="M820,${y + 70} q40,-14 90,0 t90,0" stroke="#3a86ff" stroke-width="10" fill="none" opacity=".7"/>
-    <text x="${W / 2}" y="${y + 66}" text-anchor="middle" font-family="Anton" font-size="54" fill="${CORES.vinho}" opacity=".9" letter-spacing="4">${esc(nome.toUpperCase())}</text>`;
+    <text class="rotulo" x="265" y="${y + 62}" text-anchor="middle" font-family="Anton" font-size="${Math.min(46, 270 / Math.max(1, medir(nome.toUpperCase(), 1)))}" fill="${CORES.vinho}" opacity=".9">${esc(nome.toUpperCase())}</text>
+    <text class="rotulo" x="835" y="${y + 64}" text-anchor="middle" font-family="Anton" font-size="52" fill="${CORES.vinho}" opacity=".85" letter-spacing="6">${esc(window._sigla || '')}</text>`;
 }
 
 function torcedores(n, y0, y1, seed = 'torcida') {
@@ -441,15 +444,17 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   s += `<path d="M-100,1260 H1180" stroke="${linha}" stroke-width="8"/>
     <ellipse cx="${W / 2}" cy="1260" rx="240" ry="70" fill="none" stroke="${linha}" stroke-width="8"/>
     <path d="M330,950 L300,1060 H780 L750,950" fill="none" stroke="${linha}" stroke-width="7"/>`;
-  s += trave(W / 2, 1075, 0.8, !grama);
+  s += trave(W / 2, 955, 0.8, !grama);
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
   return s;
 }
 
-function sede(estrutura, { t = 0 } = {}) {
+// dy > 0 "abaixa a câmera": o bar vai para a parte de baixo e libera o céu para os cartões
+function sede(estrutura, { t = 0, dy = 0 } = {}) {
   const novo = estrutura.telhado;
-  let s = ceu(t) + bairro(820);
+  let s = '';
+  s += bairro(820);
   s += `<rect x="-10" y="820" width="${W + 20}" height="${H - 820}" fill="#cfc2a8"/><rect x="-10" y="1180" width="${W + 20}" height="${H - 1180}" fill="url(#gterra)"/>`;
   // prédio do bar / sede
   s += `<rect x="170" y="640" width="740" height="560" fill="#f2e2c4" stroke="${OUT}" stroke-width="7"/>
@@ -460,9 +465,9 @@ function sede(estrutura, { t = 0 } = {}) {
   else s += `<path d="M140,660 L940,620 L930,660 L150,680Z" fill="#9aa5b1" stroke="${OUT}" stroke-width="6"/>
     <rect x="420" y="628" width="90" height="34" fill="#6c757d" stroke="${OUT}" stroke-width="4" transform="rotate(-5 465 645)"/>
     <circle cx="700" cy="640" r="10" fill="${OUT}"/><circle cx="300" cy="655" r="8" fill="${OUT}"/>`;
-  s += `<rect x="260" y="700" width="560" height="110" rx="14" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="7"/>
+  s += `<g class="rotulo"><rect x="260" y="700" width="560" height="110" rx="14" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="7"/>
     <text x="540" y="785" text-anchor="middle" font-family="Anton" font-size="74" fill="${CORES.vinho}">BAR DA CIDA</text>
-    <text x="540" y="860" text-anchor="middle" font-family="Anton" font-size="36" fill="${OUT}" letter-spacing="4">SEDE SOCIAL · ${esc(window._sigla || '')}</text>
+    <text x="540" y="860" text-anchor="middle" font-family="Anton" font-size="36" fill="${OUT}" letter-spacing="4">SEDE SOCIAL · ${esc(window._sigla || '')}</text></g>
     <path d="M200,880 H880 L860,940 H220Z" fill="#e63946" stroke="${OUT}" stroke-width="6"/>
     ${[0, 1, 2, 3, 4, 5].map(i => `<path d="M${215 + i * 113},882 h56 l-6,56 h-46z" fill="#fff"/>`).join('')}
     <rect x="460" y="960" width="160" height="240" fill="#6f4518" stroke="${OUT}" stroke-width="6"/>
@@ -474,14 +479,16 @@ function sede(estrutura, { t = 0 } = {}) {
   s += mesa(150, '#ffbe0b') + mesa(930, '#e63946') + `<rect x="840" y="1150" width="110" height="70" fill="#e63946" stroke="${OUT}" stroke-width="5"/>
     ${[0, 1, 2].map(i => `<rect x="${852 + i * 32}" y="1132" width="18" height="36" rx="6" fill="#6a994e" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
   if (estrutura.lanchonete) s += lanchonete(estrutura.lanchonete);
-  return s;
+  return ceu(t) + (dy ? `<g transform="translate(0 ${dy})">${s}</g><rect x="-10" y="${H}" width="${W + 20}" height="${dy}" fill="url(#gterra)"/>` : s);
 }
 
-function lanchonete(nome, x = 40, y = 1000) {
-  return `<g transform="translate(${x} ${y}) scale(.8)">
+function lanchonete(nome, x = 44, y = 1010) {
+  const txt = nome.length > 22 ? nome.replace('Lanchonete', 'Lanch.') : nome;
+  const tam = Math.min(30, 250 / Math.max(1, medir(txt, 1)));   // cabe sempre na placa
+  return `<g transform="translate(${x} ${y}) scale(.68)">
     <rect x="0" y="0" width="240" height="220" fill="#d4a373" stroke="${OUT}" stroke-width="6"/>
-    <rect x="-20" y="-40" width="280" height="56" rx="10" fill="#fff4dc" stroke="${OUT}" stroke-width="6"/>
-    <text x="120" y="-1" text-anchor="middle" font-family="Anton" font-size="30" fill="${CORES.vinho}">${esc(nome.length > 18 ? nome.replace('Lanchonete', 'Lanch.') : nome)}</text>
+    <g class="rotulo"><rect x="-20" y="-40" width="280" height="56" rx="10" fill="#fff4dc" stroke="${OUT}" stroke-width="6"/>
+    <text x="120" y="${-12 + tam * 0.36}" text-anchor="middle" font-family="Anton" font-size="${tam}" fill="${CORES.vinho}">${esc(txt)}</text></g>
     <rect x="20" y="40" width="200" height="90" fill="#3d2b1f" stroke="${OUT}" stroke-width="5"/>
     <text x="120" y="100" text-anchor="middle" font-size="44">🌭🥤</text>
     <rect x="-10" y="130" width="260" height="22" fill="#e63946" stroke="${OUT}" stroke-width="5"/></g>`;
@@ -492,7 +499,7 @@ function fundoEscuro() {
     ${Array.from({ length: 14 }, (_, i) => `<circle cx="${(i * 173) % W}" cy="${(i * 311) % H}" r="${80 + (i % 4) * 40}" fill="#ffffff08"/>`).join('')}`;
 }
 
-Object.assign(window, { W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
+Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
   escudo, sigla, pessoa, PERSONAGENS, jogador, campo, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 

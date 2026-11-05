@@ -155,7 +155,7 @@ def cmd_video(args):
     dia = args.dia or estado["dia"]
     pasta = _pasta_dia(dia)
     saida = pasta / f"dia-{dia:03d}.mp4"
-    gerar(pasta / "roteiro.json", saida, preview=args.preview)
+    gerar(pasta / "roteiro.json", saida, preview=args.preview, forcar=args.forcar)
     print(f"Vídeo: {saida.relative_to(RAIZ)}")
 
 
@@ -185,6 +185,7 @@ def main():
     vi = sub.add_parser("video", help="gera o MP4 do episódio a partir do roteiro")
     vi.add_argument("--dia", type=int)
     vi.add_argument("--preview", action="store_true", help="só quadros PNG de cada cena")
+    vi.add_argument("--forcar", action="store_true", help="renderiza mesmo se a checagem visual reclamar")
     vi.set_defaults(f=cmd_video)
     sub.add_parser("renovar-token").set_defaults(f=cmd_renovar)
     args = p.parse_args()

@@ -83,6 +83,8 @@ O vídeo é 100% gerado por código, sem banco de imagens. Arte vetorial em SVG 
 - Requisitos: `ffmpeg`, Node 18+ com `playwright` (Chromium) e as variáveis `ELEVENLABS_API_KEY` / `ELEVENLABS_VOICE_ID`.
 - A narração fica em cache em `.cache/tts`, então re-renderizar não gasta créditos.
 - `python -m timefc video --preview` gera só um PNG por cena, para revisar rápido.
+- **Checagem visual automática:** antes de renderizar, o `video` mede todos os textos, cartões, letreiros do cenário (placa do bar, muro, lanchonete) e rostos de personagens, e para se algo estiver sobreposto ou cortado na borda (use `--forcar` para ignorar). Manualmente: `node video/render.mjs render.json x --qa`.
+- **Layout em faixas:** topo = contador e @; meio = cartões e títulos; faixa central (y≈1165) = legenda; embaixo = personagens. Cenas novas devem respeitar isso.
 - Trilha de fundo: `video/audio/trilha.mp3`, um loop de samba gerado pela ElevenLabs. O áudio final é normalizado para cerca de -14 LUFS.
 - Um episódio de 90 s leva uns 3 minutos para renderizar.
 
