@@ -21,7 +21,7 @@ const variantes = {
     <g transform="translate(540 560) scale(1.72)">${escudoPoeira()}</g>`,
   'perfil-creme': () => `<rect width="1080" height="1080" fill="${CORES.creme}"/>
     <g transform="translate(540 560) scale(1.72)">${escudoPoeira()}</g>`,
-  'escudo-transparente': () => `<g transform="translate(540 550) scale(1.9)">${escudoPoeira({ ano: '2026' })}</g>`,
+  'escudo-transparente': () => `<g transform="translate(540 550) scale(1.9)">${escudoPoeira()}</g>`,
 };
 for (const [nome, fn] of Object.entries(variantes)) {
   await page.evaluate(svg => {

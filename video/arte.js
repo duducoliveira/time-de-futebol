@@ -615,7 +615,7 @@ function bola(r) {
 }
 
 let _idEscudo = 0;
-function escudoPoeira({ estrelas = 0, nome = 'POEIRA', sub = 'FC', ano = '' } = {}) {
+function escudoPoeira({ estrelas = 0, nome = 'POEIRA FC' } = {}) {
   const id = 'ep' + (_idEscudo++);
   const vinho = CORES.vinho, ouro = CORES.amarelo, creme = CORES.creme;
   const forma = 'M-190,-200 Q0,-245 190,-200 L190,10 C190,140 90,205 0,245 C-90,205 -190,140 -190,10 Z';
@@ -626,7 +626,7 @@ function escudoPoeira({ estrelas = 0, nome = 'POEIRA', sub = 'FC', ano = '' } = 
   const est = Array.from({ length: estrelas }, (_, i) => {
     const x = (i - (estrelas - 1) / 2) * 46;
     return `<path transform="translate(${x} -268) scale(1.1)" d="M0,-18 L5,-6 L18,-6 L8,2 L12,15 L0,7 L-12,15 L-8,2 L-18,-6 L-5,-6Z" fill="${ouro}" stroke="${OUT}" stroke-width="4"/>`; }).join('');
-  const tamNome = Math.min(64, 290 / Math.max(1, medir(nome, 1) + 0.02 * nome.length));
+  const tamNome = Math.min(64, 300 / Math.max(1, medir(nome, 1) + 0.04 * nome.length));
   return `<g><defs><clipPath id="${id}"><path d="${interna}"/></clipPath></defs>
     <path d="${forma}" fill="${OUT}" transform="translate(10 14)"/>
     <path d="${forma}" fill="${vinho}" stroke="${OUT}" stroke-width="12" stroke-linejoin="round"/>
@@ -636,10 +636,8 @@ function escudoPoeira({ estrelas = 0, nome = 'POEIRA', sub = 'FC', ano = '' } = 
       <path d="M-150,150 q-20,-10 -40,-4 M150,140 q20,-10 40,-3" stroke="#e9d5b3" stroke-width="10" fill="none" stroke-linecap="round"/>
     </g>
     <path d="${interna}" fill="none" stroke="${ouro}" stroke-width="10"/>
-    <text y="${-86 + tamNome * 0.36}" text-anchor="middle" font-family="Anton" font-size="${tamNome}" fill="${vinho}" letter-spacing="5">${esc(nome)}</text>
-    <g transform="translate(0 52) rotate(-12)">${bola(70)}</g>
-    <rect x="-64" y="${ano ? 120 : 124}" width="128" height="${ano ? 58 : 54}" rx="12" fill="${creme}" stroke="${OUT}" stroke-width="6"/>
-    <text y="${ano ? 158 : 163}" text-anchor="middle" font-family="Anton" font-size="${ano ? 26 : 40}" fill="${vinho}" letter-spacing="3">${esc(ano ? sub + ' · ' + ano : sub)}</text>
+    <text y="${-86 + tamNome * 0.36}" text-anchor="middle" font-family="Anton" font-size="${tamNome}" fill="${vinho}" letter-spacing="4">${esc(nome)}</text>
+    <g transform="translate(0 66) rotate(-12)">${bola(78)}</g>
     ${est}</g>`;
 }
 Object.assign(window, { escudoPoeira, bola });
