@@ -29,17 +29,25 @@ RAIZ = Path(__file__).resolve().parents[2]
 load_dotenv(RAIZ / ".env")
 
 
+SUFIXO = os.environ.get("TIMEFC_SUFIXO", "POEIRA")  # várias contas no mesmo ambiente: BUFFER_API_KEY_POEIRA etc.
+
+
+def env(nome: str) -> str:
+    """Lê NOME_POEIRA e, se não existir, NOME."""
+    return os.environ.get(f"{nome}_{SUFIXO}") or os.environ.get(nome, "")
+
+
 def buffer() -> BufferClient:
-    return BufferClient(os.environ.get("BUFFER_API_KEY", ""), os.environ.get("BUFFER_ORGANIZATION_ID"))
+    return BufferClient(env("BUFFER_API_KEY"), env("BUFFER_ORGANIZATION_ID") or None)
 
 
 def instagram() -> InstagramClient:
-    return InstagramClient(os.environ.get("INSTAGRAM_ACCESS_TOKEN", ""),
+    return InstagramClient(env("INSTAGRAM_ACCESS_TOKEN"),
                            os.environ.get("INSTAGRAM_API_VERSION", "v23.0"))
 
 
 def canal_ig() -> str:
-    ch = os.environ.get("BUFFER_INSTAGRAM_CHANNEL_ID")
+    ch = env("BUFFER_INSTAGRAM_CHANNEL_ID")
     if ch:
         return ch
     for c in buffer().canais():
@@ -161,7 +169,7 @@ def cmd_video(args):
 
 def cmd_renovar(_):
     r = instagram().renovar_token()
-    print(f"Novo token (expira em {r.get('expires_in')}s). Atualize o segredo INSTAGRAM_ACCESS_TOKEN:")
+    print(f"Novo token (expira em {r.get('expires_in')}s). Atualize a variável INSTAGRAM_ACCESS_TOKEN_POEIRA:")
     print(r.get("access_token"))
 
 
