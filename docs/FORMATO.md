@@ -35,7 +35,7 @@ Elementos recorrentes:
 
 O formato (regras e ritmo) é a referência. **Nome, personagens, visual e liga são nossos.** Não reaproveitamos nada do clube dos vídeos. Proposta inicial (editável em `dados/estado_time.json`):
 
-- **Clube:** *Poeira FC* (@poeira.fc), um time de várzea com campo de terra. Voz do narrador: ElevenLabs `UP5aPvvfM4UCXZrr3fdX`, configurada em `personagens.narrador.voz`.
+- **Clube:** *Poeira* (@poeira.fc), um time de várzea com campo de terra. Voz do narrador: ElevenLabs `UP5aPvvfM4UCXZrr3fdX`, configurada em `personagens.narrador.voz`.
 - **Narrador:** *Tião*, locutor da rádio comunitária que narra tudo como se fosse uma final de Copa. Isso diferencia o tom e é muito brasileiro.
 - **Presidente:** *Dona Cida*, dona do bar da esquina, que acumula os cargos de presidente, tesoureira e roupeira.
 - **Elenco de várzea:** Baixinho (goleiro de 1,63 m), Bujão (centroavante de 118 kg), Maestro (44 anos, "fez teste num time grande em 98"), Zé Marmita (entregador que sai no intervalo), entre outros.
