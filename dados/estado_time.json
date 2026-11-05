@@ -1,6 +1,7 @@
 {
   "clube": {
-    "nome": "Poeira",
+    "nome": "Poeira FC",
+    "nome_falado": "Poeira",
     "sigla": "PFC",
     "instagram": "@poeira.fc",
     "fundado_no_dia": 0,
@@ -107,7 +108,7 @@
     "nome": "Terceira Divisão da Várzea",
     "rodada": 0,
     "times": {
-      "Poeira": 28,
+      "Poeira FC": 28,
       "Leões do Brejo": 50,
       "Atlético Padaria": 45,
       "Ferro-Velho EC": 42,

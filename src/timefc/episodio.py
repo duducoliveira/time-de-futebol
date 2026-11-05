@@ -150,7 +150,10 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     rng = random.Random(f"roteiro-{dia}")
     cenas: list[dict] = []
 
+    falado = e["clube"].get("nome_falado") or nome  # na narração o time pode ter um nome mais curto
+
     def cena(tipo: str, narracao: str, tela: list[str] | None = None, **dados: Any) -> None:
+        narracao = narracao.replace(nome, falado)
         dados.setdefault("hud", {"torcida": e["torcida"]["seguidores"], "caixa": e["caixa"]})
         dados.setdefault("estrutura", copy.deepcopy(e["estrutura"]))  # o clube como está NESTA cena
         cenas.append({"id": f"{len(cenas) + 1:02d}-{tipo}", "tipo": tipo, "narracao": narracao,
