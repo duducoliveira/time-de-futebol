@@ -17,7 +17,7 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
 ## Credenciais (variáveis de ambiente, nunca no código nem no chat)
 - `BUFFER_API_KEY_POEIRA`, `INSTAGRAM_ACCESS_TOKEN_POEIRA` (sufixo `_POEIRA`: o ambiente é compartilhado com outros projetos; `env()` em `__main__.py` lê o sufixo primeiro).
 - `ELEVENLABS_API_KEY`.
-- O token do Instagram atual é do tipo **Facebook (`EAA…`)**, gerado pelo login unificado: usa graph.facebook.com com o ID da conta (`clube.instagram_id` = 17841453282683112). Não renova por API; quando expirar, gere outro no painel da Meta. Um token `IG…` também funciona (graph.instagram.com).
+- O token do Instagram atual é do tipo **Facebook (`EAA…`)**, gerado pelo login unificado: usa graph.facebook.com com o ID da conta (`clube.instagram_id` = 17841453282683112). **Não expira** (conferido pelo usuário no Depurador de token em 06/11/2026). Só deixa de funcionar se for revogado, se a senha da conta mudar ou se o app for removido; nesse caso, gere outro no painel da Meta. Um token `IG…` também funciona (graph.instagram.com).
 - Canal do Buffer da @poeira.fc: `clube.buffer_canal_id` = 6aed11bde29c69a171783476.
 
 ## Próximos passos (em 06/11/2026)
