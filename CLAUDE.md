@@ -16,10 +16,12 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
 
 ## Credenciais (variáveis de ambiente, nunca no código nem no chat)
 - `BUFFER_API_KEY_POEIRA`, `INSTAGRAM_ACCESS_TOKEN_POEIRA` (sufixo `_POEIRA`: o ambiente é compartilhado com outros projetos; `env()` em `__main__.py` lê o sufixo primeiro).
-- `ELEVENLABS_API_KEY`. O token do Instagram dura 60 dias: renove com `python -m timefc renovar-token`.
+- `ELEVENLABS_API_KEY`.
+- O token do Instagram atual é do tipo **Facebook (`EAA…`)**, gerado pelo login unificado: usa graph.facebook.com com o ID da conta (`clube.instagram_id` = 17841453282683112). Não renova por API; quando expirar, gere outro no painel da Meta. Um token `IG…` também funciona (graph.instagram.com).
+- Canal do Buffer da @poeira.fc: `clube.buffer_canal_id` = 6aed11bde29c69a171783476.
 
 ## Próximos passos (em 06/11/2026)
-1. Testar a leitura do Instagram (perfil, seguidores, mídias, comentários) e do Buffer (`python -m timefc canais`); anotar o ID do canal da @poeira.fc em `BUFFER_INSTAGRAM_CHANNEL_ID_POEIRA`.
+1. ✅ (06/11) Leitura do Instagram e do Buffer testada: @poeira.fc com 1 seguidor e 0 posts; canal do Buffer encontrado.
 2. Post de teste no Buffer **como rascunho** (`postar --rascunho`). Não publique nada sem aprovação.
 3. A lógica das decisões ainda está em discussão com o usuário.
 4. Opcional: `FAL_KEY` existe no ambiente (geração de imagem); use só com o OK do usuário.

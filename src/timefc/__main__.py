@@ -42,12 +42,12 @@ def buffer() -> BufferClient:
 
 
 def instagram() -> InstagramClient:
-    return InstagramClient(env("INSTAGRAM_ACCESS_TOKEN"),
-                           os.environ.get("INSTAGRAM_API_VERSION", "v23.0"))
+    ig_id = env("INSTAGRAM_USER_ID") or est.carregar()["clube"].get("instagram_id")
+    return InstagramClient(env("INSTAGRAM_ACCESS_TOKEN"), os.environ.get("INSTAGRAM_API_VERSION", "v23.0"), ig_id)
 
 
 def canal_ig() -> str:
-    ch = env("BUFFER_INSTAGRAM_CHANNEL_ID")
+    ch = env("BUFFER_INSTAGRAM_CHANNEL_ID") or est.carregar()["clube"].get("buffer_canal_id")
     if ch:
         return ch
     for c in buffer().canais():

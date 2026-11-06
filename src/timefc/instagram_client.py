@@ -19,11 +19,24 @@ import requests
 
 
 class InstagramClient:
-    def __init__(self, access_token: str, version: str = "v23.0"):
+    """Aceita os dois tipos de token da Meta:
+    * "IG…"  (login do Instagram)        -> graph.instagram.com, conta = "me"
+    * "EAA…" (login do Facebook/unificado) -> graph.facebook.com, conta = ID da conta do Instagram
+    """
+
+    def __init__(self, access_token: str, version: str = "v23.0", ig_user_id: str | None = None):
         if not access_token:
             raise RuntimeError("INSTAGRAM_ACCESS_TOKEN não definido")
         self.token = access_token
-        self.base = f"https://graph.instagram.com/{version}"
+        self.facebook = access_token.startswith("EAA")
+        if self.facebook:
+            if not ig_user_id:
+                raise RuntimeError("token do tipo Facebook (EAA…) precisa do ID da conta do Instagram (clube.instagram_id)")
+            self.base = f"https://graph.facebook.com/{version}"
+            self.conta = ig_user_id
+        else:
+            self.base = f"https://graph.instagram.com/{version}"
+            self.conta = "me"
 
     def _get(self, path: str, **params: Any) -> dict:
         params["access_token"] = self.token
@@ -46,12 +59,13 @@ class InstagramClient:
 
     # ---------------------------------------------------------------- dados
     def perfil(self) -> dict:
-        return self._get("me", fields="user_id,username,followers_count,follows_count,media_count")
+        campos = "id,username,followers_count,follows_count,media_count" + ("" if self.facebook else ",user_id")
+        return self._get(self.conta, fields=campos)
 
     def midias(self, limite: int = 25) -> list[dict]:
         campos = "id,caption,media_type,media_product_type,permalink,timestamp,like_count,comments_count"
         out = []
-        for m in self._paginar("me/media", fields=campos, limit=min(limite, 50)):
+        for m in self._paginar(f"{self.conta}/media", fields=campos, limit=min(limite, 50)):
             out.append(m)
             if len(out) >= limite:
                 break
@@ -70,6 +84,9 @@ class InstagramClient:
         return r.json()
 
     def renovar_token(self) -> dict:
-        """Renova o token de longa duração (válido por mais 60 dias)."""
+        """Renova o token de longa duração (válido por mais 60 dias). Só para tokens "IG…"."""
+        if self.facebook:
+            raise RuntimeError("Token do tipo Facebook (EAA…): gere um novo no painel do app da Meta "
+                               "(Casos de uso → API setup with Unified login → Gerar token).")
         return self._get("https://graph.instagram.com/refresh_access_token",
                          grant_type="ig_refresh_token")
