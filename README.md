@@ -17,7 +17,7 @@ python -m timefc preparar     # lê seguidores, curtidas e comentários do epis�
 python -m timefc fechar       # aplica a decisão, simula a rodada e calcula a bilheteria
                               # → episodios/dia-NNN/roteiro.md / roteiro.json (cenas + narração)
 python -m timefc video        # narra (ElevenLabs) e renderiza → episodios/dia-NNN/dia-NNN.mp4
-python -m timefc postar       # versiona o MP4 em videos/, faz push e manda o link raw do GitHub pro Buffer
+python -m timefc postar       # sobe o MP4 para duducoliveira/poeirafc-videos e manda o link raw pro Buffer
                               # (legenda e 1º comentário vêm do roteiro)
 ```
 

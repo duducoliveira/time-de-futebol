@@ -145,12 +145,12 @@ def cmd_postar(args):
     url = args.video_url
     if not url:
         from .hospedagem import publicar_video
-        url = publicar_video(_pasta_dia(dia) / f"dia-{dia:03d}.mp4", dia)
+        url = publicar_video(_pasta_dia(dia) / f"dia-{dia:03d}.mp4", dia, estado["clube"]["repo_videos"])
         print(f"Vídeo hospedado: {url}")
     legenda, comentario = args.legenda, args.comentario
     if not legenda:
         r = json.loads((_pasta_dia(dia) / "roteiro.json").read_text(encoding="utf-8"))
-        legenda, comentario = r["legenda"], comentario or r["primeiro_comentario"]
+        legenda = r["legenda"]  # 1º comentário automático exige plano pago do Buffer: só com --comentario
     post = buffer().postar_reel(canal_ig(), url, legenda,
                                 agendar_para=args.agendar, primeiro_comentario=comentario,
                                 rascunho=args.rascunho)

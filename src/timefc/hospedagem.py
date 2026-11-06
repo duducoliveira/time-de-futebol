@@ -1,12 +1,14 @@
-"""Hospedagem dos vídeos no próprio repositório público do GitHub.
+"""Hospedagem dos vídeos num repositório público do GitHub só para vídeos.
 
-O MP4 é versionado em videos/dia-NNN.mp4 e servido por raw.githubusercontent.com
-(com content-type de vídeo), que é a URL pública que o Buffer baixa para postar.
-Limite do GitHub: 100 MB por arquivo; um episódio de 90 s tem uns 28 MB.
+Repositório: `clube.repo_videos` em dados/estado_time.json (ex: duducoliveira/poeirafc-videos).
+O MP4 vai para dia-NNN.mp4 na raiz desse repositório e é servido por
+raw.githubusercontent.com (com content-type de vídeo), que é a URL pública que o
+Buffer baixa para postar. Limite do GitHub: 100 MB por arquivo (um episódio tem ~28 MB).
+
+O clone local fica ao lado deste projeto (../<nome-do-repo>); se não existir, é clonado.
 """
 from __future__ import annotations
 
-import re
 import shutil
 import subprocess
 import time
@@ -17,35 +19,38 @@ import requests
 RAIZ = Path(__file__).resolve().parents[2]
 
 
-def _git(*args: str) -> str:
-    return subprocess.run(["git", *args], cwd=RAIZ, check=True, capture_output=True, text=True).stdout.strip()
+def _git(pasta: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess:
+    return subprocess.run(["git", *args], cwd=pasta, check=check, capture_output=True, text=True)
 
 
-def repo_slug() -> str:
-    url = _git("remote", "get-url", "origin")
-    m = re.search(r"github\.com[/:]([^/]+/[^/.]+)", url) or re.search(r"/git/([^/]+/[^/.]+)", url)
-    if not m:
-        raise RuntimeError(f"não consegui descobrir o repositório GitHub a partir de {url}")
-    return m.group(1)
+def clone_local(repo: str) -> Path:
+    pasta = RAIZ.parent / repo.split("/")[1]
+    if not (pasta / ".git").exists():
+        subprocess.run(["git", "clone", "--depth", "1", f"https://github.com/{repo}", str(pasta)], check=True)
+    return pasta
 
 
-def publicar_video(mp4: Path, dia: int, branch: str | None = None) -> str:
-    destino = RAIZ / "videos" / f"dia-{dia:03d}.mp4"
-    destino.parent.mkdir(exist_ok=True)
-    if mp4.resolve() != destino.resolve():
-        shutil.copyfile(mp4, destino)
-    branch = branch or _git("rev-parse", "--abbrev-ref", "HEAD")
-    _git("add", "-f", str(destino.relative_to(RAIZ)))
-    if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=RAIZ).returncode:
-        _git("commit", "-m", f"vídeo: dia {dia}")
+def publicar_video(mp4: Path, dia: int, repo: str, branch: str = "main") -> str:
+    pasta = clone_local(repo)
+    tem_historico = _git(pasta, "rev-parse", "HEAD", check=False).returncode == 0
+    if tem_historico:
+        _git(pasta, "fetch", "origin", branch, check=False)
+        _git(pasta, "checkout", "-B", branch, f"origin/{branch}", check=False)
+    else:
+        _git(pasta, "checkout", "-B", branch)
+    destino = pasta / f"dia-{dia:03d}.mp4"
+    shutil.copyfile(mp4, destino)
+    _git(pasta, "add", destino.name)
+    if _git(pasta, "diff", "--cached", "--quiet", check=False).returncode:
+        _git(pasta, "commit", "-m", f"Dia {dia}")
     for espera in (0, 2, 4, 8, 16):
         time.sleep(espera)
-        if subprocess.run(["git", "push", "-u", "origin", branch], cwd=RAIZ).returncode == 0:
+        if _git(pasta, "push", "-u", "origin", branch, check=False).returncode == 0:
             break
     else:
-        raise RuntimeError("git push falhou")
-    url = f"https://raw.githubusercontent.com/{repo_slug()}/{branch}/videos/{destino.name}"
-    for _ in range(10):  # o raw pode levar alguns segundos para refletir o push
+        raise RuntimeError("git push do vídeo falhou")
+    url = f"https://raw.githubusercontent.com/{repo}/{branch}/{destino.name}"
+    for _ in range(15):  # o raw pode levar alguns segundos para refletir o push
         r = requests.head(url, timeout=30, allow_redirects=True)
         if r.status_code == 200:
             return url
