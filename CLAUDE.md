@@ -25,8 +25,10 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
 2. ✅ (06/11) Dia 1 hospedado em poeirafc-videos (`dia-001.mp4`) e **rascunho** criado no Buffer (id 6aed2684f3498efda75f1669, Reel de 80 s). Não publique nada sem aprovação.
    - Buffer grátis: **sem primeiro comentário automático** (plano pago); a pergunta do dia vai na legenda.
    - O raw do GitHub serve MP4 como application/octet-stream, e o Buffer aceitou assim mesmo.
-3. A lógica das decisões ainda está em discussão com o usuário.
-4. Opcional: `FAL_KEY` existe no ambiente (geração de imagem); use só com o OK do usuário.
+3. ✅ (06/11) **Dia 1 agendado** no Buffer para 07/11/2026 às 06:00 (Brasília) e fechado no estado (`dia` = 1). O roteiro está em `episodios/dia-001/`.
+4. Dia 2: rodar `preparar` (Instagram ao vivo) depois que o Dia 1 acumular curtidas e comentários, depois `fechar` → `video` → subir → agendar. A cadência (que dia e que hora) ainda será combinada com o usuário.
+5. A lógica das decisões ainda está em discussão com o usuário.
+6. Opcional: `FAL_KEY` existe no ambiente (geração de imagem); use só com o OK do usuário.
 
 ## Rodar
 ```bash
