@@ -1,0 +1,24 @@
+{
+  "dia": 1,
+  "seguidores_ontem": 0,
+  "seguidores_hoje": 0,
+  "post_anterior": null,
+  "curtidas": 0,
+  "receita_curtidas": 0,
+  "caixa_atual": 0,
+  "caixa_com_curtidas": 0,
+  "top_comentarios": [],
+  "avaliacao_comentarios": [],
+  "enquetes": [],
+  "decisao": null,
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "Primeira decisão: o que a gente faz com o dinheiro?",
+    "opcoes": [
+      "Rede nova no gol?",
+      "Bolas novas?",
+      "Outra ideia?"
+    ]
+  }
+}

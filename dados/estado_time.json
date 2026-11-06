@@ -12,7 +12,7 @@
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 0,
+  "dia": 1,
   "caixa": 0,
   "moeda": "R$",
   "regras": {
@@ -23,7 +23,13 @@
   },
   "torcida": {
     "seguidores": 0,
-    "historico": []
+    "historico": [
+      {
+        "dia": 1,
+        "seguidores": 0,
+        "data": "2026-11-06T01:02:56+00:00"
+      }
+    ]
   },
   "estrutura": {
     "gramado": "terrão",
@@ -132,10 +138,33 @@
     },
     "resultados": []
   },
-  "episodios": [],
+  "episodios": [
+    {
+      "dia": 1,
+      "data": "2026-11-06T01:02:56+00:00",
+      "proxima_decisao": {
+        "pergunta": "Primeira decisão: o que a gente faz com o dinheiro?",
+        "opcoes": [
+          "Rede nova no gol?",
+          "Bolas novas?",
+          "Outra ideia?"
+        ]
+      },
+      "post": {
+        "buffer_id": "6aed2684f3498efda75f1669",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-001.mp4",
+        "agendado_para": "2026-11-07T06:00:00-03:00"
+      }
+    }
+  ],
   "decisoes": [],
   "enquetes": [],
   "extrato": [],
-  "linha_do_tempo": [],
-  "atualizado_em": null
+  "linha_do_tempo": [
+    {
+      "dia": 1,
+      "evento": "Fundação do Poeira FC"
+    }
+  ],
+  "atualizado_em": "2026-11-06T01:02:56+00:00"
 }

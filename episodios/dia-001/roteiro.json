@@ -1,0 +1,564 @@
+{
+  "dia": 1,
+  "clube": "Poeira FC",
+  "caixa": 0,
+  "torcida": 0,
+  "posicao": 8,
+  "partida": null,
+  "cenas": [
+    {
+      "id": "01-abertura",
+      "tipo": "abertura",
+      "narracao": "Dia um do Poeira: um time de várzea que vai crescer com você!",
+      "texto_tela": [
+        "DIA 1",
+        "CLUBE FUNDADO"
+      ],
+      "dados": {
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "02-regras",
+      "tipo": "regras",
+      "narracao": "Funciona assim: cada seguidor vira um torcedor no nosso estádio. Cada curtida vira um real no caixa do clube. E o comentário mais curtido decide o que a gente faz com o dinheiro.",
+      "texto_tela": [
+        "COMO FUNCIONA"
+      ],
+      "dados": {
+        "torcida": 0,
+        "caixa": 0,
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "03-estadio",
+      "tipo": "estadio",
+      "narracao": "Hoje a gente tem zero torcedores e zero reais. O estádio é isso aqui: um campo de terra e dois bancos de madeira. Vazios. E quando venta, você entende o nome do time.",
+      "texto_tela": [
+        "CAMPO DO POEIRA"
+      ],
+      "dados": {
+        "antes": 0,
+        "torcida": 0,
+        "nivel": "vazio",
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "04-presidente",
+      "tipo": "presidente",
+      "narracao": "Eu sou o Tião, o locutor. E essa é a Dona Cida. Dona do bar da esquina, presidente, tesoureira e roupeira do clube. Tudo ao mesmo tempo.",
+      "texto_tela": [
+        "DONA CIDA",
+        "PRESIDENTE · TESOUREIRA · ROUPEIRA"
+      ],
+      "dados": {
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "05-elenco",
+      "tipo": "elenco",
+      "narracao": "E esse é o elenco. Vamos dizer que... é o que tem.",
+      "texto_tela": [
+        "O ELENCO"
+      ],
+      "dados": {
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "06-jogador",
+      "tipo": "jogador",
+      "narracao": "O camisa 1, Baixinho: 1,63 m; pula muito, alcança pouco.",
+      "texto_tela": [
+        "#1 BAIXINHO",
+        "1,63 M; PULA MUITO, ALCANÇA POUCO"
+      ],
+      "dados": {
+        "numero": "1",
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "07-jogador",
+      "tipo": "jogador",
+      "narracao": "O camisa 9, Bujão: 118 kg; finaliza muito bem, parado.",
+      "texto_tela": [
+        "#9 BUJÃO",
+        "118 KG; FINALIZA MUITO BEM, PARADO"
+      ],
+      "dados": {
+        "numero": "9",
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "08-jogador",
+      "tipo": "jogador",
+      "narracao": "O camisa 10, Maestro: 44 anos; conta do teste que fez num time grande em 98.",
+      "texto_tela": [
+        "#10 MAESTRO",
+        "44 ANOS; CONTA DO TESTE QUE FEZ NUM TIME GRANDE EM 98"
+      ],
+      "dados": {
+        "numero": "10",
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "09-liga",
+      "tipo": "liga",
+      "narracao": "A gente vai disputar a Terceira Divisão da Várzea. Dez times, e a estreia é amanhã, contra o Grêmio Vila Barro.",
+      "texto_tela": [
+        "TERCEIRA DIVISÃO DA VÁRZEA",
+        "ESTREIA AMANHÃ"
+      ],
+      "dados": {
+        "adversario": "Grêmio Vila Barro",
+        "tabela": [
+          {
+            "time": "Amigos do Churrasco FC",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 1,
+            "sg": 0
+          },
+          {
+            "time": "Atlético Padaria",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 2,
+            "sg": 0
+          },
+          {
+            "time": "Estrela da Feira",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 3,
+            "sg": 0
+          },
+          {
+            "time": "Ferro-Velho EC",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 4,
+            "sg": 0
+          },
+          {
+            "time": "Grêmio Vila Barro",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 5,
+            "sg": 0
+          },
+          {
+            "time": "Juventude do Asfalto",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 6,
+            "sg": 0
+          },
+          {
+            "time": "Leões do Brejo",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 7,
+            "sg": 0
+          },
+          {
+            "time": "Poeira FC",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 8,
+            "sg": 0
+          },
+          {
+            "time": "Real Laje",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 9,
+            "sg": 0
+          },
+          {
+            "time": "Veteranos do Bairro",
+            "j": 0,
+            "v": 0,
+            "e": 0,
+            "d": 0,
+            "gp": 0,
+            "gc": 0,
+            "pts": 0,
+            "pos": 10,
+            "sg": 0
+          }
+        ],
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "10-decisao",
+      "tipo": "decisao",
+      "narracao": "E quem manda no clube é você. O comentário viável mais curtido decide o que a gente faz. Primeira decisão: o que a gente faz com o dinheiro?",
+      "texto_tela": [
+        "DECISÃO #1",
+        "COMENTÁRIO MAIS CURTIDO DECIDE"
+      ],
+      "dados": {
+        "opcoes": [
+          "Rede nova no gol?",
+          "Bolas novas?",
+          "Outra ideia?"
+        ],
+        "caixa": 0,
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    },
+    {
+      "id": "11-encerramento",
+      "tipo": "encerramento",
+      "narracao": "Então já sabe: segue pra virar torcedor, curte pra encher o caixa, e comenta o que a gente faz. Amanhã tem estreia!",
+      "texto_tela": [
+        "@poeira.fc"
+      ],
+      "dados": {
+        "proximo": null,
+        "hud": {
+          "torcida": 0,
+          "caixa": 0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": false,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": null,
+          "tecnico": false,
+          "kombi": false
+        }
+      }
+    }
+  ],
+  "estado": {
+    "clube": {
+      "nome": "Poeira FC",
+      "nome_falado": "Poeira",
+      "sigla": "PFC",
+      "instagram": "@poeira.fc",
+      "instagram_id": "17841453282683112",
+      "buffer_canal_id": "6aed11bde29c69a171783476",
+      "repo_videos": "duducoliveira/poeirafc-videos",
+      "fundado_no_dia": 0,
+      "forca": 28,
+      "estadio": "Campo do Poeira",
+      "piada_estadio": "E quando venta, você entende o nome do time."
+    },
+    "estrutura": {
+      "gramado": "terrão",
+      "capacidade": 500,
+      "arquibancada": "dois bancos de madeira",
+      "telhado": false,
+      "vestiario": "um banheiro sem porta",
+      "uniforme": "cada um com uma camisa",
+      "rede": false,
+      "bolas": false,
+      "iluminacao": false,
+      "lanchonete": null,
+      "tecnico": false,
+      "kombi": false
+    },
+    "elenco": {
+      "1": {
+        "nome": "Baixinho",
+        "posicao": "GOL",
+        "traco": "1,63 m; pula muito, alcança pouco"
+      },
+      "2": {
+        "nome": "Zé Marmita",
+        "posicao": "LD",
+        "traco": "entregador; sai no intervalo pra fazer entrega"
+      },
+      "3": {
+        "nome": "Tonhão",
+        "posicao": "ZAG",
+        "traco": "pedreiro; nunca perdeu uma dividida, nunca acertou um passe"
+      },
+      "4": {
+        "nome": "Professor",
+        "posicao": "ZAG",
+        "traco": "51 anos; não corre, se posiciona"
+      },
+      "5": {
+        "nome": "Padeiro",
+        "posicao": "VOL",
+        "traco": "chega direto do forno, com pão pra todo mundo"
+      },
+      "6": {
+        "nome": "Chinelinho",
+        "posicao": "LE",
+        "traco": "joga com chuteira emprestada dois números maior"
+      },
+      "7": {
+        "nome": "Foguete",
+        "posicao": "PD",
+        "traco": "o mais rápido do bairro; não tem freio"
+      },
+      "8": {
+        "nome": "Nenê",
+        "posicao": "MEI",
+        "traco": "16 anos, filho da Dona Cida; o único que sabe jogar"
+      },
+      "9": {
+        "nome": "Bujão",
+        "posicao": "CA",
+        "traco": "118 kg; finaliza muito bem, parado"
+      },
+      "10": {
+        "nome": "Maestro",
+        "posicao": "MEI",
+        "traco": "44 anos; conta do teste que fez num time grande em 98"
+      },
+      "11": {
+        "nome": "Sumido",
+        "posicao": "PE",
+        "traco": "ninguém sabe onde mora; aparece só no jogo"
+      }
+    },
+    "personagens": {
+      "narrador": {
+        "nome": "Tião",
+        "papel": "locutor da rádio comunitária, narra tudo como se fosse final de Copa",
+        "voz": "rpNe0HOx7heUulPiOEaG"
+      },
+      "presidente": {
+        "nome": "Dona Cida",
+        "papel": "dona do bar da esquina; presidente, tesoureira e roupeira do clube"
+      }
+    },
+    "liga": "Terceira Divisão da Várzea",
+    "moeda": "R$"
+  },
+  "legenda": "DIA 1 do Poeira FC ⚽\n\nPrimeira decisão: o que a gente faz com o dinheiro? O comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "primeiro_comentario": "Primeira decisão: o que a gente faz com o dinheiro? 👇"
+}
