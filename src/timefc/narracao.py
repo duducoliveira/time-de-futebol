@@ -87,6 +87,8 @@ def falar_token(tok: str, anterior: str = "", proximo: str = "") -> str:
         return pre + extenso(int(nucleo.replace(".", ""))) + sufixo + pos
     if re.fullmatch(r"\d+'", nucleo):
         return f"{pre}{extenso(int(nucleo[:-1]))} minutos{pos}"
+    if re.search(r"[#%*@$&!]{2,}|#.*[%*]", nucleo) and not nucleo.startswith("@"):
+        return pre + "piiiii" + pos  # palavrão censurado na tela ("p#%*") vira um "piii" na narração
     if nucleo == "FC":
         return pre + "éfe cê" + pos
     if nucleo.startswith("@"):
