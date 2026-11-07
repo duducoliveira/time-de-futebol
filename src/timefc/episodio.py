@@ -180,7 +180,8 @@ def piada_do_dia(e: dict, briefing: dict, adv: str, rng: random.Random) -> dict 
         livres = [a for a in banco if a["apelido"] == pedido["apelido"]] or livres
     if alvo == "nosso":
         sem_apelido = [(n, j) for n, j in e["elenco"].items() if not j.get("apelido")]
-        opcoes = [(a, n, j) for a in livres for n, j in sem_apelido if POSICOES.get(j["posicao"]) == a["posicao"]]
+        opcoes = [(a, n, j) for a in livres if not a.get("so_adversario")
+                  for n, j in sem_apelido if POSICOES.get(j["posicao"]) == a["posicao"]]
         if not opcoes:
             return None
         a, n, j = rng.choice(opcoes)

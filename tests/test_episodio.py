@@ -144,3 +144,15 @@ def test_piada_do_dia_alterna_e_nao_repete():
         if d["alvo"] == "nosso":
             assert e["elenco"][d["numero"]]["apelido"] == d["apelido"]
     assert len(set(vistos)) == len(vistos)
+
+
+def test_apelidos_so_adversario_nunca_no_nosso_elenco():
+    import random
+    e = _estado()
+    e["dia"] = 3
+    for i in range(60):
+        p = ep.piada_do_dia(e, {"piada": {"alvo": "nosso"}}, "Real Laje", random.Random(i))
+        if p is None:
+            break
+        assert p["apelido"] not in ("Elizo Matsunaga", "Suzane")
+    assert not any(j.get("apelido") in ("Elizo Matsunaga", "Suzane") for j in e["elenco"].values())

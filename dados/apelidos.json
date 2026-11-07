@@ -1,5 +1,5 @@
 {
-  "_formato": "posição + apelido + piada (o porquê). Uma por episódio; as usadas ficam em estado.piadas_usadas.",
+  "_formato": "posição + apelido + piada (o porquê). Uma por episódio; as usadas ficam em estado.piadas_usadas. \"so_adversario\": true = só para jogadores de outros times (nunca no nosso elenco nem em seguidores).",
   "apelidos": [
     {
       "posicao": "lateral",
@@ -34,12 +34,14 @@
     {
       "posicao": "zagueiro",
       "apelido": "Elizo Matsunaga",
-      "piada": "chega dividindo"
+      "piada": "chega dividindo",
+      "so_adversario": true
     },
     {
       "posicao": "zagueiro",
       "apelido": "Suzane",
-      "piada": "bate até na mãe"
+      "piada": "bate até na mãe",
+      "so_adversario": true
     },
     {
       "posicao": "volante",
