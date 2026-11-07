@@ -310,13 +310,19 @@ Object.assign(TIPOS, {
 const CARIMBOS = { inviavel: ['INVIÁVEL POR ENQUANTO', '#e63946'], aprovado: ['APROVADO!', '#2e8b57'],
   anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'] };
 
+const CAPA_LAYOUT = 'abaixo_titulo';  // ou 'acima_tiao'
+
 Object.assign(TIPOS, {
   // capa (como a do Dia 1): o Tião abre o vídeo falando "Dia N: tema"; é dela que sai a capa do post
   capa(t, d, c, E) {
     let s = campo(E.estrutura, { t, nome: NOME(E), torcida: c.dados.antes || 0 });
     s += narrador(t, E, 540, 1870, 1.8, { pose: 'acena' });
     s += `<g transform="translate(${W / 2} 470)">${tituloGrande(c.texto_tela[0] || '', { tam: 230 })}</g>`;
-    if (c.dados.tema) s += `<g transform="translate(${W / 2} 650)">${pilula(c.dados.tema, { tam: 58, rot: 2 })}</g>`;
+    if (c.dados.tema) {
+      const tam = Math.min(128, 900 / Math.max(1, medir(c.dados.tema, 1)));  // tema grande, sem passar da tela
+      const y = (c.dados.layout || CAPA_LAYOUT) === 'acima_tiao' ? 1150 : 700;
+      s += `<g transform="translate(${W / 2} ${y})">${pilula(c.dados.tema, { tam, rot: 2, px: 40, py: 24 })}</g>`;
+    }
     return s;
   },
   // vários comentários, cada um entra quando a narração chega nele, com carimbo
