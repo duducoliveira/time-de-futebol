@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 from pathlib import Path
 
@@ -17,6 +18,7 @@ RAIZ = Path(__file__).resolve().parents[2]
 CACHE = RAIZ / ".cache" / "tts"
 # efeitos sonoros (video/audio/), tocados no início da cena: (arquivo, volume, atraso em s)
 EFEITOS = {"gol": ("torcida_gol.mp3", 0.55, 0.1), "fim_de_jogo": ("apito_final.mp3", 0.6, 0.0)}
+CENSURA = re.compile(r"[#%*@$&!]{2,}|#.*[%*]")  # mesma regra de narracao.falar_token
 PAUSA = {"gol": 1.0, "fim_de_jogo": 0.5, "encerramento": 1.8, "abertura": 0.4, "obra": 0.5}
 
 
@@ -27,10 +29,28 @@ def montar_audio(cenas: list[dict], saida: Path, trilha: Path | None = None) -> 
         args += ["-i", c["audio"]]
         filtros.append(f"[{i}:a]aresample=44100,apad,atrim=0:{c['duracao']:.3f},asetpts=N/SR/TB[a{i}]")
         rotulos.append(f"[a{i}]")
-    filtros.append(f"{''.join(rotulos)}concat=n={len(cenas)}:v=0:a=1[voz]")
-    saida_rot = "[voz]"
+    filtros.append(f"{''.join(rotulos)}concat=n={len(cenas)}:v=0:a=1[voz0]")
     n_in = len(cenas)
     inicio, efeitos = 0.0, []
+    # bipe de TV: a palavra censurada ("p#%*") fica muda na voz e ganha um bipe de 1 kHz no lugar
+    bipes, ini_cena = [], 0.0
+    for c in cenas:
+        for p in c.get("palavras", []):
+            if CENSURA.search(p["texto"]):
+                bipes.append((ini_cena + p["t0"] - 0.03, ini_cena + p["t1"] + 0.05))
+        ini_cena += c["duracao"]
+    if bipes:
+        mudo = "+".join(f"between(t,{a:.3f},{b:.3f})" for a, b in bipes)
+        filtros.append(f"[voz0]volume=0:enable='{mudo}'[voz]")
+        for a, b in bipes:
+            args += ["-f", "lavfi", "-i", f"sine=frequency=1000:sample_rate=44100:duration={b - a:.3f}"]
+            ms = int(a * 1000)
+            filtros.append(f"[{n_in}:a]volume=1.6,adelay={ms}|{ms}[ef{n_in}]")
+            efeitos.append(f"[ef{n_in}]")
+            n_in += 1
+    else:
+        filtros.append("[voz0]anull[voz]")
+    saida_rot = "[voz]"
     for c in cenas:
         ef = EFEITOS.get(c["tipo"])
         if ef and (c["tipo"] != "gol" or c["dados"].get("nosso")):
