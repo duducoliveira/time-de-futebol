@@ -15,6 +15,8 @@ Regras do formato:
 from __future__ import annotations
 
 import copy
+import json
+from pathlib import Path
 import random
 from typing import Any
 
@@ -148,6 +150,52 @@ PIADAS_ADVERSARIO = {
     "Estrela da Feira": "patrocinados pela banca de pastel.",
     "Grêmio Vila Barro": "o único campo pior que o nosso.",
 }
+
+
+POSICOES = {"GOL": "goleiro", "ZAG": "zagueiro", "LD": "lateral", "LE": "lateral", "VOL": "volante",
+            "MEI": "meia", "CA": "atacante", "PD": "ponta", "PE": "ponta"}
+ARQ_APELIDOS = Path(__file__).resolve().parents[2] / "dados" / "apelidos.json"
+
+
+def piada_do_dia(e: dict, briefing: dict, adv: str, rng: random.Random) -> dict | None:
+    """Uma brincadeira de nome/apelido por episódio (a partir do dia 3), no formato
+    "posição + apelido + piada" (ex: lateral Caxumba: quando desce é um perigo).
+
+    briefing["piada"] pode trazer uma piada pronta (ex: com um seguidor):
+      {"alvo": "seguidor", "narracao": "...", "texto_tela": [...], "nome": ..., "apelido": ..., "piada": ..., "instagram": ...}
+    ou fixar o alvo/apelido: {"alvo": "nosso"|"adversario", "apelido": "Caxumba"}; {"pular": true} desliga.
+    Sem nada, alterna: dia ímpar = jogador nosso (o apelido fica), dia par = jogador do adversário."""
+    pedido = briefing.get("piada") or {}
+    if pedido.get("pular") or (e["dia"] < 3 and not pedido):
+        return None
+    e.setdefault("piadas_usadas", [])
+    if pedido.get("alvo") == "seguidor" or pedido.get("narracao"):
+        if pedido.get("apelido"):
+            e["piadas_usadas"].append(pedido["apelido"])
+        return {"alvo": pedido.get("alvo", "seguidor"), **{k: v for k, v in pedido.items() if k != "alvo"}}
+    banco = json.loads(ARQ_APELIDOS.read_text(encoding="utf-8"))["apelidos"]
+    livres = [a for a in banco if a["apelido"] not in e["piadas_usadas"]] or banco
+    alvo = pedido.get("alvo") or ("nosso" if e["dia"] % 2 else "adversario")
+    if pedido.get("apelido"):
+        livres = [a for a in banco if a["apelido"] == pedido["apelido"]] or livres
+    if alvo == "nosso":
+        sem_apelido = [(n, j) for n, j in e["elenco"].items() if not j.get("apelido")]
+        opcoes = [(a, n, j) for a in livres for n, j in sem_apelido if POSICOES.get(j["posicao"]) == a["posicao"]]
+        if not opcoes:
+            return None
+        a, n, j = rng.choice(opcoes)
+        j["apelido"] = a["apelido"]
+        e["piadas_usadas"].append(a["apelido"])
+        est.evento(e, f"{j['nome']} ganhou o apelido {a['apelido']}")
+        return {"alvo": "nosso", "numero": n, "nome": j["nome"], "posicao": a["posicao"], "apelido": a["apelido"],
+                "piada": a["piada"], "narracao": f"E o {j['nome']} ganhou apelido novo: {a['posicao']} "
+                f"{a['apelido']}. {a['piada'].capitalize()}!", "texto_tela": [f"#{n} {j['nome'].upper()}"]}
+    a = rng.choice(livres)
+    e["piadas_usadas"].append(a["apelido"])
+    return {"alvo": "adversario", "time": adv, "posicao": a["posicao"], "apelido": a["apelido"], "piada": a["piada"],
+            "numero": str(rng.randint(2, 11)),
+            "narracao": f"Fica de olho no {a['posicao']} do {adv}, o {a['apelido']}: {a['piada']}!",
+            "texto_tela": [f"DE OLHO NO {adv.upper()}"]}
 
 
 def calendario_do_clube(e: dict) -> list[list[tuple[str, str]]]:
@@ -346,6 +394,9 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                     f"Rodada {liga['rodada']}{', em casa' if casa else ', fora de casa'}, contra o {adv}. Detalhe: {piada}")
         cena("pre_jogo", fala_pre, [f"RODADA {liga['rodada']}", "CLÁSSICO!" if rival else ("EM CASA" if casa else "FORA DE CASA")],
              mandante=partida["mandante"], visitante=partida["visitante"])
+        p = piada_do_dia(e, briefing, adv, rng)
+        if p:
+            cena("apelido", p.pop("narracao"), p.pop("texto_tela", []), **p)
         gm = gv = 0
         usados: list[str] = []
         gols = partida["gols"]

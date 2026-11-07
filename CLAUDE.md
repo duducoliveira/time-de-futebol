@@ -8,7 +8,12 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
 - Nome: **Poeira FC** no cenário, no escudo, na tabela e nos cartões; na narração, só "Poeira" (`clube.nome_falado`). Sigla PFC, estádio "Campo do Poeira".
 - Narrador: **Tião**. Voz da ElevenLabs: Diego, `rpNe0HOx7heUulPiOEaG` (`personagens.narrador.voz`). Os gols usam `eleven_v3` com [tags] (estilo "grito").
 - Presidente: Dona Cida (Bar da Cida). Elenco e liga ficam em `dados/estado_time.json`.
-- Estreia roteirizada: o Poeira **perde o 1º jogo** (`liga.roteiro`), com gol de honra.
+- Arco roteirizado (`liga.roteiro`): rodada 1 = **derrota** (cabaré); rodada 2 = **empate em casa**, com gols do Poeira só no 2º tempo (os reservas entram descansados graças ao banco); rodada 3 = **1ª vitória, no clássico contra o maior rival, o Estrela da Feira** (`liga.rival`, "quem perde paga o pastel"). `mando` em `liga.roteiro` inverte casa/fora (com espelho no returno).
+- Gols: em jogos com 3+ gols, narra só o 1º gol do Poeira (empolgado, eleven_v3) e o último do jogo (com o placar final: virada, empate...).
+- Piada do dia (a partir do dia 3): 1 brincadeira de nome/apelido por vídeo, no formato "posição + apelido + o porquê". Alterna jogador nosso (o apelido fica no elenco) e adversário (banco em `dados/apelidos.json`, sem repetir); com seguidor, use `briefing["piada"]`.
+- Episódios com comentários roteirizados: `briefing["historia"]` (`comentarios` com carimbos, `reforcos` com seguidores que viram jogadores, `antes_jogo`/`depois_jogo` com cenas extras como o cabaré). Preços da lista de pedidos ÷5 (rede R$ 60, banco R$ 50...).
+- Narração: "reais" só no primeiro valor do caixa ("saiu de R$ 358 pra 658"). Banco de reservas: imagem própria da lateral (fora da linha), não aparece na vista do campo.
+- Fluxo diário: levantamento às 22h11 (tarefa agendada) → OK do usuário → vídeo → "aprovado" → hospeda e agenda para 6h.
 - Visual: arte vetorial por código (`video/arte.js`, `video/cenas.js`). Antes de renderizar, rode a checagem de sobreposição (`--qa`); o layout é em faixas (topo = contador, meio = cartões, y≈1165 = legenda, embaixo = personagens).
 - Escudo oficial: `escudoPoeira()` em `video/arte.js`; as imagens de perfil ficam em `marca/` (gere com `node video/logo.mjs marca`).
 - Vídeos hospedados no repositório público **duducoliveira/poeirafc-videos** (`clube.repo_videos`, arquivo `dia-NNN.mp4`, link raw do GitHub) → Buffer.
@@ -26,6 +31,7 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
    - Buffer grátis: **sem primeiro comentário automático** (plano pago); a pergunta do dia vai na legenda.
    - O raw do GitHub serve MP4 como application/octet-stream, e o Buffer aceitou assim mesmo.
 3. ✅ (06/11) **Dia 1 agendado** no Buffer para 06/11/2026 às 06:00 (Brasília) e fechado no estado (`dia` = 1). O roteiro está em `episodios/dia-001/`.
+   ✅ (06/11) Dia 1 no ar: 106 seguidores, 256 curtidas e 27 comentários em 16 h. ✅ Dia 2 agendado para 07/11 às 06:00.
 4. Dia 2: rodar `preparar` (Instagram ao vivo) depois que o Dia 1 acumular curtidas e comentários, depois `fechar` → `video` → subir → agendar. A cadência (que dia e que hora) ainda será combinada com o usuário.
 5. A lógica das decisões ainda está em discussão com o usuário.
 6. Opcional: `FAL_KEY` existe no ambiente (geração de imagem); use só com o OK do usuário.

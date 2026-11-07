@@ -125,3 +125,22 @@ def test_rodada_2_em_casa_com_espelho_no_returno():
     turno = len(cal) // 2
     espelho = next(j for j in cal[1 + turno] if nome in j)
     assert espelho[1] == nome and espelho[0] == r2[1]  # returno fora, contra o mesmo time
+
+
+def test_piada_do_dia_alterna_e_nao_repete():
+    e = _estado()
+    e, _ = ep.fechar(e, ep.preparar(e, 0, None, []))
+    vistos = []
+    for dia, seg in ((2, 106), (3, 300), (4, 600), (5, 900)):
+        e, r = ep.fechar(e, ep.preparar(e, seg, {"like_count": 100}, []))
+        ap = [c for c in r["cenas"] if c["tipo"] == "apelido"]
+        if dia == 2:
+            assert not ap  # começa no dia 3
+            continue
+        assert len(ap) == 1
+        d = ap[0]["dados"]
+        assert d["alvo"] == ("nosso" if dia % 2 else "adversario")
+        vistos.append(d["apelido"])
+        if d["alvo"] == "nosso":
+            assert e["elenco"][d["numero"]]["apelido"] == d["apelido"]
+    assert len(set(vistos)) == len(vistos)

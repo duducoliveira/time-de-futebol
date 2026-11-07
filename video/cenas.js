@@ -394,6 +394,37 @@ Object.assign(TIPOS, {
   },
 });
 
+Object.assign(TIPOS, {
+  // piada do dia: posição + apelido + o porquê (jogador nosso, do adversário ou seguidor)
+  apelido(t, d, c, E) {
+    const dd = c.dados;
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.12, z1: 1.18 });
+    let visual;
+    if (dd.alvo === 'nosso') visual = jogador(dd.numero, E, { expr: 'feliz' });
+    else if (dd.alvo === 'adversario') {
+      const [c1, c2] = coresTime(dd.time || '');
+      const r = rng('adv' + dd.apelido);
+      visual = { pele: PELES[Math.floor(r() * PELES.length)], cabelo: ['curto', 'raspado', 'cacheado', 'careca'][Math.floor(r() * 4)],
+        corCabelo: '#2b1d14', camisa: c1, listra: c2, calcao: c2, meiao: c1, numero: dd.numero, bigode: r() > 0.5,
+        luvas: dd.posicao === 'goleiro', expr: 'bravo' };
+    } else {
+      const r = rng('seg' + (dd.instagram || dd.nome));
+      visual = { pele: PELES[Math.floor(r() * PELES.length)], cabelo: ['curto', 'cacheado', 'black'][Math.floor(r() * 3)],
+        corCabelo: '#2b1d14', camisa: CORES.vinho, listra: CORES.amarelo, calcao: '#fff', numero: dd.numero || '', expr: 'feliz' };
+    }
+    s += popPessoa(t, 0.2, W / 2, 1960, pessoa(visual, t, { s: 2.1 }));
+    const topo = c.texto_tela[0] || (dd.time ? `DE OLHO NO ${dd.time.toUpperCase()}` : '');
+    if (topo) s += pop(t, 0.1, W / 2, 300, pilula(topo, { tam: 44, bg: dd.alvo === 'adversario' ? '#495057' : CORES.vinho, rot: -2 }));
+    const tApelido = quando(c, (dd.apelido || '').split(' ')[0].toLowerCase(), 1.0);
+    const titulo = `${(dd.posicao || '').toUpperCase()} ${(dd.apelido || '').toUpperCase()}`;
+    const tam = Math.min(110, 900 / Math.max(1, medir(titulo, 1)));
+    s += pop(t, tApelido - 0.1, W / 2, 520, tituloGrande(titulo, { tam, cor: CORES.amarelo, rot: -3 }));
+    s += pop(t, tApelido + 0.6, W / 2, 680, pilula(`"${(dd.piada || '').toUpperCase()}"`, { tam: 38, bg: CORES.creme, cor: OUT, rot: 2 }));
+    if (dd.instagram) s += pop(t, tApelido + 0.9, W / 2, 790, pilula('@' + dd.instagram, { tam: 30, bg: CORES.marinho, py: 10 }));
+    return s;
+  },
+});
+
 // contador fixo no canto: a lógica do perfil sempre visível
 const SEM_HUD = new Set(['abertura', 'regras', 'evolucao', 'estadio', 'encerramento']);
 function hud(c, E) {
