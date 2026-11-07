@@ -368,7 +368,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     liga = e["liga"]
     times = list(liga["times"])
     partida = None
-    if dia > 1 and liga["rodada"] < len(cal):
+    sem_jogo = bool(briefing.get("sem_jogo"))  # ex: dia da peneira; a rodada fica adiada
+    if dia > 1 and not sem_jogo and liga["rodada"] < len(cal):
         rodada = []
         for m, v in cal[liga["rodada"]]:
             r = simular(m, v, liga["times"], semente=f"{dia}-{m}-{v}")
@@ -494,13 +495,18 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
              [nova["pergunta"].upper()], valores=nova["valores"])
 
     prox = briefing["proxima_decisao"]
-    if dia == 1:
+    chamada = briefing.get("chamada")  # ex: {"tipo": "peneira", "narracao": ..., ...}
+    if chamada:
+        cena(chamada.get("tipo", "peneira"), chamada["narracao"], chamada.get("texto_tela", []),
+             **chamada.get("dados", {}))
+    elif dia == 1:
         txt = ("E quem manda no clube é você. O comentário viável mais curtido decide o que a gente faz. "
                f"{prox['pergunta']}")
     else:
         txt = f"No caixa, {_n(e['caixa'])} reais. {prox['pergunta']} O comentário mais curtido decide."
-    cena("decisao", txt, [f"DECISÃO #{dia}", "COMENTÁRIO MAIS CURTIDO DECIDE"],
-         opcoes=prox["opcoes"], caixa=e["caixa"])
+    if not chamada:
+        cena("decisao", txt, [f"DECISÃO #{dia}", "COMENTÁRIO MAIS CURTIDO DECIDE"],
+             opcoes=prox["opcoes"], caixa=e["caixa"])
 
     prox_jogo = None
     if liga["rodada"] < len(cal):
@@ -513,12 +519,14 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             fala = f"E amanhã é clássico: {nome} contra o {advp}, o nosso maior rival! " + fala
         else:
             fala = f"Amanhã tem {nome} contra o {advp}. " + fala
+    fala = briefing.get("encerramento") or fala
     cena("encerramento", fala, [e["clube"]["instagram"]],
          proximo=list(prox_jogo) if prox_jogo and dia > 1 else None)
 
     roteiro = {"dia": dia, "clube": nome, "caixa": e["caixa"], "torcida": hoje, "posicao": pos,
                "partida": partida, "cenas": cenas, "estado": _resumo_visual(e),
-               "legenda": legenda(e, prox), "primeiro_comentario": prox["pergunta"] + " 👇"}
+               "legenda": briefing.get("legenda") or legenda(e, prox),
+               "primeiro_comentario": prox["pergunta"] + " 👇"}
     e["episodios"].append({"dia": dia, "data": est.agora(), "proxima_decisao": prox, "post": None})
     return e, roteiro
 

@@ -1,0 +1,61 @@
+{
+  "_uso": "Mesclar no briefing do Dia 3 (peneira): sem jogo, sem obra; a rodada 2 fica para o Dia 4.",
+  "sem_jogo": true,
+  "decisao": null,
+  "historia": {
+    "antes_jogo": [
+      {
+        "tipo": "peneira",
+        "narracao": "Tem muita gente nos comentários querendo jogar no Poeira! Então tá decidido: vai ter a Peneira do Poeira, pra escolher quem vai se juntar ao nosso elenco.",
+        "dados": {
+          "etapa": "anuncio"
+        }
+      },
+      {
+        "tipo": "apelido",
+        "narracao": "Quem passar vai jogar do lado do Gabriel Zaga, nosso zagueiro: o único zagueiro que já vem com a posição no nome. Pra não esquecer onde fica.",
+        "texto_tela": [
+          "JÁ ESTÁ NO TIME"
+        ],
+        "dados": {
+          "alvo": "nosso",
+          "numero": "12",
+          "nome": "Gabriel Zaga",
+          "posicao": "zagueiro",
+          "apelido": "Gabriel Zaga",
+          "piada": "já vem com a posição no nome",
+          "instagram": "gabriel_rzt1221"
+        }
+      },
+      {
+        "tipo": "apelido",
+        "narracao": "E do Zé Kaun, nosso ponta: escreve o nome letra por letra, e corre do mesmo jeito. Devagarzinho.",
+        "texto_tela": [
+          "JÁ ESTÁ NO TIME"
+        ],
+        "dados": {
+          "alvo": "nosso",
+          "numero": "14",
+          "nome": "Zé Kaun",
+          "posicao": "ponta",
+          "apelido": "Zé Kaun",
+          "piada": "corre letra por letra",
+          "instagram": "j_o_s_e_k_a_u_n"
+        }
+      }
+    ]
+  },
+  "chamada": {
+    "tipo": "peneira",
+    "dados": {
+      "etapa": "regras"
+    },
+    "narracao": "Pra participar é fácil: comenta aqui embaixo seu nome e sua posição. Os comentários mais curtidos viram jogadores do Poeira. Então manda pros amigos e pede pra eles curtirem o seu comentário. Amanhã sai a escalação!"
+  },
+  "encerramento": "Segue pra virar torcedor, curte pra encher o caixa e comenta seu nome e sua posição. Amanhã sai a escalação da peneira!",
+  "legenda": "DIA 3 do Poeira FC ⚽\n\n🔥 PENEIRA DO POEIRA 🔥\nQuer jogar no Poeira? Comente seu NOME e sua POSIÇÃO.\nOs comentários mais curtidos viram jogadores!\n📲 Manda pros amigos curtirem o seu comentário.\n\n1 seguidor = 1 torcedor | 1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #peneira #futebolamador #futebolraiz",
+  "proxima_decisao": {
+    "pergunta": "Comenta seu nome e sua posição!",
+    "opcoes": []
+  }
+}

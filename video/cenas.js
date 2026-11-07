@@ -425,6 +425,42 @@ Object.assign(TIPOS, {
   },
 });
 
+Object.assign(TIPOS, {
+  // Peneira do Poeira: "anuncio" (fila de candidatos) e "regras" (como participar)
+  peneira(t, d, c, E) {
+    const dd = c.dados;
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.0, z1: 1.06 });
+    if (dd.etapa === 'anuncio') {
+      s += pop(t, 0.2, W / 2, 470, tituloGrande('PENEIRA', { tam: 180, cor: CORES.amarelo, rot: -4 }));
+      s += pop(t, 0.6, W / 2, 620, pilula('DO POEIRA', { tam: 64, bg: CORES.vinho, rot: 2 }));
+      // fila de candidatos chegando, cada um com uma camisa diferente
+      for (let i = 0; i < 7; i++) {
+        const r = rng('cand' + i);
+        const p = { pele: PELES[Math.floor(r() * PELES.length)], cabelo: ['curto', 'raspado', 'cacheado', 'black', 'careca'][Math.floor(r() * 5)],
+          corCabelo: '#2b1d14', camisa: CAMISAS_SORTIDAS[Math.floor(r() * CAMISAS_SORTIDAS.length)], numero: String(Math.floor(r() * 30) + 1),
+          expr: ['feliz', 'surpreso', 'serio'][Math.floor(r() * 3)], pose: i % 3 === 0 ? 'acena' : 'normal' };
+        s += popPessoa(t, 0.8 + i * 0.18, 100 + i * 147, 1880 + (i % 2) * 40, pessoa(p, t, { s: 0.95, fase: i }));
+      }
+      return s;
+    }
+    // regras: fundo escuro (sem letreiros); cada cartão entra quando a narração chega nele
+    s = fundoEscuro() + `<g transform="translate(${W / 2} 1500) scale(.9)">${escudoPoeira()}</g>`;
+    s += pop(t, 0.05, W / 2, 200, pilula('COMO ENTRAR NO TIME', { tam: 56, bg: CORES.laranja, cor: OUT, rot: -2 }));
+    const regras = [['coment', '💬', 'COMENTE SEU NOME', 'E SUA POSIÇÃO', '#3a86ff'],
+      ['curtid', '❤️', 'OS MAIS CURTIDOS', 'VIRAM JOGADORES DO POEIRA', '#e63946'],
+      ['amigos', '📲', 'MANDA PROS AMIGOS', 'PEDE PRA ELES CURTIREM', '#2e8b57']];
+    regras.forEach(([chave, ic, a, b, cor], i) => {
+      const t0 = quando(c, chave, 0.6 + i * 2);
+      s += pop(t, t0 - 0.15, W / 2, 350 + i * 175, cartao(900, 155, `
+        <circle cx="-360" r="56" fill="${cor}" stroke="${OUT}" stroke-width="6"/><text x="-360" y="22" text-anchor="middle" font-size="56">${ic}</text>
+        <text x="-270" y="-6" font-family="Anton" font-size="56" fill="${OUT}">${esc(a)}</text>
+        <text x="-270" y="48" font-family="Anton" font-size="36" fill="${cor}">${esc(b)}</text>`, { bg: CORES.creme }));
+    });
+    s += pop(t, quando(c, 'comenta', 1) + 1.2, W / 2, 900, cartaoComentario('voce', 'Zé da Silva, lateral esquerdo', 0, { selo: 'EXEMPLO DE COMENTÁRIO', w: 760 }));
+    return s;
+  },
+});
+
 // contador fixo no canto: a lógica do perfil sempre visível
 const SEM_HUD = new Set(['abertura', 'regras', 'evolucao', 'estadio', 'encerramento']);
 function hud(c, E) {
