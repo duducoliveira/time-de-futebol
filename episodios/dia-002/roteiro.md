@@ -43,56 +43,41 @@ Torcida: 106 · Caixa: R$ 358 · Posição: 7º
 > [shouting] ENTROOOOU! [excited] GOL DO POEIRA! PADEIRO, aos 14! Que pintura!
 
 ## 09-gol
-**Na tela:** 43' | GOL DO GRÊMIO VILA BARRO
-
-> Gol do Grêmio Vila Barro, aos 43. O Professor disse que estava se posicionando.
-
-## 10-gol
-**Na tela:** 55' | GOOOOL!
-
-> [shouting] GOOOOOOOOOL! [excited] Chora, goleiro! BUJÃO manda pra rede aos 55! É DO POEIRA!
-
-## 11-gol
-**Na tela:** 55' | GOL DO GRÊMIO VILA BARRO
-
-> Gol do Grêmio Vila Barro, aos 55. Ninguém marcou ninguém. Foi democrático.
-
-## 12-gol
 **Na tela:** 65' | GOL DO GRÊMIO VILA BARRO
 
-> Gol do Grêmio Vila Barro, aos 65. A zaga parou pra ver. Literalmente parou.
+> Ah, não... Gol do Grêmio Vila Barro, aos 65. Eles viraram o jogo: 3 a 2. A torcida ficou em silêncio.
 
-## 13-fim_de_jogo
+## 10-fim_de_jogo
 **Na tela:** FIM DE JOGO | Poeira FC 2 x 3 Grêmio Vila Barro
 
 > Apita o árbitro! Derrota por 3 a 2. Faz parte.
 
-## 14-cabare
+## 11-cabare
 **Na tela:** JÁ EXISTE!
 
 > E sabe por que a gente perdeu? Um torcedor pediu um cabaré do lado do estádio... só que ele já existe! E o elenco passou a noite inteira lá. Deu no que deu.
 
-## 15-cabare
+## 12-cabare
 **Na tela:** DECISÃO DA PRESIDENTE
 
 > A Dona Cida já decidiu: jogador do Poeira está proibido de pisar no cabaré!
 
-## 16-bilheteria
+## 13-bilheteria
 **Na tela:** 106 × R$ 2 = R$ 212
 
 > Na bilheteria: 106 pagantes, a 2 reais cada. 212 reais pro clube!
 
-## 17-tabela
+## 14-tabela
 **Na tela:** TERCEIRA DIVISÃO DA VÁRZEA | 7º LUGAR
 
 > Na tabela, o Poeira está em 7º lugar.
 
-## 18-decisao
+## 15-decisao
 **Na tela:** DECISÃO #2 | COMENTÁRIO MAIS CURTIDO DECIDE
 
 > No caixa, 358 reais. O que a gente faz agora? O comentário mais curtido decide.
 
-## 19-encerramento
+## 16-encerramento
 **Na tela:** @poeira.fc
 
 > Amanhã tem Poeira contra o Veteranos do Bairro. Então já sabe: segue pra virar torcedor, curte pra encher o caixa, e comenta o que a gente faz. Até amanhã!

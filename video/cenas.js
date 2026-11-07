@@ -116,7 +116,11 @@ const TIPOS = {
     const est = t < virada ? c.dados.antes : c.dados.depois;
     const acoes = c.dados.acoes || [];
     const noCampo = acoes.some(a => ['grama', 'arquibancada', 'refletores', 'rede', 'banco_reservas'].includes(a));
-    let s = camera(t, d, noCampo ? campo(est, { t, nome: NOME(E), torcida: 0 }) : sede(est, { t }));
+    // banco de reservas: depois de mostrar a obra no campo, corta para a imagem da lateral
+    const tBanco = acoes.includes('banco_reservas') ? Math.max(virada + 0.8, quando(c, 'banquinho', quando(c, 'banco', d * 0.6)) - 0.2) : Infinity;
+    const fundo = t >= tBanco ? lateral(est, { t, nome: NOME(E) })
+      : noCampo ? campo(est, { t, nome: NOME(E), torcida: 0 }) : sede(est, { t });
+    let s = camera(t, d, fundo);
     if (t >= virada && t < virada + 0.5) {
       const p = (t - virada) / 0.5;
       for (let i = 0; i < 10; i++) s += `<circle cx="${100 + i * 95}" cy="${1000 + Math.sin(i) * 180}" r="${60 + p * 120}" fill="#fff" opacity="${0.8 * (1 - p)}"/>`;
@@ -368,13 +372,13 @@ Object.assign(TIPOS, {
 Object.assign(TIPOS, {
   // os reservas que entraram descansados, ao lado do banco na lateral
   banco(t, d, c, E) {
-    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.0, z1: 1.08, cx: 200, cy: 1400 });
+    let s = camera(t, d, lateral(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.0, z1: 1.05, cx: 330, cy: 1500 });
     s += pop(t, 0.1, W / 2, 330, pilula(c.texto_tela[0] || 'O BANCO FUNCIONOU', { tam: 60, bg: '#2e8b57', rot: -2 }));
     (c.dados.jogadores || []).forEach((n, i) => {
       const j = E.elenco[n] || {};
       const t0 = quando(c, (j.nome || '').split(' ')[0].toLowerCase(), 0.6 + i);
-      s += popPessoa(t, t0, 420 + i * 230, 1910, pessoa(jogador(n, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.15, fase: i }));
-      s += pop(t, t0 + 0.1, 420 + i * 230, 520 + i * 110, pilula(`#${n} ${(j.nome || '').toUpperCase()}`, { tam: 40, bg: CORES.vinho, rot: i % 2 ? 2 : -2 }));
+      s += popPessoa(t, t0, 640 + i * 150, 1910 - i * 40, pessoa(jogador(n, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.0, fase: i }));
+      s += pop(t, t0 + 0.1, W / 2, 470 + i * 110, pilula(`#${n} ${(j.nome || '').toUpperCase()}`, { tam: 40, bg: CORES.vinho, rot: i % 2 ? 2 : -2 }));
     });
     return s;
   },

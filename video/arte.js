@@ -440,6 +440,28 @@ function bancoReservas(x, y, s = 1) {
     <path d="M-66,-18 v26 M66,-18 v26 M-70,-50 v32 M70,-50 v32" stroke="${OUT}" stroke-width="7"/></g>`;
 }
 
+// Vista da linha lateral: o campo à direita da linha branca, a área de fora à esquerda,
+// com o banco de reservas (e um isopor) do lado de fora.
+function lateral(estrutura, { t = 0, nome = '', torcida = 0 } = {}) {
+  const grama = estrutura.gramado === 'grama';
+  let s = ceu(t) + bairro(760) + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
+  s += `<rect x="-10" y="950" width="${W + 20}" height="${H - 950}" fill="#d9b382"/>`;            // área de fora
+  const r = rng('lateral');
+  for (let i = 0; i < 14; i++) s += `<ellipse cx="${r() * 520}" cy="${1000 + r() * 880}" rx="${8 + r() * 18}" ry="${3 + r() * 5}" fill="#a47148" opacity=".45"/>`;
+  s += `<path d="M560,950 L1090,950 L1090,1930 L860,1930Z" fill="${grama ? CORES.grama1 : CORES.terra1}" stroke="${OUT}" stroke-width="4"/>`; // campo
+  s += `<path d="M560,950 L860,1930" stroke="#fff" stroke-width="16" opacity=".9"/>`;                  // linha lateral
+  s += `<g transform="translate(330 1560) scale(1.9)">${bancoReservasFrente()}</g>`;
+  s += `<g transform="translate(110 1640)"><rect x="-55" y="-60" width="110" height="70" rx="10" fill="#3a86ff" stroke="${OUT}" stroke-width="6"/>
+    <rect x="-60" y="-74" width="120" height="20" rx="8" fill="#fff" stroke="${OUT}" stroke-width="5"/></g>`;                   // isopor
+  return s;
+}
+
+function bancoReservasFrente() {
+  return `<rect x="-120" y="-40" width="240" height="22" rx="6" fill="#b08968" stroke="${OUT}" stroke-width="5"/>
+    <rect x="-120" y="-84" width="240" height="18" rx="6" fill="#9c6644" stroke="${OUT}" stroke-width="5"/>
+    <path d="M-100,-18 v40 M100,-18 v40 M-106,-66 v48 M106,-66 v48" stroke="${OUT}" stroke-width="9" stroke-linecap="round"/>`;
+}
+
 function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   const grama = estrutura.gramado === 'grama';
   let s = ceu(t) + bairro(760) + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
@@ -455,7 +477,7 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
     <ellipse cx="${W / 2}" cy="1260" rx="240" ry="70" fill="none" stroke="${linha}" stroke-width="8"/>
     <path d="M330,950 L300,1060 H780 L750,950" fill="none" stroke="${linha}" stroke-width="7"/>`;
   s += trave(W / 2, 955, 0.8, !grama, !!estrutura.rede);
-  if (estrutura.banco_reservas) s += bancoReservas(150, 1470, 1.15);  // lateral esquerda do campo
+  // o banco de reservas aparece na imagem própria da lateral (lateral()), não aqui
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
   return s;
@@ -678,4 +700,4 @@ function carimbo(txt, cor = '#e63946', rot = -10, tam = 54) {
   return `<g transform="rotate(${rot})" opacity=".92"><rect x="${-w / 2}" y="${-tam * 0.85}" width="${w}" height="${tam * 1.4}" rx="10" fill="none" stroke="${cor}" stroke-width="9"/>
     <text y="${tam * 0.32}" text-anchor="middle" font-family="Anton" font-size="${tam}" fill="${cor}" letter-spacing="2">${esc(txt)}</text></g>`;
 }
-Object.assign(window, { escudoPoeira, bola, bancoReservas, cabare, zzz, carimbo });
+Object.assign(window, { escudoPoeira, bola, bancoReservas, cabare, zzz, carimbo, lateral });

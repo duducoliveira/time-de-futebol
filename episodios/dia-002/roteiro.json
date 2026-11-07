@@ -21,8 +21,7 @@
       },
       {
         "minuto": 55,
-        "time": "Poeira FC",
-        "autor": "Bujão"
+        "time": "Poeira FC"
       },
       {
         "minuto": 55,
@@ -394,127 +393,7 @@
     {
       "id": "09-gol",
       "tipo": "gol",
-      "narracao": "Gol do Grêmio Vila Barro, aos 43. O Professor disse que estava se posicionando.",
-      "texto_tela": [
-        "43'",
-        "GOL DO GRÊMIO VILA BARRO"
-      ],
-      "dados": {
-        "minuto": 43,
-        "nosso": false,
-        "estilo_voz": "normal",
-        "autor": null,
-        "placar": [
-          1,
-          1
-        ],
-        "mandante": "Poeira FC",
-        "visitante": "Grêmio Vila Barro",
-        "hud": {
-          "torcida": 106,
-          "caixa": 146.0
-        },
-        "estrutura": {
-          "gramado": "terrão",
-          "capacidade": 500,
-          "arquibancada": "dois bancos de madeira",
-          "telhado": false,
-          "vestiario": "um banheiro sem porta",
-          "uniforme": "cada um com uma camisa",
-          "rede": true,
-          "bolas": false,
-          "iluminacao": false,
-          "lanchonete": null,
-          "tecnico": false,
-          "kombi": false,
-          "banco_reservas": true
-        }
-      }
-    },
-    {
-      "id": "10-gol",
-      "tipo": "gol",
-      "narracao": "[shouting] GOOOOOOOOOL! [excited] Chora, goleiro! BUJÃO manda pra rede aos 55! É DO POEIRA!",
-      "texto_tela": [
-        "55'",
-        "GOOOOL!"
-      ],
-      "dados": {
-        "minuto": 55,
-        "nosso": true,
-        "estilo_voz": "grito",
-        "autor": "Bujão",
-        "placar": [
-          2,
-          1
-        ],
-        "mandante": "Poeira FC",
-        "visitante": "Grêmio Vila Barro",
-        "hud": {
-          "torcida": 106,
-          "caixa": 146.0
-        },
-        "estrutura": {
-          "gramado": "terrão",
-          "capacidade": 500,
-          "arquibancada": "dois bancos de madeira",
-          "telhado": false,
-          "vestiario": "um banheiro sem porta",
-          "uniforme": "cada um com uma camisa",
-          "rede": true,
-          "bolas": false,
-          "iluminacao": false,
-          "lanchonete": null,
-          "tecnico": false,
-          "kombi": false,
-          "banco_reservas": true
-        }
-      }
-    },
-    {
-      "id": "11-gol",
-      "tipo": "gol",
-      "narracao": "Gol do Grêmio Vila Barro, aos 55. Ninguém marcou ninguém. Foi democrático.",
-      "texto_tela": [
-        "55'",
-        "GOL DO GRÊMIO VILA BARRO"
-      ],
-      "dados": {
-        "minuto": 55,
-        "nosso": false,
-        "estilo_voz": "normal",
-        "autor": null,
-        "placar": [
-          2,
-          2
-        ],
-        "mandante": "Poeira FC",
-        "visitante": "Grêmio Vila Barro",
-        "hud": {
-          "torcida": 106,
-          "caixa": 146.0
-        },
-        "estrutura": {
-          "gramado": "terrão",
-          "capacidade": 500,
-          "arquibancada": "dois bancos de madeira",
-          "telhado": false,
-          "vestiario": "um banheiro sem porta",
-          "uniforme": "cada um com uma camisa",
-          "rede": true,
-          "bolas": false,
-          "iluminacao": false,
-          "lanchonete": null,
-          "tecnico": false,
-          "kombi": false,
-          "banco_reservas": true
-        }
-      }
-    },
-    {
-      "id": "12-gol",
-      "tipo": "gol",
-      "narracao": "Gol do Grêmio Vila Barro, aos 65. A zaga parou pra ver. Literalmente parou.",
+      "narracao": "Ah, não... Gol do Grêmio Vila Barro, aos 65. Eles viraram o jogo: 3 a 2. A torcida ficou em silêncio.",
       "texto_tela": [
         "65'",
         "GOL DO GRÊMIO VILA BARRO"
@@ -552,7 +431,7 @@
       }
     },
     {
-      "id": "13-fim_de_jogo",
+      "id": "10-fim_de_jogo",
       "tipo": "fim_de_jogo",
       "narracao": "Apita o árbitro! Derrota por 3 a 2. Faz parte.",
       "texto_tela": [
@@ -589,7 +468,7 @@
       }
     },
     {
-      "id": "14-cabare",
+      "id": "11-cabare",
       "tipo": "cabare",
       "narracao": "E sabe por que a gente perdeu? Um torcedor pediu um cabaré do lado do estádio... só que ele já existe! E o elenco passou a noite inteira lá. Deu no que deu.",
       "texto_tela": [
@@ -623,7 +502,7 @@
       }
     },
     {
-      "id": "15-cabare",
+      "id": "12-cabare",
       "tipo": "cabare",
       "narracao": "A Dona Cida já decidiu: jogador do Poeira está proibido de pisar no cabaré!",
       "texto_tela": [
@@ -653,7 +532,7 @@
       }
     },
     {
-      "id": "16-bilheteria",
+      "id": "13-bilheteria",
       "tipo": "bilheteria",
       "narracao": "Na bilheteria: 106 pagantes, a 2 reais cada. 212 reais pro clube!",
       "texto_tela": [
@@ -687,7 +566,7 @@
       }
     },
     {
-      "id": "17-tabela",
+      "id": "14-tabela",
       "tipo": "tabela",
       "narracao": "Na tabela, o Poeira está em 7º lugar.",
       "texto_tela": [
@@ -841,7 +720,7 @@
       }
     },
     {
-      "id": "18-decisao",
+      "id": "15-decisao",
       "tipo": "decisao",
       "narracao": "No caixa, 358 reais. O que a gente faz agora? O comentário mais curtido decide.",
       "texto_tela": [
@@ -878,7 +757,7 @@
       }
     },
     {
-      "id": "19-encerramento",
+      "id": "16-encerramento",
       "tipo": "encerramento",
       "narracao": "Amanhã tem Poeira contra o Veteranos do Bairro. Então já sabe: segue pra virar torcedor, curte pra encher o caixa, e comenta o que a gente faz. Até amanhã!",
       "texto_tela": [

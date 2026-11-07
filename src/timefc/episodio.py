@@ -329,8 +329,12 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 gm += 1
             else:
                 gv += 1
-            if len(gols) > 6 and 0 < i < len(gols) - 1:
-                continue  # jogo com muitos gols: narra o primeiro e o último
+            # Jogos com 3+ gols: narra só o 1º gol do Poeira (empolgado) e o último gol do jogo.
+            # Os do meio aparecem no placar. Até 2 gols: narra todos.
+            primeiro_nosso = next((k for k, x in enumerate(gols) if x["time"] == nome), None)
+            if len(gols) > 2 and i not in (primeiro_nosso, len(gols) - 1):
+                continue
+            ultimo = i == len(gols) - 1 and len(gols) > 2
             if nosso:
                 art = _artilheiro(e, rng)
                 g["autor"] = art["nome"]
@@ -340,6 +344,15 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 txt = grito.format(N=nome.upper(), A=art["nome"].upper(), m=g["minuto"])
             else:
                 txt = f"Gol do {adv}, aos {g['minuto']}. {rng.choice(PIADAS_GOL_CONTRA)}"
+            if ultimo:  # o último gol fecha a história do jogo
+                ns, ds = (gm, gv) if partida["mandante"] == nome else (gv, gm)
+                if not nosso and ns < ds:
+                    txt = (f"Ah, não... Gol do {adv}, aos {g['minuto']}. Eles viraram o jogo: "
+                           f"{ds} a {ns}. A torcida ficou em silêncio.")
+                elif not nosso and ns == ds:
+                    txt = f"Ah, não... Gol do {adv}, aos {g['minuto']}. Empatou: {ds} a {ns}."
+                elif nosso and ns > ds:
+                    txt = txt.replace("Que golaço!", "").rstrip() + f" Virou: {ns} a {ds}!"
             cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"],
                  minuto=g["minuto"], nosso=nosso, estilo_voz="grito" if nosso else "normal", autor=g.get("autor"), placar=[gm, gv],
                  mandante=partida["mandante"], visitante=partida["visitante"])

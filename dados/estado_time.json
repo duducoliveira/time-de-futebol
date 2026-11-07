@@ -32,7 +32,7 @@
       {
         "dia": 2,
         "seguidores": 106,
-        "data": "2026-11-07T01:59:41+00:00"
+        "data": "2026-11-07T02:14:20+00:00"
       }
     ]
   },
@@ -225,8 +225,7 @@
           },
           {
             "minuto": 55,
-            "time": "Poeira FC",
-            "autor": "Bujão"
+            "time": "Poeira FC"
           },
           {
             "minuto": 55,
@@ -308,6 +307,11 @@
         "rodada": 1
       }
     ],
+    "rival": {
+      "time": "Estrela da Feira",
+      "apelido": "o clássico da feira",
+      "historia": "os dois times dividem a mesma rua de feira; quem perde paga o pastel"
+    },
     "tabela": [
       {
         "time": "Atlético Padaria",
@@ -429,12 +433,7 @@
         "pos": 10,
         "sg": -2
       }
-    ],
-    "rival": {
-      "time": "Estrela da Feira",
-      "apelido": "o clássico da feira",
-      "historia": "os dois times dividem a mesma rua de feira; quem perde paga o pastel"
-    }
+    ]
   },
   "episodios": [
     {
@@ -455,7 +454,7 @@
     },
     {
       "dia": 2,
-      "data": "2026-11-07T01:59:41+00:00",
+      "data": "2026-11-07T02:14:20+00:00",
       "proxima_decisao": {
         "pergunta": "O que a gente faz agora?",
         "opcoes": [
@@ -523,5 +522,5 @@
       "evento": "Rodada 1: Poeira FC 2 x 3 Grêmio Vila Barro (derrota)"
     }
   ],
-  "atualizado_em": "2026-11-07T01:59:41+00:00"
+  "atualizado_em": "2026-11-07T02:14:20+00:00"
 }
