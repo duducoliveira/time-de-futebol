@@ -318,11 +318,13 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     else:
         if briefing["receita_curtidas"]:
             est.lancar(e, briefing["receita_curtidas"], f"curtidas do dia {dia - 1}")
-        cena("evolucao", f"Dia {dia}! Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. "
+        tema = tema_do_dia(e, briefing, cal)
+        fala_tema = briefing.get("tema_falado") or (tema.capitalize().rstrip("!") if tema else "")
+        cena("capa", f"Dia {dia}{': ' + fala_tema if fala_tema else ''}!", [f"DIA {dia}"], tema=tema, antes=antes)
+        cena("evolucao", f"Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. "
              f"Ontem, {_n(antes)} torcedores. Hoje: {_n(hoje)}! E o caixa saiu de {_moeda(e, caixa_ontem)} "
              f"pra {_n(e['caixa'])}!", [f"DIA {dia}"], antes=antes, torcida=hoje,
-             caixa_antes=caixa_ontem, caixa=e["caixa"], curtidas=briefing["curtidas"],
-             tema=tema_do_dia(e, briefing, cal))
+             caixa_antes=caixa_ontem, caixa=e["caixa"], curtidas=briefing["curtidas"])
         nivel = nivel_torcida(hoje, e["estrutura"]["capacidade"])
         nivel_ontem = nivel_torcida(antes, e["estrutura"]["capacidade"])
         cena("estadio", FALAS_TORCIDA[nivel] + (" Isso é novidade!" if nivel != nivel_ontem and nivel in

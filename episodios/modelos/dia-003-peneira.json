@@ -62,5 +62,6 @@
     "jogadores": 5,
     "tecnico": 1
   },
-  "tema": "PENEIRA DO POEIRA"
+  "tema": "PENEIRA DO POEIRA",
+  "tema_falado": "Peneira do Poeira"
 }

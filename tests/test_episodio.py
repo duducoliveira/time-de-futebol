@@ -83,9 +83,10 @@ def test_niveis_da_torcida_e_gancho():
     e, r = ep.fechar(e, ep.preparar(e, 0, None, []))
     assert [c["tipo"] for c in r["cenas"][:3]] == ["abertura", "regras", "estadio"]
     e, r = ep.fechar(e, ep.preparar(e, 3745, {"like_count": 4732}, []))
-    evo = r["cenas"][0]
+    capa, evo = r["cenas"][0], r["cenas"][1]
+    assert capa["tipo"] == "capa" and capa["narracao"] == "Dia 2: Estreia!" and capa["dados"]["tema"] == "ESTREIA"
     assert evo["tipo"] == "evolucao" and evo["dados"]["caixa"] == 4732 and evo["dados"]["antes"] == 0
-    assert r["cenas"][1]["tipo"] == "estadio" and r["cenas"][1]["dados"]["nivel"] == "arvore"
+    assert r["cenas"][2]["tipo"] == "estadio" and r["cenas"][2]["dados"]["nivel"] == "arvore"
     assert all("hud" in c["dados"] and "estrutura" in c["dados"] for c in r["cenas"])
 
 

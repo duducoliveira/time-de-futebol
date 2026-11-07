@@ -288,14 +288,6 @@ Object.assign(TIPOS, {
     return s;
   },
   evolucao(t, d, c, E) {
-    // quadro de capa (como o do Dia 1): "DIA N" + tema do dia; é dele que sai a capa do post
-    if (t < CAPA) {
-      let s = campo(E.estrutura, { t, nome: NOME(E), torcida: c.dados.antes || 0 });
-      s += narrador(t, E, 540, 1870, 1.8, { pose: 'acena' });
-      s += `<g transform="translate(${W / 2} 470)">${tituloGrande(c.texto_tela[0] || '', { tam: 230 })}</g>`;
-      if (c.dados.tema) s += `<g transform="translate(${W / 2} 650)">${pilula(c.dados.tema, { tam: 58, rot: 2 })}</g>`;
-      return s;
-    }
     const dd = c.dados;
     const tT = quando(c, 'hoje', 1.2, true), tC = quando(c, 'caixa', 3, true);
     let s = camera(t, d, estadioAereo(E.estrutura, dd.torcida, { t, revelar: easeOut(prog(t, tT, 1.6)), torcidaAntes: dd.antes, nome: NOME(E) }), { z0: 1.0, z1: 1.04 });
@@ -318,9 +310,15 @@ Object.assign(TIPOS, {
 const CARIMBOS = { inviavel: ['INVIÁVEL POR ENQUANTO', '#e63946'], aprovado: ['APROVADO!', '#2e8b57'],
   anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'] };
 
-const CAPA = 1.2;  // segundos de capa no começo do vídeo
-
 Object.assign(TIPOS, {
+  // capa (como a do Dia 1): o Tião abre o vídeo falando "Dia N: tema"; é dela que sai a capa do post
+  capa(t, d, c, E) {
+    let s = campo(E.estrutura, { t, nome: NOME(E), torcida: c.dados.antes || 0 });
+    s += narrador(t, E, 540, 1870, 1.8, { pose: 'acena' });
+    s += `<g transform="translate(${W / 2} 470)">${tituloGrande(c.texto_tela[0] || '', { tam: 230 })}</g>`;
+    if (c.dados.tema) s += `<g transform="translate(${W / 2} 650)">${pilula(c.dados.tema, { tam: 58, rot: 2 })}</g>`;
+    return s;
+  },
   // vários comentários, cada um entra quando a narração chega nele, com carimbo
   comentarios(t, d, c, E) {
     let s = camera(t, d, sede(E.estrutura, { t, dy: 540 }));
