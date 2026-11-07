@@ -5,8 +5,11 @@ from timefc.liga import calendario, tabela
 from timefc.comentarios import ranking
 
 
+INICIAL = pathlib.Path(__file__).with_name("estado_inicial.json")
+
+
 def _estado():
-    return est.carregar()
+    return est.carregar(INICIAL)  # estado do dia 0, independente do clube real
 
 
 def test_calendario_turno_returno():
@@ -32,10 +35,10 @@ def test_comentario_viavel_mais_curtido():
     top = [{"usuario": "rico", "texto": "faz refletores e grama!", "curtidas": 900},
            {"usuario": "nada", "texto": "vai corinthians", "curtidas": 500},
            {"usuario": "fulano", "texto": "uma lanchonete com meu nome", "curtidas": 200}]
-    d, av = catalogo.escolher(e, top, caixa=4732, dia=2)
+    d, av = catalogo.escolher(e, top, caixa=946, dia=2)
     assert not av[0]["viavel"] and "caixa" in av[0]["motivo"]
     assert av[1]["revisar"]
-    assert d["comentario"] == 2 and d["acoes"] == ["lanchonete"] and d["custo"] == 2500
+    assert d["comentario"] == 2 and d["acoes"] == ["lanchonete"] and d["custo"] == 500
     assert d["efeitos"]["estrutura.lanchonete"] == "Lanchonete do @fulano"
 
 
@@ -48,7 +51,7 @@ def test_tres_dias():
 
     coms = [{"id": "1", "username": "fulano", "text": "lanchonete com meu nome", "like_count": 206, "timestamp": "1"},
             {"id": "0", "username": "sonhador", "text": "estadio de 50 mil lugares e refletores", "like_count": 300, "timestamp": "1"}]
-    b = ep.preparar(e, 3745, {"id": "x", "permalink": "p", "like_count": 4732}, coms, "clube")
+    b = ep.preparar(e, 3745, {"id": "x", "permalink": "p", "like_count": 946}, coms, "clube")
     assert b["decisao"]["acoes"] == ["lanchonete"]
     b["nova_enquete"] = {"id": "apelido", "pergunta": "Apelido do goleiro?", "atributo": "elenco.1.apelido",
                          "opcoes": {"A": ["muralha"], "B": ["gato"]}, "valores": {"A": "Muralha", "B": "Gato"}}

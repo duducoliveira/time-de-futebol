@@ -12,8 +12,8 @@
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 1,
-  "caixa": 0,
+  "dia": 2,
+  "caixa": 358.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -22,12 +22,17 @@
     "comentario_vencedor": "mais curtido no post do dia anterior"
   },
   "torcida": {
-    "seguidores": 0,
+    "seguidores": 106,
     "historico": [
       {
         "dia": 1,
         "seguidores": 0,
         "data": "2026-11-06T01:02:56+00:00"
+      },
+      {
+        "dia": 2,
+        "seguidores": 106,
+        "data": "2026-11-07T01:59:41+00:00"
       }
     ]
   },
@@ -38,12 +43,14 @@
     "telhado": false,
     "vestiario": "um banheiro sem porta",
     "uniforme": "cada um com uma camisa",
-    "rede": false,
+    "rede": true,
     "bolas": false,
     "iluminacao": false,
     "lanchonete": null,
     "tecnico": false,
-    "kombi": false
+    "kombi": false,
+    "banco_reservas": true,
+    "cabare_proibido": true
   },
   "personagens": {
     "narrador": {
@@ -54,6 +61,12 @@
     "presidente": {
       "nome": "Dona Cida",
       "papel": "dona do bar da esquina; presidente, tesoureira e roupeira do clube"
+    },
+    "diretor": {
+      "nome": "Ragazzo",
+      "cargo": "diretor de futebol (estagiário)",
+      "instagram": "gabriel_ragazzo1",
+      "chave": "ragazzo"
     }
   },
   "elenco": {
@@ -111,11 +124,35 @@
       "nome": "Sumido",
       "posicao": "PE",
       "traco": "ninguém sabe onde mora; aparece só no jogo"
+    },
+    "12": {
+      "nome": "Gabriel Zaga",
+      "posicao": "ZAG",
+      "traco": "se apresentou nos comentários: 'Eu sou zagueiro'",
+      "instagram": "gabriel_rzt1221",
+      "chegou_no_dia": 2,
+      "chave": "gabriel"
+    },
+    "13": {
+      "nome": "Fé no Justo",
+      "posicao": "VOL",
+      "traco": "levantou a mão nos comentários",
+      "instagram": "_fe_no_justo_._777",
+      "chegou_no_dia": 2,
+      "chave": "fé"
+    },
+    "14": {
+      "nome": "Zé Kaun",
+      "posicao": "PE",
+      "traco": "respondeu com três emojis e foi contratado",
+      "instagram": "j_o_s_e_k_a_u_n",
+      "chegou_no_dia": 2,
+      "chave": "zé"
     }
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 0,
+    "rodada": 1,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -136,7 +173,229 @@
       "Veteranos do Bairro": 35,
       "Grêmio Vila Barro": 33
     },
-    "resultados": []
+    "resultados": [
+      {
+        "mandante": "Poeira FC",
+        "visitante": "Grêmio Vila Barro",
+        "gols_mandante": 2,
+        "gols_visitante": 3,
+        "gols": [
+          {
+            "minuto": 14,
+            "time": "Poeira FC",
+            "autor": "Padeiro"
+          },
+          {
+            "minuto": 43,
+            "time": "Grêmio Vila Barro"
+          },
+          {
+            "minuto": 55,
+            "time": "Poeira FC",
+            "autor": "Bujão"
+          },
+          {
+            "minuto": 55,
+            "time": "Grêmio Vila Barro"
+          },
+          {
+            "minuto": 65,
+            "time": "Grêmio Vila Barro"
+          }
+        ],
+        "rodada": 1
+      },
+      {
+        "mandante": "Leões do Brejo",
+        "visitante": "Veteranos do Bairro",
+        "gols_mandante": 1,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 11,
+            "time": "Leões do Brejo"
+          },
+          {
+            "minuto": 33,
+            "time": "Veteranos do Bairro"
+          }
+        ],
+        "rodada": 1
+      },
+      {
+        "mandante": "Atlético Padaria",
+        "visitante": "Estrela da Feira",
+        "gols_mandante": 3,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 7,
+            "time": "Atlético Padaria"
+          },
+          {
+            "minuto": 24,
+            "time": "Estrela da Feira"
+          },
+          {
+            "minuto": 28,
+            "time": "Atlético Padaria"
+          },
+          {
+            "minuto": 64,
+            "time": "Atlético Padaria"
+          }
+        ],
+        "rodada": 1
+      },
+      {
+        "mandante": "Ferro-Velho EC",
+        "visitante": "Real Laje",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 52,
+            "time": "Ferro-Velho EC"
+          }
+        ],
+        "rodada": 1
+      },
+      {
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Juventude do Asfalto",
+        "gols_mandante": 0,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 60,
+            "time": "Juventude do Asfalto"
+          }
+        ],
+        "rodada": 1
+      }
+    ],
+    "tabela": [
+      {
+        "time": "Atlético Padaria",
+        "j": 1,
+        "v": 1,
+        "e": 0,
+        "d": 0,
+        "gp": 3,
+        "gc": 1,
+        "pts": 3,
+        "pos": 1,
+        "sg": 2
+      },
+      {
+        "time": "Grêmio Vila Barro",
+        "j": 1,
+        "v": 1,
+        "e": 0,
+        "d": 0,
+        "gp": 3,
+        "gc": 2,
+        "pts": 3,
+        "pos": 2,
+        "sg": 1
+      },
+      {
+        "time": "Ferro-Velho EC",
+        "j": 1,
+        "v": 1,
+        "e": 0,
+        "d": 0,
+        "gp": 1,
+        "gc": 0,
+        "pts": 3,
+        "pos": 3,
+        "sg": 1
+      },
+      {
+        "time": "Juventude do Asfalto",
+        "j": 1,
+        "v": 1,
+        "e": 0,
+        "d": 0,
+        "gp": 1,
+        "gc": 0,
+        "pts": 3,
+        "pos": 4,
+        "sg": 1
+      },
+      {
+        "time": "Leões do Brejo",
+        "j": 1,
+        "v": 0,
+        "e": 1,
+        "d": 0,
+        "gp": 1,
+        "gc": 1,
+        "pts": 1,
+        "pos": 5,
+        "sg": 0
+      },
+      {
+        "time": "Veteranos do Bairro",
+        "j": 1,
+        "v": 0,
+        "e": 1,
+        "d": 0,
+        "gp": 1,
+        "gc": 1,
+        "pts": 1,
+        "pos": 6,
+        "sg": 0
+      },
+      {
+        "time": "Poeira FC",
+        "j": 1,
+        "v": 0,
+        "e": 0,
+        "d": 1,
+        "gp": 2,
+        "gc": 3,
+        "pts": 0,
+        "pos": 7,
+        "sg": -1
+      },
+      {
+        "time": "Amigos do Churrasco FC",
+        "j": 1,
+        "v": 0,
+        "e": 0,
+        "d": 1,
+        "gp": 0,
+        "gc": 1,
+        "pts": 0,
+        "pos": 8,
+        "sg": -1
+      },
+      {
+        "time": "Real Laje",
+        "j": 1,
+        "v": 0,
+        "e": 0,
+        "d": 1,
+        "gp": 0,
+        "gc": 1,
+        "pts": 0,
+        "pos": 9,
+        "sg": -1
+      },
+      {
+        "time": "Estrela da Feira",
+        "j": 1,
+        "v": 0,
+        "e": 0,
+        "d": 1,
+        "gp": 1,
+        "gc": 3,
+        "pts": 0,
+        "pos": 10,
+        "sg": -2
+      }
+    ]
   },
   "episodios": [
     {
@@ -151,20 +410,79 @@
         ]
       },
       "post": {
-        "buffer_id": "6aed2684f3498efda75f1669",
-        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-001.mp4",
-        "agendado_para": "2026-11-06T06:00:00-03:00"
+        "id": "17995425222019508",
+        "permalink": "https://www.instagram.com/reel/DfZPHPZmRRH/"
       }
+    },
+    {
+      "dia": 2,
+      "data": "2026-11-07T01:59:41+00:00",
+      "proxima_decisao": {
+        "pergunta": "O que a gente faz agora?",
+        "opcoes": [
+          "Uniforme novo?",
+          "Bolas novas?",
+          "Outra ideia?"
+        ]
+      },
+      "post": null
     }
   ],
-  "decisoes": [],
+  "decisoes": [
+    {
+      "dia": 2,
+      "acao": "rede",
+      "autor": "pedroandrade1995",
+      "curtidas": 0,
+      "texto": "Rede no gol + banco de reservas"
+    },
+    {
+      "dia": 2,
+      "acao": "banco_reservas",
+      "autor": "pedroandrade1995",
+      "curtidas": 0,
+      "texto": "Rede no gol + banco de reservas"
+    }
+  ],
   "enquetes": [],
-  "extrato": [],
+  "extrato": [
+    {
+      "dia": 2,
+      "valor": 256,
+      "descricao": "curtidas do dia 1",
+      "saldo": 256
+    },
+    {
+      "dia": 2,
+      "valor": -110.0,
+      "descricao": "Rede no gol + banco de reservas",
+      "saldo": 146.0
+    },
+    {
+      "dia": 2,
+      "valor": 212,
+      "descricao": "bilheteria rodada 1 (106 pagantes)",
+      "saldo": 358.0
+    }
+  ],
   "linha_do_tempo": [
     {
       "dia": 1,
       "evento": "Fundação do Poeira FC"
+    },
+    {
+      "dia": 2,
+      "evento": "Rede no gol (simples) e um banquinho de madeira na lateral para os reservas, pedidos por @pedroandrade1995, @brruno_10, @duducoliveira, @isaq_ueestevao e @felipe_brzz.",
+      "autor": "pedroandrade1995"
+    },
+    {
+      "dia": 2,
+      "evento": "Reforços vindos dos comentários: Gabriel Zaga (@gabriel_rzt1221), Fé no Justo (@_fe_no_justo_._777), Zé Kaun (@j_o_s_e_k_a_u_n)"
+    },
+    {
+      "dia": 2,
+      "evento": "Rodada 1: Poeira FC 2 x 3 Grêmio Vila Barro (derrota)"
     }
   ],
-  "atualizado_em": "2026-11-06T01:02:56+00:00"
+  "atualizado_em": "2026-11-07T01:59:41+00:00"
 }

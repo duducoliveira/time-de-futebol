@@ -238,11 +238,17 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
              antes=antes, torcida=hoje, nivel=nivel)
 
         d = briefing.get("decisao")
-        if d and d.get("comentario") is not None:
-            c = briefing["top_comentarios"][d["comentario"]]
+        hist = briefing.get("historia") or {}
+        # comentários roteirizados: cenas com vários comentários e carimbos (inviável/aprovado...)
+        for cc in hist.get("comentarios", []):
+            cena("comentarios", cc["narracao"], cc.get("texto_tela", []), comentarios=cc["comentarios"])
+        if d and (d.get("comentario") is not None or d.get("acoes")):
+            c = (briefing["top_comentarios"][d["comentario"]] if d.get("comentario") is not None
+                 else {"usuario": d.get("autor", ""), "texto": d.get("titulo", ""), "curtidas": 0})
             custo = float(d.get("custo") or 0)
-            cena("comentario", f"O comentário mais curtido de ontem foi do @{c['usuario']}: "
-                 f"\"{c['texto']}\"", ["COMENTÁRIO MAIS CURTIDO"], comentario=c)
+            if d.get("comentario") is not None and not hist.get("comentarios"):
+                cena("comentario", f"O comentário mais curtido de ontem foi do @{c['usuario']}: "
+                     f"\"{c['texto']}\"", ["COMENTÁRIO MAIS CURTIDO"], comentario=c)
             antes_obra = copy.deepcopy(e["estrutura"])
             if custo:
                 est.lancar(e, -custo, d.get("titulo") or "decisão da torcida")
@@ -254,11 +260,24 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                                       "curtidas": c["curtidas"], "texto": c["texto"]})
             est.evento(e, d.get("interpretacao") or c["texto"], autor=c["usuario"])
             novos = [v for k, v in (d.get("efeitos") or {}).items() if k.startswith("elenco.")]
-            cena("obra", f"Pedido aceito! {d.get('interpretacao', '')}",
+            cena("obra", d.get("narracao_obra") or f"Pedido aceito! {d.get('interpretacao', '')}",
                  [(d.get("titulo") or "").upper(), f"-{_moeda(e, custo)}" if custo else ""],
                  acoes=d.get("acoes") or [], custo=custo, caixa=e["caixa"], antes=antes_obra,
                  depois=copy.deepcopy(e["estrutura"]), novos_jogadores=novos,
                  autor=c["usuario"])
+        # reforços vindos dos comentários (entram no elenco e ganham cena própria)
+        if hist.get("reforcos"):
+            r = hist["reforcos"]
+            for num, j in r["jogadores"].items():
+                e["elenco"][num] = j
+            for chave, pers in (r.get("personagens") or {}).items():
+                e["personagens"][chave] = pers
+            est.evento(e, "Reforços vindos dos comentários: " + ", ".join(
+                f"{j['nome']} (@{j.get('instagram', '')})" for j in r["jogadores"].values()))
+            cena("reforcos", r["narracao"], r.get("texto_tela", ["REFORÇOS DA TORCIDA"]),
+                 jogadores=r["jogadores"], personagens=r.get("personagens") or {})
+        for x in hist.get("antes_jogo", []):
+            cena(x["tipo"], x["narracao"], x.get("texto_tela", []), **x.get("dados", {}))
 
         for eid in briefing.get("encerrar_enquetes", []):
             enq = next(x for x in e["enquetes"] if x["id"] == eid)
@@ -307,7 +326,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 gm += 1
             else:
                 gv += 1
-            if len(gols) > 4 and 0 < i < len(gols) - 1:
+            if len(gols) > 6 and 0 < i < len(gols) - 1:
                 continue  # jogo com muitos gols: narra o primeiro e o último
             if nosso:
                 art = _artilheiro(e, rng)
@@ -334,6 +353,10 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
              resultado=resultado, placar=[partida["gols_mandante"], partida["gols_visitante"]],
              mandante=partida["mandante"], visitante=partida["visitante"])
         est.evento(e, f"Rodada {liga['rodada']}: {placar_completo} ({resultado})")
+        for x in (briefing.get("historia") or {}).get("depois_jogo", []):
+            cena(x["tipo"], x["narracao"], x.get("texto_tela", []), **x.get("dados", {}))
+            for caminho, valor in (x.get("efeitos") or {}).items():
+                est.definir(e, caminho, valor)
 
         if casa:
             publico = min(hoje, e["estrutura"]["capacidade"])

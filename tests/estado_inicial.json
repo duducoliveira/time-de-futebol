@@ -1,0 +1,141 @@
+{
+  "clube": {
+    "nome": "Poeira FC",
+    "nome_falado": "Poeira",
+    "sigla": "PFC",
+    "instagram": "@poeira.fc",
+    "instagram_id": "17841453282683112",
+    "buffer_canal_id": "6aed11bde29c69a171783476",
+    "repo_videos": "duducoliveira/poeirafc-videos",
+    "fundado_no_dia": 0,
+    "forca": 28,
+    "estadio": "Campo do Poeira",
+    "piada_estadio": "E quando venta, você entende o nome do time."
+  },
+  "dia": 0,
+  "caixa": 0,
+  "moeda": "R$",
+  "regras": {
+    "por_curtida": 1,
+    "ingresso": 2,
+    "gasto_lanchonete_por_torcedor": 0,
+    "comentario_vencedor": "mais curtido no post do dia anterior"
+  },
+  "torcida": {
+    "seguidores": 0,
+    "historico": []
+  },
+  "estrutura": {
+    "gramado": "terrão",
+    "capacidade": 500,
+    "arquibancada": "dois bancos de madeira",
+    "telhado": false,
+    "vestiario": "um banheiro sem porta",
+    "uniforme": "cada um com uma camisa",
+    "rede": false,
+    "bolas": false,
+    "iluminacao": false,
+    "lanchonete": null,
+    "tecnico": false,
+    "kombi": false
+  },
+  "personagens": {
+    "narrador": {
+      "nome": "Tião",
+      "papel": "locutor da rádio comunitária, narra tudo como se fosse final de Copa",
+      "voz": "rpNe0HOx7heUulPiOEaG"
+    },
+    "presidente": {
+      "nome": "Dona Cida",
+      "papel": "dona do bar da esquina; presidente, tesoureira e roupeira do clube"
+    }
+  },
+  "elenco": {
+    "1": {
+      "nome": "Baixinho",
+      "posicao": "GOL",
+      "traco": "1,63 m; pula muito, alcança pouco"
+    },
+    "2": {
+      "nome": "Zé Marmita",
+      "posicao": "LD",
+      "traco": "entregador; sai no intervalo pra fazer entrega"
+    },
+    "3": {
+      "nome": "Tonhão",
+      "posicao": "ZAG",
+      "traco": "pedreiro; nunca perdeu uma dividida, nunca acertou um passe"
+    },
+    "4": {
+      "nome": "Professor",
+      "posicao": "ZAG",
+      "traco": "51 anos; não corre, se posiciona"
+    },
+    "5": {
+      "nome": "Padeiro",
+      "posicao": "VOL",
+      "traco": "chega direto do forno, com pão pra todo mundo"
+    },
+    "6": {
+      "nome": "Chinelinho",
+      "posicao": "LE",
+      "traco": "joga com chuteira emprestada dois números maior"
+    },
+    "7": {
+      "nome": "Foguete",
+      "posicao": "PD",
+      "traco": "o mais rápido do bairro; não tem freio"
+    },
+    "8": {
+      "nome": "Nenê",
+      "posicao": "MEI",
+      "traco": "16 anos, filho da Dona Cida; o único que sabe jogar"
+    },
+    "9": {
+      "nome": "Bujão",
+      "posicao": "CA",
+      "traco": "118 kg; finaliza muito bem, parado"
+    },
+    "10": {
+      "nome": "Maestro",
+      "posicao": "MEI",
+      "traco": "44 anos; conta do teste que fez num time grande em 98"
+    },
+    "11": {
+      "nome": "Sumido",
+      "posicao": "PE",
+      "traco": "ninguém sabe onde mora; aparece só no jogo"
+    }
+  },
+  "liga": {
+    "nome": "Terceira Divisão da Várzea",
+    "rodada": 0,
+    "roteiro": {
+      "1": {
+        "resultado": "derrota",
+        "marca_gol": true,
+        "max_gols_sofridos": 3,
+        "motivo": "estreia sofrida: o Poeira começa perdendo e vai melhorando"
+      }
+    },
+    "times": {
+      "Poeira FC": 28,
+      "Leões do Brejo": 50,
+      "Atlético Padaria": 45,
+      "Ferro-Velho EC": 42,
+      "Amigos do Churrasco FC": 38,
+      "Juventude do Asfalto": 55,
+      "Real Laje": 40,
+      "Estrela da Feira": 47,
+      "Veteranos do Bairro": 35,
+      "Grêmio Vila Barro": 33
+    },
+    "resultados": []
+  },
+  "episodios": [],
+  "decisoes": [],
+  "enquetes": [],
+  "extrato": [],
+  "linha_do_tempo": [],
+  "atualizado_em": null
+}

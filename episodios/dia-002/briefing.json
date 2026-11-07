@@ -1,0 +1,336 @@
+{
+  "dia": 2,
+  "seguidores_ontem": 0,
+  "seguidores_hoje": 106,
+  "post_anterior": {
+    "id": "17995425222019508",
+    "caption": "DIA 1 do Poeira FC ⚽\n\nPrimeira decisão: o que a gente faz com o dinheiro? O comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 27,
+    "like_count": 256,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/DfZPHPZmRRH/",
+    "timestamp": "2026-11-06T09:01:53+0000"
+  },
+  "curtidas": 256,
+  "receita_curtidas": 256,
+  "caixa_atual": 0,
+  "caixa_com_curtidas": 256,
+  "top_comentarios": [
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Fazer um estádio raiz estilo couto pereira e outros Estadios raizes",
+      "curtidas": 27,
+      "id": "18109402250369811",
+      "timestamp": "2026-11-06T09:29:03+0000"
+    },
+    {
+      "usuario": "mths._esk15",
+      "texto": "Montar um cabaré do lado do estádio pros jogadores",
+      "curtidas": 18,
+      "id": "17916432342493602",
+      "timestamp": "2026-11-06T10:45:09+0000"
+    },
+    {
+      "usuario": "gui_srl",
+      "texto": "Mexe no gramado, mete logo um sintéticao pra os outros times sofrerem e nos sobressairmos em casa",
+      "curtidas": 2,
+      "id": "18089948222296179",
+      "timestamp": "2026-11-06T14:42:51+0000"
+    },
+    {
+      "usuario": "duducoliveira",
+      "texto": "Rede no gol!",
+      "curtidas": 1,
+      "id": "17915235429476798",
+      "timestamp": "2026-11-06T10:48:23+0000"
+    },
+    {
+      "usuario": "brruno_10",
+      "texto": "Bancos de reserva ai se não vai todo mundo ficar no chão na hora do jogo",
+      "curtidas": 1,
+      "id": "18131444812877356",
+      "timestamp": "2026-11-06T11:05:33+0000"
+    },
+    {
+      "usuario": "pedroandrade1995",
+      "texto": "Rede nova no gol e guarda o restante da grana para colocar o banco de reservas",
+      "curtidas": 1,
+      "id": "18199120342344965",
+      "timestamp": "2026-11-06T12:25:17+0000"
+    },
+    {
+      "usuario": "j_o_s_e_k_a_u_n",
+      "texto": "Eu 👍 ❤️🙌",
+      "curtidas": 1,
+      "id": "18448800796134424",
+      "timestamp": "2026-11-06T13:01:56+0000"
+    },
+    {
+      "usuario": "thalleslara",
+      "texto": "Contratar um mascote (efeito intimidador) escolhido pelos torcedores",
+      "curtidas": 1,
+      "id": "18131264698828333",
+      "timestamp": "2026-11-06T13:07:58+0000"
+    },
+    {
+      "usuario": "lucas_carvalho317",
+      "texto": "Primeiramente a  rifa ou galeto pro uniforme!",
+      "curtidas": 1,
+      "id": "17995823547061112",
+      "timestamp": "2026-11-06T17:50:46+0000"
+    },
+    {
+      "usuario": "ricardin_dtn",
+      "texto": "Segundoooo",
+      "curtidas": 0,
+      "id": "17984183733127261",
+      "timestamp": "2026-11-06T09:34:55+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 27,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Arquibancada nova custa R$ 6000 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 1,
+      "usuario": "mths._esk15",
+      "curtidas": 18,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Arquibancada nova custa R$ 6000 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 2,
+      "usuario": "gui_srl",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Grama no campo custa R$ 12000 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 3,
+      "usuario": "duducoliveira",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Rede nova no gol custa R$ 300 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 4,
+      "usuario": "brruno_10",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "pedroandrade1995",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Rede nova no gol custa R$ 300 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 6,
+      "usuario": "j_o_s_e_k_a_u_n",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 7,
+      "usuario": "thalleslara",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 8,
+      "usuario": "lucas_carvalho317",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Uniforme novo custa R$ 1500 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 9,
+      "usuario": "ricardin_dtn",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": null,
+    "acoes": [
+      "rede",
+      "banco_reservas"
+    ],
+    "custo": 110,
+    "autor": "pedroandrade1995",
+    "titulo": "Rede no gol + banco de reservas",
+    "interpretacao": "Rede no gol (simples) e um banquinho de madeira na lateral para os reservas, pedidos por @pedroandrade1995, @brruno_10, @duducoliveira, @isaq_ueestevao e @felipe_brzz.",
+    "efeitos": {
+      "estrutura.rede": true,
+      "estrutura.banco_reservas": true
+    },
+    "narracao_obra": "Feito! Rede no gol, das simples, e um banquinho de madeira na lateral pros reservas. Tudo por R$ 110."
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz agora?",
+    "opcoes": [
+      "Uniforme novo?",
+      "Bolas novas?",
+      "Outra ideia?"
+    ]
+  },
+  "historia": {
+    "comentarios": [
+      {
+        "narracao": "O comentário mais curtido foi do Benício: um estádio raiz, estilo Couto Pereira! Ideia anotada, mas hoje é inviável: com R$ 256 no caixa não dá nem pro cimento. E o gramado sintético que o Gui pediu vem junto com o estádio, lá na frente.",
+        "comentarios": [
+          {
+            "usuario": "beniciocarmocarvalho",
+            "texto": "Fazer um estádio raiz estilo couto pereira e outros Estadios raizes",
+            "curtidas": 27,
+            "chave": "benício",
+            "carimbo": "inviavel",
+            "chave_carimbo": "inviável"
+          },
+          {
+            "usuario": "gui_srl",
+            "texto": "Mexe no gramado, mete logo um sintéticão",
+            "curtidas": 2,
+            "chave": "gramado",
+            "carimbo": "depois",
+            "chave_carimbo": "junto",
+            "selo": "COMENTÁRIO"
+          }
+        ]
+      },
+      {
+        "narracao": "O que cabe no bolso: a rede no gol e o banco de reservas, que o Pedro e o Bruno pediram.",
+        "comentarios": [
+          {
+            "usuario": "pedroandrade1995",
+            "texto": "Rede nova no gol e guarda o restante da grana para colocar o banco de reservas",
+            "curtidas": 1,
+            "chave": "rede",
+            "carimbo": "aprovado",
+            "selo": "COMENTÁRIO"
+          },
+          {
+            "usuario": "brruno_10",
+            "texto": "Bancos de reserva ai se não vai todo mundo ficar no chão na hora do jogo",
+            "curtidas": 1,
+            "chave": "banco",
+            "carimbo": "aprovado",
+            "selo": "COMENTÁRIO"
+          }
+        ]
+      }
+    ],
+    "reforcos": {
+      "narracao": "E teve gente se oferecendo pro time! O Gabriel avisou que é zagueiro: contratado, camisa 12. O Fé no Justo e o Zé Kaun levantaram a mão: vieram também. E o Ragazzo pediu pra ser dirigente: virou diretor de futebol. Estagiário, mas diretor.",
+      "texto_tela": [
+        "REFORÇOS DA TORCIDA"
+      ],
+      "jogadores": {
+        "12": {
+          "nome": "Gabriel Zaga",
+          "posicao": "ZAG",
+          "traco": "se apresentou nos comentários: 'Eu sou zagueiro'",
+          "instagram": "gabriel_rzt1221",
+          "chegou_no_dia": 2,
+          "chave": "gabriel"
+        },
+        "13": {
+          "nome": "Fé no Justo",
+          "posicao": "VOL",
+          "traco": "levantou a mão nos comentários",
+          "instagram": "_fe_no_justo_._777",
+          "chegou_no_dia": 2,
+          "chave": "fé"
+        },
+        "14": {
+          "nome": "Zé Kaun",
+          "posicao": "PE",
+          "traco": "respondeu com três emojis e foi contratado",
+          "instagram": "j_o_s_e_k_a_u_n",
+          "chegou_no_dia": 2,
+          "chave": "zé"
+        }
+      },
+      "personagens": {
+        "diretor": {
+          "nome": "Ragazzo",
+          "cargo": "diretor de futebol (estagiário)",
+          "instagram": "gabriel_ragazzo1",
+          "chave": "ragazzo"
+        }
+      }
+    },
+    "depois_jogo": [
+      {
+        "tipo": "cabare",
+        "narracao": "E sabe por que a gente perdeu? Um torcedor pediu um cabaré do lado do estádio... só que ele já existe! E o elenco passou a noite inteira lá. Deu no que deu.",
+        "texto_tela": [
+          "JÁ EXISTE!"
+        ],
+        "dados": {
+          "comentario": {
+            "usuario": "mths._esk15",
+            "texto": "Montar um cabaré do lado do estádio pros jogadores",
+            "curtidas": 18
+          }
+        }
+      },
+      {
+        "tipo": "cabare",
+        "narracao": "A Dona Cida já decidiu: jogador do Poeira está proibido de pisar no cabaré!",
+        "texto_tela": [
+          "DECISÃO DA PRESIDENTE"
+        ],
+        "dados": {
+          "proibido": true
+        },
+        "efeitos": {
+          "estrutura.cabare_proibido": true
+        }
+      }
+    ]
+  }
+}

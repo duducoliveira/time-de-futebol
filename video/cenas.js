@@ -115,7 +115,7 @@ const TIPOS = {
     const virada = Math.min(1.6, d * 0.35);
     const est = t < virada ? c.dados.antes : c.dados.depois;
     const acoes = c.dados.acoes || [];
-    const noCampo = acoes.some(a => ['grama', 'arquibancada', 'refletores', 'rede'].includes(a));
+    const noCampo = acoes.some(a => ['grama', 'arquibancada', 'refletores', 'rede', 'banco_reservas'].includes(a));
     let s = camera(t, d, noCampo ? campo(est, { t, nome: NOME(E), torcida: 0 }) : sede(est, { t }));
     if (t >= virada && t < virada + 0.5) {
       const p = (t - virada) / 0.5;
@@ -126,7 +126,7 @@ const TIPOS = {
       s += popPessoa(t, virada + 0.2, 540 + i * 200, 1880, pessoa(jogador(num, E, { pose: 'comemora' }), t, { s: 1.9 }));
     });
     s += pop(t, 0.1, W / 2, 330, pilula(c.texto_tela[0] || '', { tam: 52, bg: '#2e8b57', rot: -2 }));
-    if (c.texto_tela[1]) s += pop(t, virada + 0.1, W / 2, 520, texto(c.texto_tela[1], { tam: 110, cor: '#e63946', bw: 16 }));
+    if (c.texto_tela[1]) s += pop(t, virada + 0.1, W / 2, 580, texto(c.texto_tela[1], { tam: 110, cor: '#e63946', bw: 16 }));
     s += pop(t, virada + 0.6, 260, 1830, `<g transform="scale(.55)">${painelCaixa(c.dados.caixa, E.moeda, 'SOBROU')}</g>`);
     return s;
   },
@@ -298,6 +298,68 @@ Object.assign(TIPOS, {
     for (let i = 0; i < 6 && t > tC; i++) {
       const tt = (t * 0.9 + i * 0.37) % 2.2;
       s += `<text x="${640 + i * 60}" y="${900 - tt * 260}" font-size="54" fill="#e63946" opacity="${clamp(1 - tt / 2.2)}">♥</text>`;
+    }
+    return s;
+  },
+});
+
+const CARIMBOS = { inviavel: ['INVIÁVEL POR ENQUANTO', '#e63946'], aprovado: ['APROVADO!', '#2e8b57'],
+  anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'] };
+
+Object.assign(TIPOS, {
+  // vários comentários, cada um entra quando a narração chega nele, com carimbo
+  comentarios(t, d, c, E) {
+    let s = camera(t, d, sede(E.estrutura, { t, dy: 540 }));
+    s += narrador(t, E, 300, 1910, 1.22, { pose: 'microfone' }) + presidente(t, E, 935, 1910, 1.22);
+    const lista = c.dados.comentarios || [];
+    const alturas = lista.map(cm => 150 + Math.min(2, quebrar(cm.texto, 44, 700).length) * 54);
+    let y = 250;
+    lista.forEach((cm, i) => {
+      const t0 = cm.chave ? quando(c, cm.chave, 0.3 + i * 2) : 0.3 + i * 2;
+      const h = alturas[i];
+      s += pop(t, t0 - 0.1, W / 2, y + h / 2, cartaoComentario(cm.usuario, quebrar(cm.texto, 44, 700).slice(0, 2).join(' '), cm.curtidas,
+        { selo: cm.selo || (i === 0 ? 'COMENTÁRIO MAIS CURTIDO' : 'COMENTÁRIO'), w: 900 }));
+      if (cm.carimbo && CARIMBOS[cm.carimbo]) {
+        const t1 = cm.chave_carimbo ? quando(c, cm.chave_carimbo, t0 + 1.2) : t0 + 1.2;
+        s += pop(t, t1, W / 2 + 190, y + h - 20, carimbo(CARIMBOS[cm.carimbo][0], CARIMBOS[cm.carimbo][1], -8, 40), 0.3, false);  // carimbo faz parte do cartão
+      }
+      y += h + 40;
+    });
+    return s;
+  },
+  // torcedores que pediram para entrar no time viram personagens
+  reforcos(t, d, c, E) {
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.05, z1: 1.1 });
+    s += pop(t, 0.05, W / 2, 215, pilula(c.texto_tela[0] || 'REFORÇOS DA TORCIDA', { tam: 50, bg: '#2e8b57', rot: -2 }));
+    const itens = [...Object.entries(c.dados.jogadores || {}).map(([n, j]) => ({ n, ...j })),
+      ...Object.values(c.dados.personagens || {}).map(p => ({ ...p, n: null }))];
+    itens.forEach((j, i) => {
+      const t0 = j.chave ? quando(c, j.chave, 0.6 + i * 2) : 0.6 + i * 2;
+      const linha1 = j.n ? `#${j.n} ${j.nome.toUpperCase()} · ${j.posicao}` : `${j.nome.toUpperCase()} · ${(j.cargo || '').toUpperCase()}`;
+      s += pop(t, t0, W / 2, 322 + i * 138, `${pilula(linha1, { tam: 42, bg: j.n ? CORES.vinho : CORES.marinho, rot: i % 2 ? 1.5 : -1.5 })}
+        <g transform="translate(0 54)">${pilula('@' + (j.instagram || ''), { tam: 24, bg: CORES.creme, cor: OUT, py: 6 })}</g>`);
+      const x = 160 + i * (760 / Math.max(1, itens.length - 1));
+      const visual = j.n ? jogador(j.n, E, { pose: 'comemora' }) : { pele: '#e0ac69', cabelo: 'curto', corCabelo: '#2b1d14', oculos: true, camisa: '#f1faee', calcao: '#343a40', meiao: '#343a40', expr: 'serio' };
+      s += popPessoa(t, t0 + 0.1, x, 1910, pessoa(visual, t, { s: 1.05, fase: i }));
+    });
+    return s;
+  },
+  cabare(t, d, c, E) {
+    const dd = c.dados;
+    let s = camera(t, d, cabare(E.estrutura, { t }), { z0: 1.0, z1: 1.04 });
+    ['9', '4', '10'].forEach((n, i) => {
+      const x = 170 + i * 120;
+      s += pessoa(jogador(n, E, { expr: 'serio' }), t, { x, y: 1910, s: 0.95, fase: i });
+      s += zzz(x + 20, 1560, t, i * 0.3);
+    });
+    if (dd.proibido) {
+      s += presidente(t, E, 860, 1910, 1.25, { pose: 'aponta', expr: 'bravo' });
+      s += pop(t, 0.3, W / 2, 360, pilula(c.texto_tela[0] || 'DECISÃO DA PRESIDENTE', { tam: 50, bg: CORES.vinho, rot: -2 }));
+      s += pop(t, quando(c, 'proibido', 1.2) - 0.1, W / 2, 640, carimbo('PROIBIDO PARA JOGADORES', '#e63946', -8, 76), 0.35);
+    } else {
+      s += presidente(t, E, 880, 1910, 1.2, { expr: 'surpreso' });
+      if (dd.comentario) s += pop(t, 0.3, W / 2, 420, cartaoComentario(dd.comentario.usuario, dd.comentario.texto, dd.comentario.curtidas, { selo: 'COMENTÁRIO', w: 900 }));
+      if (c.texto_tela[0]) s += pop(t, quando(c, 'existe', 2.5), W / 2, 720, carimbo(c.texto_tela[0], '#9d4edd', -6, 56), 0.35);
     }
     return s;
   },

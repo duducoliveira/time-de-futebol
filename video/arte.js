@@ -424,11 +424,20 @@ function arquibancada(estrutura, torcida, y = 850, t = 0) {
   return s;
 }
 
-function trave(x, y, s = 1, torta = true) {
+function trave(x, y, s = 1, torta = true, rede = false) {
+  const malha = rede ? Array.from({ length: 13 }, (_, i) => `<path d="M${-150 + i * 25},-110 V0" stroke="#fff" stroke-width="2" opacity=".75"/>`).join('')
+    + Array.from({ length: 5 }, (_, i) => `<path d="M-150,${-110 + i * 22} H150" stroke="#fff" stroke-width="2" opacity=".75"/>`).join('') : '';
   return `<g transform="translate(${x} ${y}) scale(${s}) rotate(${torta ? -3 : 0})">
-    <rect x="-150" y="-110" width="300" height="110" fill="#ffffff22"/>
+    <rect x="-150" y="-110" width="300" height="110" fill="#ffffff22"/>${malha}
     <path d="M-150,0 V-110 H150 V0" fill="none" stroke="#fff" stroke-width="12" stroke-linejoin="round"/>
     <path d="M-150,0 V-110 H150 V0" fill="none" stroke="${OUT}" stroke-width="3"/></g>`;
+}
+
+function bancoReservas(x, y, s = 1) {
+  return `<g transform="translate(${x} ${y}) scale(${s})">
+    <rect x="-80" y="-34" width="160" height="16" rx="4" fill="#b08968" stroke="${OUT}" stroke-width="5"/>
+    <rect x="-80" y="-62" width="160" height="12" rx="4" fill="#9c6644" stroke="${OUT}" stroke-width="4"/>
+    <path d="M-66,-18 v26 M66,-18 v26 M-70,-50 v32 M70,-50 v32" stroke="${OUT}" stroke-width="7"/></g>`;
 }
 
 function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
@@ -445,7 +454,8 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   s += `<path d="M-100,1260 H1180" stroke="${linha}" stroke-width="8"/>
     <ellipse cx="${W / 2}" cy="1260" rx="240" ry="70" fill="none" stroke="${linha}" stroke-width="8"/>
     <path d="M330,950 L300,1060 H780 L750,950" fill="none" stroke="${linha}" stroke-width="7"/>`;
-  s += trave(W / 2, 955, 0.8, !grama);
+  s += trave(W / 2, 955, 0.8, !grama, !!estrutura.rede);
+  if (estrutura.banco_reservas) s += bancoReservas(905, 1010, 0.9);
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
   return s;
@@ -581,6 +591,8 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
     <path d="M420,${yTopo} L405,${yTopo + 90} H675 L660,${yTopo}" fill="none" stroke="${lc}" stroke-width="5"/>
     <path d="M300,${yBase} L330,${yBase - 160} H750 L780,${yBase}" fill="none" stroke="${lc}" stroke-width="6"/>
     <path d="M490,${yTopo} V${yTopo - 40} H590 V${yTopo}" fill="none" stroke="#fff" stroke-width="7"/>`;
+  if (estrutura.rede) s += Array.from({ length: 6 }, (_, i) => `<path d="M${492 + i * 19},${yTopo - 38} V${yTopo}" stroke="#fff" stroke-width="2" opacity=".8"/>`).join('');
+  if (estrutura.banco_reservas) s += `<g transform="translate(${xBorda(1230, 1) + 30} 1230) rotate(66) scale(.55)">${bancoReservas(0, 0)}</g>`;
   // torcida desenhada: assentos primeiro, depois as faixas de "não cabe mais"
   const total = bonecos(Math.min(torcida, 1e7));
   const visiveis = Math.round(bonecos(torcidaAntes) + (total - bonecos(torcidaAntes)) * revelar);
@@ -640,4 +652,30 @@ function escudoPoeira({ estrelas = 0, nome = 'POEIRA FC' } = {}) {
     <g transform="translate(0 66) rotate(-12)">${bola(78)}</g>
     ${est}</g>`;
 }
-Object.assign(window, { escudoPoeira, bola });
+
+function cabare(estrutura, { t = 0 } = {}) {
+  let s = ceu(t) + bairro(820);
+  s += `<rect x="-10" y="820" width="${W + 20}" height="${H - 820}" fill="#cfc2a8"/><rect x="-10" y="1700" width="${W + 20}" height="${H - 1700}" fill="url(#gterra)"/>`;
+  const pisca = Math.floor(t * 3) % 2;
+  s += `<rect x="230" y="1240" width="620" height="460" fill="#ff8fab" stroke="${OUT}" stroke-width="7"/>
+    <path d="M200,1250 L540,1130 L880,1250Z" fill="#9d4edd" stroke="${OUT}" stroke-width="7"/>
+    <g class="rotulo"><rect x="330" y="1290" width="420" height="96" rx="16" fill="#3c096c" stroke="${OUT}" stroke-width="6"/>
+    <text x="540" y="1362" text-anchor="middle" font-family="Anton" font-size="66" fill="${pisca ? '#ffd6ff' : '#ff4d6d'}" letter-spacing="8">CABARÉ</text></g>
+    ${Array.from({ length: 9 }, (_, i) => `<circle cx="${345 + i * 49}" cy="1404" r="9" fill="${(i + pisca) % 2 ? '#ffd166' : '#ff4d6d'}" stroke="${OUT}" stroke-width="3"/>`).join('')}
+    <rect x="480" y="1500" width="120" height="200" rx="8" fill="#5a189a" stroke="${OUT}" stroke-width="6"/>
+    <rect x="280" y="1450" width="150" height="120" fill="#ffccd5" stroke="${OUT}" stroke-width="6"/><path d="M280,1450 q75,60 150,0" fill="#c9184a" opacity=".85"/>
+    <rect x="650" y="1450" width="150" height="120" fill="#ffccd5" stroke="${OUT}" stroke-width="6"/><path d="M650,1450 q75,60 150,0" fill="#c9184a" opacity=".85"/>`;
+  return s;
+}
+
+function zzz(x, y, t, fase = 0) {
+  return [0, 1, 2].map(i => { const k = ((t * 0.8 + fase + i * 0.33) % 1);
+    return `<text x="${x + i * 18 + k * 20}" y="${y - k * 70 - i * 22}" font-family="Anton" font-size="${30 + i * 8}" fill="#fff" stroke="${OUT}" stroke-width="5" paint-order="stroke" opacity="${1 - k}">Z</text>`; }).join('');
+}
+
+function carimbo(txt, cor = '#e63946', rot = -10, tam = 54) {
+  const w = medir(txt, tam) + 50;
+  return `<g transform="rotate(${rot})" opacity=".92"><rect x="${-w / 2}" y="${-tam * 0.85}" width="${w}" height="${tam * 1.4}" rx="10" fill="none" stroke="${cor}" stroke-width="9"/>
+    <text y="${tam * 0.32}" text-anchor="middle" font-family="Anton" font-size="${tam}" fill="${cor}" letter-spacing="2">${esc(txt)}</text></g>`;
+}
+Object.assign(window, { escudoPoeira, bola, bancoReservas, cabare, zzz, carimbo });
