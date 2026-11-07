@@ -1,35 +1,160 @@
 {
   "_formato": "posição + apelido + piada (o porquê). Uma por episódio; as usadas ficam em estado.piadas_usadas.",
   "apelidos": [
-    {"posicao": "lateral", "apelido": "Caxumba", "piada": "quando desce é um perigo"},
-    {"posicao": "zagueiro", "apelido": "Whisky do Paraguai", "piada": "só dá dor de cabeça"},
-    {"posicao": "goleiro", "apelido": "Peneira", "piada": "deixa passar tudo"},
-    {"posicao": "atacante", "apelido": "Wi-Fi de Rodoviária", "piada": "some na hora que a gente mais precisa"},
-    {"posicao": "volante", "apelido": "Pedágio", "piada": "ninguém passa sem pagar"},
-    {"posicao": "meia", "apelido": "GPS Desligado", "piada": "vive perdido em campo"},
-    {"posicao": "zagueiro", "apelido": "Muro de Arrimo", "piada": "segura qualquer coisa"},
-    {"posicao": "atacante", "apelido": "Ventilador", "piada": "fica só girando e não sai do lugar"},
-    {"posicao": "goleiro", "apelido": "Sabonete", "piada": "a bola escorrega da mão"},
-    {"posicao": "lateral", "apelido": "Elevador", "piada": "sobe e desce o jogo inteiro"},
-    {"posicao": "volante", "apelido": "Carrapato", "piada": "gruda no adversário e não larga"},
-    {"posicao": "zagueiro", "apelido": "Portão Eletrônico", "piada": "abre sozinho na hora errada"},
-    {"posicao": "meia", "apelido": "Pastel de Vento", "piada": "por fora é bonito, por dentro não tem nada"},
-    {"posicao": "goleiro", "apelido": "Rede de Pesca", "piada": "é cheio de buraco"},
-    {"posicao": "ponta", "apelido": "Motoboy", "piada": "corta caminho por onde não pode"},
-    {"posicao": "zagueiro", "apelido": "Feriado Prolongado", "piada": "some por três dias"},
-    {"posicao": "atacante", "apelido": "Ex-Namorada", "piada": "aparece quando você menos espera"},
-    {"posicao": "lateral", "apelido": "Fila de Banco", "piada": "não anda de jeito nenhum"},
-    {"posicao": "meia", "apelido": "Wi-Fi do Vizinho", "piada": "às vezes funciona e ninguém sabe por quê"},
-    {"posicao": "goleiro", "apelido": "Varal", "piada": "só pega o que cai do alto"},
-    {"posicao": "ponta", "apelido": "Cometa", "piada": "aparece uma vez por temporada"},
-    {"posicao": "atacante", "apelido": "Ônibus de Domingo", "piada": "demora, mas quando chega..."},
-    {"posicao": "zagueiro", "apelido": "Segunda-Feira", "piada": "ninguém gosta de encarar"},
-    {"posicao": "volante", "apelido": "Boleto", "piada": "chega todo mês e não tem como fugir"},
-    {"posicao": "meia", "apelido": "Controle Remoto", "piada": "some no meio do sofá"},
-    {"posicao": "lateral", "apelido": "Fofoca", "piada": "corre pelo lado e todo mundo fica sabendo"},
-    {"posicao": "goleiro", "apelido": "Guarda-Chuva de Camelô", "piada": "quebra no primeiro chute"},
-    {"posicao": "atacante", "apelido": "Pipoca", "piada": "pula pra todo lado, mas estoura no calor do jogo"},
-    {"posicao": "ponta", "apelido": "Promoção de Black Friday", "piada": "parece que vai, mas não vai"},
-    {"posicao": "volante", "apelido": "Sogra", "piada": "aparece em todo lugar sem ser chamado"}
+    {
+      "posicao": "lateral",
+      "apelido": "Caxumba",
+      "piada": "quando desce é um perigo"
+    },
+    {
+      "posicao": "zagueiro",
+      "apelido": "Whisky do Paraguai",
+      "piada": "só dá dor de cabeça"
+    },
+    {
+      "posicao": "volante",
+      "apelido": "Pílula do Dia Seguinte",
+      "piada": "chega atrasado, mas acaba com a porra toda"
+    },
+    {
+      "posicao": "goleiro",
+      "apelido": "Peneira",
+      "piada": "deixa passar tudo"
+    },
+    {
+      "posicao": "atacante",
+      "apelido": "Wi-Fi de Rodoviária",
+      "piada": "some na hora que a gente mais precisa"
+    },
+    {
+      "posicao": "volante",
+      "apelido": "Pedágio",
+      "piada": "ninguém passa sem pagar"
+    },
+    {
+      "posicao": "meia",
+      "apelido": "GPS Desligado",
+      "piada": "vive perdido em campo"
+    },
+    {
+      "posicao": "zagueiro",
+      "apelido": "Muro de Arrimo",
+      "piada": "segura qualquer coisa"
+    },
+    {
+      "posicao": "atacante",
+      "apelido": "Ventilador",
+      "piada": "fica só girando e não sai do lugar"
+    },
+    {
+      "posicao": "goleiro",
+      "apelido": "Sabonete",
+      "piada": "a bola escorrega da mão"
+    },
+    {
+      "posicao": "lateral",
+      "apelido": "Elevador",
+      "piada": "sobe e desce o jogo inteiro"
+    },
+    {
+      "posicao": "volante",
+      "apelido": "Carrapato",
+      "piada": "gruda no adversário e não larga"
+    },
+    {
+      "posicao": "zagueiro",
+      "apelido": "Portão Eletrônico",
+      "piada": "abre sozinho na hora errada"
+    },
+    {
+      "posicao": "meia",
+      "apelido": "Pastel de Vento",
+      "piada": "por fora é bonito, por dentro não tem nada"
+    },
+    {
+      "posicao": "goleiro",
+      "apelido": "Rede de Pesca",
+      "piada": "é cheio de buraco"
+    },
+    {
+      "posicao": "ponta",
+      "apelido": "Motoboy",
+      "piada": "corta caminho por onde não pode"
+    },
+    {
+      "posicao": "zagueiro",
+      "apelido": "Feriado Prolongado",
+      "piada": "some por três dias"
+    },
+    {
+      "posicao": "atacante",
+      "apelido": "Ex-Namorada",
+      "piada": "aparece quando você menos espera"
+    },
+    {
+      "posicao": "lateral",
+      "apelido": "Fila de Banco",
+      "piada": "não anda de jeito nenhum"
+    },
+    {
+      "posicao": "meia",
+      "apelido": "Wi-Fi do Vizinho",
+      "piada": "às vezes funciona e ninguém sabe por quê"
+    },
+    {
+      "posicao": "goleiro",
+      "apelido": "Varal",
+      "piada": "só pega o que cai do alto"
+    },
+    {
+      "posicao": "ponta",
+      "apelido": "Cometa",
+      "piada": "aparece uma vez por temporada"
+    },
+    {
+      "posicao": "atacante",
+      "apelido": "Ônibus de Domingo",
+      "piada": "demora, mas quando chega..."
+    },
+    {
+      "posicao": "zagueiro",
+      "apelido": "Segunda-Feira",
+      "piada": "ninguém gosta de encarar"
+    },
+    {
+      "posicao": "volante",
+      "apelido": "Boleto",
+      "piada": "chega todo mês e não tem como fugir"
+    },
+    {
+      "posicao": "meia",
+      "apelido": "Controle Remoto",
+      "piada": "some no meio do sofá"
+    },
+    {
+      "posicao": "lateral",
+      "apelido": "Fofoca",
+      "piada": "corre pelo lado e todo mundo fica sabendo"
+    },
+    {
+      "posicao": "goleiro",
+      "apelido": "Guarda-Chuva de Camelô",
+      "piada": "quebra no primeiro chute"
+    },
+    {
+      "posicao": "atacante",
+      "apelido": "Pipoca",
+      "piada": "pula pra todo lado, mas estoura no calor do jogo"
+    },
+    {
+      "posicao": "ponta",
+      "apelido": "Promoção de Black Friday",
+      "piada": "parece que vai, mas não vai"
+    },
+    {
+      "posicao": "volante",
+      "apelido": "Sogra",
+      "piada": "aparece em todo lugar sem ser chamado"
+    }
   ]
 }
