@@ -104,7 +104,7 @@ class BufferClient:
         *,
         agendar_para: str | None = None,  # ISO 8601, ex: 2026-11-10T21:00:00Z
         primeiro_comentario: str | None = None,
-        thumbnail_ms: int = 1000,
+        thumbnail_ms: int = 500,  # capa: o quadro "DIA N + tema" do começo do vídeo
         rascunho: bool = False,
     ) -> dict:
         """Cria um Reel. `video_url` precisa ser público (ex: R2, S3, GCS)."""

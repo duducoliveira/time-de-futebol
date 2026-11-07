@@ -199,6 +199,22 @@ def piada_do_dia(e: dict, briefing: dict, adv: str, rng: random.Random) -> dict 
             "texto_tela": [f"DE OLHO NO {adv.upper()}"]}
 
 
+def tema_do_dia(e: dict, briefing: dict, cal: list) -> str:
+    """Texto da capa do vídeo (abaixo do "DIA N"): briefing["tema"] ou o jogo do dia."""
+    if briefing.get("tema"):
+        return briefing["tema"]
+    liga, nome = e["liga"], e["clube"]["nome"]
+    if briefing.get("sem_jogo") or liga["rodada"] >= len(cal):
+        return ""
+    m, v = next(j for j in cal[liga["rodada"]] if nome in j)
+    adv = v if m == nome else m
+    if (liga.get("rival") or {}).get("time") == adv:
+        return "CLÁSSICO!"
+    if liga["rodada"] == 0:
+        return "ESTREIA"
+    return f"RODADA {liga['rodada'] + 1}"
+
+
 def calendario_do_clube(e: dict) -> list[list[tuple[str, str]]]:
     """Calendário com os mandos roteirizados: liga.roteiro[N].mando = "casa" ou "fora".
     Ao inverter o mando da rodada N, inverte também o jogo espelho do returno."""
@@ -305,7 +321,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         cena("evolucao", f"Dia {dia}! Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. "
              f"Ontem, {_n(antes)} torcedores. Hoje: {_n(hoje)}! E o caixa saiu de {_moeda(e, caixa_ontem)} "
              f"pra {_n(e['caixa'])}!", [f"DIA {dia}"], antes=antes, torcida=hoje,
-             caixa_antes=caixa_ontem, caixa=e["caixa"], curtidas=briefing["curtidas"])
+             caixa_antes=caixa_ontem, caixa=e["caixa"], curtidas=briefing["curtidas"],
+             tema=tema_do_dia(e, briefing, cal))
         nivel = nivel_torcida(hoje, e["estrutura"]["capacidade"])
         nivel_ontem = nivel_torcida(antes, e["estrutura"]["capacidade"])
         cena("estadio", FALAS_TORCIDA[nivel] + (" Isso é novidade!" if nivel != nivel_ontem and nivel in
