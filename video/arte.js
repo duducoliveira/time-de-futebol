@@ -455,7 +455,7 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
     <ellipse cx="${W / 2}" cy="1260" rx="240" ry="70" fill="none" stroke="${linha}" stroke-width="8"/>
     <path d="M330,950 L300,1060 H780 L750,950" fill="none" stroke="${linha}" stroke-width="7"/>`;
   s += trave(W / 2, 955, 0.8, !grama, !!estrutura.rede);
-  if (estrutura.banco_reservas) s += bancoReservas(905, 1010, 0.9);
+  if (estrutura.banco_reservas) s += bancoReservas(150, 1470, 1.15);  // lateral esquerda do campo
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
   return s;

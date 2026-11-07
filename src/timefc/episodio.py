@@ -314,8 +314,11 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         deles = partida["gols_visitante"] if casa else partida["gols_mandante"]
         placar_completo = f"{partida['mandante']} {partida['gols_mandante']} x {partida['gols_visitante']} {partida['visitante']}"
         piada = PIADAS_ADVERSARIO.get(adv, "ninguém sabe nada sobre eles.")
-        cena("pre_jogo", f"Rodada {liga['rodada']}{', em casa' if casa else ', fora de casa'}, contra o "
-             f"{adv}. Detalhe: {piada}", [f"RODADA {liga['rodada']}", "EM CASA" if casa else "FORA DE CASA"],
+        rival = (liga.get("rival") or {}).get("time") == adv
+        fala_pre = (f"É clássico! Rodada {liga['rodada']}, contra o maior rival do Poeira: o {adv}. "
+                    f"{liga['rival']['historia'].capitalize()}." if rival else
+                    f"Rodada {liga['rodada']}{', em casa' if casa else ', fora de casa'}, contra o {adv}. Detalhe: {piada}")
+        cena("pre_jogo", fala_pre, [f"RODADA {liga['rodada']}", "CLÁSSICO!" if rival else ("EM CASA" if casa else "FORA DE CASA")],
              mandante=partida["mandante"], visitante=partida["visitante"])
         gm = gv = 0
         usados: list[str] = []
@@ -353,6 +356,10 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
              resultado=resultado, placar=[partida["gols_mandante"], partida["gols_visitante"]],
              mandante=partida["mandante"], visitante=partida["visitante"])
         est.evento(e, f"Rodada {liga['rodada']}: {placar_completo} ({resultado})")
+        regra = liga.get("roteiro", {}).get(str(liga["rodada"])) or {}
+        if regra.get("cena_depois"):
+            x = regra["cena_depois"]
+            cena(x["tipo"], x["narracao"], x.get("texto_tela", []), **x.get("dados", {}))
         for x in (briefing.get("historia") or {}).get("depois_jogo", []):
             cena(x["tipo"], x["narracao"], x.get("texto_tela", []), **x.get("dados", {}))
             for caminho, valor in (x.get("efeitos") or {}).items():
@@ -409,7 +416,10 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             + ("Amanhã tem estreia!" if dia == 1 else "Até amanhã!"))
     if prox_jogo and dia > 1:
         advp = prox_jogo[1] if prox_jogo[0] == nome else prox_jogo[0]
-        fala = f"Amanhã tem {nome} contra o {advp}. " + fala
+        if (liga.get("rival") or {}).get("time") == advp:
+            fala = f"E amanhã é clássico: {nome} contra o {advp}, o nosso maior rival! " + fala
+        else:
+            fala = f"Amanhã tem {nome} contra o {advp}. " + fala
     cena("encerramento", fala, [e["clube"]["instagram"]],
          proximo=list(prox_jogo) if prox_jogo and dia > 1 else None)
 

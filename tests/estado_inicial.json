@@ -116,6 +116,40 @@
         "marca_gol": true,
         "max_gols_sofridos": 3,
         "motivo": "estreia sofrida: o Poeira começa perdendo e vai melhorando"
+      },
+      "2": {
+        "resultado": "empate",
+        "marca_gol": true,
+        "max_gols_sofridos": 2,
+        "motivo": "os reservas entram descansados graças ao banco novo",
+        "cena_depois": {
+          "tipo": "banco",
+          "narracao": "E o segredo do empate? Os reservas! O Gabriel Zaga, o Fé no Justo e o Zé Kaun passaram o primeiro tempo sentadinhos no banco novo e entraram descansados. Dinheiro bem gasto!",
+          "texto_tela": [
+            "O BANCO FUNCIONOU"
+          ],
+          "dados": {
+            "jogadores": [
+              "12",
+              "13",
+              "14"
+            ]
+          }
+        }
+      },
+      "3": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "max_gols_sofridos": 1,
+        "motivo": "primeira vitória do clube, no clássico contra o maior rival",
+        "cena_depois": {
+          "tipo": "festa",
+          "narracao": "Primeira vitória do Poeira, e logo no clássico! Hoje o pastel é por conta do Estrela da Feira!",
+          "texto_tela": [
+            "O PASTEL É POR CONTA DELES"
+          ],
+          "dados": {}
+        }
       }
     },
     "times": {
@@ -130,7 +164,12 @@
       "Veteranos do Bairro": 35,
       "Grêmio Vila Barro": 33
     },
-    "resultados": []
+    "resultados": [],
+    "rival": {
+      "time": "Estrela da Feira",
+      "apelido": "o clássico da feira",
+      "historia": "os dois times dividem a mesma rua de feira; quem perde paga o pastel"
+    }
   },
   "episodios": [],
   "decisoes": [],

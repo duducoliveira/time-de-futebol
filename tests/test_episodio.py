@@ -96,3 +96,19 @@ def test_estreia_e_derrota_roteirizada():
         e, r = ep.fechar(e, ep.preparar(e, seguidores, {"like_count": 100}, []))
         assert ep._desfecho(r["partida"], e["clube"]["nome"]) == "derrota"
         assert any(g["time"] == e["clube"]["nome"] for g in r["partida"]["gols"])  # mas marca um golzinho
+
+
+def test_arco_da_temporada_empate_e_classico():
+    e = _estado()
+    e, _ = ep.fechar(e, ep.preparar(e, 0, None, []))
+    resultados = []
+    for dia, seg in ((2, 106), (3, 300), (4, 600)):
+        e, r = ep.fechar(e, ep.preparar(e, seg, {"like_count": 100}, []))
+        resultados.append(ep._desfecho(r["partida"], e["clube"]["nome"]))
+        if dia == 3:
+            assert any(c["tipo"] == "banco" for c in r["cenas"])
+            assert "clássico" in r["cenas"][-1]["narracao"]
+        if dia == 4:
+            assert any(c["tipo"] == "festa" for c in r["cenas"])
+            assert "clássico" in next(c["narracao"] for c in r["cenas"] if c["tipo"] == "pre_jogo").lower()
+    assert resultados == ["derrota", "empate", "vitória"]

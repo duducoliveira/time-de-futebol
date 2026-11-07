@@ -365,6 +365,31 @@ Object.assign(TIPOS, {
   },
 });
 
+Object.assign(TIPOS, {
+  // os reservas que entraram descansados, ao lado do banco na lateral
+  banco(t, d, c, E) {
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.0, z1: 1.08, cx: 200, cy: 1400 });
+    s += pop(t, 0.1, W / 2, 330, pilula(c.texto_tela[0] || 'O BANCO FUNCIONOU', { tam: 60, bg: '#2e8b57', rot: -2 }));
+    (c.dados.jogadores || []).forEach((n, i) => {
+      const j = E.elenco[n] || {};
+      const t0 = quando(c, (j.nome || '').split(' ')[0].toLowerCase(), 0.6 + i);
+      s += popPessoa(t, t0, 420 + i * 230, 1910, pessoa(jogador(n, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.15, fase: i }));
+      s += pop(t, t0 + 0.1, 420 + i * 230, 520 + i * 110, pilula(`#${n} ${(j.nome || '').toUpperCase()}`, { tam: 40, bg: CORES.vinho, rot: i % 2 ? 2 : -2 }));
+    });
+    return s;
+  },
+  // comemoração (ex: primeira vitória no clássico)
+  festa(t, d, c, E) {
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.05, z1: 1.12 });
+    s += pop(t, 0.1, W / 2, 420, tituloGrande('VITÓRIA!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
+    if (c.texto_tela[0]) s += pop(t, 0.8, W / 2, 640, pilula(c.texto_tela[0], { tam: 46, bg: CORES.vinho, rot: 2 }));
+    ['9', '8', '1', '10', '12'].forEach((n, i) => {
+      if (E.elenco[n]) s += popPessoa(t, 0.3 + i * 0.15, 140 + i * 200, 1910, pessoa(jogador(n, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.0, fase: i }));
+    });
+    return s;
+  },
+});
+
 // contador fixo no canto: a lógica do perfil sempre visível
 const SEM_HUD = new Set(['abertura', 'regras', 'evolucao', 'estadio', 'encerramento']);
 function hud(c, E) {
