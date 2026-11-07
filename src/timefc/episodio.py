@@ -150,6 +150,27 @@ PIADAS_ADVERSARIO = {
 }
 
 
+def calendario_do_clube(e: dict) -> list[list[tuple[str, str]]]:
+    """Calendário com os mandos roteirizados: liga.roteiro[N].mando = "casa" ou "fora".
+    Ao inverter o mando da rodada N, inverte também o jogo espelho do returno."""
+    nome = e["clube"]["nome"]
+    cal = [list(r) for r in calendario(list(e["liga"]["times"]))]
+    turno = len(cal) // 2
+    for n, regra in (e["liga"].get("roteiro") or {}).items():
+        mando = regra.get("mando")
+        if not mando:
+            continue
+        k = int(n) - 1
+        for idx in (k, k + turno if k < turno else k - turno):
+            for j, (m, v) in enumerate(cal[idx]):
+                if nome in (m, v):
+                    em_casa = m == nome
+                    quer_casa = (mando == "casa") if idx == k else (mando != "casa")
+                    if em_casa != quer_casa:
+                        cal[idx][j] = (v, m)
+    return cal
+
+
 def _desfecho(r: dict, nome: str) -> str:
     nossos = r["gols_mandante"] if r["mandante"] == nome else r["gols_visitante"]
     deles = r["gols_visitante"] if r["mandante"] == nome else r["gols_mandante"]
@@ -158,7 +179,8 @@ def _desfecho(r: dict, nome: str) -> str:
 
 def _simular_com_desfecho(m: str, v: str, forca: dict, semente: str, nome: str, regra: dict) -> dict:
     """Simula até sair o desfecho combinado (ex: perder a estreia), de forma determinística.
-    regra: {"resultado": "derrota", "max_gols_sofridos": 3, "marca_gol": true}"""
+    regra: {"resultado": "derrota", "max_gols_sofridos": 3, "marca_gol": true,
+            "gols_nossos_a_partir_do_minuto": 46}"""
     for i in range(500):
         r = simular(m, v, forca, semente=f"{semente}-{i}")
         if _desfecho(r, nome) != regra.get("resultado", _desfecho(r, nome)):
@@ -166,6 +188,10 @@ def _simular_com_desfecho(m: str, v: str, forca: dict, semente: str, nome: str, 
         deles = r["gols_visitante"] if m == nome else r["gols_mandante"]
         nossos = r["gols_mandante"] if m == nome else r["gols_visitante"]
         if deles > regra.get("max_gols_sofridos", 99) or (regra.get("marca_gol") and not nossos):
+            continue
+        # ex: os gols do Poeira só no 2º tempo (quando os reservas descansados entram)
+        minimo = regra.get("gols_nossos_a_partir_do_minuto")
+        if minimo and any(g["minuto"] < minimo for g in r["gols"] if g["time"] == nome):
             continue
         return r
     return simular(m, v, forca, semente=semente)
@@ -192,7 +218,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     antes, hoje = briefing["seguidores_ontem"], briefing["seguidores_hoje"]
     e["torcida"]["seguidores"] = hoje  # (o HUD das cenas já mostra a torcida de hoje)
     e["torcida"]["historico"].append({"dia": dia, "seguidores": hoje, "data": est.agora()})
-    cal = calendario(list(e["liga"]["times"]))
+    cal = calendario_do_clube(e)
 
     caixa_ontem = e["caixa"]
     pres = e["personagens"]["presidente"]["nome"]
@@ -229,7 +255,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             est.lancar(e, briefing["receita_curtidas"], f"curtidas do dia {dia - 1}")
         cena("evolucao", f"Dia {dia}! Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. "
              f"Ontem, {_n(antes)} torcedores. Hoje: {_n(hoje)}! E o caixa saiu de {_moeda(e, caixa_ontem)} "
-             f"pra {_moeda(e, e['caixa'])}!", [f"DIA {dia}"], antes=antes, torcida=hoje,
+             f"pra {_n(e['caixa'])}!", [f"DIA {dia}"], antes=antes, torcida=hoje,
              caixa_antes=caixa_ontem, caixa=e["caixa"], curtidas=briefing["curtidas"])
         nivel = nivel_torcida(hoje, e["estrutura"]["capacidade"])
         nivel_ontem = nivel_torcida(antes, e["estrutura"]["capacidade"])
@@ -353,6 +379,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                     txt = f"Ah, não... Gol do {adv}, aos {g['minuto']}. Empatou: {ds} a {ns}."
                 elif nosso and ns > ds:
                     txt = txt.replace("Que golaço!", "").rstrip() + f" Virou: {ns} a {ds}!"
+                elif nosso and ns == ds:
+                    txt = txt.replace("Que golaço!", "").replace("Que pintura!", "").rstrip() + f" EMPATOU NO FIM: {ns} a {ds}!"
             cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"],
                  minuto=g["minuto"], nosso=nosso, estilo_voz="grito" if nosso else "normal", autor=g.get("autor"), placar=[gm, gv],
                  mandante=partida["mandante"], visitante=partida["visitante"])

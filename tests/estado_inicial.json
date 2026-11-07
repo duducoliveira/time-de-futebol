@@ -121,7 +121,7 @@
         "resultado": "empate",
         "marca_gol": true,
         "max_gols_sofridos": 2,
-        "motivo": "os reservas entram descansados graças ao banco novo",
+        "motivo": "em casa, com o banco de reservas novo: os reservas entram descansados",
         "cena_depois": {
           "tipo": "banco",
           "narracao": "E o segredo do empate? Os reservas! O Gabriel Zaga, o Fé no Justo e o Zé Kaun passaram o primeiro tempo sentadinhos no banco novo e entraram descansados. Dinheiro bem gasto!",
@@ -135,7 +135,9 @@
               "14"
             ]
           }
-        }
+        },
+        "mando": "casa",
+        "gols_nossos_a_partir_do_minuto": 46
       },
       "3": {
         "resultado": "vitória",

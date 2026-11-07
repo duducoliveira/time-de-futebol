@@ -107,8 +107,21 @@ def test_arco_da_temporada_empate_e_classico():
         resultados.append(ep._desfecho(r["partida"], e["clube"]["nome"]))
         if dia == 3:
             assert any(c["tipo"] == "banco" for c in r["cenas"])
+            assert all(g["minuto"] >= 46 for g in r["partida"]["gols"] if g["time"] == e["clube"]["nome"])
+            assert r["partida"]["mandante"] == e["clube"]["nome"]  # em casa
             assert "clássico" in r["cenas"][-1]["narracao"]
         if dia == 4:
             assert any(c["tipo"] == "festa" for c in r["cenas"])
             assert "clássico" in next(c["narracao"] for c in r["cenas"] if c["tipo"] == "pre_jogo").lower()
     assert resultados == ["derrota", "empate", "vitória"]
+
+
+def test_rodada_2_em_casa_com_espelho_no_returno():
+    e = _estado()
+    cal = ep.calendario_do_clube(e)
+    nome = e["clube"]["nome"]
+    r2 = next(j for j in cal[1] if nome in j)
+    assert r2[0] == nome  # rodada 2 em casa
+    turno = len(cal) // 2
+    espelho = next(j for j in cal[1 + turno] if nome in j)
+    assert espelho[1] == nome and espelho[0] == r2[1]  # returno fora, contra o mesmo time
