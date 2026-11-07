@@ -14,6 +14,7 @@ import unicodedata
 
 # (padrão, código da posição no elenco). A ordem importa: o mais específico primeiro.
 POSICOES = [
+    (r"\btecnic[oa]\b|\btreinador[a]?\b", "TEC"),
     (r"\bgoleir[oa]\b|\bgk\b|\bgol\b|\barqueiro\b", "GOL"),
     (r"\blateral direit[oa]\b|\bld\b", "LD"),
     (r"\blateral esquerd[oa]\b|\ble\b", "LE"),
@@ -26,7 +27,7 @@ POSICOES = [
     (r"\bponta\b|\bextremo\b", "PD"),
     (r"\bcentroavante\b|\batacante\b|\bata\b|\bca\b|\bcamisa 9\b|\bcentro avante\b", "CA"),
 ]
-NOMES_POSICAO = {"GOL": "goleiro", "LD": "lateral direito", "LE": "lateral esquerdo", "ZAG": "zagueiro",
+NOMES_POSICAO = {"TEC": "técnico", "GOL": "goleiro", "LD": "lateral direito", "LE": "lateral esquerdo", "ZAG": "zagueiro",
                  "VOL": "volante", "MEI": "meia", "PD": "ponta direita", "PE": "ponta esquerda", "CA": "atacante"}
 LIXO = {"me", "coloca", "eu", "de", "sou", "pode", "posso", "ser", "o", "a", "contrata", "aqui", "estou", "na",
         "no", "do", "da", "chama", "pra", "para", "convocação", "convocacao", "precisar", "precisa", "kkk", "kkkk",
@@ -78,3 +79,11 @@ def selecionar(comentarios: list[dict], vagas: int = 5, ignorar: set[str] | None
             melhores[u] = cand
     ordem = sorted(melhores.values(), key=lambda x: (-x["curtidas"], x["timestamp"]))
     return ordem[:vagas]
+
+
+def selecionar_peneira(comentarios: list[dict], vagas: int = 5, ignorar: set[str] | None = None) -> dict:
+    """5 jogadores + 1 técnico: os comentários mais curtidos em cada grupo (uma vaga por perfil)."""
+    todos = selecionar(comentarios, vagas=10_000, ignorar=ignorar)
+    tecnico = next((c for c in todos if c["posicao"] == "TEC"), None)
+    jogadores = [c for c in todos if c["posicao"] != "TEC" and c is not tecnico][:vagas]
+    return {"jogadores": jogadores, "tecnico": tecnico}

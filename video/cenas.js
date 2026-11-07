@@ -433,6 +433,7 @@ Object.assign(TIPOS, {
     if (dd.etapa === 'anuncio') {
       s += pop(t, 0.2, W / 2, 470, tituloGrande('PENEIRA', { tam: 180, cor: CORES.amarelo, rot: -4 }));
       s += pop(t, 0.6, W / 2, 620, pilula('DO POEIRA', { tam: 64, bg: CORES.vinho, rot: 2 }));
+    s += pop(t, quando(c, 'cinco', 2.5), W / 2, 760, pilula('5 JOGADORES + 1 TÉCNICO', { tam: 44, bg: CORES.marinho, rot: -1 }));
       // fila de candidatos chegando, cada um com uma camisa diferente
       for (let i = 0; i < 7; i++) {
         const r = rng('cand' + i);
@@ -446,8 +447,8 @@ Object.assign(TIPOS, {
     // regras: fundo escuro (sem letreiros); cada cartão entra quando a narração chega nele
     s = fundoEscuro() + `<g transform="translate(${W / 2} 1500) scale(.9)">${escudoPoeira()}</g>`;
     s += pop(t, 0.05, W / 2, 200, pilula('COMO ENTRAR NO TIME', { tam: 56, bg: CORES.laranja, cor: OUT, rot: -2 }));
-    const regras = [['coment', '💬', 'COMENTE SEU NOME', 'E SUA POSIÇÃO', '#3a86ff'],
-      ['curtid', '❤️', 'OS MAIS CURTIDOS', 'VIRAM JOGADORES DO POEIRA', '#e63946'],
+    const regras = [['coment', '💬', 'COMENTE SEU NOME', 'E SUA POSIÇÃO (OU TÉCNICO)', '#3a86ff'],
+      ['cinco', '❤️', '5 JOGADORES + 1 TÉCNICO', 'OS MAIS CURTIDOS ENTRAM NO POEIRA', '#e63946'],
       ['amigos', '📲', 'MANDA PROS AMIGOS', 'PEDE PRA ELES CURTIREM', '#2e8b57']];
     regras.forEach(([chave, ic, a, b, cor], i) => {
       const t0 = quando(c, chave, 0.6 + i * 2);
