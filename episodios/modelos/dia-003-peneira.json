@@ -13,33 +13,33 @@
       },
       {
         "tipo": "apelido",
-        "narracao": "Quem passar vai jogar do lado do Gabriel Zaga, nosso zagueiro: o único zagueiro que já vem com a posição no nome. Pra não esquecer onde fica.",
+        "narracao": "Quem passar vai jogar do lado do Gabriel, nosso zagueiro. Ou melhor: o zagueiro Whisky do Paraguai. Só dá dor de cabeça!",
         "texto_tela": [
-          "JÁ ESTÁ NO TIME"
+          "#12 GABRIEL · JÁ ESTÁ NO TIME"
         ],
         "dados": {
           "alvo": "nosso",
           "numero": "12",
-          "nome": "Gabriel Zaga",
+          "nome": "Gabriel",
           "posicao": "zagueiro",
-          "apelido": "Gabriel Zaga",
-          "piada": "já vem com a posição no nome",
+          "apelido": "Whisky do Paraguai",
+          "piada": "só dá dor de cabeça",
           "instagram": "gabriel_rzt1221"
         }
       },
       {
         "tipo": "apelido",
-        "narracao": "E do Zé Kaun, nosso ponta: escreve o nome letra por letra, e corre do mesmo jeito. Devagarzinho.",
+        "narracao": "E do Zé Kaun, o ponta Promoção de Black Friday: parece que vai, mas não vai!",
         "texto_tela": [
-          "JÁ ESTÁ NO TIME"
+          "#14 ZÉ KAUN · JÁ ESTÁ NO TIME"
         ],
         "dados": {
           "alvo": "nosso",
           "numero": "14",
           "nome": "Zé Kaun",
           "posicao": "ponta",
-          "apelido": "Zé Kaun",
-          "piada": "corre letra por letra",
+          "apelido": "Promoção de Black Friday",
+          "piada": "parece que vai, mas não vai",
           "instagram": "j_o_s_e_k_a_u_n"
         }
       }

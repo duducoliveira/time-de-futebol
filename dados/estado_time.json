@@ -126,9 +126,9 @@
       "traco": "ninguém sabe onde mora; aparece só no jogo"
     },
     "12": {
-      "nome": "Gabriel Zaga",
+      "nome": "Gabriel",
       "posicao": "ZAG",
-      "traco": "se apresentou nos comentários: 'Eu sou zagueiro'",
+      "traco": "se apresentou nos comentários: 'Gabriel, zagueiro'",
       "instagram": "gabriel_rzt1221",
       "chegou_no_dia": 2,
       "chave": "gabriel"
@@ -167,7 +167,7 @@
         "motivo": "em casa, com o banco de reservas novo: os reservas entram descansados",
         "cena_depois": {
           "tipo": "banco",
-          "narracao": "E o segredo do empate? Os reservas! O Gabriel Zaga, o Fé no Justo e o Zé Kaun passaram o primeiro tempo sentadinhos no banco novo e entraram descansados. Dinheiro bem gasto!",
+          "narracao": "E o segredo do empate? Os reservas! O Gabriel, o Fé no Justo e o Zé Kaun passaram o primeiro tempo sentadinhos no banco novo e entraram descansados. Dinheiro bem gasto!",
           "texto_tela": [
             "O BANCO FUNCIONOU"
           ],

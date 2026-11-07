@@ -353,6 +353,11 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                  jogadores=r["jogadores"], personagens=r.get("personagens") or {})
         for x in hist.get("antes_jogo", []):
             cena(x["tipo"], x["narracao"], x.get("texto_tela", []), **x.get("dados", {}))
+            dd = x.get("dados", {})
+            if x["tipo"] == "apelido" and dd.get("apelido"):
+                e.setdefault("piadas_usadas", []).append(dd["apelido"])
+                if dd.get("alvo") == "nosso" and dd.get("numero") in e["elenco"]:
+                    e["elenco"][dd["numero"]]["apelido"] = dd["apelido"]
 
         for eid in briefing.get("encerrar_enquetes", []):
             enq = next(x for x in e["enquetes"] if x["id"] == eid)
