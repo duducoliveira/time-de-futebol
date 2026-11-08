@@ -106,6 +106,7 @@ class BufferClient:
         primeiro_comentario: str | None = None,
         thumbnail_ms: int = 500,  # capa: o quadro "DIA N + tema" do começo do vídeo
         rascunho: bool = False,
+        agora: bool = False,  # publica imediatamente
     ) -> dict:
         """Cria um Reel. `video_url` precisa ser público (ex: R2, S3, GCS)."""
         q = """mutation($input: CreatePostInput!) {
@@ -121,7 +122,7 @@ class BufferClient:
             "channelId": channel_id,
             "text": legenda,
             "schedulingType": "automatic",
-            "mode": "customScheduled" if agendar_para else "addToQueue",
+            "mode": "shareNow" if agora else ("customScheduled" if agendar_para else "addToQueue"),
             "assets": [{"video": {"url": video_url,
                                    "metadata": {"thumbnailOffset": thumbnail_ms}}}],
             "metadata": {"instagram": instagram},
