@@ -12,17 +12,17 @@
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 2,
-  "caixa": 358.0,
+  "dia": 3,
+  "caixa": 135.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
     "ingresso": 2,
-    "gasto_lanchonete_por_torcedor": 0,
+    "gasto_lanchonete_por_torcedor": 1,
     "comentario_vencedor": "mais curtido no post do dia anterior"
   },
   "torcida": {
-    "seguidores": 106,
+    "seguidores": 218,
     "historico": [
       {
         "dia": 1,
@@ -33,6 +33,11 @@
         "dia": 2,
         "seguidores": 106,
         "data": "2026-11-07T02:14:20+00:00"
+      },
+      {
+        "dia": 3,
+        "seguidores": 218,
+        "data": "2026-11-08T01:53:45+00:00"
       }
     ]
   },
@@ -46,7 +51,7 @@
     "rede": true,
     "bolas": false,
     "iluminacao": false,
-    "lanchonete": null,
+    "lanchonete": "Barraca do Guigs",
     "tecnico": false,
     "kombi": false,
     "banco_reservas": true,
@@ -131,7 +136,8 @@
       "traco": "se apresentou nos comentários: 'Gabriel, zagueiro'",
       "instagram": "gabriel_rzt1221",
       "chegou_no_dia": 2,
-      "chave": "gabriel"
+      "chave": "gabriel",
+      "apelido": "Whisky do Paraguai"
     },
     "13": {
       "nome": "Fé no Justo",
@@ -147,7 +153,8 @@
       "traco": "respondeu com três emojis e foi contratado",
       "instagram": "j_o_s_e_k_a_u_n",
       "chegou_no_dia": 2,
-      "chave": "zé"
+      "chave": "zé",
+      "apelido": "Viagra em Idoso"
     }
   },
   "liga": {
@@ -472,6 +479,15 @@
         "id": "18117715483835687",
         "permalink": "https://www.instagram.com/reel/Dfbz0SonNR7/"
       }
+    },
+    {
+      "dia": 3,
+      "data": "2026-11-08T01:53:45+00:00",
+      "proxima_decisao": {
+        "pergunta": "Comenta seu nome e sua posição!",
+        "opcoes": []
+      },
+      "post": null
     }
   ],
   "decisoes": [
@@ -488,6 +504,13 @@
       "autor": "pedroandrade1995",
       "curtidas": 0,
       "texto": "Rede no gol + banco de reservas"
+    },
+    {
+      "dia": 3,
+      "acao": "lanchonete",
+      "autor": "_guigs12",
+      "curtidas": 14,
+      "texto": "Ja que o time precisa de dinheiro tem que colocar alguma barraca para vender e arrecadar dinheiro para o clube"
     }
   ],
   "enquetes": [],
@@ -509,6 +532,18 @@
       "valor": 212,
       "descricao": "bilheteria rodada 1 (106 pagantes)",
       "saldo": 358.0
+    },
+    {
+      "dia": 3,
+      "valor": 277,
+      "descricao": "curtidas do dia 2",
+      "saldo": 635.0
+    },
+    {
+      "dia": 3,
+      "valor": -500.0,
+      "descricao": "Barraca do Guigs",
+      "saldo": 135.0
     }
   ],
   "linha_do_tempo": [
@@ -528,7 +563,16 @@
     {
       "dia": 2,
       "evento": "Rodada 1: Poeira FC 2 x 3 Grêmio Vila Barro (derrota)"
+    },
+    {
+      "dia": 3,
+      "evento": "Barraca do Guigs: cada torcedor gasta R$ 1 por jogo em casa, e vai tudo pro caixa.",
+      "autor": "_guigs12"
     }
   ],
-  "atualizado_em": "2026-11-08T01:12:18+00:00"
+  "atualizado_em": "2026-11-08T01:53:45+00:00",
+  "piadas_usadas": [
+    "Whisky do Paraguai",
+    "Viagra em Idoso"
+  ]
 }

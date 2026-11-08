@@ -202,23 +202,94 @@
     "acoes": [
       "lanchonete"
     ],
-    "titulo": "Lanchonete do @_guigs12",
-    "interpretacao": "Construímos a Lanchonete do @_guigs12. Cada torcedor gasta um real por jogo, e tudo vai pro caixa.",
     "custo": 500,
+    "autor": "_guigs12",
+    "titulo": "Barraca do Guigs",
+    "interpretacao": "Barraca do Guigs: cada torcedor gasta R$ 1 por jogo em casa, e vai tudo pro caixa.",
     "efeitos": {
-      "estrutura.lanchonete": "Lanchonete do @_guigs12",
+      "estrutura.lanchonete": "Barraca do Guigs",
       "regras.gasto_lanchonete_por_torcedor": "+1"
     },
-    "automatica": true
+    "narracao_obra": "Pedido aceito: a Barraca do Guigs! Cada torcedor gasta um real por jogo em casa, e vai tudo pro caixa."
   },
   "encerrar_enquetes": [],
   "nova_enquete": null,
   "proxima_decisao": {
-    "pergunta": "O que a gente faz agora?",
-    "opcoes": [
-      "Técnico de verdade?",
-      "Kombi do time?",
-      "Outra ideia?"
+    "pergunta": "Comenta seu nome e sua posição!",
+    "opcoes": []
+  },
+  "sem_jogo": true,
+  "historia": {
+    "antes_jogo": [
+      {
+        "tipo": "peneira",
+        "narracao": "Tem muita gente nos comentários querendo jogar no Poeira! Então tá decidido: vai ter a Peneira do Poeira, pra escolher cinco jogadores e um técnico pro nosso time.",
+        "dados": {
+          "etapa": "anuncio"
+        }
+      },
+      {
+        "tipo": "apelido",
+        "narracao": "Quem passar vai jogar do lado do Gabriel, nosso zagueiro. Ou melhor: o zagueiro Whisky do Paraguai. Só dá dor de cabeça!",
+        "texto_tela": [
+          "#12 GABRIEL · JÁ ESTÁ NO TIME"
+        ],
+        "dados": {
+          "alvo": "nosso",
+          "numero": "12",
+          "nome": "Gabriel",
+          "posicao": "zagueiro",
+          "apelido": "Whisky do Paraguai",
+          "piada": "só dá dor de cabeça",
+          "instagram": "gabriel_rzt1221"
+        }
+      },
+      {
+        "tipo": "apelido",
+        "narracao": "E do Zé Kaun, o ponta Viagra em Idoso: parece que vai, mas não vai!",
+        "texto_tela": [
+          "#14 ZÉ KAUN · JÁ ESTÁ NO TIME"
+        ],
+        "dados": {
+          "alvo": "nosso",
+          "numero": "14",
+          "nome": "Zé Kaun",
+          "posicao": "ponta",
+          "apelido": "Viagra em Idoso",
+          "piada": "parece que vai, mas não vai",
+          "instagram": "j_o_s_e_k_a_u_n"
+        }
+      }
+    ],
+    "comentarios": [
+      {
+        "narracao": "O comentário mais curtido de ontem foi do Guigs: uma barraca pra vender e arrecadar dinheiro pro clube.",
+        "comentarios": [
+          {
+            "usuario": "_guigs12",
+            "texto": "Ja que o time precisa de dinheiro tem que colocar alguma barraca para vender e arrecadar dinheiro para o clube",
+            "curtidas": 14,
+            "chave": "guigs",
+            "carimbo": "aprovado",
+            "chave_carimbo": "barraca"
+          }
+        ]
+      }
     ]
-  }
+  },
+  "chamada": {
+    "tipo": "peneira",
+    "dados": {
+      "etapa": "regras"
+    },
+    "narracao": "Pra participar é fácil: comenta aqui embaixo seu nome e sua posição. Quer ser o técnico? Comenta seu nome e técnico. Os cinco jogadores e o técnico mais curtidos entram no Poeira. Então manda pros amigos e pede pra eles curtirem o seu comentário. Amanhã sai a escalação!"
+  },
+  "encerramento": "Segue pra virar torcedor, curte pra encher o caixa e comenta seu nome e sua posição. Amanhã sai a escalação da peneira!",
+  "legenda": "DIA 3 do Poeira FC ⚽\n\n🔥 PENEIRA DO POEIRA 🔥\n5 vagas de jogador + 1 vaga de técnico!\nComente seu NOME e sua POSIÇÃO (ou TÉCNICO).\nOs comentários mais curtidos entram no time!\n📲 Manda pros amigos curtirem o seu comentário.\n\n1 seguidor = 1 torcedor | 1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #peneira #futebolamador #futebolraiz",
+  "vagas": {
+    "jogadores": 5,
+    "tecnico": 1
+  },
+  "tema": "PENEIRA DO POEIRA",
+  "tema_falado": "Peneira do Poeira"
 }
