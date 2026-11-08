@@ -1,0 +1,224 @@
+{
+  "dia": 3,
+  "seguidores_ontem": 106,
+  "seguidores_hoje": 218,
+  "post_anterior": {
+    "id": "18117715483835687",
+    "caption": "DIA 2 do Poeira FC ⚽\n\nO que a gente faz agora? O comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 60,
+    "like_count": 277,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/Dfbz0SonNR7/",
+    "timestamp": "2026-11-07T09:02:27+0000"
+  },
+  "curtidas": 277,
+  "receita_curtidas": 277,
+  "caixa_atual": 358.0,
+  "caixa_com_curtidas": 635.0,
+  "top_comentarios": [
+    {
+      "usuario": "_guigs12",
+      "texto": "Ja que o time precisa de dinheiro tem que colocar alguma barraca para vender e arrecadar dinheiro para o clube",
+      "curtidas": 14,
+      "id": "18094507262693743",
+      "timestamp": "2026-11-07T10:21:54+0000"
+    },
+    {
+      "usuario": "talvezomoura",
+      "texto": "SO QUE ELE JA EXISTE KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK",
+      "curtidas": 6,
+      "id": "18159913168510110",
+      "timestamp": "2026-11-07T10:18:07+0000"
+    },
+    {
+      "usuario": "sementinhadobemong",
+      "texto": "Escola de Futebol Raiz , para as crianças , com um profissional Raiz , e comprar lanche para crianças",
+      "curtidas": 4,
+      "id": "18060051191570101",
+      "timestamp": "2026-11-07T15:18:26+0000"
+    },
+    {
+      "usuario": "kaique_dias.gk01",
+      "texto": "Kaique dias Goleiro🙌🙌👏",
+      "curtidas": 2,
+      "id": "17910113997330952",
+      "timestamp": "2026-11-07T09:56:34+0000"
+    },
+    {
+      "usuario": "juliokngs",
+      "texto": "Vende espaço de publicidade para as placas laterais do campo para gerar renda.",
+      "curtidas": 2,
+      "id": "17995286355051484",
+      "timestamp": "2026-11-07T17:07:23+0000"
+    },
+    {
+      "usuario": "khauan.ribero",
+      "texto": "Posso ser o centroavante",
+      "curtidas": 1,
+      "id": "18645732547049368",
+      "timestamp": "2026-11-07T10:29:02+0000"
+    },
+    {
+      "usuario": "kleiton_dmitri",
+      "texto": "Me contrata, Zagueiro Central.",
+      "curtidas": 1,
+      "id": "18389514817235916",
+      "timestamp": "2026-11-07T11:23:05+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Faz um estádio raiz estilo couto pereira, e outros Estadios raizes.  Vou comentar até o poeira ter dinheiro para fazer o estádio, curte meu comentário e o vídeo tbm para o poeira evoluir",
+      "curtidas": 1,
+      "id": "18104435126171963",
+      "timestamp": "2026-11-07T12:27:55+0000"
+    },
+    {
+      "usuario": "julianotarraf",
+      "texto": "Manda a Dona Cida embora e me contrata no lugar dela pros jogadores poder ir no Cabaré denovo.. ai faz sociedade com o Cabaré pra ganhar uma comissão nos jogadores adversários que vão no cabare também.. ai é só levar os jogadores adversários lá",
+      "curtidas": 1,
+      "id": "18118559036043409",
+      "timestamp": "2026-11-07T14:12:18+0000"
+    },
+    {
+      "usuario": "isaq_ueestevao",
+      "texto": "Sou meia atacante camisa 10 que pisa na área e finaliza, gostaria de fazer testes no poeira. A ideia para gastar o dinheiro, é fazer uma barraquinha para uma cantina bem pequena, para começar a revender produtos e arrecadar fundos",
+      "curtidas": 1,
+      "id": "17915804079497389",
+      "timestamp": "2026-11-07T20:59:01+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "_guigs12",
+      "curtidas": 14,
+      "viavel": true,
+      "acoes": [
+        "lanchonete"
+      ],
+      "custo": 500.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 1,
+      "usuario": "talvezomoura",
+      "curtidas": 6,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 2,
+      "usuario": "sementinhadobemong",
+      "curtidas": 4,
+      "viavel": true,
+      "acoes": [
+        "lanchonete"
+      ],
+      "custo": 500.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 3,
+      "usuario": "kaique_dias.gk01",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Goleiro novo custa R$ 800 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 4,
+      "usuario": "juliokngs",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "khauan.ribero",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Atacante novo custa R$ 1000 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 6,
+      "usuario": "kleiton_dmitri",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Zagueiro novo custa R$ 800 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 7,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Arquibancada nova custa R$ 1200 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 8,
+      "usuario": "julianotarraf",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Técnico de verdade custa R$ 1200 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 9,
+      "usuario": "isaq_ueestevao",
+      "curtidas": 1,
+      "viavel": true,
+      "acoes": [
+        "uniforme"
+      ],
+      "custo": 300.0,
+      "motivo": null,
+      "revisar": false
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": 0,
+    "acoes": [
+      "lanchonete"
+    ],
+    "titulo": "Lanchonete do @_guigs12",
+    "interpretacao": "Construímos a Lanchonete do @_guigs12. Cada torcedor gasta um real por jogo, e tudo vai pro caixa.",
+    "custo": 500,
+    "efeitos": {
+      "estrutura.lanchonete": "Lanchonete do @_guigs12",
+      "regras.gasto_lanchonete_por_torcedor": "+1"
+    },
+    "automatica": true
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz agora?",
+    "opcoes": [
+      "Técnico de verdade?",
+      "Kombi do time?",
+      "Outra ideia?"
+    ]
+  }
+}

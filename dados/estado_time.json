@@ -468,7 +468,9 @@
       "post": {
         "buffer_id": "6aee8bc4a7751de7c9bec6a7",
         "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-002.mp4",
-        "agendado_para": "2026-11-07T06:00:00-03:00"
+        "agendado_para": "2026-11-07T06:00:00-03:00",
+        "id": "18117715483835687",
+        "permalink": "https://www.instagram.com/reel/Dfbz0SonNR7/"
       }
     }
   ],
@@ -528,5 +530,5 @@
       "evento": "Rodada 1: Poeira FC 2 x 3 Grêmio Vila Barro (derrota)"
     }
   ],
-  "atualizado_em": "2026-11-07T02:24:05+00:00"
+  "atualizado_em": "2026-11-08T01:12:18+00:00"
 }
