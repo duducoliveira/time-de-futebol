@@ -106,7 +106,8 @@ def cmd_preparar(args):
         post = reels[0] if reels and estado["episodios"] else None
         comentarios = ig.comentarios(post["id"]) if post else []
         if post and estado["episodios"]:
-            estado["episodios"][-1]["post"] = {"id": post["id"], "permalink": post["permalink"]}
+            estado["episodios"][-1]["post"] = {**(estado["episodios"][-1].get("post") or {}),
+                                               "id": post["id"], "permalink": post["permalink"]}
             est.salvar(estado)
     b = ep.preparar(estado, seguidores, post, comentarios, usuario)
     arq = _pasta_dia(b["dia"]) / "briefing.json"
