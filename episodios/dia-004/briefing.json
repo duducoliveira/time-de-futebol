@@ -195,20 +195,7 @@
     }
   ],
   "enquetes": [],
-  "decisao": {
-    "comentario": 3,
-    "acoes": [
-      "uniforme"
-    ],
-    "titulo": "Uniforme novo",
-    "interpretacao": "Uniforme novo! Pela primeira vez, todo mundo com a mesma cor.",
-    "custo": 300,
-    "efeitos": {
-      "estrutura.uniforme": "novo",
-      "clube.forca": "+1"
-    },
-    "automatica": true
-  },
+  "decisao": null,
   "encerrar_enquetes": [],
   "nova_enquete": null,
   "proxima_decisao": {
@@ -218,5 +205,71 @@
       "Grama no campo?",
       "Outra ideia?"
     ]
+  },
+  "tema": "ESCALAÇÃO DA PENEIRA",
+  "tema_falado": "Escalação da peneira",
+  "piada": {
+    "pular": true
+  },
+  "historia": {
+    "reforcos": {
+      "narracao": "A peneira acabou! O novo técnico é o Gilberto Teles, que chegou com um três, quatro, dois, um... num time em que o zagueiro é o Whisky do Paraguai. E os cinco reforços: o Khauan, centroavante. O Rodrigo Moura, lateral soldado de guerra: vai, mas ninguém sabe se volta. O Biquinho, meia camisa sete. O Saci, centroavante de uma perna só: só faz gol de bicicleta. E o Kelvin, ponta direita. Bem-vindos ao Poeira!",
+      "texto_tela": [
+        "RESULTADO DA PENEIRA"
+      ],
+      "personagens": {
+        "tecnico": {
+          "nome": "Gilberto Teles",
+          "cargo": "técnico",
+          "instagram": "gilbertoteles_",
+          "chave": "gilberto",
+          "esquema": "3-4-2-1"
+        }
+      },
+      "jogadores": {
+        "15": {
+          "nome": "Khauan",
+          "posicao": "CA",
+          "traco": "chegou pela peneira: 'bora subir esse time'",
+          "instagram": "khauan.ribero",
+          "chegou_no_dia": 4,
+          "chave": "khauan"
+        },
+        "16": {
+          "nome": "Rodrigo Moura",
+          "posicao": "LD",
+          "apelido": "Soldado de Guerra",
+          "traco": "vai, mas ninguém sabe se volta",
+          "instagram": "rodrigo_smoura01",
+          "chegou_no_dia": 4,
+          "chave": "rodrigo"
+        },
+        "17": {
+          "nome": "Biquinho",
+          "posicao": "MEI",
+          "traco": "meia camisa 7 (o mesmo do estádio raiz)",
+          "instagram": "beniciocarmocarvalho",
+          "chegou_no_dia": 4,
+          "chave": "biquinho"
+        },
+        "18": {
+          "nome": "Saci",
+          "posicao": "CA",
+          "apelido": "Uma Perna Só",
+          "traco": "só faz gol de bicicleta",
+          "instagram": "alisoonjesus",
+          "chegou_no_dia": 4,
+          "chave": "saci"
+        },
+        "19": {
+          "nome": "Kelvin",
+          "posicao": "PD",
+          "traco": "ponta direita da peneira",
+          "instagram": "kelvinzy29",
+          "chegou_no_dia": 4,
+          "chave": "kelvin"
+        }
+      }
+    }
   }
 }

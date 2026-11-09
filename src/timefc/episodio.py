@@ -438,11 +438,15 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             if len(gols) > 2 and i not in (primeiro_nosso, len(gols) - 1):
                 continue
             ultimo = i == len(gols) - 1 and len(gols) > 2
+            regra_jogo = liga.get("roteiro", {}).get(str(liga["rodada"])) or {}
             if nosso:
                 art = _artilheiro(e, rng)
+                if regra_jogo.get("artilheiro"):  # gol roteirizado (ex: o Saci, de bicicleta)
+                    art = next(({"numero": n, **j} for n, j in e["elenco"].items()
+                                 if j["nome"] == regra_jogo["artilheiro"]), art)
                 g["autor"] = art["nome"]
                 gritos = [x for x in GRITOS_GOL if x not in usados] or GRITOS_GOL
-                grito = rng.choice(gritos)
+                grito = regra_jogo.get("grito_gol") or rng.choice(gritos)
                 usados.append(grito)
                 txt = grito.format(N=nome.upper(), A=art["nome"].upper(), m=g["minuto"])
             else:
@@ -456,7 +460,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                     txt = f"Ah, não... Gol do {adv}, aos {g['minuto']}. Empatou: {ds} a {ns}."
                 elif nosso and ns > ds:
                     txt = txt.replace("Que golaço!", "").rstrip() + f" Virou: {ns} a {ds}!"
-                elif nosso and ns == ds:
+                elif nosso and ns == ds and not regra_jogo.get("grito_gol"):
                     txt = txt.replace("Que golaço!", "").replace("Que pintura!", "").rstrip() + f" EMPATOU NO FIM: {ns} a {ds}!"
             cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"],
                  minuto=g["minuto"], nosso=nosso, estilo_voz="grito" if nosso else "normal", autor=g.get("autor"), placar=[gm, gv],
@@ -492,7 +496,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             if lanche:
                 est.lancar(e, lanche, f"lanchonete rodada {liga['rodada']}")
             if publico:
-                extra = f" Mais {_n(lanche)} da lanchonete." if lanche else ""
+                extra = (f" Mais {_n(lanche)} da {e['estrutura'].get('lanchonete') or 'lanchonete'}." if lanche else "")
                 cena("bilheteria", f"Na bilheteria: {_n(publico)} pagantes, a {e['regras']['ingresso']} reais "
                      f"cada. {_n(bilheteria)} reais pro clube!{extra}",
                      [f"{_n(publico)} × R$ {e['regras']['ingresso']} = {_moeda(e, bilheteria)}"],

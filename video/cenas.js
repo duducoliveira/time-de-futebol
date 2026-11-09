@@ -347,15 +347,18 @@ Object.assign(TIPOS, {
   },
   // torcedores que pediram para entrar no time viram personagens
   reforcos(t, d, c, E) {
-    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.05, z1: 1.1 });
+    const itens = [...Object.values(c.dados.personagens || {}).map(p => ({ ...p, n: null })),
+      ...Object.entries(c.dados.jogadores || {}).map(([n, j]) => ({ n, ...j }))];
+    const muitos = itens.length > 4;  // muita gente: fundo escuro (sem letreiros) e lista mais compacta
+    let s = muitos ? fundoEscuro() : camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.05, z1: 1.1 });
     s += pop(t, 0.05, W / 2, 215, pilula(c.texto_tela[0] || 'REFORÇOS DA TORCIDA', { tam: 50, bg: '#2e8b57', rot: -2 }));
-    const itens = [...Object.entries(c.dados.jogadores || {}).map(([n, j]) => ({ n, ...j })),
-      ...Object.values(c.dados.personagens || {}).map(p => ({ ...p, n: null }))];
     itens.forEach((j, i) => {
       const t0 = j.chave ? quando(c, j.chave, 0.6 + i * 2) : 0.6 + i * 2;
       const linha1 = j.n ? `#${j.n} ${j.nome.toUpperCase()} · ${j.posicao}` : `${j.nome.toUpperCase()} · ${(j.cargo || '').toUpperCase()}`;
-      s += pop(t, t0, W / 2, 322 + i * 138, `${pilula(linha1, { tam: 42, bg: j.n ? CORES.vinho : CORES.marinho, rot: i % 2 ? 1.5 : -1.5 })}
+      const passo = muitos ? 132 : 138;
+      s += pop(t, t0, W / 2, 322 + i * passo, `${pilula(linha1, { tam: muitos ? 38 : 42, bg: j.n ? CORES.vinho : '#2e8b57', rot: i % 2 ? 1.5 : -1.5 })}
         <g transform="translate(0 54)">${pilula('@' + (j.instagram || ''), { tam: 24, bg: CORES.creme, cor: OUT, py: 6 })}</g>`);
+      if (muitos && i >= 6) return;
       const x = 160 + i * (760 / Math.max(1, itens.length - 1));
       const visual = j.n ? jogador(j.n, E, { pose: 'comemora' }) : { pele: '#e0ac69', cabelo: 'curto', corCabelo: '#2b1d14', oculos: true, camisa: '#f1faee', calcao: '#343a40', meiao: '#343a40', expr: 'serio' };
       s += popPessoa(t, t0 + 0.1, x, 1910, pessoa(visual, t, { s: 1.05, fase: i }));

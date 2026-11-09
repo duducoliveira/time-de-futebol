@@ -12,8 +12,8 @@
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 3,
-  "caixa": 135.0,
+  "dia": 4,
+  "caixa": 1057.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -22,7 +22,7 @@
     "comentario_vencedor": "mais curtido no post do dia anterior"
   },
   "torcida": {
-    "seguidores": 218,
+    "seguidores": 250,
     "historico": [
       {
         "dia": 1,
@@ -38,6 +38,11 @@
         "dia": 3,
         "seguidores": 218,
         "data": "2026-11-08T01:53:45+00:00"
+      },
+      {
+        "dia": 4,
+        "seguidores": 250,
+        "data": "2026-11-09T01:33:56+00:00"
       }
     ]
   },
@@ -72,6 +77,13 @@
       "cargo": "diretor de futebol (estagiário)",
       "instagram": "gabriel_ragazzo1",
       "chave": "ragazzo"
+    },
+    "tecnico": {
+      "nome": "Gilberto Teles",
+      "cargo": "técnico",
+      "instagram": "gilbertoteles_",
+      "chave": "gilberto",
+      "esquema": "3-4-2-1"
     }
   },
   "elenco": {
@@ -155,11 +167,53 @@
       "chegou_no_dia": 2,
       "chave": "zé",
       "apelido": "Viagra em Idoso"
+    },
+    "15": {
+      "nome": "Khauan",
+      "posicao": "CA",
+      "traco": "chegou pela peneira: 'bora subir esse time'",
+      "instagram": "khauan.ribero",
+      "chegou_no_dia": 4,
+      "chave": "khauan"
+    },
+    "16": {
+      "nome": "Rodrigo Moura",
+      "posicao": "LD",
+      "apelido": "Soldado de Guerra",
+      "traco": "vai, mas ninguém sabe se volta",
+      "instagram": "rodrigo_smoura01",
+      "chegou_no_dia": 4,
+      "chave": "rodrigo"
+    },
+    "17": {
+      "nome": "Biquinho",
+      "posicao": "MEI",
+      "traco": "meia camisa 7 (o mesmo do estádio raiz)",
+      "instagram": "beniciocarmocarvalho",
+      "chegou_no_dia": 4,
+      "chave": "biquinho"
+    },
+    "18": {
+      "nome": "Saci",
+      "posicao": "CA",
+      "apelido": "Uma Perna Só",
+      "traco": "só faz gol de bicicleta",
+      "instagram": "alisoonjesus",
+      "chegou_no_dia": 4,
+      "chave": "saci"
+    },
+    "19": {
+      "nome": "Kelvin",
+      "posicao": "PD",
+      "traco": "ponta direita da peneira",
+      "instagram": "kelvinzy29",
+      "chegou_no_dia": 4,
+      "chave": "kelvin"
     }
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 1,
+    "rodada": 2,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -170,24 +224,25 @@
       "2": {
         "resultado": "empate",
         "marca_gol": true,
-        "max_gols_sofridos": 2,
-        "motivo": "em casa, com o banco de reservas novo: os reservas entram descansados",
+        "max_gols_sofridos": 1,
+        "motivo": "em casa; os reforços da peneira (Saci e Kelvin) saem do banco descansados e o Saci empata de bicicleta",
         "cena_depois": {
           "tipo": "banco",
-          "narracao": "E o segredo do empate? Os reservas! O Gabriel, o Fé no Justo e o Zé Kaun passaram o primeiro tempo sentadinhos no banco novo e entraram descansados. Dinheiro bem gasto!",
+          "narracao": "E o segredo do empate? Os reforços da peneira! O Saci e o Kelvin passaram o primeiro tempo sentadinhos no banco novo e entraram descansados. Estreia com o pé direito... no caso do Saci, o único que ele tem.",
           "texto_tela": [
             "O BANCO FUNCIONOU"
           ],
           "dados": {
             "jogadores": [
-              "12",
-              "13",
-              "14"
+              "18",
+              "19"
             ]
           }
         },
         "mando": "casa",
-        "gols_nossos_a_partir_do_minuto": 46
+        "gols_nossos_a_partir_do_minuto": 46,
+        "artilheiro": "Saci",
+        "grito_gol": "[shouting] GOOOOOOOL DE BICICLETAAA! [excited] É DO SACI, aos {m}! O centroavante de uma perna só empatou o jogo: um a um!"
       },
       "3": {
         "resultado": "vitória",
@@ -314,6 +369,91 @@
           }
         ],
         "rodada": 1
+      },
+      {
+        "mandante": "Poeira FC",
+        "visitante": "Veteranos do Bairro",
+        "gols_mandante": 1,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 5,
+            "time": "Veteranos do Bairro"
+          },
+          {
+            "minuto": 87,
+            "time": "Poeira FC",
+            "autor": "Saci"
+          }
+        ],
+        "rodada": 2
+      },
+      {
+        "mandante": "Estrela da Feira",
+        "visitante": "Grêmio Vila Barro",
+        "gols_mandante": 2,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 56,
+            "time": "Estrela da Feira"
+          },
+          {
+            "minuto": 69,
+            "time": "Estrela da Feira"
+          },
+          {
+            "minuto": 75,
+            "time": "Grêmio Vila Barro"
+          }
+        ],
+        "rodada": 2
+      },
+      {
+        "mandante": "Real Laje",
+        "visitante": "Leões do Brejo",
+        "gols_mandante": 0,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 3,
+            "time": "Leões do Brejo"
+          }
+        ],
+        "rodada": 2
+      },
+      {
+        "mandante": "Juventude do Asfalto",
+        "visitante": "Atlético Padaria",
+        "gols_mandante": 0,
+        "gols_visitante": 0,
+        "gols": [],
+        "rodada": 2
+      },
+      {
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Ferro-Velho EC",
+        "gols_mandante": 4,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 16,
+            "time": "Amigos do Churrasco FC"
+          },
+          {
+            "minuto": 45,
+            "time": "Amigos do Churrasco FC"
+          },
+          {
+            "minuto": 58,
+            "time": "Amigos do Churrasco FC"
+          },
+          {
+            "minuto": 68,
+            "time": "Amigos do Churrasco FC"
+          }
+        ],
+        "rodada": 2
       }
     ],
     "rival": {
@@ -324,120 +464,120 @@
     "tabela": [
       {
         "time": "Atlético Padaria",
-        "j": 1,
+        "j": 2,
         "v": 1,
-        "e": 0,
+        "e": 1,
         "d": 0,
         "gp": 3,
         "gc": 1,
-        "pts": 3,
+        "pts": 4,
         "pos": 1,
         "sg": 2
       },
       {
-        "time": "Grêmio Vila Barro",
-        "j": 1,
+        "time": "Leões do Brejo",
+        "j": 2,
         "v": 1,
-        "e": 0,
+        "e": 1,
         "d": 0,
-        "gp": 3,
-        "gc": 2,
-        "pts": 3,
+        "gp": 2,
+        "gc": 1,
+        "pts": 4,
         "pos": 2,
         "sg": 1
       },
       {
-        "time": "Ferro-Velho EC",
-        "j": 1,
+        "time": "Juventude do Asfalto",
+        "j": 2,
         "v": 1,
-        "e": 0,
+        "e": 1,
         "d": 0,
         "gp": 1,
         "gc": 0,
-        "pts": 3,
+        "pts": 4,
         "pos": 3,
         "sg": 1
       },
       {
-        "time": "Juventude do Asfalto",
-        "j": 1,
+        "time": "Amigos do Churrasco FC",
+        "j": 2,
         "v": 1,
         "e": 0,
-        "d": 0,
-        "gp": 1,
-        "gc": 0,
+        "d": 1,
+        "gp": 4,
+        "gc": 1,
         "pts": 3,
         "pos": 4,
-        "sg": 1
+        "sg": 3
       },
       {
-        "time": "Leões do Brejo",
-        "j": 1,
-        "v": 0,
-        "e": 1,
-        "d": 0,
-        "gp": 1,
-        "gc": 1,
-        "pts": 1,
+        "time": "Grêmio Vila Barro",
+        "j": 2,
+        "v": 1,
+        "e": 0,
+        "d": 1,
+        "gp": 4,
+        "gc": 4,
+        "pts": 3,
         "pos": 5,
         "sg": 0
       },
       {
-        "time": "Veteranos do Bairro",
-        "j": 1,
-        "v": 0,
-        "e": 1,
-        "d": 0,
-        "gp": 1,
-        "gc": 1,
-        "pts": 1,
+        "time": "Estrela da Feira",
+        "j": 2,
+        "v": 1,
+        "e": 0,
+        "d": 1,
+        "gp": 3,
+        "gc": 4,
+        "pts": 3,
         "pos": 6,
+        "sg": -1
+      },
+      {
+        "time": "Ferro-Velho EC",
+        "j": 2,
+        "v": 1,
+        "e": 0,
+        "d": 1,
+        "gp": 1,
+        "gc": 4,
+        "pts": 3,
+        "pos": 7,
+        "sg": -3
+      },
+      {
+        "time": "Veteranos do Bairro",
+        "j": 2,
+        "v": 0,
+        "e": 2,
+        "d": 0,
+        "gp": 2,
+        "gc": 2,
+        "pts": 2,
+        "pos": 8,
         "sg": 0
       },
       {
         "time": "Poeira FC",
-        "j": 1,
+        "j": 2,
         "v": 0,
-        "e": 0,
+        "e": 1,
         "d": 1,
-        "gp": 2,
-        "gc": 3,
-        "pts": 0,
-        "pos": 7,
-        "sg": -1
-      },
-      {
-        "time": "Amigos do Churrasco FC",
-        "j": 1,
-        "v": 0,
-        "e": 0,
-        "d": 1,
-        "gp": 0,
-        "gc": 1,
-        "pts": 0,
-        "pos": 8,
-        "sg": -1
-      },
-      {
-        "time": "Real Laje",
-        "j": 1,
-        "v": 0,
-        "e": 0,
-        "d": 1,
-        "gp": 0,
-        "gc": 1,
-        "pts": 0,
+        "gp": 3,
+        "gc": 4,
+        "pts": 1,
         "pos": 9,
         "sg": -1
       },
       {
-        "time": "Estrela da Feira",
-        "j": 1,
+        "time": "Real Laje",
+        "j": 2,
         "v": 0,
         "e": 0,
-        "d": 1,
-        "gp": 1,
-        "gc": 3,
+        "d": 2,
+        "gp": 0,
+        "gc": 2,
         "pts": 0,
         "pos": 10,
         "sg": -2
@@ -494,6 +634,19 @@
         "permalink": "https://www.instagram.com/reel/DfeyVh3D5eH/",
         "id": "17915554359489368"
       }
+    },
+    {
+      "dia": 4,
+      "data": "2026-11-09T01:33:56+00:00",
+      "proxima_decisao": {
+        "pergunta": "O que a gente faz agora?",
+        "opcoes": [
+          "Kombi do time?",
+          "Grama no campo?",
+          "Outra ideia?"
+        ]
+      },
+      "post": null
     }
   ],
   "decisoes": [
@@ -550,6 +703,24 @@
       "valor": -500.0,
       "descricao": "Barraca do Guigs",
       "saldo": 135.0
+    },
+    {
+      "dia": 4,
+      "valor": 172,
+      "descricao": "curtidas do dia 3",
+      "saldo": 307.0
+    },
+    {
+      "dia": 4,
+      "valor": 500,
+      "descricao": "bilheteria rodada 2 (250 pagantes)",
+      "saldo": 807.0
+    },
+    {
+      "dia": 4,
+      "valor": 250,
+      "descricao": "lanchonete rodada 2",
+      "saldo": 1057.0
     }
   ],
   "linha_do_tempo": [
@@ -574,9 +745,17 @@
       "dia": 3,
       "evento": "Barraca do Guigs: cada torcedor gasta R$ 1 por jogo em casa, e vai tudo pro caixa.",
       "autor": "_guigs12"
+    },
+    {
+      "dia": 4,
+      "evento": "Reforços vindos dos comentários: Khauan (@khauan.ribero), Rodrigo Moura (@rodrigo_smoura01), Biquinho (@beniciocarmocarvalho), Saci (@alisoonjesus), Kelvin (@kelvinzy29)"
+    },
+    {
+      "dia": 4,
+      "evento": "Rodada 2: Poeira FC 1 x 1 Veteranos do Bairro (empate)"
     }
   ],
-  "atualizado_em": "2026-11-09T01:15:39+00:00",
+  "atualizado_em": "2026-11-09T01:33:56+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso"
