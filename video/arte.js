@@ -194,7 +194,7 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
     <line x1="${dx + ang * 0.6}" y1="-38" x2="${dx + ang}" y2="-12" stroke="${p.meiao || '#fff'}" stroke-width="18" stroke-linecap="round"/>
     <ellipse cx="${dx + ang + (dx < 0 ? -6 : 6)}" cy="-4" rx="24" ry="13" fill="${p.chinelo ? '#3a86ff' : '#222'}" stroke="${OUT}" stroke-width="5"/>`;
   const chute = pose === 'chute';
-  s1 += pe(-tw * 0.22, chute ? -10 : 0) + pe(tw * 0.22, chute ? 46 : 0);
+  s1 += p.umaPerna ? pe(2, 0) : pe(-tw * 0.22, chute ? -10 : 0) + pe(tw * 0.22, chute ? 46 : 0);  // o Saci tem uma perna só
 
   // calção
   s1 += `<path d="M${-tw / 2 + 4},${topoCalcao} H${tw / 2 - 4} L${tw / 2 + 2},${quadril + 10} H6 L0,${quadril - 4} L-6,${quadril + 10} H${-tw / 2 - 2} Z"
@@ -241,14 +241,15 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
 
   // cabeça
   const hy = cab + bob * 0.3;
-  let c = `<circle cx="${-R + 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
+  // black power fica atrás da cabeça (não cobre os olhos)
+  let c = (p.cabelo === 'black' ? `<ellipse cx="0" cy="${hy - 22}" rx="${R + 22}" ry="${R * 0.95}" fill="${p.corCabelo || '#2b1d14'}" stroke="${OUT}" stroke-width="5"/>` : '') + `<circle cx="${-R + 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
     <circle cx="${R - 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
     <circle class="rosto" cx="0" cy="${hy}" r="${R}" fill="${pele}" stroke="${OUT}" stroke-width="6"/>`;
   const cc = p.corCabelo || '#2b1d14';
   const cabelos = {
     curto: `<path d="M${-R + 2},${hy - 4} C${-R + 4},${hy - R - 22} ${R - 4},${hy - R - 22} ${R - 2},${hy - 4} C${R * 0.5},${hy - R * 0.55} ${-R * 0.3},${hy - R * 0.75} ${-R + 2},${hy - 4} Z" fill="${cc}" stroke="${OUT}" stroke-width="5"/>`,
     cacheado: Array.from({ length: 9 }, (_, i) => { const a = Math.PI * (1.05 + i * 0.112); return `<circle cx="${Math.cos(a) * R * 0.92}" cy="${hy + Math.sin(a) * R * 0.92}" r="22" fill="${cc}" stroke="${OUT}" stroke-width="4"/>`; }).join(''),
-    black: `<ellipse cx="0" cy="${hy - 30}" rx="${R + 18}" ry="${R * 0.78}" fill="${cc}" stroke="${OUT}" stroke-width="5"/>`,
+    black: `<path d="M${-R + 6},${hy - 18} Q0,${hy - R - 14} ${R - 6},${hy - 18}" fill="none" stroke="${p.corCabelo || '#2b1d14'}" stroke-width="14" stroke-linecap="round"/>`,
     raspado: `<path d="M${-R + 4},${hy - 10} A${R - 4},${R - 4} 0 0 1 ${R - 4},${hy - 10} Q0,${hy - R * 0.6} ${-R + 4},${hy - 10}Z" fill="${cc}" opacity=".85"/>`,
     careca: `<ellipse cx="-18" cy="${hy - R * 0.62}" rx="16" ry="8" fill="#fff" opacity=".5"/>`,
     grisalho: `<path d="M${-R + 2},${hy + 4} Q${-R - 6},${hy - 36} ${-R * 0.45},${hy - R * 0.72}" stroke="${cc}" stroke-width="18" fill="none" stroke-linecap="round"/>
@@ -258,6 +259,9 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
       Array.from({ length: 7 }, (_, i) => { const a = Math.PI * (1.08 + i * 0.14); return `<circle cx="${Math.cos(a) * R * 0.9}" cy="${hy + Math.sin(a) * R * 0.9}" r="20" fill="${cc}" stroke="${OUT}" stroke-width="4"/>`; }).join(''),
   };
   c += cabelos[p.cabelo || 'curto'] || '';
+  if (p.gorro) c += `<path d="M${-R + 2},${hy - 18} Q${-R * 0.2},${hy - R - 30} ${R * 0.9},${hy - R - 70} Q${R * 0.55},${hy - R * 0.5} ${R - 2},${hy - 18} Z"
+      fill="${p.gorro}" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>
+    <circle cx="${R * 0.9}" cy="${hy - R - 70}" r="13" fill="#fff" stroke="${OUT}" stroke-width="5"/>`;  // gorro de saci
 
   // rosto
   const ex = R * 0.36, ey = hy + 2;
@@ -321,6 +325,12 @@ const JOGADORES = {
   '9': { pele: '#e0ac69', cabelo: 'curto', corCabelo: '#4a3426', larg: 1.75, barriga: true, camisa: '#fb5607', bigode: true },
   '10': { pele: '#d9a066', cabelo: 'grisalho', corCabelo: '#555', barba: true, idade: true, camisa: '#f4a261', larg: 1.1 },
   '11': { pele: '#f1c27d', cabelo: 'cacheado', corCabelo: '#7a4b2a', camisa: '#ff006e', expr: 'serio' },
+  // reforços da peneira (Dia 4): visual próprio para cada um
+  '15': { pele: '#c68642', cabelo: 'raspado', corCabelo: '#1b1b1b', camisa: '#3a86ff', expr: 'feliz' },
+  '16': { pele: '#f1c27d', cabelo: 'curto', corCabelo: '#6b4226', bigode: true, camisa: '#6c757d', listra: '#495057', expr: 'serio' },
+  '17': { pele: '#e0ac69', cabelo: 'cacheado', corCabelo: '#4a3426', camisa: '#ffbe0b', expr: 'feliz' },
+  '18': { pele: '#6b4226', cabelo: 'raspado', corCabelo: '#1b1b1b', gorro: '#e63946', umaPerna: true, camisa: '#e63946', listra: '#fff', expr: 'feliz' },
+  '19': { pele: '#8d5524', cabelo: 'black', corCabelo: '#1b1b1b', camisa: '#06d6a0', expr: 'feliz', larg: 0.9 },
 };
 
 function jogador(numero, estado, extra = {}) {
