@@ -1,0 +1,222 @@
+{
+  "dia": 4,
+  "seguidores_ontem": 218,
+  "seguidores_hoje": 250,
+  "post_anterior": {
+    "id": "17915554359489368",
+    "caption": "DIA 3 do Poeira FC ⚽\n\n🔥 PENEIRA DO POEIRA 🔥\n5 vagas de jogador + 1 vaga de técnico!\nComente seu NOME e sua POSIÇÃO (ou TÉCNICO).\nOs comentários mais curtidos entram no time!\n📲 Manda pros amigos curtirem o seu comentário.\n\n1 seguidor = 1 torcedor | 1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #peneira #futebolamador #futebolraiz",
+    "comments_count": 38,
+    "like_count": 172,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/DfeyVh3D5eH/",
+    "timestamp": "2026-11-08T12:45:45+0000"
+  },
+  "curtidas": 172,
+  "receita_curtidas": 172,
+  "caixa_atual": 135.0,
+  "caixa_com_curtidas": 307.0,
+  "top_comentarios": [
+    {
+      "usuario": "gilbertoteles_",
+      "texto": "Gilberto Teles – Quero assumir como técnico! Minha proposta é um 3-4-2-1, com três zagueiros, alas ofensivos e dois meias dando suporte ao centroavante. Quero uma equipe que controle o meio-campo, pressione alto e explore a velocidade pelos corredores. Defesa sólida, transições rápidas e futebol inteligente!",
+      "curtidas": 10,
+      "id": "18051013433820627",
+      "timestamp": "2026-11-08T13:06:53+0000"
+    },
+    {
+      "usuario": "khauan.ribero",
+      "texto": "Khauan centro avante bora subi esse time",
+      "curtidas": 4,
+      "id": "18182144146442192",
+      "timestamp": "2026-11-08T13:28:24+0000"
+    },
+    {
+      "usuario": "rodrigo_smoura01",
+      "texto": "Rodrigo Moura- Lateral soldado de Guerra!\nVai, Mas ninguém sabe se volta 😂😂",
+      "curtidas": 4,
+      "id": "17951438886353349",
+      "timestamp": "2026-11-08T14:01:18+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Biquinho camisa 7 meia armador",
+      "curtidas": 4,
+      "id": "18169270819468432",
+      "timestamp": "2026-11-08T16:55:54+0000"
+    },
+    {
+      "usuario": "alisoonjesus",
+      "texto": "Saci - centro avante",
+      "curtidas": 3,
+      "id": "18131308679489493",
+      "timestamp": "2026-11-08T15:08:33+0000"
+    },
+    {
+      "usuario": "stefano.lima7",
+      "texto": "Stefano Lima, Lateral direito carro antigo, só funciona com álcool",
+      "curtidas": 2,
+      "id": "18082183244441688",
+      "timestamp": "2026-11-08T17:05:43+0000"
+    },
+    {
+      "usuario": "kelvinzy29",
+      "texto": "Kelvin e sou ponta direita",
+      "curtidas": 2,
+      "id": "18102287813417512",
+      "timestamp": "2026-11-08T19:52:04+0000"
+    },
+    {
+      "usuario": "lucas_carvalho317",
+      "texto": "Lateral \"Coca-Cola 3litros\"  passou do meio perdeu o gás!",
+      "curtidas": 1,
+      "id": "18152582200512805",
+      "timestamp": "2026-11-08T12:50:20+0000"
+    },
+    {
+      "usuario": "joaoc_89",
+      "texto": "João Carlos - técnico. Quero que o time jogue em uma 4-2-1-3 com 2 volantes e um meia atacante. Quero que jogue com posse de bola e uma armação mais conservadora, 1 a 0 para nós vai ser goleada.",
+      "curtidas": 1,
+      "id": "18002926674010210",
+      "timestamp": "2026-11-08T12:51:32+0000"
+    },
+    {
+      "usuario": "edu07m",
+      "texto": "Eduardo, Meia Armador",
+      "curtidas": 1,
+      "id": "18142516348628325",
+      "timestamp": "2026-11-08T12:55:00+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "gilbertoteles_",
+      "curtidas": 10,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Técnico de verdade custa R$ 1200 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 1,
+      "usuario": "khauan.ribero",
+      "curtidas": 4,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 2,
+      "usuario": "rodrigo_smoura01",
+      "curtidas": 4,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 4,
+      "viavel": true,
+      "acoes": [
+        "uniforme"
+      ],
+      "custo": 300.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 4,
+      "usuario": "alisoonjesus",
+      "curtidas": 3,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "stefano.lima7",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 6,
+      "usuario": "kelvinzy29",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 7,
+      "usuario": "lucas_carvalho317",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 8,
+      "usuario": "joaoc_89",
+      "curtidas": 1,
+      "viavel": true,
+      "acoes": [
+        "bolas"
+      ],
+      "custo": 80.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 9,
+      "usuario": "edu07m",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Meia novo custa R$ 900 e o caixa não cobre",
+      "revisar": false
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": 3,
+    "acoes": [
+      "uniforme"
+    ],
+    "titulo": "Uniforme novo",
+    "interpretacao": "Uniforme novo! Pela primeira vez, todo mundo com a mesma cor.",
+    "custo": 300,
+    "efeitos": {
+      "estrutura.uniforme": "novo",
+      "clube.forca": "+1"
+    },
+    "automatica": true
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz agora?",
+    "opcoes": [
+      "Kombi do time?",
+      "Grama no campo?",
+      "Outra ideia?"
+    ]
+  }
+}
