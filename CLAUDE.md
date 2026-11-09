@@ -34,7 +34,7 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
    - O raw do GitHub serve MP4 como application/octet-stream, e o Buffer aceitou assim mesmo.
 3. ✅ (06/11) **Dia 1 agendado** no Buffer para 06/11/2026 às 06:00 (Brasília) e fechado no estado (`dia` = 1). O roteiro está em `episodios/dia-001/`.
    ✅ (06/11) Dia 1 no ar: 106 seguidores, 256 curtidas e 27 comentários em 16 h. ✅ Dia 2 no ar 07/11 6h (218 seguidores, 277 curtidas, 58 comentários). ✅ Dia 3 (peneira + Barraca do Guigs) publicado em 08/11 às 9h45, a pedido (`postar_reel(..., agora=True)`).
-   Dia 4: resultado da peneira (`selecionar_peneira` nos comentários do Dia 3, 5 jogadores + 1 técnico; mandar a lista ao usuário antes) + rodada 2 em casa (empate, banco).
+   ✅ Dia 4 publicado em 09/11 às 7h48: escalação da peneira (técnico Gilberto Teles; #15 Khauan, #16 Rodrigo Moura, #17 Biquinho, #18 Saci (uma perna só, gorro), #19 Kelvin) + 1x1 com gol de bicicleta do Saci. Próximo: Dia 5 = clássico contra o Estrela da Feira (1ª vitória).
 4. Dia 2: rodar `preparar` (Instagram ao vivo) depois que o Dia 1 acumular curtidas e comentários, depois `fechar` → `video` → subir → agendar. A cadência (que dia e que hora) ainda será combinada com o usuário.
 5. A lógica das decisões ainda está em discussão com o usuário.
 6. Opcional: `FAL_KEY` existe no ambiente (geração de imagem); use só com o OK do usuário.

@@ -646,7 +646,12 @@
           "Outra ideia?"
         ]
       },
-      "post": null
+      "post": {
+        "buffer_id": "6af1a46e12d5da744d403281",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-004.mp4",
+        "permalink": "https://www.instagram.com/reel/DfhJlRcgowl/",
+        "publicado": "2026-11-09T07:48-03:00"
+      }
     }
   ],
   "decisoes": [
@@ -755,7 +760,7 @@
       "evento": "Rodada 2: Poeira FC 1 x 1 Veteranos do Bairro (empate)"
     }
   ],
-  "atualizado_em": "2026-11-09T01:33:56+00:00",
+  "atualizado_em": "2026-11-09T10:46:17+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso"
