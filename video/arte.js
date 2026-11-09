@@ -190,15 +190,16 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   const pe = (dx, ang = 0) => `
     <line x1="${dx}" y1="${quadril - 6}" x2="${dx + ang}" y2="-10" stroke="${OUT}" stroke-width="30" stroke-linecap="round"/>
     <line x1="${dx}" y1="${quadril - 6}" x2="${dx + ang}" y2="-10" stroke="${pele}" stroke-width="18" stroke-linecap="round"/>
+    <line class="brilho3d" x1="${dx - 4}" y1="${quadril - 2}" x2="${dx + ang - 4}" y2="-40" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0"/>
     <line x1="${dx + ang * 0.6}" y1="-38" x2="${dx + ang}" y2="-12" stroke="${OUT}" stroke-width="30" stroke-linecap="round"/>
     <line x1="${dx + ang * 0.6}" y1="-38" x2="${dx + ang}" y2="-12" stroke="${p.meiao || '#fff'}" stroke-width="18" stroke-linecap="round"/>
-    <ellipse cx="${dx + ang + (dx < 0 ? -6 : 6)}" cy="-4" rx="24" ry="13" fill="${p.chinelo ? '#3a86ff' : '#222'}" stroke="${OUT}" stroke-width="5"/>`;
+    <ellipse data-v="Esfera" cx="${dx + ang + (dx < 0 ? -6 : 6)}" cy="-4" rx="24" ry="13" fill="${p.chinelo ? '#3a86ff' : '#222'}" stroke="${OUT}" stroke-width="5"/>`;
   const chute = pose === 'chute';
   s1 += p.umaPerna ? pe(2, 0) : pe(-tw * 0.22, chute ? -10 : 0) + pe(tw * 0.22, chute ? 46 : 0);  // o Saci tem uma perna só
 
   // calção
   s1 += `<path d="M${-tw / 2 + 4},${topoCalcao} H${tw / 2 - 4} L${tw / 2 + 2},${quadril + 10} H6 L0,${quadril - 4} L-6,${quadril + 10} H${-tw / 2 - 2} Z"
-    fill="${p.calcao || '#1d3557'}" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>`;
+    data-v="Vert" fill="${p.calcao || '#1d3557'}" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>`;
 
   // braços (atrás do tronco quando "normal")
   const ombroY = topo + 26, ox = tw / 2 - 6;
@@ -206,7 +207,8 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
     const sx = lado * ox;
     return `<path d="M${sx},${ombroY} Q${sx + lado * 18},${(ombroY + my) / 2} ${mx},${my}" fill="none" stroke="${OUT}" stroke-width="30" stroke-linecap="round"/>
       <path d="M${sx},${ombroY} Q${sx + lado * 18},${(ombroY + my) / 2} ${mx},${my}" fill="none" stroke="${pele}" stroke-width="18" stroke-linecap="round"/>
-      <circle cx="${mx}" cy="${my}" r="${p.luvas ? 20 : 14}" fill="${p.luvas ? '#f1c40f' : pele}" stroke="${OUT}" stroke-width="5"/>`;
+      <path class="brilho3d" d="M${sx - 4},${ombroY - 2} Q${sx + lado * 18 - 4},${(ombroY + my) / 2 - 2} ${mx - 4},${my - 2}" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0"/>
+      <circle data-v="Esfera" cx="${mx}" cy="${my}" r="${p.luvas ? 20 : 14}" fill="${p.luvas ? '#f1c40f' : pele}" stroke="${OUT}" stroke-width="5"/>`;
   };
   const aceno = Math.sin(t * 9) * 16;
   const maos = {
@@ -224,6 +226,7 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   // tronco / camisa
   s1 += `<rect x="${-tw / 2}" y="${topo}" width="${tw}" height="${tronco}" rx="${28 * lf}" fill="${p.camisa || '#e63946'}" stroke="${OUT}" stroke-width="6"/>`;
   if (p.listra) s1 += `<rect x="${-tw / 2 + 3}" y="${topo + tronco * 0.38}" width="${tw - 6}" height="${tronco * 0.2}" fill="${p.listra}"/>`;
+  s1 += `<rect class="vol3d" x="${-tw / 2}" y="${topo}" width="${tw}" height="${tronco}" rx="${28 * lf}" fill="url(#g3dCorpo)" opacity="0"/>`;  // volume do tronco (só no estilo 3D)
   if (p.avental) s1 += `<path d="M${-tw * 0.34},${topo + 14} H${tw * 0.34} V${topo + tronco + 22} Q0,${topo + tronco + 34} ${-tw * 0.34},${topo + tronco + 22} Z" fill="${p.avental}" stroke="${OUT}" stroke-width="5"/>
       <text y="${topo + tronco * 0.62}" text-anchor="middle" font-family="Anton" font-size="26" fill="${OUT}">${esc(p.aventalTxt || '')}</text>`;
   if (p.numero) s1 += `<text y="${topo + tronco * 0.66}" text-anchor="middle" font-family="Anton" font-size="${44 * Math.min(lf, 1.3)}" fill="#fff" stroke="${OUT}" stroke-width="5" paint-order="stroke">${p.numero}</text>`;
@@ -233,7 +236,7 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   if (p.microfone) {
     const [mx, my] = maos[1];
     s1 += `<g transform="translate(${mx} ${my}) rotate(-25)"><rect x="-9" y="-12" width="18" height="60" rx="8" fill="#444" stroke="${OUT}" stroke-width="5"/>
-      <circle cy="-26" r="24" fill="#9aa5b1" stroke="${OUT}" stroke-width="6"/><path d="M-16,-30 h32 M-16,-20 h32" stroke="${OUT}" stroke-width="3"/>
+      <circle data-v="Esfera" cy="-26" r="24" fill="#9aa5b1" stroke="${OUT}" stroke-width="6"/><path d="M-16,-30 h32 M-16,-20 h32" stroke="${OUT}" stroke-width="3"/>
       <rect x="-20" y="10" width="40" height="22" rx="4" fill="${CORES.laranja}" stroke="${OUT}" stroke-width="4"/>
       <text y="27" text-anchor="middle" font-family="Anton" font-size="15" fill="${OUT}">RÁDIO</text></g>`;
     s1 += braco(1, ...maos[1]).split('<circle')[0];
@@ -242,24 +245,24 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   // cabeça
   const hy = cab + bob * 0.3;
   // black power fica atrás da cabeça (não cobre os olhos)
-  let c = (p.cabelo === 'black' ? `<ellipse cx="0" cy="${hy - 22}" rx="${R + 22}" ry="${R * 0.95}" fill="${p.corCabelo || '#2b1d14'}" stroke="${OUT}" stroke-width="5"/>` : '') + `<circle cx="${-R + 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
-    <circle cx="${R - 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
-    <circle class="rosto" cx="0" cy="${hy}" r="${R}" fill="${pele}" stroke="${OUT}" stroke-width="6"/>`;
+  let c = (p.cabelo === 'black' ? `<ellipse data-v="Esfera" cx="0" cy="${hy - 22}" rx="${R + 22}" ry="${R * 0.95}" fill="${p.corCabelo || '#2b1d14'}" stroke="${OUT}" stroke-width="5"/>` : '') + `<circle data-v="Esfera" cx="${-R + 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
+    <circle data-v="Esfera" cx="${R - 4}" cy="${hy + 8}" r="15" fill="${pele}" stroke="${OUT}" stroke-width="5"/>
+    <circle data-v="Esfera" class="rosto" cx="0" cy="${hy}" r="${R}" fill="${pele}" stroke="${OUT}" stroke-width="6"/>`;
   const cc = p.corCabelo || '#2b1d14';
   const cabelos = {
-    curto: `<path d="M${-R + 2},${hy - 4} C${-R + 4},${hy - R - 22} ${R - 4},${hy - R - 22} ${R - 2},${hy - 4} C${R * 0.5},${hy - R * 0.55} ${-R * 0.3},${hy - R * 0.75} ${-R + 2},${hy - 4} Z" fill="${cc}" stroke="${OUT}" stroke-width="5"/>`,
-    cacheado: Array.from({ length: 9 }, (_, i) => { const a = Math.PI * (1.05 + i * 0.112); return `<circle cx="${Math.cos(a) * R * 0.92}" cy="${hy + Math.sin(a) * R * 0.92}" r="22" fill="${cc}" stroke="${OUT}" stroke-width="4"/>`; }).join(''),
+    curto: `<path data-v="Cabelo" d="M${-R + 2},${hy - 4} C${-R + 4},${hy - R - 22} ${R - 4},${hy - R - 22} ${R - 2},${hy - 4} C${R * 0.5},${hy - R * 0.55} ${-R * 0.3},${hy - R * 0.75} ${-R + 2},${hy - 4} Z" fill="${cc}" stroke="${OUT}" stroke-width="5"/>`,
+    cacheado: Array.from({ length: 9 }, (_, i) => { const a = Math.PI * (1.05 + i * 0.112); return `<circle data-v="Esfera" cx="${Math.cos(a) * R * 0.92}" cy="${hy + Math.sin(a) * R * 0.92}" r="22" fill="${cc}" stroke="${OUT}" stroke-width="4"/>`; }).join(''),
     black: `<path d="M${-R + 6},${hy - 18} Q0,${hy - R - 14} ${R - 6},${hy - 18}" fill="none" stroke="${p.corCabelo || '#2b1d14'}" stroke-width="14" stroke-linecap="round"/>`,
     raspado: `<path d="M${-R + 4},${hy - 10} A${R - 4},${R - 4} 0 0 1 ${R - 4},${hy - 10} Q0,${hy - R * 0.6} ${-R + 4},${hy - 10}Z" fill="${cc}" opacity=".85"/>`,
     careca: `<ellipse cx="-18" cy="${hy - R * 0.62}" rx="16" ry="8" fill="#fff" opacity=".5"/>`,
     grisalho: `<path d="M${-R + 2},${hy + 4} Q${-R - 6},${hy - 36} ${-R * 0.45},${hy - R * 0.72}" stroke="${cc}" stroke-width="18" fill="none" stroke-linecap="round"/>
       <path d="M${R - 2},${hy + 4} Q${R + 6},${hy - 36} ${R * 0.45},${hy - R * 0.72}" stroke="${cc}" stroke-width="18" fill="none" stroke-linecap="round"/>
       <ellipse cx="-14" cy="${hy - R * 0.66}" rx="14" ry="7" fill="#fff" opacity=".5"/>`,
-    coque: `<circle cx="0" cy="${hy - R - 18}" r="30" fill="${cc}" stroke="${OUT}" stroke-width="5"/>` +
-      Array.from({ length: 7 }, (_, i) => { const a = Math.PI * (1.08 + i * 0.14); return `<circle cx="${Math.cos(a) * R * 0.9}" cy="${hy + Math.sin(a) * R * 0.9}" r="20" fill="${cc}" stroke="${OUT}" stroke-width="4"/>`; }).join(''),
+    coque: `<circle data-v="Esfera" cx="0" cy="${hy - R - 18}" r="30" fill="${cc}" stroke="${OUT}" stroke-width="5"/>` +
+      Array.from({ length: 7 }, (_, i) => { const a = Math.PI * (1.08 + i * 0.14); return `<circle data-v="Esfera" cx="${Math.cos(a) * R * 0.9}" cy="${hy + Math.sin(a) * R * 0.9}" r="20" fill="${cc}" stroke="${OUT}" stroke-width="4"/>`; }).join(''),
   };
   c += cabelos[p.cabelo || 'curto'] || '';
-  if (p.gorro) c += `<path d="M${-R + 2},${hy - 18} Q${-R * 0.2},${hy - R - 30} ${R * 0.9},${hy - R - 70} Q${R * 0.55},${hy - R * 0.5} ${R - 2},${hy - 18} Z"
+  if (p.gorro) c += `<path data-v="Cabelo" d="M${-R + 2},${hy - 18} Q${-R * 0.2},${hy - R - 30} ${R * 0.9},${hy - R - 70} Q${R * 0.55},${hy - R * 0.5} ${R - 2},${hy - 18} Z"
       fill="${p.gorro}" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>
     <circle cx="${R * 0.9}" cy="${hy - R - 70}" r="13" fill="#fff" stroke="${OUT}" stroke-width="5"/>`;  // gorro de saci
 
@@ -290,7 +293,7 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   if (p.barba) c += `<path d="M${-R + 8},${hy + 14} Q${-R + 10},${hy + R + 14} 0,${hy + R + 10} Q${R - 10},${hy + R + 14} ${R - 8},${hy + 14} Q${R * 0.5},${hy + R * 0.85} 0,${hy + R * 0.75} Q${-R * 0.5},${hy + R * 0.85} ${-R + 8},${hy + 14}Z" fill="${cc}" opacity=".9"/>`;
   if (p.idade) c += `<path d="M${-ex - 28},${ey + 4} q-6,8 0,14 M${ex + 28},${ey + 4} q6,8 0,14" stroke="${OUT}" stroke-width="3" fill="none" opacity=".6"/>`;
   if (p.oculos) c += `<circle cx="${-ex}" cy="${ey}" r="24" fill="#ffffff22" stroke="${OUT}" stroke-width="6"/><circle cx="${ex}" cy="${ey}" r="24" fill="#ffffff22" stroke="${OUT}" stroke-width="6"/><path d="M${-ex + 24},${ey} H${ex - 24}" stroke="${OUT}" stroke-width="6"/>`;
-  if (p.bone) c += `<path d="M${-R - 2},${hy - 14} A${R + 2},${R + 2} 0 0 1 ${R + 2},${hy - 14} Z" fill="${p.bone}" stroke="${OUT}" stroke-width="6"/>
+  if (p.bone) c += `<path data-v="Cabelo" d="M${-R - 2},${hy - 14} A${R + 2},${R + 2} 0 0 1 ${R + 2},${hy - 14} Z" fill="${p.bone}" stroke="${OUT}" stroke-width="6"/>
     <path d="M${R - 6},${hy - 16} Q${R + 52},${hy - 22} ${R + 58},${hy - 6} Q${R + 20},${hy - 2} ${R - 6},${hy - 6}Z" fill="${p.bone}" stroke="${OUT}" stroke-width="6"/>
     ${p.boneTxt ? `<text x="-4" y="${hy - 30}" text-anchor="middle" font-family="Anton" font-size="24" fill="#fff">${esc(p.boneTxt)}</text>` : ''}`;
   if (p.fone) c += `<path d="M${-R - 4},${hy} A${R + 6},${R + 10} 0 0 1 ${R + 4},${hy}" stroke="#333" stroke-width="12" fill="none"/>
@@ -298,7 +301,9 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
     <rect x="${R - 4}" y="${hy - 20}" width="26" height="46" rx="10" fill="#e63946" stroke="${OUT}" stroke-width="5"/>`;
   if (p.brinco) c += `<circle cx="${-R + 2}" cy="${hy + 30}" r="7" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="3"/><circle cx="${R - 2}" cy="${hy + 30}" r="7" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="3"/>`;
 
-  const sombra = `<ellipse cx="0" cy="0" rx="${tw * 0.85}" ry="16" fill="#000" opacity=".22"/>`;
+  const sombra = window.ESTILO3D
+    ? `<ellipse cx="${tw * 0.25}" cy="4" rx="${tw * 1.25}" ry="26" fill="url(#g3dSombra)"/>`
+    : `<ellipse cx="0" cy="0" rx="${tw * 0.85}" ry="16" fill="#000" opacity=".22"/>`;
   return `<g transform="translate(${x} ${y}) scale(${espelho ? -s : s} ${s})">${sombra}<g transform="translate(0 ${bob})">${s1}${c}</g></g>`;
 }
 
@@ -358,7 +363,7 @@ function ceu(t) {
 // morro com casinhas e caixas d'água: o "bairro" atrás do campo
 function bairro(yBase = 780) {
   const r = rng('bairro');
-  let s = `<path d="M-50,${yBase} C150,${yBase - 380} 420,${yBase - 470} 640,${yBase - 380} C820,${yBase - 300} 1000,${yBase - 360} 1130,${yBase - 280} V${yBase + 40} H-50Z" fill="#7fb069" stroke="${OUT}" stroke-width="5"/>`;
+  let s = `<path d="M-50,${yBase} C150,${yBase - 380} 420,${yBase - 470} 640,${yBase - 380} C820,${yBase - 300} 1000,${yBase - 360} 1130,${yBase - 280} V${yBase + 40} H-50Z" data-v="Morro" fill="#7fb069" stroke="${OUT}" stroke-width="5"/>`;
   const cores = ['#f4a259', '#f7d488', '#e76f51', '#90be6d', '#f1faee', '#a8dadc', '#e9c46a', '#d4a373', '#cdb4db', '#ffafcc'];
   const casas = [];
   for (let fila = 0; fila < 6; fila++) {
@@ -373,7 +378,9 @@ function bairro(yBase = 780) {
   casas.sort((a, b) => a[1] - b[1]);
   window._lajes = casas.map(([x, y, w, h]) => [x, y - h, w]);
   for (const [x, y, w, h, cor, caixa, q] of casas) {
-    s += `<rect x="${x}" y="${y - h}" width="${w}" height="${h}" fill="${cor}" stroke="${OUT}" stroke-width="4"/>
+    if (window.ESTILO3D) s += `<path d="M${x + w},${y - h} l12,-9 v${h} l-12,9z" fill="${cor}"/><path d="M${x + w},${y - h} l12,-9 v${h} l-12,9z" fill="#000" opacity=".38"/>
+      <path d="M${x},${y - h} l12,-9 h${w} l-12,9z" fill="${cor}"/><path d="M${x},${y - h} l12,-9 h${w} l-12,9z" fill="#fff" opacity=".35"/>`;
+    s += `<rect data-v="Casa" x="${x}" y="${y - h}" width="${w}" height="${h}" fill="${cor}" stroke="${OUT}" stroke-width="4"/>
       <rect x="${x + w * 0.2}" y="${y - h * 0.7}" width="${w * 0.22}" height="${h * 0.28}" fill="#264653" stroke="${OUT}" stroke-width="3"/>
       ${w > 80 ? `<rect x="${x + w * 0.58}" y="${y - h * 0.7}" width="${w * 0.22}" height="${h * 0.28}" fill="#264653" stroke="${OUT}" stroke-width="3"/>` : ''}
       ${q > 0.6 ? `<rect x="${x - 2}" y="${y - h - 8}" width="${w + 4}" height="8" fill="#bcb8b1" stroke="${OUT}" stroke-width="3"/>` : ''}
@@ -382,13 +389,13 @@ function bairro(yBase = 780) {
   // árvores na frente do morro
   for (let x = -40; x < 1120; x += 70) {
     const rr = 40 + r() * 26;
-    s += `<circle cx="${x}" cy="${yBase - 10 + r() * 10}" r="${rr}" fill="${r() > 0.5 ? '#3a7d44' : '#4f9d55'}" stroke="${OUT}" stroke-width="4"/>`;
+    s += `<circle data-v="Esfera" cx="${x}" cy="${yBase - 10 + r() * 10}" r="${rr}" fill="${r() > 0.5 ? '#3a7d44' : '#4f9d55'}" stroke="${OUT}" stroke-width="4"/>`;
   }
   return s;
 }
 
 function muro(y, nome) {
-  return `<rect x="-10" y="${y}" width="${W + 20}" height="90" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
+  return (window.ESTILO3D ? `<rect x="-10" y="${y - 14}" width="${W + 20}" height="16" fill="#fbf6ea"/><rect x="-10" y="${y + 88}" width="${W + 20}" height="60" fill="url(#g3dSombraChao)"/>` : '') + `<rect data-v="Vert" x="-10" y="${y}" width="${W + 20}" height="90" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
     <path d="M60,${y + 18} q40,-12 90,0 t90,0" stroke="#e76f51" stroke-width="10" fill="none" opacity=".7"/>
     <path d="M820,${y + 70} q40,-14 90,0 t90,0" stroke="#3a86ff" stroke-width="10" fill="none" opacity=".7"/>
     <text class="rotulo" x="265" y="${y + 62}" text-anchor="middle" font-family="Anton" font-size="${Math.min(46, 270 / Math.max(1, medir(nome.toUpperCase(), 1)))}" fill="${CORES.vinho}" opacity=".9">${esc(nome.toUpperCase())}</text>
@@ -406,8 +413,8 @@ function torcedores(n, y0, y1, seed = 'torcida') {
     for (let i = 0; i < porFila && k < n; i++, k++) {
       const x = 30 + (i + (f % 2) * 0.5) * ((W - 60) / porFila) + (r() - 0.5) * 8;
       const camisa = r() > 0.4 ? CORES.vinho : CAMISAS_SORTIDAS[Math.floor(r() * CAMISAS_SORTIDAS.length)];
-      s += `<rect x="${x - 14}" y="${y + 6}" width="28" height="34" rx="10" fill="${camisa}" stroke="${OUT}" stroke-width="3"/>
-        <circle cx="${x}" cy="${y}" r="13" fill="${PELES[Math.floor(r() * PELES.length)]}" stroke="${OUT}" stroke-width="3"/>`;
+      s += `<rect data-v="Vert" x="${x - 14}" y="${y + 6}" width="28" height="34" rx="10" fill="${camisa}" stroke="${OUT}" stroke-width="3"/>
+        <circle data-v="Esfera" cx="${x}" cy="${y}" r="13" fill="${PELES[Math.floor(r() * PELES.length)]}" stroke="${OUT}" stroke-width="3"/>`;
     }
   }
   return s;
@@ -500,7 +507,9 @@ function sede(estrutura, { t = 0, dy = 0 } = {}) {
   s += bairro(820);
   s += `<rect x="-10" y="820" width="${W + 20}" height="${H - 820}" fill="#cfc2a8"/><rect x="-10" y="1180" width="${W + 20}" height="${H - 1180}" fill="url(#gterra)"/>`;
   // prédio do bar / sede
-  s += `<rect x="170" y="640" width="740" height="560" fill="#f2e2c4" stroke="${OUT}" stroke-width="7"/>
+  if (window.ESTILO3D) s += `<path d="M910,640 l46,-30 v560 l-46,30z" fill="#b89f7a"/><path d="M910,640 l46,-30 v560 l-46,30z" fill="url(#g3dVert)"/>
+    <ellipse cx="560" cy="1215" rx="470" ry="44" fill="url(#g3dSombra)"/>`;
+  s += `<rect data-v="Casa" x="170" y="640" width="740" height="560" fill="#f2e2c4" stroke="${OUT}" stroke-width="7"/>
     ${[0, 1, 2, 3, 4].map(i => `<rect x="${220 + i * 120}" y="${900 + (i % 2) * 40}" width="60" height="26" fill="#c97a40" stroke="${OUT}" stroke-width="3" opacity=".7"/>`).join('')}`;
   if (novo) s += `<path d="M130,650 L540,500 L950,650Z" fill="#d1495b" stroke="${OUT}" stroke-width="7"/>
     ${[0, 1, 2, 3].map(i => `<path d="M${200 + i * 30},${640 - i * 11} L540,${510 + i * 25}" stroke="#a23b4a" stroke-width="5" opacity=".0"/>`).join('')}
@@ -508,14 +517,15 @@ function sede(estrutura, { t = 0, dy = 0 } = {}) {
   else s += `<path d="M140,660 L940,620 L930,660 L150,680Z" fill="#9aa5b1" stroke="${OUT}" stroke-width="6"/>
     <rect x="420" y="628" width="90" height="34" fill="#6c757d" stroke="${OUT}" stroke-width="4" transform="rotate(-5 465 645)"/>
     <circle cx="700" cy="640" r="10" fill="${OUT}"/><circle cx="300" cy="655" r="8" fill="${OUT}"/>`;
-  s += `<g class="rotulo"><rect x="260" y="700" width="560" height="110" rx="14" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="7"/>
+  s += `<g class="rotulo"><rect data-v="Vert" x="260" y="700" width="560" height="110" rx="14" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="7"/>
     <text x="540" y="785" text-anchor="middle" font-family="Anton" font-size="74" fill="${CORES.vinho}">BAR DA CIDA</text>
     <text x="540" y="860" text-anchor="middle" font-family="Anton" font-size="36" fill="${OUT}" letter-spacing="4">SEDE SOCIAL · ${esc(window._sigla || '')}</text></g>
     <path d="M200,880 H880 L860,940 H220Z" fill="#e63946" stroke="${OUT}" stroke-width="6"/>
     ${[0, 1, 2, 3, 4, 5].map(i => `<path d="M${215 + i * 113},882 h56 l-6,56 h-46z" fill="#fff"/>`).join('')}
-    <rect x="460" y="960" width="160" height="240" fill="#6f4518" stroke="${OUT}" stroke-width="6"/>
-    <rect x="230" y="980" width="180" height="140" fill="#8ecae6" stroke="${OUT}" stroke-width="6"/><path d="M320,980 V1120 M230,1050 H410" stroke="${OUT}" stroke-width="5"/>
-    <rect x="670" y="980" width="180" height="140" fill="#8ecae6" stroke="${OUT}" stroke-width="6"/><path d="M760,980 V1120 M670,1050 H850" stroke="${OUT}" stroke-width="5"/>`;
+    ${window.ESTILO3D ? `<path d="M200,880 H880 L860,940 H220Z" fill="url(#g3dVert)"/><rect x="220" y="940" width="640" height="46" fill="url(#g3dSombraChao)"/>` : ''}
+    <rect data-v="Casa" x="460" y="960" width="160" height="240" fill="#6f4518" stroke="${OUT}" stroke-width="6"/>
+    <rect data-v="Vidro" x="230" y="980" width="180" height="140" fill="#8ecae6" stroke="${OUT}" stroke-width="6"/><path d="M320,980 V1120 M230,1050 H410" stroke="${OUT}" stroke-width="5"/>
+    <rect data-v="Vidro" x="670" y="980" width="180" height="140" fill="#8ecae6" stroke="${OUT}" stroke-width="6"/><path d="M760,980 V1120 M670,1050 H850" stroke="${OUT}" stroke-width="5"/>`;
   // mesas de plástico e engradado
   const mesa = (x, cor) => `<rect x="${x - 70}" y="1250" width="140" height="18" rx="6" fill="${cor}" stroke="${OUT}" stroke-width="5"/>
     <path d="M${x - 55},1268 l-10,70 M${x + 55},1268 l10,70" stroke="${cor}" stroke-width="10"/>`;
@@ -566,8 +576,8 @@ function boneco(x, y, r, { torcendo = false, t = 0, i = 0, zoom = 1 } = {}) {
   const pulo = torcendo ? Math.abs(Math.sin(t * 7 + i)) * 6 * k : 0;
   const bracos = torcendo && i % 3 === 0 ? `<path d="M${-11 * k},${-4 * k} l${-7 * k},${-16 * k} M${11 * k},${-4 * k} l${7 * k},${-16 * k}" stroke="${pele}" stroke-width="${6 * k}" stroke-linecap="round"/>` : '';
   return `<g transform="translate(${x.toFixed(1)} ${(y - pulo).toFixed(1)})">${bracos}
-    <rect x="${-12 * k}" y="${-6 * k}" width="${24 * k}" height="${26 * k}" rx="${8 * k}" fill="${camisa}" stroke="${OUT}" stroke-width="${2.5 * k}"/>
-    <circle cy="${-14 * k}" r="${11 * k}" fill="${pele}" stroke="${OUT}" stroke-width="${2.5 * k}"/></g>`;
+    <rect data-v="Vert" x="${-12 * k}" y="${-6 * k}" width="${24 * k}" height="${26 * k}" rx="${8 * k}" fill="${camisa}" stroke="${OUT}" stroke-width="${2.5 * k}"/>
+    <circle data-v="Esfera" cy="${-14 * k}" r="${11 * k}" fill="${pele}" stroke="${OUT}" stroke-width="${2.5 * k}"/></g>`;
 }
 
 // posições de assento conforme a capacidade (dois bancos -> arquibancada em volta)
@@ -655,7 +665,7 @@ function bola(r) {
   }
   const id = 'cb' + (_idEscudo++);
   return `<g clip-path="url(#${id})">${s}</g><defs><clipPath id="${id}"><circle r="${r}"/></clipPath></defs>
-    <circle r="${r}" fill="none" stroke="${OUT}" stroke-width="${r * 0.09}"/>`;
+    <circle class="vol3d" r="${r}" fill="url(#g3dEsfera)" opacity="0"/><circle r="${r}" fill="none" stroke="${OUT}" stroke-width="${r * 0.09}"/>`;
 }
 
 let _idEscudo = 0;
@@ -673,7 +683,7 @@ function escudoPoeira({ estrelas = 0, nome = 'POEIRA FC' } = {}) {
   const tamNome = Math.min(64, 300 / Math.max(1, medir(nome, 1) + 0.04 * nome.length));
   return `<g><defs><clipPath id="${id}"><path d="${interna}"/></clipPath></defs>
     <path d="${forma}" fill="${OUT}" transform="translate(10 14)"/>
-    <path d="${forma}" fill="${vinho}" stroke="${OUT}" stroke-width="12" stroke-linejoin="round"/>
+    <path data-v="Corpo" d="${forma}" fill="${vinho}" stroke="${OUT}" stroke-width="12" stroke-linejoin="round"/>
     <g clip-path="url(#${id})">
       <rect x="-200" y="-132" width="400" height="92" fill="${ouro}" stroke="${OUT}" stroke-width="7"/>
       ${poeira}

@@ -553,6 +553,7 @@ window.quadro = tGlobal => {
   const E = c.dados.estrutura ? { ...DADOS.estado, estrutura: c.dados.estrutura } : DADOS.estado;
   const fn = TIPOS[c.tipo] || TIPOS.abertura;
   let svg = fn(t, c.duracao, c, E);
+  if (window.ESTILO3D) svg = cena3d(svg);  // volume, luz e contorno suave (arte3d.js)
   svg += marcaDagua(E) + hud(c, E) + legenda(t, c);
   // corte com "flash" curto entre cenas
   if (t < 0.12 && i > 0) svg += `<rect width="${W}" height="${H}" fill="#fff" opacity="${(0.12 - t) / 0.12 * 0.5}"/>`;

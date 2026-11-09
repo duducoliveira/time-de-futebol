@@ -19,6 +19,7 @@ const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, de
 await page.goto(pathToFileURL(path.join(aqui, 'palco.html')).href);
 await page.evaluate(() => document.fonts.ready);
 await page.evaluate(() => Promise.all([...document.fonts].map(f => f.load())));
+if (process.env.ESTILO3D) await page.evaluate(() => { window.ESTILO3D = true; });  // estilo 3D experimental (arte3d.js)
 const total = await page.evaluate(d => window.preparar(d), dados);
 
 if (qa) {
