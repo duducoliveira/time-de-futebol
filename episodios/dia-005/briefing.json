@@ -1,0 +1,225 @@
+{
+  "dia": 5,
+  "seguidores_ontem": 250,
+  "seguidores_hoje": 271,
+  "post_anterior": {
+    "id": "18121646698966048",
+    "caption": "DIA 4 do Poeira FC ⚽\n\nO que a gente faz agora? O comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 20,
+    "like_count": 190,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/DfhJlRcgowl/",
+    "timestamp": "2026-11-09T10:48:57+0000"
+  },
+  "curtidas": 190,
+  "receita_curtidas": 190,
+  "caixa_atual": 1057.0,
+  "caixa_com_curtidas": 1247.0,
+  "top_comentarios": [
+    {
+      "usuario": "gilbertoteles_",
+      "texto": "Gilberto Teles – Como técnico, quero começar construindo uma identidade para o Poeira FC. Sobre os R$ 1.057, minha proposta é investir com inteligência: melhorar as condições do campo, adquirir materiais de treino e reservar uma parte para transporte e despesas dos próximos jogos. Não adianta gastar tudo agora; precisamos pensar no crescimento do clube a longo prazo.\n\nPara o confronto de amanhã contra o EFE, vamos entrar no 3-4-2-1. Teremos três zagueiros para dar segurança defensiva, dois alas com liberdade para atacar e dois meias responsáveis pela criação das jogadas. Quero intensidade na marcação, posse de bola consciente e transições rápidas quando recuperarmos a bola. Sem a bola, vamos fechar os espaços e evitar que o adversário encontre facilidade pelo meio.\n\nNossa prioridade será corrigir os erros defensivos, melhorar a comunicação e aproveitar melhor as oportunidades de gol. Não quero uma equipe afobada, quero jogadores disciplinados, que saibam a hora de pressionar e a hora de controlar o jogo.\n\nSabemos que estamos em 9º lugar e precisamos reagir. Amanhã não será apenas mais uma partida: será o primeiro passo da nossa recuperação. Vamos buscar os três pontos com organização, coragem e trabalho coletivo. O Poeira FC precisa voltar a ser respeitado!",
+      "curtidas": 13,
+      "id": "18166711852493897",
+      "timestamp": "2026-11-09T12:47:53+0000"
+    },
+    {
+      "usuario": "joaoc_89",
+      "texto": "Compra a Kombi do clube para ajudar na locomoção dos jogadores.",
+      "curtidas": 6,
+      "id": "17999917595829022",
+      "timestamp": "2026-11-09T10:59:04+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Sou o biquinho jogador do poeira FC venho aqui pedir para q o poeira faça um lugar para nossos torcedores poderem comer quando estiverem Com fomo durante o jogo",
+      "curtidas": 2,
+      "id": "18026533193707014",
+      "timestamp": "2026-11-09T21:35:53+0000"
+    },
+    {
+      "usuario": "zcadilhazz",
+      "texto": "quero ser o roupeiro do clube 🔥",
+      "curtidas": 1,
+      "id": "17877685473585356",
+      "timestamp": "2026-11-09T16:53:50+0000"
+    },
+    {
+      "usuario": "kelvinzy29",
+      "texto": "Bora pra cima!! Próximo jogo buscar os 3 pontos. Clássico é clássico",
+      "curtidas": 1,
+      "id": "18121076270095413",
+      "timestamp": "2026-11-09T22:00:52+0000"
+    },
+    {
+      "usuario": "kleiton_dmitri",
+      "texto": "Kleiton, Zagueiro pra evitar tomar gol que o Paraguai tá fraco na defensiva.",
+      "curtidas": 1,
+      "id": "17938672689403244",
+      "timestamp": "2026-11-09T23:44:22+0000"
+    },
+    {
+      "usuario": "vilela_rei",
+      "texto": "Não entrei no time",
+      "curtidas": 0,
+      "id": "18135537103775554",
+      "timestamp": "2026-11-09T11:02:32+0000"
+    },
+    {
+      "usuario": "yan_stegen",
+      "texto": "Chamaaa, volante jogando por amor a camisa, regra clássica, ou passa o jogador ou a bola kkkk do pescoço para baixo é canela",
+      "curtidas": 0,
+      "id": "18149221492602232",
+      "timestamp": "2026-11-09T11:46:21+0000"
+    },
+    {
+      "usuario": "daviluiz.oliveiravieira",
+      "texto": "Eu quero ser jogador",
+      "curtidas": 0,
+      "id": "17953910187339012",
+      "timestamp": "2026-11-09T12:08:06+0000"
+    },
+    {
+      "usuario": "lernerbruninho",
+      "texto": "Coloca eu de volante. Quebro mais que  mareia",
+      "curtidas": 0,
+      "id": "18442130878180034",
+      "timestamp": "2026-11-09T12:43:57+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "gilbertoteles_",
+      "curtidas": 13,
+      "viavel": true,
+      "acoes": [
+        "tecnico"
+      ],
+      "custo": 1200.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 1,
+      "usuario": "joaoc_89",
+      "curtidas": 6,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Kombi do time custa R$ 1400 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 2,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "zcadilhazz",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 4,
+      "usuario": "kelvinzy29",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "kleiton_dmitri",
+      "curtidas": 1,
+      "viavel": true,
+      "acoes": [
+        "zagueiro"
+      ],
+      "custo": 800.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 6,
+      "usuario": "vilela_rei",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 7,
+      "usuario": "yan_stegen",
+      "curtidas": 0,
+      "viavel": true,
+      "acoes": [
+        "uniforme",
+        "bolas"
+      ],
+      "custo": 380.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 8,
+      "usuario": "daviluiz.oliveiravieira",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 9,
+      "usuario": "lernerbruninho",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": 0,
+    "acoes": [
+      "tecnico"
+    ],
+    "titulo": "Técnico de verdade",
+    "interpretacao": "Contratamos um técnico de verdade, com prancheta e tudo.",
+    "custo": 1200,
+    "efeitos": {
+      "estrutura.tecnico": true,
+      "clube.forca": "+5"
+    },
+    "automatica": true
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz agora?",
+    "opcoes": [
+      "Grama no campo?",
+      "Arquibancada nova?",
+      "Outra ideia?"
+    ]
+  }
+}
