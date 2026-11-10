@@ -146,7 +146,7 @@
         "motivo": "clássico na casa do Estrela da Feira: sai atrás e vira no fim com gol do Benício (o ex-Biquinho, que prometeu o gol)",
         "cena_depois": {
           "tipo": "festa",
-          "narracao": "Primeira vitória do Poeira, e logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
+          "narracao": "E logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
           "texto_tela": [
             "O PASTEL É POR CONTA DELES"
           ],
@@ -157,7 +157,7 @@
         "max_gols_nossos": 2,
         "gol_decisivo": {
           "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era Biquinho, prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
         }
       }
     },

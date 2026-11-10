@@ -17,7 +17,7 @@
       {
         "minuto": 44,
         "time": "Poeira FC",
-        "autor": "Khauan"
+        "autor": "Foguete"
       },
       {
         "minuto": 75,
@@ -221,7 +221,10 @@
           "banco_reservas": true,
           "cabare_proibido": true
         },
-        "novos_jogadores": [],
+        "novos_jogadores": [
+          "Benício",
+          "o ex-Biquinho, meia camisa 7"
+        ],
         "autor": "joaoc_89",
         "hud": {
           "torcida": 271,
@@ -246,55 +249,7 @@
       }
     },
     {
-      "id": "06-comentarios",
-      "tipo": "comentarios",
-      "narracao": "E o Biquinho mandou dois recados. Primeiro: quer ser chamado de Benício. Pedido aceito! Segundo: prometeu fazer gol e garantir a vitória no clássico. Anotado, Benício!",
-      "texto_tela": [],
-      "dados": {
-        "comentarios": [
-          {
-            "usuario": "beniciocarmocarvalho",
-            "texto": "Poeira pode trocar meu nome de biquinho para Benicio por favor?",
-            "curtidas": 1,
-            "chave": "biquinho",
-            "carimbo": "aprovado",
-            "chave_carimbo": "aceito",
-            "selo": "PEDIDO DO CAMISA 7"
-          },
-          {
-            "usuario": "beniciocarmocarvalho",
-            "texto": "Venho aqui falar para a torcida que próximo jogo vou fazer um gol e prometo a vitória",
-            "curtidas": 1,
-            "chave": "segundo",
-            "carimbo": "anotado",
-            "chave_carimbo": "anotado",
-            "selo": "PROMESSA"
-          }
-        ],
-        "hud": {
-          "torcida": 271,
-          "caixa": 0.0
-        },
-        "estrutura": {
-          "gramado": "terrão",
-          "capacidade": 500,
-          "arquibancada": "dois bancos de madeira",
-          "telhado": false,
-          "vestiario": "um banheiro sem porta",
-          "uniforme": "cada um com uma camisa",
-          "rede": true,
-          "bolas": false,
-          "iluminacao": false,
-          "lanchonete": "Barraca do Guigs",
-          "tecnico": false,
-          "kombi": true,
-          "banco_reservas": true,
-          "cabare_proibido": true
-        }
-      }
-    },
-    {
-      "id": "07-pre_jogo",
+      "id": "06-pre_jogo",
       "tipo": "pre_jogo",
       "narracao": "É clássico! Rodada 3, na casa do maior rival do Poeira: o Estrela da Feira. Os dois times dividem a mesma rua de feira; quem perde paga o pastel.",
       "texto_tela": [
@@ -333,7 +288,7 @@
       }
     },
     {
-      "id": "08-apelido",
+      "id": "07-apelido",
       "tipo": "apelido",
       "narracao": "Fica de olho no zagueiro do Estrela da Feira, o Supino: se pressionar, peida!",
       "texto_tela": [
@@ -375,9 +330,9 @@
       }
     },
     {
-      "id": "09-gol",
+      "id": "08-gol",
       "tipo": "gol",
-      "narracao": "Gol do Estrela da Feira, aos 43. A zaga parou pra ver. Literalmente parou.",
+      "narracao": "Gol do Estrela da Feira, aos 43. Ninguém marcou ninguém. Foi democrático.",
       "texto_tela": [
         "43'",
         "GOL DO ESTRELA DA FEIRA"
@@ -422,9 +377,9 @@
       }
     },
     {
-      "id": "10-gol",
+      "id": "09-gol",
       "tipo": "gol",
-      "narracao": "[shouting] GOOOOOOOOOL! GOL! GOL! [excited] É DO POEIRA! KHAUAN, aos 44 minutos! Tudo igual: 1 a 1!",
+      "narracao": "[shouting] GOOOOOOOOL DO POEIRA! [excited] FOGUETE! Aos 44 minutos! Pode comemorar, torcida! Tudo igual: 1 a 1!",
       "texto_tela": [
         "44'",
         "GOOOOL!"
@@ -433,7 +388,7 @@
         "minuto": 44,
         "nosso": true,
         "estilo_voz": "grito",
-        "autor": "Khauan",
+        "autor": "Foguete",
         "placar": [
           1,
           1
@@ -469,9 +424,9 @@
       }
     },
     {
-      "id": "11-gol",
+      "id": "10-gol",
       "tipo": "gol",
-      "narracao": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era Biquinho, prometeu e cumpriu, aos 75! VIROU: 2 a 1!",
+      "narracao": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos 75! VIROU: 2 a 1!",
       "texto_tela": [
         "75'",
         "GOOOOL!"
@@ -516,7 +471,7 @@
       }
     },
     {
-      "id": "12-fim_de_jogo",
+      "id": "11-fim_de_jogo",
       "tipo": "fim_de_jogo",
       "narracao": "Apita o árbitro! Primeira vitória da história do Poeira! 2 a 1!",
       "texto_tela": [
@@ -560,9 +515,9 @@
       }
     },
     {
-      "id": "13-festa",
+      "id": "12-festa",
       "tipo": "festa",
-      "narracao": "Primeira vitória do Poeira, e logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
+      "narracao": "E logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
       "texto_tela": [
         "O PASTEL É POR CONTA DELES"
       ],
@@ -596,7 +551,7 @@
       }
     },
     {
-      "id": "14-tabela",
+      "id": "13-tabela",
       "tipo": "tabela",
       "narracao": "Na tabela, o Poeira está em 5º lugar.",
       "texto_tela": [
@@ -750,7 +705,7 @@
       }
     },
     {
-      "id": "15-decisao",
+      "id": "14-decisao",
       "tipo": "decisao",
       "narracao": "Caixa zerado! Agora é com as curtidas de vocês. O que a gente faz agora? O comentário mais curtido decide.",
       "texto_tela": [
@@ -760,7 +715,7 @@
       "dados": {
         "opcoes": [
           "Grama no campo?",
-          "Arquibancada nova?",
+          "Uniforme do time?",
           "Outra ideia?"
         ],
         "caixa": 0.0,
@@ -787,7 +742,7 @@
       }
     },
     {
-      "id": "16-encerramento",
+      "id": "15-encerramento",
       "tipo": "encerramento",
       "narracao": "Amanhã tem Poeira contra o Real Laje. Então já sabe: segue pra virar torcedor, curte pra encher o caixa, e comenta o que a gente faz. Até amanhã!",
       "texto_tela": [

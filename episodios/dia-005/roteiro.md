@@ -27,57 +27,52 @@ Torcida: 271 · Caixa: R$ 0 · Posição: 5º
 
 > A Kombi custava mil e quatrocentos reais. Mas a Dona Cida chorou tanto que o vendedor aceitou tudo o que tinha no caixa: mil duzentos e quarenta e sete. Caixa zerado, e o Poeira vai de Kombi pro clássico!
 
-## 06-comentarios
-**Na tela:** 
-
-> E o Biquinho mandou dois recados. Primeiro: quer ser chamado de Benício. Pedido aceito! Segundo: prometeu fazer gol e garantir a vitória no clássico. Anotado, Benício!
-
-## 07-pre_jogo
+## 06-pre_jogo
 **Na tela:** RODADA 3 | CLÁSSICO!
 
 > É clássico! Rodada 3, na casa do maior rival do Poeira: o Estrela da Feira. Os dois times dividem a mesma rua de feira; quem perde paga o pastel.
 
-## 08-apelido
+## 07-apelido
 **Na tela:** DE OLHO NO ESTRELA DA FEIRA
 
 > Fica de olho no zagueiro do Estrela da Feira, o Supino: se pressionar, peida!
 
-## 09-gol
+## 08-gol
 **Na tela:** 43' | GOL DO ESTRELA DA FEIRA
 
-> Gol do Estrela da Feira, aos 43. A zaga parou pra ver. Literalmente parou.
+> Gol do Estrela da Feira, aos 43. Ninguém marcou ninguém. Foi democrático.
 
-## 10-gol
+## 09-gol
 **Na tela:** 44' | GOOOOL!
 
-> [shouting] GOOOOOOOOOL! GOL! GOL! [excited] É DO POEIRA! KHAUAN, aos 44 minutos! Tudo igual: 1 a 1!
+> [shouting] GOOOOOOOOL DO POEIRA! [excited] FOGUETE! Aos 44 minutos! Pode comemorar, torcida! Tudo igual: 1 a 1!
 
-## 11-gol
+## 10-gol
 **Na tela:** 75' | GOOOOL!
 
-> [shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era Biquinho, prometeu e cumpriu, aos 75! VIROU: 2 a 1!
+> [shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos 75! VIROU: 2 a 1!
 
-## 12-fim_de_jogo
+## 11-fim_de_jogo
 **Na tela:** FIM DE JOGO | Estrela da Feira 1 x 2 Poeira FC
 
 > Apita o árbitro! Primeira vitória da história do Poeira! 2 a 1!
 
-## 13-festa
+## 12-festa
 **Na tela:** O PASTEL É POR CONTA DELES
 
-> Primeira vitória do Poeira, e logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!
+> E logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!
 
-## 14-tabela
+## 13-tabela
 **Na tela:** TERCEIRA DIVISÃO DA VÁRZEA | 5º LUGAR
 
 > Na tabela, o Poeira está em 5º lugar.
 
-## 15-decisao
+## 14-decisao
 **Na tela:** DECISÃO #5 | COMENTÁRIO MAIS CURTIDO DECIDE
 
 > Caixa zerado! Agora é com as curtidas de vocês. O que a gente faz agora? O comentário mais curtido decide.
 
-## 16-encerramento
+## 15-encerramento
 **Na tela:** @poeira.fc
 
 > Amanhã tem Poeira contra o Real Laje. Então já sabe: segue pra virar torcedor, curte pra encher o caixa, e comenta o que a gente faz. Até amanhã!

@@ -183,7 +183,9 @@ def sugerir_opcoes(estado: dict, caixa_previsto: float, n: int = 2) -> list[str]
     """Opções para a próxima decisão: o que cabe no caixa e ainda não foi feito."""
     candidatos = [(k, v) for k, v in CATALOGO.items()
                   if not (v["unico"] and _ja_feito(estado, k))
-                  and (not v.get("requer") or _ja_feito(estado, v["requer"]))]
+                  and (not v.get("requer") or _ja_feito(estado, v["requer"]))
+                  # arquibancada nova só quando a torcida não couber mais
+                  and (k != "arquibancada" or estado["torcida"]["seguidores"] > estado["estrutura"]["capacidade"])]
     cabem = [c for c in candidatos if c[1]["custo"] <= max(caixa_previsto, 3000)]
     pool = sorted(cabem or candidatos, key=lambda kv: -kv[1]["custo"])[:5]
     rng = random.Random(f"opcoes-{estado['dia']}")

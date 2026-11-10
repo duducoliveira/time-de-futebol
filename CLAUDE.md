@@ -16,7 +16,8 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
 - Narração: "reais" só no primeiro valor do caixa ("saiu de R$ 358 pra 658"). Banco de reservas: imagem própria da lateral (fora da linha), não aparece na vista do campo.
 - Capa: todo vídeo abre com a cena `capa`, em que o Tião fala "Dia N: tema!" sobre a tela "DIA N" + tema (`briefing["tema"]`/`tema_falado` ou automático ESTREIA/RODADA N/CLÁSSICO!). O Buffer usa o quadro de 0,5 s como capa (`thumbnail_ms`).
 - Peneira (Dia 3 → Dia 4): 5 jogadores + 1 técnico, pelos comentários mais curtidos com nome + posição (`timefc/peneira.py`, `selecionar_peneira`). Modelo do Dia 3: `episodios/modelos/dia-003-peneira.json`. Piadas com o padrão "o [posição] [nome], ou melhor, o [posição] [apelido do banco]: [porquê]".
-- Fluxo diário: levantamento às 22h11 (tarefa agendada) → OK do usuário → vídeo → "aprovado" → hospeda e agenda para 6h.
+- Fluxo diário: levantamento às 22h11 (tarefa agendada) → OK do usuário → **vídeo-rascunho com voz local** (`video --rascunho`, Piper pt-BR, sem gastar ElevenLabs) → ajustes → vídeo final com a ElevenLabs → "aprovado" → hospeda e agenda para 6h.
+- Gol contra: piada de `PIADAS_GOL_CONTRA` nunca repete (`piadas_gol_usadas`); quando acabarem, só o gol. "Primeira vitória" só no apito final. Arquibancada nova só é sugerida quando a torcida passa da capacidade.
 - Visual: arte vetorial por código (`video/arte.js`, `video/cenas.js`). Antes de renderizar, rode a checagem de sobreposição (`--qa`); o layout é em faixas (topo = contador, meio = cartões, y≈1165 = legenda, embaixo = personagens).
 - Escudo oficial: `escudoPoeira()` em `video/arte.js`; as imagens de perfil ficam em `marca/` (gere com `node video/logo.mjs marca`).
 - Vídeos hospedados no repositório público **duducoliveira/poeirafc-videos** (`clube.repo_videos`, arquivo `dia-NNN.mp4`, link raw do GitHub) → Buffer.

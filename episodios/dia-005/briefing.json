@@ -209,7 +209,9 @@
     "custo": 1247,
     "efeitos": {
       "estrutura.kombi": true,
-      "clube.forca": "+1"
+      "clube.forca": "+1",
+      "elenco.17.nome": "Benício",
+      "elenco.17.traco": "o ex-Biquinho, meia camisa 7"
     },
     "narracao_obra": "A Kombi custava mil e quatrocentos reais. Mas a Dona Cida chorou tanto que o vendedor aceitou tudo o que tinha no caixa: mil duzentos e quarenta e sete. Caixa zerado, e o Poeira vai de Kombi pro clássico!"
   },
@@ -219,7 +221,7 @@
     "pergunta": "O que a gente faz agora?",
     "opcoes": [
       "Grama no campo?",
-      "Arquibancada nova?",
+      "Uniforme do time?",
       "Outra ideia?"
     ]
   },
@@ -246,38 +248,6 @@
             "selo": "A SOLUÇÃO"
           }
         ]
-      }
-    ],
-    "antes_jogo": [
-      {
-        "tipo": "comentarios",
-        "narracao": "E o Biquinho mandou dois recados. Primeiro: quer ser chamado de Benício. Pedido aceito! Segundo: prometeu fazer gol e garantir a vitória no clássico. Anotado, Benício!",
-        "efeitos": {
-          "elenco.17.nome": "Benício",
-          "elenco.17.traco": "o ex-Biquinho, meia camisa 7"
-        },
-        "dados": {
-          "comentarios": [
-            {
-              "usuario": "beniciocarmocarvalho",
-              "texto": "Poeira pode trocar meu nome de biquinho para Benicio por favor?",
-              "curtidas": 1,
-              "chave": "biquinho",
-              "carimbo": "aprovado",
-              "chave_carimbo": "aceito",
-              "selo": "PEDIDO DO CAMISA 7"
-            },
-            {
-              "usuario": "beniciocarmocarvalho",
-              "texto": "Venho aqui falar para a torcida que próximo jogo vou fazer um gol e prometo a vitória",
-              "curtidas": 1,
-              "chave": "segundo",
-              "carimbo": "anotado",
-              "chave_carimbo": "anotado",
-              "selo": "PROMESSA"
-            }
-          ]
-        }
       }
     ]
   },

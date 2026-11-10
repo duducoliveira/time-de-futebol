@@ -473,6 +473,10 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             ultimo = i == len(gols) - 1 and len(gols) > 1
             if nosso:
                 art = _artilheiro(e, rng)
+                for _ in range(20):  # o autor do gol decisivo marca só esse
+                    if not decisivo or i == ultimo_nosso or art["nome"] != decisivo.get("artilheiro"):
+                        break
+                    art = _artilheiro(e, rng)
                 quem = decisivo.get("artilheiro") if decisivo and i == ultimo_nosso else regra_jogo.get("artilheiro")
                 if quem:  # gol roteirizado (ex: o Saci, de bicicleta; o Benício, que prometeu o gol)
                     art = next(({"numero": n, **j} for n, j in e["elenco"].items() if j["nome"] == quem), art)
@@ -496,7 +500,14 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                     elif ns > ds + 1:
                         txt = limpo + f" Ampliou: {_n(ns)} a {_n(ds)}!"
             else:
-                txt = f"Gol do {adv}, aos {g['minuto']}. {rng.choice(PIADAS_GOL_CONTRA)}"
+                # piada do gol contra: nunca repete (quando acabarem, só o gol)
+                usadas = e.setdefault("piadas_gol_usadas", [])
+                livres = [x for x in PIADAS_GOL_CONTRA if x not in usadas]
+                fecha_historia = ultimo and (ns == ds or (ns < ds and any(x["time"] == nome for x in gols[:i])))
+                piada_gol = rng.choice(livres) if livres and not fecha_historia else ""
+                if piada_gol:
+                    usadas.append(piada_gol)
+                txt = f"Gol do {adv}, aos {g['minuto']}. {piada_gol}".strip()
                 if ultimo and ns < ds and any(x["time"] == nome for x in gols[:i]):
                     txt = (f"Ah, não... Gol do {adv}, aos {g['minuto']}. Eles viraram o jogo: "
                            f"{_n(ds)} a {_n(ns)}. {'A torcida ficou em silêncio.' if casa else 'A casa deles veio abaixo.'}")

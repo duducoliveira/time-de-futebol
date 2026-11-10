@@ -47,7 +47,7 @@
       {
         "dia": 5,
         "seguidores": 271,
-        "data": "2026-11-10T01:48:06+00:00"
+        "data": "2026-11-10T02:08:21+00:00"
       }
     ]
   },
@@ -256,7 +256,7 @@
         "motivo": "clássico na casa do Estrela da Feira: sai atrás e vira no fim com gol do Benício (o ex-Biquinho, que prometeu o gol)",
         "cena_depois": {
           "tipo": "festa",
-          "narracao": "Primeira vitória do Poeira, e logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
+          "narracao": "E logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
           "texto_tela": [
             "O PASTEL É POR CONTA DELES"
           ],
@@ -267,7 +267,7 @@
         "max_gols_nossos": 2,
         "gol_decisivo": {
           "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era Biquinho, prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
         }
       }
     },
@@ -480,7 +480,7 @@
           {
             "minuto": 44,
             "time": "Poeira FC",
-            "autor": "Khauan"
+            "autor": "Foguete"
           },
           {
             "minuto": 75,
@@ -759,12 +759,12 @@
     },
     {
       "dia": 5,
-      "data": "2026-11-10T01:48:06+00:00",
+      "data": "2026-11-10T02:08:21+00:00",
       "proxima_decisao": {
         "pergunta": "O que a gente faz agora?",
         "opcoes": [
           "Grama no campo?",
-          "Arquibancada nova?",
+          "Uniforme do time?",
           "Outra ideia?"
         ]
       },
@@ -905,10 +905,14 @@
       "evento": "Rodada 3: Estrela da Feira 1 x 2 Poeira FC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-10T01:48:06+00:00",
+  "atualizado_em": "2026-11-10T02:08:21+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
     "Supino"
+  ],
+  "piadas_gol_usadas": [
+    "A zaga parou pra ver. Literalmente parou.",
+    "Ninguém marcou ninguém. Foi democrático."
   ]
 }

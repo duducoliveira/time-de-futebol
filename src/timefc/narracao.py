@@ -125,8 +125,67 @@ ESTILOS = {
 }
 
 
+PIPER_MODELO = Path(__file__).resolve().parents[2] / ".cache" / "piper" / "pt_BR-faber-medium.onnx"
+PIPER_URL = "https://huggingface.co/rhasspy/piper-voices/resolve/main/pt/pt_BR/faber/medium/pt_BR-faber-medium.onnx"
+_piper = None
+
+
+def tts_rascunho(texto: str, cache: Path) -> tuple[Path, dict]:
+    """Voz local (Piper, pt-BR) para o vídeo de aprovação: não gasta crédito da ElevenLabs.
+    O tempo de cada caractere é estimado pela proporção do texto (bom o bastante para a legenda)."""
+    global _piper
+    import wave
+    chave = "piper-" + hashlib.sha1(texto.encode()).hexdigest()[:16]
+    mp3, alin = cache / f"{chave}.mp3", cache / f"{chave}.json"
+    if not mp3.exists():
+        cache.mkdir(parents=True, exist_ok=True)
+        if not PIPER_MODELO.exists():
+            PIPER_MODELO.parent.mkdir(parents=True, exist_ok=True)
+            for ext in ("", ".json"):
+                r = requests.get(PIPER_URL + ext, timeout=300)
+                r.raise_for_status()
+                Path(str(PIPER_MODELO) + ext).write_bytes(r.content)
+        if _piper is None:
+            from piper import PiperVoice
+            _piper = PiperVoice.load(str(PIPER_MODELO))
+        limpo = re.sub(r"\[[^\]]*\]\s*", "", texto)
+        wav = cache / f"{chave}.wav"
+        with wave.open(str(wav), "wb") as w:
+            _piper.synthesize_wav(limpo, w)
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(wav), "-ar", "44100", "-b:a", "128k", str(mp3)],
+                       check=True)
+        wav.unlink()
+        d = duracao(mp3)
+        # caracteres dentro de [tags] não são falados: ficam com o tempo do vizinho
+        falado = [not dentro for dentro in _dentro_de_tag(texto)]
+        n = max(1, sum(falado))
+        ini, fim, k = [], [], 0
+        for f in falado:
+            t0 = d * k / n
+            k += 1 if f else 0
+            ini.append(round(t0, 3))
+            fim.append(round(d * k / n, 3))
+        alin.write_text(json.dumps({"character_start_times_seconds": ini, "character_end_times_seconds": fim}),
+                        encoding="utf-8")
+    return mp3, json.loads(alin.read_text(encoding="utf-8"))
+
+
+def _dentro_de_tag(texto: str) -> list[bool]:
+    dentro, out = False, []
+    for ch in texto:
+        if ch == "[":
+            dentro = True
+        out.append(dentro)
+        if ch == "]":
+            dentro = False
+    return out
+
+
 def tts(texto: str, cache: Path, voz: str | None = None, estilo: str = "normal") -> tuple[Path, dict]:
-    """Gera (ou reaproveita) o MP3 e o alinhamento de um texto."""
+    """Gera (ou reaproveita) o MP3 e o alinhamento de um texto.
+    Com VOZ_RASCUNHO=1 usa a voz local (Piper), sem gastar crédito da ElevenLabs."""
+    if os.environ.get("VOZ_RASCUNHO"):
+        return tts_rascunho(texto, cache)
     voz = voz or os.environ["ELEVENLABS_VOICE_ID"]
     modelo, ajustes = ESTILOS[estilo]
     if estilo == "normal":
