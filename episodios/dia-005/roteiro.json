@@ -1,0 +1,1008 @@
+{
+  "dia": 5,
+  "clube": "Poeira FC",
+  "caixa": 0.0,
+  "torcida": 271,
+  "posicao": 5,
+  "partida": {
+    "mandante": "Estrela da Feira",
+    "visitante": "Poeira FC",
+    "gols_mandante": 1,
+    "gols_visitante": 2,
+    "gols": [
+      {
+        "minuto": 43,
+        "time": "Estrela da Feira"
+      },
+      {
+        "minuto": 44,
+        "time": "Poeira FC",
+        "autor": "Khauan"
+      },
+      {
+        "minuto": 75,
+        "time": "Poeira FC",
+        "autor": "Benício"
+      }
+    ],
+    "rodada": 3
+  },
+  "cenas": [
+    {
+      "id": "01-capa",
+      "tipo": "capa",
+      "narracao": "Dia 5: Clássico!",
+      "texto_tela": [
+        "DIA 5"
+      ],
+      "dados": {
+        "tema": "CLÁSSICO!",
+        "antes": 250,
+        "hud": {
+          "torcida": 271,
+          "caixa": 1247.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": false,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    },
+    {
+      "id": "02-evolucao",
+      "tipo": "evolucao",
+      "narracao": "Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. Ontem, 250 torcedores. Hoje: 271! E o caixa saiu de R$ 1.057 pra 1.247!",
+      "texto_tela": [
+        "DIA 5"
+      ],
+      "dados": {
+        "antes": 250,
+        "torcida": 271,
+        "caixa_antes": 1057.0,
+        "caixa": 1247.0,
+        "curtidas": 190,
+        "hud": {
+          "torcida": 271,
+          "caixa": 1247.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": false,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    },
+    {
+      "id": "03-estadio",
+      "tipo": "estadio",
+      "narracao": "Olha a arquibancada começando a encher!",
+      "texto_tela": [
+        "271 TORCEDORES"
+      ],
+      "dados": {
+        "antes": 250,
+        "torcida": 271,
+        "nivel": "enchendo",
+        "hud": {
+          "torcida": 271,
+          "caixa": 1247.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": false,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    },
+    {
+      "id": "04-comentarios",
+      "tipo": "comentarios",
+      "narracao": "O comentário mais curtido foi do técnico Gilberto Teles: guardar dinheiro pro transporte dos próximos jogos. E o João deu a solução: comprar a Kombi do clube! Aprovado!",
+      "texto_tela": [],
+      "dados": {
+        "comentarios": [
+          {
+            "usuario": "gilbertoteles_",
+            "texto": "Reservar uma parte para transporte e despesas dos próximos jogos. Não adianta gastar tudo agora!",
+            "curtidas": 13,
+            "chave": "gilberto",
+            "carimbo": "anotado",
+            "chave_carimbo": "transporte"
+          },
+          {
+            "usuario": "joaoc_89",
+            "texto": "Compra a Kombi do clube para ajudar na locomoção dos jogadores.",
+            "curtidas": 6,
+            "chave": "joão",
+            "carimbo": "aprovado",
+            "chave_carimbo": "aprovado",
+            "selo": "A SOLUÇÃO"
+          }
+        ],
+        "hud": {
+          "torcida": 271,
+          "caixa": 1247.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": false,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    },
+    {
+      "id": "05-obra",
+      "tipo": "obra",
+      "narracao": "A Kombi custava mil e quatrocentos reais. Mas a Dona Cida chorou tanto que o vendedor aceitou tudo o que tinha no caixa: mil duzentos e quarenta e sete. Caixa zerado, e o Poeira vai de Kombi pro clássico!",
+      "texto_tela": [
+        "KOMBI DO POEIRA",
+        "-R$ 1.247"
+      ],
+      "dados": {
+        "acoes": [
+          "kombi"
+        ],
+        "custo": 1247.0,
+        "caixa": 0.0,
+        "antes": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": false,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "depois": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "novos_jogadores": [],
+        "autor": "joaoc_89",
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    },
+    {
+      "id": "06-comentarios",
+      "tipo": "comentarios",
+      "narracao": "E o Biquinho mandou dois recados. Primeiro: quer ser chamado de Benício. Pedido aceito! Segundo: prometeu fazer gol e garantir a vitória no clássico. Anotado, Benício!",
+      "texto_tela": [],
+      "dados": {
+        "comentarios": [
+          {
+            "usuario": "beniciocarmocarvalho",
+            "texto": "Poeira pode trocar meu nome de biquinho para Benicio por favor?",
+            "curtidas": 1,
+            "chave": "biquinho",
+            "carimbo": "aprovado",
+            "chave_carimbo": "aceito",
+            "selo": "PEDIDO DO CAMISA 7"
+          },
+          {
+            "usuario": "beniciocarmocarvalho",
+            "texto": "Venho aqui falar para a torcida que próximo jogo vou fazer um gol e prometo a vitória",
+            "curtidas": 1,
+            "chave": "segundo",
+            "carimbo": "anotado",
+            "chave_carimbo": "anotado",
+            "selo": "PROMESSA"
+          }
+        ],
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    },
+    {
+      "id": "07-pre_jogo",
+      "tipo": "pre_jogo",
+      "narracao": "É clássico! Rodada 3, na casa do maior rival do Poeira: o Estrela da Feira. Os dois times dividem a mesma rua de feira; quem perde paga o pastel.",
+      "texto_tela": [
+        "RODADA 3",
+        "CLÁSSICO!"
+      ],
+      "dados": {
+        "mandante": "Estrela da Feira",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "local": {
+          "nome": "Estrela da Feira",
+          "sigla": "EFE",
+          "torcida": 320,
+          "tema": "feira"
+        }
+      }
+    },
+    {
+      "id": "08-apelido",
+      "tipo": "apelido",
+      "narracao": "Fica de olho no zagueiro do Estrela da Feira, o Supino: se pressionar, peida!",
+      "texto_tela": [
+        "DE OLHO NO ESTRELA DA FEIRA"
+      ],
+      "dados": {
+        "alvo": "adversario",
+        "time": "Estrela da Feira",
+        "posicao": "zagueiro",
+        "apelido": "Supino",
+        "piada": "se pressionar, peida",
+        "numero": "5",
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "local": {
+          "nome": "Estrela da Feira",
+          "sigla": "EFE",
+          "torcida": 320,
+          "tema": "feira"
+        }
+      }
+    },
+    {
+      "id": "09-gol",
+      "tipo": "gol",
+      "narracao": "Gol do Estrela da Feira, aos 43. A zaga parou pra ver. Literalmente parou.",
+      "texto_tela": [
+        "43'",
+        "GOL DO ESTRELA DA FEIRA"
+      ],
+      "dados": {
+        "minuto": 43,
+        "nosso": false,
+        "estilo_voz": "normal",
+        "autor": null,
+        "placar": [
+          1,
+          0
+        ],
+        "mandante": "Estrela da Feira",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "local": {
+          "nome": "Estrela da Feira",
+          "sigla": "EFE",
+          "torcida": 320,
+          "tema": "feira"
+        }
+      }
+    },
+    {
+      "id": "10-gol",
+      "tipo": "gol",
+      "narracao": "[shouting] GOOOOOOOOOL! GOL! GOL! [excited] É DO POEIRA! KHAUAN, aos 44 minutos! Tudo igual: 1 a 1!",
+      "texto_tela": [
+        "44'",
+        "GOOOOL!"
+      ],
+      "dados": {
+        "minuto": 44,
+        "nosso": true,
+        "estilo_voz": "grito",
+        "autor": "Khauan",
+        "placar": [
+          1,
+          1
+        ],
+        "mandante": "Estrela da Feira",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "local": {
+          "nome": "Estrela da Feira",
+          "sigla": "EFE",
+          "torcida": 320,
+          "tema": "feira"
+        }
+      }
+    },
+    {
+      "id": "11-gol",
+      "tipo": "gol",
+      "narracao": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era Biquinho, prometeu e cumpriu, aos 75! VIROU: 2 a 1!",
+      "texto_tela": [
+        "75'",
+        "GOOOOL!"
+      ],
+      "dados": {
+        "minuto": 75,
+        "nosso": true,
+        "estilo_voz": "grito",
+        "autor": "Benício",
+        "placar": [
+          1,
+          2
+        ],
+        "mandante": "Estrela da Feira",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "local": {
+          "nome": "Estrela da Feira",
+          "sigla": "EFE",
+          "torcida": 320,
+          "tema": "feira"
+        }
+      }
+    },
+    {
+      "id": "12-fim_de_jogo",
+      "tipo": "fim_de_jogo",
+      "narracao": "Apita o árbitro! Primeira vitória da história do Poeira! 2 a 1!",
+      "texto_tela": [
+        "FIM DE JOGO",
+        "Estrela da Feira 1 x 2 Poeira FC"
+      ],
+      "dados": {
+        "resultado": "vitória",
+        "placar": [
+          1,
+          2
+        ],
+        "mandante": "Estrela da Feira",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "local": {
+          "nome": "Estrela da Feira",
+          "sigla": "EFE",
+          "torcida": 320,
+          "tema": "feira"
+        }
+      }
+    },
+    {
+      "id": "13-festa",
+      "tipo": "festa",
+      "narracao": "Primeira vitória do Poeira, e logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
+      "texto_tela": [
+        "O PASTEL É POR CONTA DELES"
+      ],
+      "dados": {
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        },
+        "local": {
+          "nome": "Estrela da Feira",
+          "sigla": "EFE",
+          "torcida": 320,
+          "tema": "feira"
+        }
+      }
+    },
+    {
+      "id": "14-tabela",
+      "tipo": "tabela",
+      "narracao": "Na tabela, o Poeira está em 5º lugar.",
+      "texto_tela": [
+        "TERCEIRA DIVISÃO DA VÁRZEA",
+        "5º LUGAR"
+      ],
+      "dados": {
+        "tabela": [
+          {
+            "time": "Leões do Brejo",
+            "j": 3,
+            "v": 2,
+            "e": 1,
+            "d": 0,
+            "gp": 4,
+            "gc": 2,
+            "pts": 7,
+            "pos": 1,
+            "sg": 2
+          },
+          {
+            "time": "Juventude do Asfalto",
+            "j": 3,
+            "v": 2,
+            "e": 1,
+            "d": 0,
+            "gp": 2,
+            "gc": 0,
+            "pts": 7,
+            "pos": 2,
+            "sg": 2
+          },
+          {
+            "time": "Ferro-Velho EC",
+            "j": 3,
+            "v": 2,
+            "e": 0,
+            "d": 1,
+            "gp": 2,
+            "gc": 4,
+            "pts": 6,
+            "pos": 3,
+            "sg": -2
+          },
+          {
+            "time": "Atlético Padaria",
+            "j": 3,
+            "v": 1,
+            "e": 1,
+            "d": 1,
+            "gp": 3,
+            "gc": 2,
+            "pts": 4,
+            "pos": 4,
+            "sg": 1
+          },
+          {
+            "time": "Poeira FC",
+            "j": 3,
+            "v": 1,
+            "e": 1,
+            "d": 1,
+            "gp": 5,
+            "gc": 5,
+            "pts": 4,
+            "pos": 5,
+            "sg": 0
+          },
+          {
+            "time": "Amigos do Churrasco FC",
+            "j": 3,
+            "v": 1,
+            "e": 0,
+            "d": 2,
+            "gp": 5,
+            "gc": 3,
+            "pts": 3,
+            "pos": 6,
+            "sg": 2
+          },
+          {
+            "time": "Grêmio Vila Barro",
+            "j": 3,
+            "v": 1,
+            "e": 0,
+            "d": 2,
+            "gp": 4,
+            "gc": 5,
+            "pts": 3,
+            "pos": 7,
+            "sg": -1
+          },
+          {
+            "time": "Real Laje",
+            "j": 3,
+            "v": 1,
+            "e": 0,
+            "d": 2,
+            "gp": 2,
+            "gc": 3,
+            "pts": 3,
+            "pos": 8,
+            "sg": -1
+          },
+          {
+            "time": "Estrela da Feira",
+            "j": 3,
+            "v": 1,
+            "e": 0,
+            "d": 2,
+            "gp": 4,
+            "gc": 6,
+            "pts": 3,
+            "pos": 9,
+            "sg": -2
+          },
+          {
+            "time": "Veteranos do Bairro",
+            "j": 3,
+            "v": 0,
+            "e": 2,
+            "d": 1,
+            "gp": 3,
+            "gc": 4,
+            "pts": 2,
+            "pos": 10,
+            "sg": -1
+          }
+        ],
+        "posicao": 5,
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    },
+    {
+      "id": "15-decisao",
+      "tipo": "decisao",
+      "narracao": "Caixa zerado! Agora é com as curtidas de vocês. O que a gente faz agora? O comentário mais curtido decide.",
+      "texto_tela": [
+        "DECISÃO #5",
+        "COMENTÁRIO MAIS CURTIDO DECIDE"
+      ],
+      "dados": {
+        "opcoes": [
+          "Grama no campo?",
+          "Arquibancada nova?",
+          "Outra ideia?"
+        ],
+        "caixa": 0.0,
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    },
+    {
+      "id": "16-encerramento",
+      "tipo": "encerramento",
+      "narracao": "Amanhã tem Poeira contra o Real Laje. Então já sabe: segue pra virar torcedor, curte pra encher o caixa, e comenta o que a gente faz. Até amanhã!",
+      "texto_tela": [
+        "@poeira.fc"
+      ],
+      "dados": {
+        "proximo": [
+          "Real Laje",
+          "Poeira FC"
+        ],
+        "hud": {
+          "torcida": 271,
+          "caixa": 0.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "cada um com uma camisa",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true
+        }
+      }
+    }
+  ],
+  "estado": {
+    "clube": {
+      "nome": "Poeira FC",
+      "nome_falado": "Poeira",
+      "sigla": "PFC",
+      "instagram": "@poeira.fc",
+      "instagram_id": "17841453282683112",
+      "buffer_canal_id": "6aed11bde29c69a171783476",
+      "repo_videos": "duducoliveira/poeirafc-videos",
+      "fundado_no_dia": 0,
+      "forca": 29,
+      "estadio": "Campo do Poeira",
+      "piada_estadio": "E quando venta, você entende o nome do time."
+    },
+    "estrutura": {
+      "gramado": "terrão",
+      "capacidade": 500,
+      "arquibancada": "dois bancos de madeira",
+      "telhado": false,
+      "vestiario": "um banheiro sem porta",
+      "uniforme": "cada um com uma camisa",
+      "rede": true,
+      "bolas": false,
+      "iluminacao": false,
+      "lanchonete": "Barraca do Guigs",
+      "tecnico": false,
+      "kombi": true,
+      "banco_reservas": true,
+      "cabare_proibido": true
+    },
+    "elenco": {
+      "1": {
+        "nome": "Baixinho",
+        "posicao": "GOL",
+        "traco": "1,63 m; pula muito, alcança pouco"
+      },
+      "2": {
+        "nome": "Zé Marmita",
+        "posicao": "LD",
+        "traco": "entregador; sai no intervalo pra fazer entrega"
+      },
+      "3": {
+        "nome": "Tonhão",
+        "posicao": "ZAG",
+        "traco": "pedreiro; nunca perdeu uma dividida, nunca acertou um passe"
+      },
+      "4": {
+        "nome": "Professor",
+        "posicao": "ZAG",
+        "traco": "51 anos; não corre, se posiciona"
+      },
+      "5": {
+        "nome": "Padeiro",
+        "posicao": "VOL",
+        "traco": "chega direto do forno, com pão pra todo mundo"
+      },
+      "6": {
+        "nome": "Chinelinho",
+        "posicao": "LE",
+        "traco": "joga com chuteira emprestada dois números maior"
+      },
+      "7": {
+        "nome": "Foguete",
+        "posicao": "PD",
+        "traco": "o mais rápido do bairro; não tem freio"
+      },
+      "8": {
+        "nome": "Nenê",
+        "posicao": "MEI",
+        "traco": "16 anos, filho da Dona Cida; o único que sabe jogar"
+      },
+      "9": {
+        "nome": "Bujão",
+        "posicao": "CA",
+        "traco": "118 kg; finaliza muito bem, parado"
+      },
+      "10": {
+        "nome": "Maestro",
+        "posicao": "MEI",
+        "traco": "44 anos; conta do teste que fez num time grande em 98"
+      },
+      "11": {
+        "nome": "Sumido",
+        "posicao": "PE",
+        "traco": "ninguém sabe onde mora; aparece só no jogo"
+      },
+      "12": {
+        "nome": "Gabriel",
+        "posicao": "ZAG",
+        "traco": "se apresentou nos comentários: 'Gabriel, zagueiro'",
+        "instagram": "gabriel_rzt1221",
+        "chegou_no_dia": 2,
+        "chave": "gabriel",
+        "apelido": "Whisky do Paraguai"
+      },
+      "13": {
+        "nome": "Fé no Justo",
+        "posicao": "VOL",
+        "traco": "levantou a mão nos comentários",
+        "instagram": "_fe_no_justo_._777",
+        "chegou_no_dia": 2,
+        "chave": "fé"
+      },
+      "14": {
+        "nome": "Zé Kaun",
+        "posicao": "PE",
+        "traco": "respondeu com três emojis e foi contratado",
+        "instagram": "j_o_s_e_k_a_u_n",
+        "chegou_no_dia": 2,
+        "chave": "zé",
+        "apelido": "Viagra em Idoso"
+      },
+      "15": {
+        "nome": "Khauan",
+        "posicao": "CA",
+        "traco": "chegou pela peneira: 'bora subir esse time'",
+        "instagram": "khauan.ribero",
+        "chegou_no_dia": 4,
+        "chave": "khauan"
+      },
+      "16": {
+        "nome": "Rodrigo Moura",
+        "posicao": "LD",
+        "apelido": "Soldado de Guerra",
+        "traco": "vai, mas ninguém sabe se volta",
+        "instagram": "rodrigo_smoura01",
+        "chegou_no_dia": 4,
+        "chave": "rodrigo"
+      },
+      "17": {
+        "nome": "Benício",
+        "posicao": "MEI",
+        "traco": "o ex-Biquinho, meia camisa 7",
+        "instagram": "beniciocarmocarvalho",
+        "chegou_no_dia": 4,
+        "chave": "biquinho"
+      },
+      "18": {
+        "nome": "Saci",
+        "posicao": "CA",
+        "apelido": "Uma Perna Só",
+        "traco": "só faz gol de bicicleta",
+        "instagram": "alisoonjesus",
+        "chegou_no_dia": 4,
+        "chave": "saci"
+      },
+      "19": {
+        "nome": "Kelvin",
+        "posicao": "PD",
+        "traco": "ponta direita da peneira",
+        "instagram": "kelvinzy29",
+        "chegou_no_dia": 4,
+        "chave": "kelvin"
+      }
+    },
+    "personagens": {
+      "narrador": {
+        "nome": "Tião",
+        "papel": "locutor da rádio comunitária, narra tudo como se fosse final de Copa",
+        "voz": "rpNe0HOx7heUulPiOEaG"
+      },
+      "presidente": {
+        "nome": "Dona Cida",
+        "papel": "dona do bar da esquina; presidente, tesoureira e roupeira do clube"
+      },
+      "diretor": {
+        "nome": "Ragazzo",
+        "cargo": "diretor de futebol (estagiário)",
+        "instagram": "gabriel_ragazzo1",
+        "chave": "ragazzo"
+      },
+      "tecnico": {
+        "nome": "Gilberto Teles",
+        "cargo": "técnico",
+        "instagram": "gilbertoteles_",
+        "chave": "gilberto",
+        "esquema": "3-4-2-1"
+      }
+    },
+    "liga": "Terceira Divisão da Várzea",
+    "moeda": "R$"
+  },
+  "legenda": "DIA 5 do Poeira FC ⚽\n\nO que a gente faz agora? O comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "primeiro_comentario": "O que a gente faz agora? 👇"
+}

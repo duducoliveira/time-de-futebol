@@ -9,7 +9,8 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
 - Narrador: **Tião**. Voz da ElevenLabs: Diego, `rpNe0HOx7heUulPiOEaG` (`personagens.narrador.voz`). Os gols usam `eleven_v3` com [tags] (estilo "grito").
 - Presidente: Dona Cida (Bar da Cida). Elenco e liga ficam em `dados/estado_time.json`.
 - Arco roteirizado (`liga.roteiro`): rodada 1 = **derrota** (cabaré); rodada 2 = **empate em casa**, com gols do Poeira só no 2º tempo (os reservas entram descansados graças ao banco); rodada 3 = **1ª vitória, no clássico contra o maior rival, o Estrela da Feira** (`liga.rival`, "quem perde paga o pastel"). `mando` em `liga.roteiro` inverte casa/fora (com espelho no returno).
-- Gols: em jogos com 3+ gols, narra só o 1º gol do Poeira (empolgado, eleven_v3) e o último do jogo (com o placar final: virada, empate...).
+- Gols: até 3 gols, narra todos ("Tudo igual", "Desempatou", "Ampliou", "Virou"); com 4+, só o 1º gol do Poeira e o último do jogo. `gol_decisivo` em `liga.roteiro` fixa o autor e o grito do último gol nosso (ex.: Benício no Dia 5).
+- Jogo fora: as cenas do jogo levam `dados.local` (muro, torcida e decoração do dono da casa; Estrela da Feira = barracas de feira), sem bilheteria nem cantina. Kombi: `kombi()` em `video/arte.js`.
 - Piada do dia (a partir do dia 3): 1 brincadeira de nome/apelido por vídeo, no formato "posição + apelido + o porquê". Alterna jogador nosso (o apelido fica no elenco) e adversário (banco em `dados/apelidos.json`, sem repetir); com seguidor, use `briefing["piada"]`.
 - Episódios com comentários roteirizados: `briefing["historia"]` (`comentarios` com carimbos, `reforcos` com seguidores que viram jogadores, `antes_jogo`/`depois_jogo` com cenas extras como o cabaré). Preços da lista de pedidos ÷5 (rede R$ 60, banco R$ 50...).
 - Narração: "reais" só no primeiro valor do caixa ("saiu de R$ 358 pra 658"). Banco de reservas: imagem própria da lateral (fora da linha), não aparece na vista do campo.

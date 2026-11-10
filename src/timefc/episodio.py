@@ -18,6 +18,7 @@ import copy
 import json
 from pathlib import Path
 import random
+import re
 from typing import Any
 
 from . import catalogo
@@ -236,6 +237,19 @@ def calendario_do_clube(e: dict) -> list[list[tuple[str, str]]]:
     return cal
 
 
+def _placar_nosso(gols: list[dict], nome: str) -> int:
+    """Saldo do Poeira depois desses gols (negativo = perdendo)."""
+    return sum(1 if g["time"] == nome else -1 for g in gols)
+
+
+def _sigla(nome: str) -> str:
+    """Mesma regra de sigla() em video/arte.js."""
+    ign = {"do", "da", "de", "dos", "das", "fc", "ec"}
+    p = [w for w in re.split(r"[\s-]+", nome) if w.lower() not in ign]
+    s = "".join(w[0] for w in p[:3]) if len(p) >= 3 else (p[0][0] + p[1][:2] if len(p) == 2 else p[0][:3])
+    return s.upper()
+
+
 def _desfecho(r: dict, nome: str) -> str:
     nossos = r["gols_mandante"] if r["mandante"] == nome else r["gols_visitante"]
     deles = r["gols_visitante"] if r["mandante"] == nome else r["gols_mandante"]
@@ -258,6 +272,11 @@ def _simular_com_desfecho(m: str, v: str, forca: dict, semente: str, nome: str, 
         minimo = regra.get("gols_nossos_a_partir_do_minuto")
         if minimo and any(g["minuto"] < minimo for g in r["gols"] if g["time"] == nome):
             continue
+        if nossos > regra.get("max_gols_nossos", 99):
+            continue
+        # virada: o adversário abre o placar e o gol da vitória sai no fim
+        if regra.get("virada") and (not r["gols"] or r["gols"][0]["time"] == nome or r["gols"][-1]["time"] != nome):
+            continue
         return r
     return simular(m, v, forca, semente=semente)
 
@@ -273,10 +292,14 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
 
     falado = e["clube"].get("nome_falado") or nome  # na narração o time pode ter um nome mais curto
 
+    local_jogo: dict = {}
+
     def cena(tipo: str, narracao: str, tela: list[str] | None = None, **dados: Any) -> None:
         narracao = narracao.replace(nome, falado).replace(nome.upper(), falado.upper())
         dados.setdefault("hud", {"torcida": e["torcida"]["seguidores"], "caixa": e["caixa"]})
         dados.setdefault("estrutura", copy.deepcopy(e["estrutura"]))  # o clube como está NESTA cena
+        if local_jogo and "local" not in dados:  # cenas do jogo fora: cenário do dono da casa
+            dados = {**dados, "local": dict(local_jogo)}
         cenas.append({"id": f"{len(cenas) + 1:02d}-{tipo}", "tipo": tipo, "narracao": narracao,
                       "texto_tela": [t for t in (tela or []) if t], "dados": dados})
 
@@ -372,6 +395,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                  jogadores=r["jogadores"], personagens=r.get("personagens") or {})
         for x in hist.get("antes_jogo", []):
             cena(x["tipo"], x["narracao"], x.get("texto_tela", []), **x.get("dados", {}))
+            for caminho, valor in (x.get("efeitos") or {}).items():  # ex: renomear jogador
+                est.definir(e, caminho, valor)
             dd = x.get("dados", {})
             if x["tipo"] == "apelido" and dd.get("apelido"):
                 e.setdefault("piadas_usadas", []).append(dd["apelido"])
@@ -415,7 +440,11 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         placar_completo = f"{partida['mandante']} {partida['gols_mandante']} x {partida['gols_visitante']} {partida['visitante']}"
         piada = PIADAS_ADVERSARIO.get(adv, "ninguém sabe nada sobre eles.")
         rival = (liga.get("rival") or {}).get("time") == adv
-        fala_pre = (f"É clássico! Rodada {liga['rodada']}, contra o maior rival do Poeira: o {adv}. "
+        if not casa:  # jogo fora: o cenário (muro, torcida, decoração) é do dono da casa
+            local_jogo.update(nome=adv, sigla=_sigla(adv), torcida=briefing.get("torcida_adversario", 320),
+                              tema="feira" if "Feira" in adv else "")
+        fala_pre = (f"É clássico! Rodada {liga['rodada']}, {'em casa, ' if casa else 'na casa do '}"
+                    f"{'contra o ' if casa else ''}maior rival do Poeira: o {adv}. "
                     f"{liga['rival']['historia'].capitalize()}." if rival else
                     f"Rodada {liga['rodada']}{', em casa' if casa else ', fora de casa'}, contra o {adv}. Detalhe: {piada}")
         cena("pre_jogo", fala_pre, [f"RODADA {liga['rodada']}", "CLÁSSICO!" if rival else ("EM CASA" if casa else "FORA DE CASA")],
@@ -426,42 +455,53 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         gm = gv = 0
         usados: list[str] = []
         gols = partida["gols"]
+        regra_jogo = liga.get("roteiro", {}).get(str(liga["rodada"])) or {}
+        decisivo = regra_jogo.get("gol_decisivo") or {}
+        ultimo_nosso = max((k for k, x in enumerate(gols) if x["time"] == nome), default=None)
+        primeiro_nosso = next((k for k, x in enumerate(gols) if x["time"] == nome), None)
         for i, g in enumerate(gols):
             nosso = g["time"] == nome
             if g["time"] == partida["mandante"]:
                 gm += 1
             else:
                 gv += 1
-            # Jogos com 3+ gols: narra só o 1º gol do Poeira (empolgado) e o último gol do jogo.
-            # Os do meio aparecem no placar. Até 2 gols: narra todos.
-            primeiro_nosso = next((k for k, x in enumerate(gols) if x["time"] == nome), None)
-            if len(gols) > 2 and i not in (primeiro_nosso, len(gols) - 1):
+            ns, ds = (gm, gv) if partida["mandante"] == nome else (gv, gm)
+            # Jogos com 4+ gols: narra só o 1º gol do Poeira (empolgado) e o último gol do jogo.
+            # Os do meio aparecem no placar. Até 3 gols: narra todos.
+            if len(gols) > 3 and i not in (primeiro_nosso, len(gols) - 1):
                 continue
-            ultimo = i == len(gols) - 1 and len(gols) > 2
-            regra_jogo = liga.get("roteiro", {}).get(str(liga["rodada"])) or {}
+            ultimo = i == len(gols) - 1 and len(gols) > 1
             if nosso:
                 art = _artilheiro(e, rng)
-                if regra_jogo.get("artilheiro"):  # gol roteirizado (ex: o Saci, de bicicleta)
-                    art = next(({"numero": n, **j} for n, j in e["elenco"].items()
-                                 if j["nome"] == regra_jogo["artilheiro"]), art)
+                quem = decisivo.get("artilheiro") if decisivo and i == ultimo_nosso else regra_jogo.get("artilheiro")
+                if quem:  # gol roteirizado (ex: o Saci, de bicicleta; o Benício, que prometeu o gol)
+                    art = next(({"numero": n, **j} for n, j in e["elenco"].items() if j["nome"] == quem), art)
                 g["autor"] = art["nome"]
                 gritos = [x for x in GRITOS_GOL if x not in usados] or GRITOS_GOL
-                grito = regra_jogo.get("grito_gol") or rng.choice(gritos)
+                if decisivo and i == ultimo_nosso:
+                    grito = decisivo["grito"]
+                else:
+                    grito = regra_jogo.get("grito_gol") or rng.choice(gritos)
                 usados.append(grito)
-                txt = grito.format(N=nome.upper(), A=art["nome"].upper(), m=g["minuto"])
+                txt = grito.format(N=nome.upper(), A=art["nome"].upper(), m=g["minuto"], ns=_n(ns), ds=_n(ds))
+                roteirizado = grito in (decisivo.get("grito"), regra_jogo.get("grito_gol"))
+                if not roteirizado:
+                    limpo = txt.replace("Que golaço!", "").replace("Que pintura!", "").rstrip()
+                    if ns == ds:
+                        txt = limpo + f" Tudo igual: {_n(ns)} a {_n(ds)}!"
+                    elif ns == ds + 1 and i and min(_placar_nosso(gols[:k + 1], nome) for k in range(i)) < 0:
+                        txt = limpo + f" Virou: {_n(ns)} a {_n(ds)}!"
+                    elif ns == ds + 1 and i and ns > 1:
+                        txt = limpo + f" Desempatou: {_n(ns)} a {_n(ds)}!"
+                    elif ns > ds + 1:
+                        txt = limpo + f" Ampliou: {_n(ns)} a {_n(ds)}!"
             else:
                 txt = f"Gol do {adv}, aos {g['minuto']}. {rng.choice(PIADAS_GOL_CONTRA)}"
-            if ultimo:  # o último gol fecha a história do jogo
-                ns, ds = (gm, gv) if partida["mandante"] == nome else (gv, gm)
-                if not nosso and ns < ds:
+                if ultimo and ns < ds and any(x["time"] == nome for x in gols[:i]):
                     txt = (f"Ah, não... Gol do {adv}, aos {g['minuto']}. Eles viraram o jogo: "
-                           f"{ds} a {ns}. A torcida ficou em silêncio.")
-                elif not nosso and ns == ds:
-                    txt = f"Ah, não... Gol do {adv}, aos {g['minuto']}. Empatou: {ds} a {ns}."
-                elif nosso and ns > ds:
-                    txt = txt.replace("Que golaço!", "").rstrip() + f" Virou: {ns} a {ds}!"
-                elif nosso and ns == ds and not regra_jogo.get("grito_gol"):
-                    txt = txt.replace("Que golaço!", "").replace("Que pintura!", "").rstrip() + f" EMPATOU NO FIM: {ns} a {ds}!"
+                           f"{_n(ds)} a {_n(ns)}. {'A torcida ficou em silêncio.' if casa else 'A casa deles veio abaixo.'}")
+                elif ultimo and ns == ds:
+                    txt = f"Ah, não... Gol do {adv}, aos {g['minuto']}. Empatou: {_n(ds)} a {_n(ns)}."
             cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"],
                  minuto=g["minuto"], nosso=nosso, estilo_voz="grito" if nosso else "normal", autor=g.get("autor"), placar=[gm, gv],
                  mandante=partida["mandante"], visitante=partida["visitante"])
@@ -487,6 +527,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             for caminho, valor in (x.get("efeitos") or {}).items():
                 est.definir(e, caminho, valor)
 
+        local_jogo.clear()
         if casa:
             publico = min(hoje, e["estrutura"]["capacidade"])
             bilheteria = publico * e["regras"]["ingresso"]
@@ -531,7 +572,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         txt = ("E quem manda no clube é você. O comentário viável mais curtido decide o que a gente faz. "
                f"{prox['pergunta']}")
     else:
-        txt = f"No caixa, {_n(e['caixa'])} reais. {prox['pergunta']} O comentário mais curtido decide."
+        txt = (f"No caixa, {_n(e['caixa'])} reais. " if e["caixa"] > 0 else
+               "Caixa zerado! Agora é com as curtidas de vocês. ") + f"{prox['pergunta']} O comentário mais curtido decide."
     if not chamada:
         cena("decisao", txt, [f"DECISÃO #{dia}", "COMENTÁRIO MAIS CURTIDO DECIDE"],
              opcoes=prox["opcoes"], caixa=e["caixa"])

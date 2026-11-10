@@ -395,11 +395,21 @@ function bairro(yBase = 780) {
 }
 
 function muro(y, nome) {
+  const L = window._local;  // jogo fora: o muro é do dono da casa
+  const corMuro = L ? coresTime(L.nome)[0] : CORES.vinho, sgMuro = L ? L.sigla : (window._sigla || '');
+  if (L) nome = L.nome;
   return (window.ESTILO3D ? `<rect x="-10" y="${y - 14}" width="${W + 20}" height="16" fill="#fbf6ea"/><rect x="-10" y="${y + 88}" width="${W + 20}" height="60" fill="url(#g3dSombraChao)"/>` : '') + `<rect data-v="Vert" x="-10" y="${y}" width="${W + 20}" height="90" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
     <path d="M60,${y + 18} q40,-12 90,0 t90,0" stroke="#e76f51" stroke-width="10" fill="none" opacity=".7"/>
     <path d="M820,${y + 70} q40,-14 90,0 t90,0" stroke="#3a86ff" stroke-width="10" fill="none" opacity=".7"/>
-    <text class="rotulo" x="265" y="${y + 62}" text-anchor="middle" font-family="Anton" font-size="${Math.min(46, 270 / Math.max(1, medir(nome.toUpperCase(), 1)))}" fill="${CORES.vinho}" opacity=".9">${esc(nome.toUpperCase())}</text>
-    <text class="rotulo" x="835" y="${y + 64}" text-anchor="middle" font-family="Anton" font-size="52" fill="${CORES.vinho}" opacity=".85" letter-spacing="6">${esc(window._sigla || '')}</text>`;
+    <text class="rotulo" x="265" y="${y + 62}" text-anchor="middle" font-family="Anton" font-size="${Math.min(46, 270 / Math.max(1, medir(nome.toUpperCase(), 1)))}" fill="${corMuro}" opacity=".9">${esc(nome.toUpperCase())}</text>
+    <text class="rotulo" x="835" y="${y + 64}" text-anchor="middle" font-family="Anton" font-size="52" fill="${corMuro}" opacity=".85" letter-spacing="6">${esc(sgMuro)}</text>`;
+}
+
+// cor da camisa da torcida: a nossa (vinho) ou, no jogo fora, a do dono da casa (com uns poucos do Poeira)
+function corTorcida(r) {
+  const L = window._local;
+  if (!L) return CORES.vinho;
+  return r() > 0.12 ? coresTime(L.nome)[0] : CORES.vinho;
 }
 
 function torcedores(n, y0, y1, seed = 'torcida') {
@@ -412,7 +422,7 @@ function torcedores(n, y0, y1, seed = 'torcida') {
     const y = y0 + f * 42;
     for (let i = 0; i < porFila && k < n; i++, k++) {
       const x = 30 + (i + (f % 2) * 0.5) * ((W - 60) / porFila) + (r() - 0.5) * 8;
-      const camisa = r() > 0.4 ? CORES.vinho : CAMISAS_SORTIDAS[Math.floor(r() * CAMISAS_SORTIDAS.length)];
+      const camisa = r() > 0.4 ? corTorcida(r) : CAMISAS_SORTIDAS[Math.floor(r() * CAMISAS_SORTIDAS.length)];
       s += `<rect data-v="Vert" x="${x - 14}" y="${y + 6}" width="28" height="34" rx="10" fill="${camisa}" stroke="${OUT}" stroke-width="3"/>
         <circle data-v="Esfera" cx="${x}" cy="${y}" r="13" fill="${PELES[Math.floor(r() * PELES.length)]}" stroke="${OUT}" stroke-width="3"/>`;
     }
@@ -481,7 +491,7 @@ function bancoReservasFrente() {
 
 function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   const grama = estrutura.gramado === 'grama';
-  let s = ceu(t) + bairro(760) + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
+  let s = ceu(t) + bairro(760) + (window._local?.tema === 'feira' ? feira(760, t) : '') + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
   s += `<path d="M-200,950 H1280 L1500,${H} H-420Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}" stroke="${OUT}" stroke-width="5"/>`;
   if (grama) for (let i = 0; i < 8; i++) s += `<path d="M${-200 + i * 185},950 h92 l${120 + i * 4},${H - 950} h-150z" fill="${CORES.grama2}" opacity=".8"/>`;
   else {
@@ -498,6 +508,53 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
   return s;
+}
+
+// casa do Estrela da Feira: barracas de feira atrás do campo e bandeirolas nas cores do time
+function feira(yBase, t = 0) {
+  const L = window._local, [c1, c2] = coresTime(L.nome);
+  const lonas = [[c1, '#fff'], ['#e63946', '#fff'], [c2, c1], ['#2a9d8f', '#fff'], ['#ffbe0b', '#e76f51'], [c1, c2]];
+  const frutas = ['#e63946', '#ffbe0b', '#6a994e', '#f77f00', '#8338ec'];
+  let s = '';
+  for (let i = 0; i < 6; i++) {
+    const x = 20 + i * 180, y = yBase - 150 + (i % 2) * 18, [a, b] = lonas[i];
+    s += `<g transform="translate(${x} ${y})">
+      <path d="M8,40 V150 M152,40 V150" stroke="${OUT}" stroke-width="7"/>
+      <rect x="0" y="105" width="160" height="40" fill="#b08968" stroke="${OUT}" stroke-width="5"/>
+      ${[0, 1, 2, 3, 4, 5].map(k => `<circle cx="${20 + k * 24}" cy="100" r="11" fill="${frutas[(k + i) % 5]}" stroke="${OUT}" stroke-width="3"/>`).join('')}
+      <path d="M-10,40 L20,0 H140 L170,40Z" fill="${a}" stroke="${OUT}" stroke-width="5"/>
+      ${[0, 1, 2].map(k => `<path d="M${30 + k * 40},0 h20 l${8 + k * 4},40 h-20z" fill="${b}"/>`).join('')}
+      <path d="M-10,40 L20,0 H140 L170,40Z" fill="none" stroke="${OUT}" stroke-width="5"/></g>`;
+  }
+  // varal de bandeirolas no céu, balançando
+  let band = `<path d="M-20,250 Q540,${330 + Math.sin(t * 2) * 6} 1100,250" fill="none" stroke="${OUT}" stroke-width="4"/>`;
+  for (let k = 0; k < 18; k++) {
+    const x = k * 64 + 12, u = x / 1080, y = 250 + 4 * u * (1 - u) * 80 - 4;
+    band += `<path d="M${x},${y} l30,0 l-15,${34 + Math.sin(t * 4 + k) * 4}z" fill="${k % 2 ? c1 : c2}" stroke="${OUT}" stroke-width="3"/>`;
+  }
+  return s + band;
+}
+
+// Kombi do Poeira (vista de lado, frente para a direita). Origem: chão, no meio.
+function kombi({ t = 0, andando = false } = {}) {
+  const roda = x => `<g transform="translate(${x} -46) rotate(${andando ? t * 720 : 0})"><circle r="46" fill="#222" stroke="${OUT}" stroke-width="6"/>
+    <circle r="22" fill="#e9ecef" stroke="${OUT}" stroke-width="4"/><path d="M-14,0 H14 M0,-14 V14" stroke="${OUT}" stroke-width="4"/></g>`;
+  const pula = andando ? Math.abs(Math.sin(t * 9)) * 6 : 0;
+  return `<ellipse cx="0" cy="0" rx="300" ry="22" fill="#00000033"/>
+    <g transform="translate(0 ${-pula})">
+    <path d="M-290,-60 V-250 Q-290,-300 -240,-300 H210 Q262,-300 280,-250 L300,-150 V-60 Q300,-40 280,-40 H-270 Q-290,-40 -290,-60Z" fill="${CORES.vinho}" stroke="${OUT}" stroke-width="8"/>
+    <path d="M-290,-150 V-250 Q-290,-300 -240,-300 H210 Q262,-300 280,-250 L300,-150Z" fill="#fff4dc" stroke="${OUT}" stroke-width="8"/>
+    <path d="M300,-150 L250,-110 L300,-70" fill="#fff4dc" stroke="${OUT}" stroke-width="6"/>
+    ${[-260, -150, -40, 70].map(x => `<rect x="${x}" y="-280" width="94" height="80" rx="12" fill="#8ecae6" stroke="${OUT}" stroke-width="6"/>`).join('')}
+    <path d="M185,-280 H235 Q262,-280 270,-250 L280,-200 H185Z" fill="#8ecae6" stroke="${OUT}" stroke-width="6"/>
+    <path d="M-80,-140 V-50 M60,-140 V-50" stroke="${OUT}" stroke-width="5" opacity=".6"/>
+    <text x="-20" y="-82" text-anchor="middle" font-family="Anton" font-size="52" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="7" paint-order="stroke">POEIRA FC</text>
+    <circle cx="288" cy="-120" r="14" fill="#ffe066" stroke="${OUT}" stroke-width="4"/>
+    <rect x="-250" y="-330" width="420" height="16" rx="6" fill="#6c757d" stroke="${OUT}" stroke-width="5"/>
+    <rect x="-220" y="-372" width="110" height="44" rx="10" fill="#3a86ff" stroke="${OUT}" stroke-width="5"/>
+    <circle cx="-40" cy="-354" r="26" fill="#fff" stroke="${OUT}" stroke-width="5"/><path d="M-50,-362 l10,-7 l10,7 l-4,12 h-12z" fill="${OUT}"/>
+    <rect x="20" y="-366" width="120" height="36" rx="8" fill="#ffbe0b" stroke="${OUT}" stroke-width="5"/>
+    ${roda(-170)}${roda(180)}</g>`;
 }
 
 // dy > 0 "abaixa a câmera": o bar vai para a parte de baixo e libera o céu para os cartões
@@ -554,7 +611,7 @@ function fundoEscuro() {
 
 Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
-  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).

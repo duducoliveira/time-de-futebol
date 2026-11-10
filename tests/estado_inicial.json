@@ -143,14 +143,21 @@
         "resultado": "vitória",
         "marca_gol": true,
         "max_gols_sofridos": 1,
-        "motivo": "primeira vitória do clube, no clássico contra o maior rival",
+        "motivo": "clássico na casa do Estrela da Feira: sai atrás e vira no fim com gol do Benício (o ex-Biquinho, que prometeu o gol)",
         "cena_depois": {
           "tipo": "festa",
-          "narracao": "Primeira vitória do Poeira, e logo no clássico! Hoje o pastel é por conta do Estrela da Feira!",
+          "narracao": "Primeira vitória do Poeira, e logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
           "texto_tela": [
             "O PASTEL É POR CONTA DELES"
           ],
           "dados": {}
+        },
+        "mando": "fora",
+        "virada": true,
+        "max_gols_nossos": 2,
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era Biquinho, prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
         }
       }
     },

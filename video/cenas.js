@@ -125,6 +125,10 @@ const TIPOS = {
       const p = (t - virada) / 0.5;
       for (let i = 0; i < 10; i++) s += `<circle cx="${100 + i * 95}" cy="${1000 + Math.sin(i) * 180}" r="${60 + p * 120}" fill="#fff" opacity="${0.8 * (1 - p)}"/>`;
     }
+    if (acoes.includes('kombi') && t >= virada) {  // a Kombi chega andando e estaciona na frente do bar
+      const p = easeOut(prog(t, virada, 1.2));
+      s += `<g transform="translate(${-400 + p * 960} 1840) scale(1.15)">${kombi({ t, andando: p < 1 })}</g>`;
+    }
     (c.dados.novos_jogadores || []).forEach((j, i) => {
       const num = Object.keys(E.elenco).find(k => E.elenco[k].nome === j.nome) || '12';
       s += popPessoa(t, virada + 0.2, 540 + i * 200, 1880, pessoa(jogador(num, E, { pose: 'comemora' }), t, { s: 1.9 }));
@@ -150,6 +154,10 @@ const TIPOS = {
     s += pop(t, 1.1, W / 2, 690, texto('X', { tam: 130 }));
     s += pop(t, 1.0, 250, 845, texto(m, { tam: 38, bw: 10 })) + pop(t, 1.0, 830, 845, texto(v, { tam: 38, bw: 10 }));
     s += elencoLinha(t, E, 1560, 0.7, ['1', '3', '4', '5', '8', '9', '10']);
+    if (c.dados.local && E.estrutura.kombi) {  // o Poeira chega de Kombi na casa do adversário (o time atrás dela)
+      const p = easeOut(prog(t, 0.1, 1.5));
+      s += `<g transform="translate(${-420 + p * 960} 1935) scale(.85)">${kombi({ t, andando: p < 1 })}</g>`;
+    }
     return s;
   },
   gol(t, d, c, E) {
@@ -550,7 +558,11 @@ window.quadro = tGlobal => {
   let i = cenas.findIndex(c => tGlobal < c.inicio + c.duracao);
   if (i < 0) i = cenas.length - 1;
   const c = cenas[i], t = tGlobal - c.inicio;
-  const E = c.dados.estrutura ? { ...DADOS.estado, estrutura: c.dados.estrutura } : DADOS.estado;
+  let E = c.dados.estrutura ? { ...DADOS.estado, estrutura: c.dados.estrutura } : DADOS.estado;
+  // jogo fora: campo, muro e torcida do dono da casa (a nossa estrutura fica no Campo do Poeira)
+  window._local = c.dados.local || null;
+  if (window._local) E = { ...E, _torcida: window._local.torcida ?? 300,
+    estrutura: { ...E.estrutura, gramado: 'terrão', capacidade: 500, rede: true, iluminacao: false } };
   const fn = TIPOS[c.tipo] || TIPOS.abertura;
   let svg = fn(t, c.duracao, c, E);
   if (window.ESTILO3D) svg = cena3d(svg);  // volume, luz e contorno suave (arte3d.js)

@@ -8,12 +8,12 @@
     "buffer_canal_id": "6aed11bde29c69a171783476",
     "repo_videos": "duducoliveira/poeirafc-videos",
     "fundado_no_dia": 0,
-    "forca": 28,
+    "forca": 29,
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 4,
-  "caixa": 1057.0,
+  "dia": 5,
+  "caixa": 0.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -22,7 +22,7 @@
     "comentario_vencedor": "mais curtido no post do dia anterior"
   },
   "torcida": {
-    "seguidores": 250,
+    "seguidores": 271,
     "historico": [
       {
         "dia": 1,
@@ -43,6 +43,11 @@
         "dia": 4,
         "seguidores": 250,
         "data": "2026-11-09T01:33:56+00:00"
+      },
+      {
+        "dia": 5,
+        "seguidores": 271,
+        "data": "2026-11-10T01:48:06+00:00"
       }
     ]
   },
@@ -58,7 +63,7 @@
     "iluminacao": false,
     "lanchonete": "Barraca do Guigs",
     "tecnico": false,
-    "kombi": false,
+    "kombi": true,
     "banco_reservas": true,
     "cabare_proibido": true
   },
@@ -186,9 +191,9 @@
       "chave": "rodrigo"
     },
     "17": {
-      "nome": "Biquinho",
+      "nome": "Benício",
       "posicao": "MEI",
-      "traco": "meia camisa 7 (o mesmo do estádio raiz)",
+      "traco": "o ex-Biquinho, meia camisa 7",
       "instagram": "beniciocarmocarvalho",
       "chegou_no_dia": 4,
       "chave": "biquinho"
@@ -213,7 +218,7 @@
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 2,
+    "rodada": 3,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -248,19 +253,26 @@
         "resultado": "vitória",
         "marca_gol": true,
         "max_gols_sofridos": 1,
-        "motivo": "primeira vitória do clube, no clássico contra o maior rival",
+        "motivo": "clássico na casa do Estrela da Feira: sai atrás e vira no fim com gol do Benício (o ex-Biquinho, que prometeu o gol)",
         "cena_depois": {
           "tipo": "festa",
-          "narracao": "Primeira vitória do Poeira, e logo no clássico! Hoje o pastel é por conta do Estrela da Feira!",
+          "narracao": "Primeira vitória do Poeira, e logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
           "texto_tela": [
             "O PASTEL É POR CONTA DELES"
           ],
           "dados": {}
+        },
+        "mando": "fora",
+        "virada": true,
+        "max_gols_nossos": 2,
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era Biquinho, prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
         }
       }
     },
     "times": {
-      "Poeira FC": 28,
+      "Poeira FC": 29,
       "Leões do Brejo": 50,
       "Atlético Padaria": 45,
       "Ferro-Velho EC": 42,
@@ -454,6 +466,97 @@
           }
         ],
         "rodada": 2
+      },
+      {
+        "mandante": "Estrela da Feira",
+        "visitante": "Poeira FC",
+        "gols_mandante": 1,
+        "gols_visitante": 2,
+        "gols": [
+          {
+            "minuto": 43,
+            "time": "Estrela da Feira"
+          },
+          {
+            "minuto": 44,
+            "time": "Poeira FC",
+            "autor": "Khauan"
+          },
+          {
+            "minuto": 75,
+            "time": "Poeira FC",
+            "autor": "Benício"
+          }
+        ],
+        "rodada": 3
+      },
+      {
+        "mandante": "Veteranos do Bairro",
+        "visitante": "Real Laje",
+        "gols_mandante": 1,
+        "gols_visitante": 2,
+        "gols": [
+          {
+            "minuto": 41,
+            "time": "Real Laje"
+          },
+          {
+            "minuto": 57,
+            "time": "Real Laje"
+          },
+          {
+            "minuto": 80,
+            "time": "Veteranos do Bairro"
+          }
+        ],
+        "rodada": 3
+      },
+      {
+        "mandante": "Grêmio Vila Barro",
+        "visitante": "Juventude do Asfalto",
+        "gols_mandante": 0,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 2,
+            "time": "Juventude do Asfalto"
+          }
+        ],
+        "rodada": 3
+      },
+      {
+        "mandante": "Leões do Brejo",
+        "visitante": "Amigos do Churrasco FC",
+        "gols_mandante": 2,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 6,
+            "time": "Amigos do Churrasco FC"
+          },
+          {
+            "minuto": 51,
+            "time": "Leões do Brejo"
+          },
+          {
+            "minuto": 78,
+            "time": "Leões do Brejo"
+          }
+        ],
+        "rodada": 3
+      },
+      {
+        "mandante": "Atlético Padaria",
+        "visitante": "Ferro-Velho EC",
+        "gols_mandante": 0,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 20,
+            "time": "Ferro-Velho EC"
+          }
+        ],
+        "rodada": 3
       }
     ],
     "rival": {
@@ -463,124 +566,124 @@
     },
     "tabela": [
       {
-        "time": "Atlético Padaria",
-        "j": 2,
-        "v": 1,
+        "time": "Leões do Brejo",
+        "j": 3,
+        "v": 2,
         "e": 1,
         "d": 0,
-        "gp": 3,
-        "gc": 1,
-        "pts": 4,
+        "gp": 4,
+        "gc": 2,
+        "pts": 7,
         "pos": 1,
         "sg": 2
       },
       {
-        "time": "Leões do Brejo",
-        "j": 2,
-        "v": 1,
+        "time": "Juventude do Asfalto",
+        "j": 3,
+        "v": 2,
         "e": 1,
         "d": 0,
         "gp": 2,
-        "gc": 1,
-        "pts": 4,
+        "gc": 0,
+        "pts": 7,
         "pos": 2,
-        "sg": 1
+        "sg": 2
       },
       {
-        "time": "Juventude do Asfalto",
-        "j": 2,
+        "time": "Ferro-Velho EC",
+        "j": 3,
+        "v": 2,
+        "e": 0,
+        "d": 1,
+        "gp": 2,
+        "gc": 4,
+        "pts": 6,
+        "pos": 3,
+        "sg": -2
+      },
+      {
+        "time": "Atlético Padaria",
+        "j": 3,
         "v": 1,
         "e": 1,
-        "d": 0,
-        "gp": 1,
-        "gc": 0,
+        "d": 1,
+        "gp": 3,
+        "gc": 2,
         "pts": 4,
-        "pos": 3,
+        "pos": 4,
         "sg": 1
       },
       {
-        "time": "Amigos do Churrasco FC",
-        "j": 2,
+        "time": "Poeira FC",
+        "j": 3,
         "v": 1,
-        "e": 0,
+        "e": 1,
         "d": 1,
-        "gp": 4,
-        "gc": 1,
-        "pts": 3,
-        "pos": 4,
-        "sg": 3
-      },
-      {
-        "time": "Grêmio Vila Barro",
-        "j": 2,
-        "v": 1,
-        "e": 0,
-        "d": 1,
-        "gp": 4,
-        "gc": 4,
-        "pts": 3,
+        "gp": 5,
+        "gc": 5,
+        "pts": 4,
         "pos": 5,
         "sg": 0
       },
       {
-        "time": "Estrela da Feira",
-        "j": 2,
+        "time": "Amigos do Churrasco FC",
+        "j": 3,
         "v": 1,
         "e": 0,
-        "d": 1,
-        "gp": 3,
-        "gc": 4,
+        "d": 2,
+        "gp": 5,
+        "gc": 3,
         "pts": 3,
         "pos": 6,
-        "sg": -1
+        "sg": 2
       },
       {
-        "time": "Ferro-Velho EC",
-        "j": 2,
+        "time": "Grêmio Vila Barro",
+        "j": 3,
         "v": 1,
         "e": 0,
-        "d": 1,
-        "gp": 1,
-        "gc": 4,
+        "d": 2,
+        "gp": 4,
+        "gc": 5,
         "pts": 3,
         "pos": 7,
-        "sg": -3
-      },
-      {
-        "time": "Veteranos do Bairro",
-        "j": 2,
-        "v": 0,
-        "e": 2,
-        "d": 0,
-        "gp": 2,
-        "gc": 2,
-        "pts": 2,
-        "pos": 8,
-        "sg": 0
-      },
-      {
-        "time": "Poeira FC",
-        "j": 2,
-        "v": 0,
-        "e": 1,
-        "d": 1,
-        "gp": 3,
-        "gc": 4,
-        "pts": 1,
-        "pos": 9,
         "sg": -1
       },
       {
         "time": "Real Laje",
-        "j": 2,
-        "v": 0,
+        "j": 3,
+        "v": 1,
         "e": 0,
         "d": 2,
-        "gp": 0,
-        "gc": 2,
-        "pts": 0,
-        "pos": 10,
+        "gp": 2,
+        "gc": 3,
+        "pts": 3,
+        "pos": 8,
+        "sg": -1
+      },
+      {
+        "time": "Estrela da Feira",
+        "j": 3,
+        "v": 1,
+        "e": 0,
+        "d": 2,
+        "gp": 4,
+        "gc": 6,
+        "pts": 3,
+        "pos": 9,
         "sg": -2
+      },
+      {
+        "time": "Veteranos do Bairro",
+        "j": 3,
+        "v": 0,
+        "e": 2,
+        "d": 1,
+        "gp": 3,
+        "gc": 4,
+        "pts": 2,
+        "pos": 10,
+        "sg": -1
       }
     ]
   },
@@ -653,6 +756,19 @@
         "publicado": "2026-11-09T07:48-03:00",
         "id": "18121646698966048"
       }
+    },
+    {
+      "dia": 5,
+      "data": "2026-11-10T01:48:06+00:00",
+      "proxima_decisao": {
+        "pergunta": "O que a gente faz agora?",
+        "opcoes": [
+          "Grama no campo?",
+          "Arquibancada nova?",
+          "Outra ideia?"
+        ]
+      },
+      "post": null
     }
   ],
   "decisoes": [
@@ -676,6 +792,13 @@
       "autor": "_guigs12",
       "curtidas": 14,
       "texto": "Ja que o time precisa de dinheiro tem que colocar alguma barraca para vender e arrecadar dinheiro para o clube"
+    },
+    {
+      "dia": 5,
+      "acao": "kombi",
+      "autor": "joaoc_89",
+      "curtidas": 0,
+      "texto": "Kombi do Poeira"
     }
   ],
   "enquetes": [],
@@ -727,6 +850,18 @@
       "valor": 250,
       "descricao": "lanchonete rodada 2",
       "saldo": 1057.0
+    },
+    {
+      "dia": 5,
+      "valor": 190,
+      "descricao": "curtidas do dia 4",
+      "saldo": 1247.0
+    },
+    {
+      "dia": 5,
+      "valor": -1247.0,
+      "descricao": "Kombi do Poeira",
+      "saldo": 0.0
     }
   ],
   "linha_do_tempo": [
@@ -759,11 +894,21 @@
     {
       "dia": 4,
       "evento": "Rodada 2: Poeira FC 1 x 1 Veteranos do Bairro (empate)"
+    },
+    {
+      "dia": 5,
+      "evento": "Compramos a Kombi do clube com todo o dinheiro do caixa, pra ir jogar o clássico na casa do Estrela da Feira.",
+      "autor": "joaoc_89"
+    },
+    {
+      "dia": 5,
+      "evento": "Rodada 3: Estrela da Feira 1 x 2 Poeira FC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-10T01:13:47+00:00",
+  "atualizado_em": "2026-11-10T01:48:06+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
-    "Viagra em Idoso"
+    "Viagra em Idoso",
+    "Supino"
   ]
 }
