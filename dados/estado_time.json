@@ -770,10 +770,11 @@
         ]
       },
       "post": {
-        "buffer_id": "6af2805226f9e6aeeadb3381",
-        "video_url": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-005.mp4",
-        "agendado_para": "2026-11-11T09:00:00Z",
-        "status": "scheduled"
+        "buffer_id": "6af2e0572224e5e62375cfba",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-005.mp4",
+        "permalink": "https://www.instagram.com/reel/DfjjyzWPFc4/",
+        "publicado": "2026-11-10T06:14-03:00",
+        "id": "18474736474137019"
       }
     }
   ],
