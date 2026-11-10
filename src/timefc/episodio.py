@@ -274,6 +274,10 @@ def _simular_com_desfecho(m: str, v: str, forca: dict, semente: str, nome: str, 
             continue
         if nossos > regra.get("max_gols_nossos", 99):
             continue
+        # gols muito colados (43' e 44') parecem repetidos na narração
+        gap = regra.get("intervalo_minimo_gols")
+        if gap and any(b["minuto"] - a["minuto"] < gap for a, b in zip(r["gols"], r["gols"][1:])):
+            continue
         # virada: o adversário abre o placar e o gol da vitória sai no fim
         if regra.get("virada") and (not r["gols"] or r["gols"][0]["time"] == nome or r["gols"][-1]["time"] != nome):
             continue

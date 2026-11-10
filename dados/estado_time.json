@@ -47,7 +47,7 @@
       {
         "dia": 5,
         "seguidores": 271,
-        "data": "2026-11-10T02:08:21+00:00"
+        "data": "2026-11-10T02:18:59+00:00"
       }
     ]
   },
@@ -268,7 +268,8 @@
         "gol_decisivo": {
           "artilheiro": "Benício",
           "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
-        }
+        },
+        "intervalo_minimo_gols": 12
       }
     },
     "times": {
@@ -474,16 +475,16 @@
         "gols_visitante": 2,
         "gols": [
           {
-            "minuto": 43,
+            "minuto": 28,
             "time": "Estrela da Feira"
           },
           {
-            "minuto": 44,
+            "minuto": 58,
             "time": "Poeira FC",
             "autor": "Foguete"
           },
           {
-            "minuto": 75,
+            "minuto": 90,
             "time": "Poeira FC",
             "autor": "Benício"
           }
@@ -562,7 +563,7 @@
     "rival": {
       "time": "Estrela da Feira",
       "apelido": "o clássico da feira",
-      "historia": "os dois times dividem a mesma rua de feira; quem perde paga o pastel"
+      "historia": "os dois times dividem a mesma rua; quem perde paga o pastel"
     },
     "tabela": [
       {
@@ -759,7 +760,7 @@
     },
     {
       "dia": 5,
-      "data": "2026-11-10T02:08:21+00:00",
+      "data": "2026-11-10T02:18:59+00:00",
       "proxima_decisao": {
         "pergunta": "O que a gente faz agora?",
         "opcoes": [
@@ -768,7 +769,12 @@
           "Outra ideia?"
         ]
       },
-      "post": null
+      "post": {
+        "buffer_id": "6af2805226f9e6aeeadb3381",
+        "video_url": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-005.mp4",
+        "agendado_para": "2026-11-11T09:00:00Z",
+        "status": "scheduled"
+      }
     }
   ],
   "decisoes": [
@@ -905,7 +911,7 @@
       "evento": "Rodada 3: Estrela da Feira 1 x 2 Poeira FC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-10T02:08:21+00:00",
+  "atualizado_em": "2026-11-10T02:18:59+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",

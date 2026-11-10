@@ -30,7 +30,7 @@ Torcida: 271 · Caixa: R$ 0 · Posição: 5º
 ## 06-pre_jogo
 **Na tela:** RODADA 3 | CLÁSSICO!
 
-> É clássico! Rodada 3, na casa do maior rival do Poeira: o Estrela da Feira. Os dois times dividem a mesma rua de feira; quem perde paga o pastel.
+> É clássico! Rodada 3, na casa do maior rival do Poeira: o Estrela da Feira. Os dois times dividem a mesma rua; quem perde paga o pastel.
 
 ## 07-apelido
 **Na tela:** DE OLHO NO ESTRELA DA FEIRA
@@ -38,19 +38,19 @@ Torcida: 271 · Caixa: R$ 0 · Posição: 5º
 > Fica de olho no zagueiro do Estrela da Feira, o Supino: se pressionar, peida!
 
 ## 08-gol
-**Na tela:** 43' | GOL DO ESTRELA DA FEIRA
+**Na tela:** 28' | GOL DO ESTRELA DA FEIRA
 
-> Gol do Estrela da Feira, aos 43. Ninguém marcou ninguém. Foi democrático.
+> Gol do Estrela da Feira, aos 28. Ninguém marcou ninguém. Foi democrático.
 
 ## 09-gol
-**Na tela:** 44' | GOOOOL!
+**Na tela:** 58' | GOOOOL!
 
-> [shouting] GOOOOOOOOL DO POEIRA! [excited] FOGUETE! Aos 44 minutos! Pode comemorar, torcida! Tudo igual: 1 a 1!
+> [shouting] GOOOOOOOOL DO POEIRA! [excited] FOGUETE! Aos 58 minutos! Pode comemorar, torcida! Tudo igual: 1 a 1!
 
 ## 10-gol
-**Na tela:** 75' | GOOOOL!
+**Na tela:** 90' | GOOOOL!
 
-> [shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos 75! VIROU: 2 a 1!
+> [shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos 90! VIROU: 2 a 1!
 
 ## 11-fim_de_jogo
 **Na tela:** FIM DE JOGO | Estrela da Feira 1 x 2 Poeira FC

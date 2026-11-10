@@ -11,16 +11,16 @@
     "gols_visitante": 2,
     "gols": [
       {
-        "minuto": 43,
+        "minuto": 28,
         "time": "Estrela da Feira"
       },
       {
-        "minuto": 44,
+        "minuto": 58,
         "time": "Poeira FC",
         "autor": "Foguete"
       },
       {
-        "minuto": 75,
+        "minuto": 90,
         "time": "Poeira FC",
         "autor": "Benício"
       }
@@ -251,7 +251,7 @@
     {
       "id": "06-pre_jogo",
       "tipo": "pre_jogo",
-      "narracao": "É clássico! Rodada 3, na casa do maior rival do Poeira: o Estrela da Feira. Os dois times dividem a mesma rua de feira; quem perde paga o pastel.",
+      "narracao": "É clássico! Rodada 3, na casa do maior rival do Poeira: o Estrela da Feira. Os dois times dividem a mesma rua; quem perde paga o pastel.",
       "texto_tela": [
         "RODADA 3",
         "CLÁSSICO!"
@@ -332,13 +332,13 @@
     {
       "id": "08-gol",
       "tipo": "gol",
-      "narracao": "Gol do Estrela da Feira, aos 43. Ninguém marcou ninguém. Foi democrático.",
+      "narracao": "Gol do Estrela da Feira, aos 28. Ninguém marcou ninguém. Foi democrático.",
       "texto_tela": [
-        "43'",
+        "28'",
         "GOL DO ESTRELA DA FEIRA"
       ],
       "dados": {
-        "minuto": 43,
+        "minuto": 28,
         "nosso": false,
         "estilo_voz": "normal",
         "autor": null,
@@ -379,13 +379,13 @@
     {
       "id": "09-gol",
       "tipo": "gol",
-      "narracao": "[shouting] GOOOOOOOOL DO POEIRA! [excited] FOGUETE! Aos 44 minutos! Pode comemorar, torcida! Tudo igual: 1 a 1!",
+      "narracao": "[shouting] GOOOOOOOOL DO POEIRA! [excited] FOGUETE! Aos 58 minutos! Pode comemorar, torcida! Tudo igual: 1 a 1!",
       "texto_tela": [
-        "44'",
+        "58'",
         "GOOOOL!"
       ],
       "dados": {
-        "minuto": 44,
+        "minuto": 58,
         "nosso": true,
         "estilo_voz": "grito",
         "autor": "Foguete",
@@ -426,13 +426,13 @@
     {
       "id": "10-gol",
       "tipo": "gol",
-      "narracao": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos 75! VIROU: 2 a 1!",
+      "narracao": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos 90! VIROU: 2 a 1!",
       "texto_tela": [
-        "75'",
+        "90'",
         "GOOOOL!"
       ],
       "dados": {
-        "minuto": 75,
+        "minuto": 90,
         "nosso": true,
         "estilo_voz": "grito",
         "autor": "Benício",

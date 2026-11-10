@@ -158,7 +158,8 @@
         "gol_decisivo": {
           "artilheiro": "Benício",
           "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
-        }
+        },
+        "intervalo_minimo_gols": 12
       }
     },
     "times": {
@@ -177,7 +178,7 @@
     "rival": {
       "time": "Estrela da Feira",
       "apelido": "o clássico da feira",
-      "historia": "os dois times dividem a mesma rua de feira; quem perde paga o pastel"
+      "historia": "os dois times dividem a mesma rua; quem perde paga o pastel"
     }
   },
   "episodios": [],
