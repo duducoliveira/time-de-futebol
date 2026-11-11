@@ -1,6 +1,6 @@
 # Roteiro do dia 6: Poeira FC
 
-Torcida: 318 · Caixa: R$ 3 · Posição: 3º
+Torcida: 318 · Caixa: R$ 3 · Posição: 6º
 
 ## 01-capa
 **Na tela:** DIA 6
@@ -38,24 +38,24 @@ Torcida: 318 · Caixa: R$ 3 · Posição: 3º
 > Rodada 4, fora de casa, contra o Real Laje. Detalhe: treinam em cima de uma laje. Ninguém sabe como.
 
 ## 08-gol
-**Na tela:** 65' | GOOOOL!
+**Na tela:** 67' | GOOOOL!
 
-> [shouting] GOOOOOL DO POEIRA! [excited] BUJÃO, aos 65! E o jogo já tá dois a zero pro Poeira!
+> [shouting] GOOOOOL DO POEIRA! [excited] BUJÃO, aos 67! Um a zero pro Poeira, na casa deles!
 
 ## 09-gol
-**Na tela:** 82' | GOL DO REAL LAJE
+**Na tela:** 84' | GOL DO REAL LAJE
 
-> Gol do Real Laje, aos 82. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Dois a um. Segura, Poeira!
+> Gol do Real Laje, aos 84. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Empatou: um a um.
 
 ## 10-fim_de_jogo
-**Na tela:** FIM DE JOGO | Real Laje 1 x 2 Poeira FC
+**Na tela:** FIM DE JOGO | Real Laje 1 x 1 Poeira FC
 
-> Apita o árbitro! Vitória do Poeira, 2 a 1!
+> Apita o árbitro! Empate em 1 a 1. Um ponto é um ponto.
 
 ## 11-tabela
-**Na tela:** TERCEIRA DIVISÃO DA VÁRZEA | 3º LUGAR
+**Na tela:** TERCEIRA DIVISÃO DA VÁRZEA | 6º LUGAR
 
-> Na tabela, o Poeira está em 3º lugar.
+> Na tabela, o Poeira está em 6º lugar.
 
 ## 12-decisao
 **Na tela:** DECISÃO #6 | COMENTÁRIO MAIS CURTIDO DECIDE

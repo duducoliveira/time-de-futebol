@@ -162,24 +162,24 @@
         "intervalo_minimo_gols": 12
       },
       "4": {
-        "resultado": "vitória",
+        "resultado": "empate",
         "marca_gol": true,
         "max_gols_sofridos": 1,
-        "max_gols_nossos": 2,
-        "motivo": "fora, contra o Real Laje: o Poeira faz 2 a 0 e toma um no fim, culpa do lateral Salário do Mês",
-        "sequencia": "NNA",
+        "max_gols_nossos": 1,
+        "motivo": "fora, contra o Real Laje: o Poeira sai na frente e toma o empate no fim, culpa do lateral Salário do Mês",
+        "sequencia": "NA",
         "ultimo_gol_a_partir_do_minuto": 80,
         "intervalo_minimo_gols": 10,
         "narrar_gols": [
-          2,
-          3
+          1,
+          2
         ],
         "textos_gol": {
-          "2": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! E o jogo já tá dois a zero pro Poeira!",
-          "3": "Gol do {adv}, aos {m}. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Dois a um. Segura, Poeira!"
+          "1": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! Um a zero pro Poeira, na casa deles!",
+          "2": "Gol do {adv}, aos {m}. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Empatou: um a um."
         },
         "apelido_no_gol": {
-          "gol": 3,
+          "gol": 2,
           "numero": "6",
           "apelido": "Salário do Mês",
           "posicao": "lateral"

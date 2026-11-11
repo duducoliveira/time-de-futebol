@@ -54,7 +54,7 @@
       {
         "dia": 6,
         "seguidores": 318,
-        "data": "2026-11-11T02:14:41+00:00"
+        "data": "2026-11-11T02:29:44+00:00"
       }
     ]
   },
@@ -286,24 +286,24 @@
         "intervalo_minimo_gols": 12
       },
       "4": {
-        "resultado": "vitória",
+        "resultado": "empate",
         "marca_gol": true,
         "max_gols_sofridos": 1,
-        "max_gols_nossos": 2,
-        "motivo": "fora, contra o Real Laje: o Poeira faz 2 a 0 e toma um no fim, culpa do lateral Salário do Mês",
-        "sequencia": "NNA",
+        "max_gols_nossos": 1,
+        "motivo": "fora, contra o Real Laje: o Poeira sai na frente e toma o empate no fim, culpa do lateral Salário do Mês",
+        "sequencia": "NA",
         "ultimo_gol_a_partir_do_minuto": 80,
         "intervalo_minimo_gols": 10,
         "narrar_gols": [
-          2,
-          3
+          1,
+          2
         ],
         "textos_gol": {
-          "2": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! E o jogo já tá dois a zero pro Poeira!",
-          "3": "Gol do {adv}, aos {m}. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Dois a um. Segura, Poeira!"
+          "1": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! Um a zero pro Poeira, na casa deles!",
+          "2": "Gol do {adv}, aos {m}. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Empatou: um a um."
         },
         "apelido_no_gol": {
-          "gol": 3,
+          "gol": 2,
           "numero": "6",
           "apelido": "Salário do Mês",
           "posicao": "lateral"
@@ -601,19 +601,15 @@
         "mandante": "Real Laje",
         "visitante": "Poeira FC",
         "gols_mandante": 1,
-        "gols_visitante": 2,
+        "gols_visitante": 1,
         "gols": [
           {
-            "minuto": 31,
-            "time": "Poeira FC"
-          },
-          {
-            "minuto": 65,
+            "minuto": 67,
             "time": "Poeira FC",
             "autor": "Bujão"
           },
           {
-            "minuto": 82,
+            "minuto": 84,
             "time": "Real Laje"
           }
         ],
@@ -719,18 +715,6 @@
         "sg": 2
       },
       {
-        "time": "Poeira FC",
-        "j": 4,
-        "v": 2,
-        "e": 1,
-        "d": 1,
-        "gp": 7,
-        "gc": 6,
-        "pts": 7,
-        "pos": 3,
-        "sg": 1
-      },
-      {
         "time": "Grêmio Vila Barro",
         "j": 4,
         "v": 2,
@@ -739,7 +723,7 @@
         "gp": 7,
         "gc": 6,
         "pts": 6,
-        "pos": 4,
+        "pos": 3,
         "sg": 1
       },
       {
@@ -751,7 +735,7 @@
         "gp": 3,
         "gc": 7,
         "pts": 6,
-        "pos": 5,
+        "pos": 4,
         "sg": -4
       },
       {
@@ -763,8 +747,20 @@
         "gp": 4,
         "gc": 3,
         "pts": 5,
-        "pos": 6,
+        "pos": 5,
         "sg": 1
+      },
+      {
+        "time": "Poeira FC",
+        "j": 4,
+        "v": 1,
+        "e": 2,
+        "d": 1,
+        "gp": 6,
+        "gc": 6,
+        "pts": 5,
+        "pos": 6,
+        "sg": 0
       },
       {
         "time": "Veteranos do Bairro",
@@ -779,6 +775,18 @@
         "sg": 0
       },
       {
+        "time": "Real Laje",
+        "j": 4,
+        "v": 1,
+        "e": 1,
+        "d": 2,
+        "gp": 3,
+        "gc": 4,
+        "pts": 4,
+        "pos": 8,
+        "sg": -1
+      },
+      {
         "time": "Amigos do Churrasco FC",
         "j": 4,
         "v": 1,
@@ -787,20 +795,8 @@
         "gp": 5,
         "gc": 4,
         "pts": 3,
-        "pos": 8,
-        "sg": 1
-      },
-      {
-        "time": "Real Laje",
-        "j": 4,
-        "v": 1,
-        "e": 0,
-        "d": 3,
-        "gp": 3,
-        "gc": 5,
-        "pts": 3,
         "pos": 9,
-        "sg": -2
+        "sg": 1
       },
       {
         "time": "Estrela da Feira",
@@ -907,7 +903,7 @@
     },
     {
       "dia": 6,
-      "data": "2026-11-11T02:14:41+00:00",
+      "data": "2026-11-11T02:29:44+00:00",
       "proxima_decisao": {
         "pergunta": "A gente junta R$ 700 pro gramado ou faz outra coisa agora? Comenta GRAMADO ou IDEIA: sua sugestão.",
         "opcoes": [
@@ -915,7 +911,12 @@
           "IDEIA: outra coisa agora?"
         ]
       },
-      "post": null
+      "post": {
+        "buffer_id": "6af3d454d9a6812579c6f48e",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-006.mp4",
+        "agendado_para": "2026-11-11T06:00-03:00",
+        "status": "scheduled"
+      }
     }
   ],
   "decisoes": [
@@ -1088,10 +1089,10 @@
     },
     {
       "dia": 6,
-      "evento": "Rodada 4: Real Laje 1 x 2 Poeira FC (vitória)"
+      "evento": "Rodada 4: Real Laje 1 x 1 Poeira FC (empate)"
     }
   ],
-  "atualizado_em": "2026-11-11T02:14:41+00:00",
+  "atualizado_em": "2026-11-11T02:29:44+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",

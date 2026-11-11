@@ -3,24 +3,20 @@
   "clube": "Poeira FC",
   "caixa": 3.0,
   "torcida": 318,
-  "posicao": 3,
+  "posicao": 6,
   "partida": {
     "mandante": "Real Laje",
     "visitante": "Poeira FC",
     "gols_mandante": 1,
-    "gols_visitante": 2,
+    "gols_visitante": 1,
     "gols": [
       {
-        "minuto": 31,
-        "time": "Poeira FC"
-      },
-      {
-        "minuto": 65,
+        "minuto": 67,
         "time": "Poeira FC",
         "autor": "Bujão"
       },
       {
-        "minuto": 82,
+        "minuto": 84,
         "time": "Real Laje"
       }
     ],
@@ -352,20 +348,20 @@
     {
       "id": "08-gol",
       "tipo": "gol",
-      "narracao": "[shouting] GOOOOOL DO POEIRA! [excited] BUJÃO, aos 65! E o jogo já tá dois a zero pro Poeira!",
+      "narracao": "[shouting] GOOOOOL DO POEIRA! [excited] BUJÃO, aos 67! Um a zero pro Poeira, na casa deles!",
       "texto_tela": [
-        "65'",
+        "67'",
         "GOOOOL!"
       ],
       "dados": {
         "culpado": null,
-        "minuto": 65,
+        "minuto": 67,
         "nosso": true,
         "estilo_voz": "grito",
         "autor": "Bujão",
         "placar": [
           0,
-          2
+          1
         ],
         "mandante": "Real Laje",
         "visitante": "Poeira FC",
@@ -402,9 +398,9 @@
     {
       "id": "09-gol",
       "tipo": "gol",
-      "narracao": "Gol do Real Laje, aos 82. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Dois a um. Segura, Poeira!",
+      "narracao": "Gol do Real Laje, aos 84. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Empatou: um a um.",
       "texto_tela": [
-        "82'",
+        "84'",
         "GOL DO REAL LAJE"
       ],
       "dados": {
@@ -414,13 +410,13 @@
           "apelido": "Salário do Mês",
           "posicao": "lateral"
         },
-        "minuto": 82,
+        "minuto": 84,
         "nosso": false,
         "estilo_voz": "normal",
         "autor": null,
         "placar": [
           1,
-          2
+          1
         ],
         "mandante": "Real Laje",
         "visitante": "Poeira FC",
@@ -457,16 +453,16 @@
     {
       "id": "10-fim_de_jogo",
       "tipo": "fim_de_jogo",
-      "narracao": "Apita o árbitro! Vitória do Poeira, 2 a 1!",
+      "narracao": "Apita o árbitro! Empate em 1 a 1. Um ponto é um ponto.",
       "texto_tela": [
         "FIM DE JOGO",
-        "Real Laje 1 x 2 Poeira FC"
+        "Real Laje 1 x 1 Poeira FC"
       ],
       "dados": {
-        "resultado": "vitória",
+        "resultado": "empate",
         "placar": [
           1,
-          2
+          1
         ],
         "mandante": "Real Laje",
         "visitante": "Poeira FC",
@@ -503,10 +499,10 @@
     {
       "id": "11-tabela",
       "tipo": "tabela",
-      "narracao": "Na tabela, o Poeira está em 3º lugar.",
+      "narracao": "Na tabela, o Poeira está em 6º lugar.",
       "texto_tela": [
         "TERCEIRA DIVISÃO DA VÁRZEA",
-        "3º LUGAR"
+        "6º LUGAR"
       ],
       "dados": {
         "tabela": [
@@ -535,18 +531,6 @@
             "sg": 2
           },
           {
-            "time": "Poeira FC",
-            "j": 4,
-            "v": 2,
-            "e": 1,
-            "d": 1,
-            "gp": 7,
-            "gc": 6,
-            "pts": 7,
-            "pos": 3,
-            "sg": 1
-          },
-          {
             "time": "Grêmio Vila Barro",
             "j": 4,
             "v": 2,
@@ -555,7 +539,7 @@
             "gp": 7,
             "gc": 6,
             "pts": 6,
-            "pos": 4,
+            "pos": 3,
             "sg": 1
           },
           {
@@ -567,7 +551,7 @@
             "gp": 3,
             "gc": 7,
             "pts": 6,
-            "pos": 5,
+            "pos": 4,
             "sg": -4
           },
           {
@@ -579,8 +563,20 @@
             "gp": 4,
             "gc": 3,
             "pts": 5,
-            "pos": 6,
+            "pos": 5,
             "sg": 1
+          },
+          {
+            "time": "Poeira FC",
+            "j": 4,
+            "v": 1,
+            "e": 2,
+            "d": 1,
+            "gp": 6,
+            "gc": 6,
+            "pts": 5,
+            "pos": 6,
+            "sg": 0
           },
           {
             "time": "Veteranos do Bairro",
@@ -595,6 +591,18 @@
             "sg": 0
           },
           {
+            "time": "Real Laje",
+            "j": 4,
+            "v": 1,
+            "e": 1,
+            "d": 2,
+            "gp": 3,
+            "gc": 4,
+            "pts": 4,
+            "pos": 8,
+            "sg": -1
+          },
+          {
             "time": "Amigos do Churrasco FC",
             "j": 4,
             "v": 1,
@@ -603,20 +611,8 @@
             "gp": 5,
             "gc": 4,
             "pts": 3,
-            "pos": 8,
-            "sg": 1
-          },
-          {
-            "time": "Real Laje",
-            "j": 4,
-            "v": 1,
-            "e": 0,
-            "d": 3,
-            "gp": 3,
-            "gc": 5,
-            "pts": 3,
             "pos": 9,
-            "sg": -2
+            "sg": 1
           },
           {
             "time": "Estrela da Feira",
@@ -631,7 +627,7 @@
             "sg": -3
           }
         ],
-        "posicao": 3,
+        "posicao": 6,
         "hud": {
           "torcida": 318,
           "caixa": 3.0
