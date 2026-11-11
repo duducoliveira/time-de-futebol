@@ -807,7 +807,7 @@ function posicoesExtras() {
   return { beira, muro, arvore, laje };
 }
 // copas das árvores em volta do campo (o tronco fica atrás do muro); a torcida sobe nelas quando lota
-const ARVORES_ESTADIO = [[60, 525], [185, 548], [895, 548], [1020, 525], [540, 505]];
+const ARVORES_ESTADIO = [[60, 548], [185, 566], [895, 566], [1020, 548], [540, 540]];
 let LAJES = [];
 
 function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0, nome = '' } = {}) {
@@ -815,11 +815,10 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
   const grama = estrutura.gramado === 'grama';
   let s = ceu(t);
   // morro ao fundo (as lajes viram arquibancada quando lota)
-  s += `<g transform="translate(0 -230)">${bairro(780)}</g>`;
-  LAJES = (window._lajes || []).map(([x, y, w]) => [x, y - 230, w]).filter(([, y]) => y > 150 && y < 540).sort((a, b) => b[1] - a[1]);
+  // o morro desce até o muro: a fileira de árvores do pé do morro fica logo atrás dele (sem faixa de chão no meio)
+  s += `<g transform="translate(0 -176)">${bairro(780)}</g>`;
+  LAJES = (window._lajes || []).map(([x, y, w]) => [x, y - 176, w]).filter(([, y]) => y > 200 && y < 580).sort((a, b) => b[1] - a[1]);
   // névoa leve no morro (está longe) e a mata escura de onde saem as árvores; o muro passa NA FRENTE delas
-  s += `<rect x="-10" y="120" width="${W + 20}" height="440" fill="#bfe3f7" opacity=".16"/>
-    <rect x="-10" y="528" width="${W + 20}" height="90" fill="#27583a"/>`;
   s += copas(ARVORES_ESTADIO.map(([x, y], i) => [x, y, 58 + (i % 2) * 10, i % 3]), 'arv-estadio');
   s += chaoEstadio(estrutura);
   s += `<rect x="-10" y="644" width="${W + 20}" height="20" fill="#000" opacity=".18"/>
@@ -843,14 +842,15 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
   s += `<path d="M${xTopo[0]},${yTopo} H${xTopo[1]} L${xBase[1]},${yBase} H${xBase[0]}Z" fill="${grama ? CORES.grama1 : CORES.terra1}" stroke="${OUT}" stroke-width="6"/>`;
   if (grama) for (let i = 0; i < 6; i++) { const y0 = yTopo + i * (yBase - yTopo) / 6, y1 = y0 + (yBase - yTopo) / 12; s += `<path d="M${xBorda(y0, -1)},${y0} H${xBorda(y0, 1)} L${xBorda(y1, 1)},${y1} H${xBorda(y1, -1)}Z" fill="${CORES.grama2}"/>`; }
   else { const r = rng('aereo'); for (let i = 0; i < 18; i++) s += `<ellipse cx="${200 + r() * 680}" cy="${800 + r() * 850}" rx="${12 + r() * 26}" ry="${4 + r() * 7}" fill="#8b4a22" opacity=".45"/>`; }
-  const lc = grama ? '#ffffffdd' : '#ffffff77', ym = (yTopo + yBase) / 2 + 40;
+  const wT = xTopo[1] - xTopo[0], wB = xBase[1] - xBase[0];
+  const lc = grama ? '#ffffffdd' : '#ffffff77', ym = yTopo + (yBase - yTopo) * wT / (wT + wB);  // meio do campo em perspectiva
   s += `<path d="M${xBorda(ym, -1)},${ym} H${xBorda(ym, 1)}" stroke="${lc}" stroke-width="6"/>
-    <ellipse cx="${W / 2}" cy="${ym}" rx="150" ry="60" fill="none" stroke="${lc}" stroke-width="6"/>
-    <path d="M420,${yTopo} L405,${yTopo + 90} H675 L660,${yTopo}" fill="none" stroke="${lc}" stroke-width="5"/>
-    <path d="M300,${yBase} L330,${yBase - 160} H750 L780,${yBase}" fill="none" stroke="${lc}" stroke-width="6"/>
+    <ellipse cx="${W / 2}" cy="${ym}" rx="104" ry="40" fill="none" stroke="${lc}" stroke-width="6"/><circle cx="${W / 2}" cy="${ym}" r="6" fill="${lc}"/>
+    <path d="M420,${yTopo} L408,${yTopo + 62} H672 L660,${yTopo}" fill="none" stroke="${lc}" stroke-width="5"/>
+    <path d="M300,${yBase} L346,${yBase - 215} H734 L780,${yBase}" fill="none" stroke="${lc}" stroke-width="6"/>
     <path d="M490,${yTopo} V${yTopo - 40} H590 V${yTopo}" fill="none" stroke="#fff" stroke-width="7"/>`;
   if (estrutura.rede) s += Array.from({ length: 6 }, (_, i) => `<path d="M${492 + i * 19},${yTopo - 38} V${yTopo}" stroke="#fff" stroke-width="2" opacity=".8"/>`).join('');
-  if (estrutura.banco_reservas) s += `<g transform="translate(${xBorda(1230, 1) + 30} 1230) rotate(66) scale(.55)">${bancoReservas(0, 0)}</g>`;
+  if (estrutura.banco_reservas) s += `<g transform="translate(${xBorda(1050, 1) + 26} 1050) rotate(66) scale(.5)">${bancoReservas(0, 0)}</g>`;
   s += entornoAereo();
   // torcida desenhada: assentos primeiro, depois as faixas de "não cabe mais"
   const seats = assentos(cap), lugares = seats.length;
@@ -865,6 +865,15 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
   const pessoas = ordem.slice(0, visiveis).map((p, i) => ({ x: p[0], y: p[1], i, faixa: p[2], rr: rng('p' + i) }));
   pessoas.sort((a, b) => a.y - b.y);
   s += pessoas.map(p => boneco(p.x, p.y, p.rr, { torcendo: true, t, i: p.i, zoom: { arvore: 1.35, laje: 1.5, muro: 1.15 }[p.faixa] || 1 })).join('');
+  // gol da ponta de cá (visto por trás, maior porque está perto da câmera)
+  { const gx = W / 2, gy = yBase, gw = 91, gh = 74;
+    s += `<ellipse cx="${gx}" cy="${gy + 30}" rx="${gw + 6}" ry="9" fill="#000" opacity=".15"/>`;
+    if (estrutura.rede) s += `<path d="M${gx - gw},${gy - gh} L${gx - gw - 8},${gy + 28} H${gx + gw + 8} L${gx + gw},${gy - gh}Z" fill="#ffffff22"/>`
+      + Array.from({ length: 10 }, (_, i) => { const u = (i + 0.5) / 10, xa = gx - gw + u * 2 * gw, xb = gx - gw - 8 + u * (2 * gw + 16); return `<path d="M${xa},${gy - gh} L${xb},${gy + 28}" stroke="#fff" stroke-width="2" opacity=".75"/>`; }).join('')
+      + [0.25, 0.5, 0.75].map(u => `<path d="M${gx - gw - 8 * u},${gy - gh + u * (gh + 28)} H${gx + gw + 8 * u}" stroke="#fff" stroke-width="2" opacity=".75"/>`).join('')
+      + `<path d="M${gx - gw - 8},${gy + 28} H${gx + gw + 8}" stroke="#fff" stroke-width="3" opacity=".8"/>`;
+    s += `<path d="M${gx - gw},${gy} V${gy - gh} H${gx + gw} V${gy}" fill="none" stroke="${OUT}" stroke-width="15" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M${gx - gw},${gy} V${gy - gh} H${gx + gw} V${gy}" fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>`; }
   s += alambrado(1790);
   return s;
 }
