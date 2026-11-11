@@ -76,7 +76,7 @@ CATALOGO: dict[str, dict] = {
                   "palavras": ["vestiario", "chuveiro", "banheiro"],
                   "efeitos": {"estrutura.vestiario": "vestiário com chuveiro quente", "clube.forca": "+2"},
                   "frase": "Vestiário reformado, com chuveiro quente!"},
-    "grama": {"titulo": "Grama no campo", "custo": 2400, "unico": True,
+    "grama": {"titulo": "Grama no campo", "custo": 700, "unico": True,
               "palavras": ["grama", "gramado", "campo novo", "arrumar o campo", "plantar"],
               "efeitos": {"estrutura.gramado": "grama", "clube.forca": "+4"},
               "frase": "Acabou o terrão: plantamos grama de verdade!"},

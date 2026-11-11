@@ -160,6 +160,30 @@
           "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
         },
         "intervalo_minimo_gols": 12
+      },
+      "4": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "max_gols_sofridos": 1,
+        "max_gols_nossos": 2,
+        "motivo": "fora, contra o Real Laje: o Poeira faz 2 a 0 e toma um no fim, culpa do lateral Salário do Mês",
+        "sequencia": "NNA",
+        "ultimo_gol_a_partir_do_minuto": 80,
+        "intervalo_minimo_gols": 10,
+        "narrar_gols": [
+          2,
+          3
+        ],
+        "textos_gol": {
+          "2": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! E o jogo já tá dois a zero pro Poeira!",
+          "3": "Gol do {adv}, aos {m}. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Dois a um. Segura, Poeira!"
+        },
+        "apelido_no_gol": {
+          "gol": 3,
+          "numero": "6",
+          "apelido": "Salário do Mês",
+          "posicao": "lateral"
+        }
       }
     },
     "times": {

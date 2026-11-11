@@ -208,7 +208,7 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
     return `<path d="M${sx},${ombroY} Q${sx + lado * 18},${(ombroY + my) / 2} ${mx},${my}" fill="none" stroke="${OUT}" stroke-width="30" stroke-linecap="round"/>
       <path d="M${sx},${ombroY} Q${sx + lado * 18},${(ombroY + my) / 2} ${mx},${my}" fill="none" stroke="${pele}" stroke-width="18" stroke-linecap="round"/>
       <path class="brilho3d" d="M${sx - 4},${ombroY - 2} Q${sx + lado * 18 - 4},${(ombroY + my) / 2 - 2} ${mx - 4},${my - 2}" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0"/>
-      <circle data-v="Esfera" cx="${mx}" cy="${my}" r="${p.luvas ? 20 : 14}" fill="${p.luvas ? '#f1c40f' : pele}" stroke="${OUT}" stroke-width="5"/>`;
+      <circle data-v="Esfera" cx="${mx}" cy="${my}" r="${p.luvas ? 20 : 14}" fill="${p.luvas ? (p.corLuva || '#f1c40f') : pele}" stroke="${OUT}" stroke-width="5"/>`;
   };
   const aceno = Math.sin(t * 9) * 16;
   const maos = {
@@ -226,9 +226,18 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   // tronco / camisa
   s1 += `<rect x="${-tw / 2}" y="${topo}" width="${tw}" height="${tronco}" rx="${28 * lf}" fill="${p.camisa || '#e63946'}" stroke="${OUT}" stroke-width="6"/>`;
   if (p.listra) s1 += `<rect x="${-tw / 2 + 3}" y="${topo + tronco * 0.38}" width="${tw - 6}" height="${tronco * 0.2}" fill="${p.listra}"/>`;
+  // uniforme feito pela costureira do bairro: remendos e costura de outra cor (cada um num lugar)
+  if (p.remendos) {
+    const r = rng('remendo' + (p.numero || ''));
+    const px = (r() - 0.5) * tw * 0.5, py = topo + 14 + r() * tronco * 0.18, pw = 18 + r() * 10;
+    s1 += `<rect x="${px - pw / 2}" y="${py}" width="${pw}" height="${pw * 0.85}" rx="3" fill="${r() > 0.5 ? '#a8324a' : '#c9a227'}" stroke="${OUT}" stroke-width="2.5" transform="rotate(${(r() - 0.5) * 30} ${px} ${py})"/>
+      <path d="M${-tw / 2 + 10},${topo + tronco * 0.82} l${tw * 0.32},${-6}" stroke="#3a86ff" stroke-width="3" stroke-dasharray="5 4"/>`;
+  }
   s1 += `<rect class="vol3d" x="${-tw / 2}" y="${topo}" width="${tw}" height="${tronco}" rx="${28 * lf}" fill="url(#g3dCorpo)" opacity="0"/>`;  // volume do tronco (só no estilo 3D)
   if (p.avental) s1 += `<path d="M${-tw * 0.34},${topo + 14} H${tw * 0.34} V${topo + tronco + 22} Q0,${topo + tronco + 34} ${-tw * 0.34},${topo + tronco + 22} Z" fill="${p.avental}" stroke="${OUT}" stroke-width="5"/>
       <text y="${topo + tronco * 0.62}" text-anchor="middle" font-family="Anton" font-size="26" fill="${OUT}">${esc(p.aventalTxt || '')}</text>`;
+  if (p.fita) s1 += `<path d="M${-tw * 0.3},${topo + 4} Q0,${topo + 40} ${tw * 0.3},${topo + 4} M${-tw * 0.3},${topo + 4} l-8,${tronco * 0.7} M${tw * 0.3},${topo + 4} l8,${tronco * 0.6}"
+      fill="none" stroke="#ffd60a" stroke-width="10" stroke-linecap="round"/><path d="M${-tw * 0.3 - 6},${topo + 30} h10 M${-tw * 0.3 - 6},${topo + 50} h10 M${tw * 0.3 + 2},${topo + 30} h10" stroke="${OUT}" stroke-width="2"/>`;
   if (p.numero) s1 += `<text y="${topo + tronco * 0.66}" text-anchor="middle" font-family="Anton" font-size="${44 * Math.min(lf, 1.3)}" fill="#fff" stroke="${OUT}" stroke-width="5" paint-order="stroke">${p.numero}</text>`;
   if (p.barriga) s1 += `<path d="M${-tw * 0.42},${topo + tronco * 0.5} Q0,${topo + tronco + 6} ${tw * 0.42},${topo + tronco * 0.5}" fill="none" stroke="${OUT}" stroke-width="4" opacity=".4"/>`;
 
@@ -314,6 +323,8 @@ const CAMISAS_SORTIDAS = ['#e63946', '#3a86ff', '#ffbe0b', '#8338ec', '#06d6a0',
 const PERSONAGENS = {
   narrador: { pele: '#d9a066', cabelo: 'curto', corCabelo: '#3b2a1e', bigode: true, bone: '#e63946', boneTxt: 'TIÃO', fone: true,
     microfone: true, camisa: '#ffd166', listra: '#f4a261', calcao: '#495057', meiao: '#fff', pose: 'microfone', larg: 1.15, barriga: true },
+  costureira: { pele: '#c68642', cabelo: 'coque', corCabelo: '#d0d0d0', oculos: true, camisa: '#9d4edd', avental: '#ffd6e0',
+    aventalTxt: 'NEIDE', calcao: '#5a189a', meiao: '#9d4edd', chinelo: true, expr: 'feliz', larg: 1.05, alt: 0.9, idade: true, fita: true },
   presidente: { pele: '#8d5524', cabelo: 'coque', corCabelo: '#5a5a5a', oculos: true, brinco: true, camisa: '#e76f51',
     avental: '#fff4dc', aventalTxt: 'CIDA', calcao: '#6d597a', meiao: '#e76f51', chinelo: true, expr: 'serio', larg: 1.1, alt: 0.95, idade: true },
 };
@@ -346,8 +357,9 @@ function jogador(numero, estado, extra = {}) {
       luvas: (estado.elenco[numero] || {}).posicao === 'GOL', bigode: r() > 0.7 };
   })();
   const uniforme = estado.estrutura.uniforme === 'novo';
-  return { ...base, numero, ...(uniforme ? { camisa: CORES.vinho, listra: CORES.amarelo, calcao: '#fff', meiao: CORES.vinho } : {}),
-    ...(base.luvas && uniforme ? { camisa: '#06d6a0', listra: null } : {}), ...extra };
+  const remendos = uniforme && !!estado.estrutura.uniforme_remendado;
+  return { ...base, numero, ...(uniforme ? { camisa: CORES.vinho, listra: CORES.amarelo, calcao: '#fff', meiao: CORES.vinho, remendos } : {}),
+    ...(base.luvas && uniforme ? { camisa: CORES.amarelo, listra: CORES.vinho, calcao: CORES.vinho, meiao: CORES.amarelo, corLuva: '#fff' } : {}), ...extra };
 }
 
 // ------------------------------------------------------------ cenários
@@ -361,6 +373,34 @@ function ceu(t) {
 }
 
 // morro com casinhas e caixas d'água: o "bairro" atrás do campo
+// Copa de árvore com volume: vários círculos com UM contorno só (contorno embaixo, preenchimento por cima),
+// sombra na parte de baixo e luz em cima à esquerda.
+const VERDES = [['#2f6b3a', '#3f8a4a', '#6fbf6a'], ['#2b5f3f', '#3a7d44', '#79c06f'], ['#356b2d', '#4f9d55', '#8fd17f']];
+function copas(lista, seed = 'copa') {
+  // lista: [[cx, cy, r, paleta?], ...]
+  const r = rng(seed);
+  const bolhas = lista.map(([cx, cy, R, k]) => {
+    const n = 5, pal = VERDES[(k ?? Math.floor(r() * 3)) % 3], bs = [];
+    for (let i = 0; i < n; i++) {
+      const a = Math.PI * (0.9 + i * 0.3) + r() * 0.3, d = R * (0.42 + r() * 0.12);
+      bs.push([cx + Math.cos(a) * d, cy + Math.sin(a) * d * 0.8, R * (0.55 + r() * 0.15)]);
+    }
+    bs.push([cx, cy - R * 0.1, R * 0.7]);
+    return { bs, pal, cx, cy, R };
+  });
+  let s = bolhas.map(({ bs }) => bs.map(([x, y, rr]) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(rr + 4).toFixed(1)}" fill="${OUT}"/>`).join('')).join('');
+  s += bolhas.map(({ bs, pal }) => bs.map(([x, y, rr]) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rr.toFixed(1)}" fill="${pal[0]}"/>`).join('')).join('');
+  s += bolhas.map(({ bs, pal }) => bs.map(([x, y, rr]) => `<circle cx="${(x - rr * 0.12).toFixed(1)}" cy="${(y - rr * 0.16).toFixed(1)}" r="${(rr * 0.8).toFixed(1)}" fill="${pal[1]}"/>`).join('')).join('');
+  s += bolhas.map(({ bs, pal }) => bs.filter((_, i) => i % 2 === 0).map(([x, y, rr]) => `<circle cx="${(x - rr * 0.3).toFixed(1)}" cy="${(y - rr * 0.36).toFixed(1)}" r="${(rr * 0.32).toFixed(1)}" fill="${pal[2]}" opacity=".85"/>`).join('')).join('');
+  return s;
+}
+// árvore inteira (tronco + copa), com sombra no chão
+function arvore(x, yChao, R = 60, seed = 'arv', k) {
+  return `<ellipse cx="${x + R * 0.25}" cy="${yChao}" rx="${R * 0.95}" ry="${R * 0.2}" fill="#000" opacity=".2"/>
+    <path d="M${x - R * 0.12},${yChao} L${x - R * 0.07},${yChao - R * 1.3} H${x + R * 0.07} L${x + R * 0.12},${yChao}Z" fill="#7f5539" stroke="${OUT}" stroke-width="4"/>
+    ${copas([[x, yChao - R * 1.55, R, k]], seed)}`;
+}
+
 function bairro(yBase = 780) {
   const r = rng('bairro');
   let s = `<path d="M-50,${yBase} C150,${yBase - 380} 420,${yBase - 470} 640,${yBase - 380} C820,${yBase - 300} 1000,${yBase - 360} 1130,${yBase - 280} V${yBase + 40} H-50Z" data-v="Morro" fill="#7fb069" stroke="${OUT}" stroke-width="5"/>`;
@@ -386,11 +426,10 @@ function bairro(yBase = 780) {
       ${q > 0.6 ? `<rect x="${x - 2}" y="${y - h - 8}" width="${w + 4}" height="8" fill="#bcb8b1" stroke="${OUT}" stroke-width="3"/>` : ''}
       ${caixa ? `<rect x="${x + w * 0.6}" y="${y - h - 26}" width="26" height="22" fill="#3a86ff" stroke="${OUT}" stroke-width="3"/>` : ''}`;
   }
-  // árvores na frente do morro
-  for (let x = -40; x < 1120; x += 70) {
-    const rr = 40 + r() * 26;
-    s += `<circle data-v="Esfera" cx="${x}" cy="${yBase - 10 + r() * 10}" r="${rr}" fill="${r() > 0.5 ? '#3a7d44' : '#4f9d55'}" stroke="${OUT}" stroke-width="4"/>`;
-  }
+  // fileira de árvores na frente do morro: copas que se juntam numa mata só, com volume
+  const fila = [];
+  for (let x = -40; x < 1120; x += 62 + r() * 20) fila.push([x, yBase - 14 + r() * 12, 36 + r() * 20]);
+  s += copas(fila, 'mata' + yBase);
   return s;
 }
 
@@ -401,8 +440,8 @@ function muro(y, nome) {
   return (window.ESTILO3D ? `<rect x="-10" y="${y - 14}" width="${W + 20}" height="16" fill="#fbf6ea"/><rect x="-10" y="${y + 88}" width="${W + 20}" height="60" fill="url(#g3dSombraChao)"/>` : '') + `<rect data-v="Vert" x="-10" y="${y}" width="${W + 20}" height="90" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
     <path d="M60,${y + 18} q40,-12 90,0 t90,0" stroke="#e76f51" stroke-width="10" fill="none" opacity=".7"/>
     <path d="M820,${y + 70} q40,-14 90,0 t90,0" stroke="#3a86ff" stroke-width="10" fill="none" opacity=".7"/>
-    <text class="rotulo" x="265" y="${y + 62}" text-anchor="middle" font-family="Anton" font-size="${Math.min(46, 270 / Math.max(1, medir(nome.toUpperCase(), 1)))}" fill="${corMuro}" opacity=".9">${esc(nome.toUpperCase())}</text>
-    <text class="rotulo" x="835" y="${y + 64}" text-anchor="middle" font-family="Anton" font-size="52" fill="${corMuro}" opacity=".85" letter-spacing="6">${esc(sgMuro)}</text>`;
+    <text class="${window._closeGol ? '' : 'rotulo'}" x="265" y="${y + 62}" text-anchor="middle" font-family="Anton" font-size="${Math.min(46, 270 / Math.max(1, medir(nome.toUpperCase(), 1)))}" fill="${corMuro}" opacity=".9">${esc(nome.toUpperCase())}</text>
+    <text class="${window._closeGol ? '' : 'rotulo'}" x="835" y="${y + 64}" text-anchor="middle" font-family="Anton" font-size="52" fill="${corMuro}" opacity=".85" letter-spacing="6">${esc(sgMuro)}</text>`;
 }
 
 // cor da camisa da torcida: a nossa (vinho) ou, no jogo fora, a do dono da casa (com uns poucos do Poeira)
@@ -430,24 +469,51 @@ function torcedores(n, y0, y1, seed = 'torcida') {
   return s;
 }
 
+const ARQ_BLOCOS = [[52, 478], [602, 1028]], ARQ_DEGRAUS = 3, ARQ_POR_FILA = 13;
 function arquibancada(estrutura, torcida, y = 850, t = 0) {
   const cap = estrutura.capacidade || 500;
   const ocup = clamp(torcida / cap);
   const grande = cap > 500;
   let s = '';
-  const altura = grande ? 200 : 90;
   if (grande) {
+    const altura = 200;
     for (let i = 0; i < 4; i++) s += `<rect x="-10" y="${y - altura + i * 50}" width="${W + 20}" height="14" fill="#b08968" stroke="${OUT}" stroke-width="4"/>`;
     s += `<rect x="-10" y="${y - altura}" width="${W + 20}" height="${altura}" fill="#00000010"/>`;
-  } else {
-    s += `<rect x="80" y="${y - 20}" width="380" height="18" fill="#b08968" stroke="${OUT}" stroke-width="4"/><rect x="110" y="${y - 2}" width="12" height="30" fill="#7f5539"/><rect x="420" y="${y - 2}" width="12" height="30" fill="#7f5539"/>
-      <rect x="620" y="${y - 20}" width="380" height="18" fill="#b08968" stroke="${OUT}" stroke-width="4"/><rect x="650" y="${y - 2}" width="12" height="30" fill="#7f5539"/><rect x="960" y="${y - 2}" width="12" height="30" fill="#7f5539"/>`;
+    const n = Math.round(260 * ocup);
+    if (n) s += `<g transform="translate(0 ${Math.sin(t * 6) * 2})">${torcedores(n, y - altura - 10, y - 30, 'arq' + cap)}</g>`;
+    if (torcida > cap) s += `<g opacity=".9">${torcedores(Math.min(80, Math.round(30 + Math.log10(torcida) * 8)), y - altura - 140, y - altura - 60, 'fora')}</g>`;
+    return s;
   }
-  const slots = grande ? 260 : 60;
-  const n = Math.round(slots * ocup);
-  if (n) s += `<g transform="translate(0 ${Math.sin(t * 6) * 2})">${torcedores(n, y - altura - 10, y - 30, 'arq' + cap)}</g>`;
-  // gente de fora (lotado)
-  if (torcida > cap) s += `<g opacity=".9">${torcedores(Math.min(80, Math.round(30 + Math.log10(torcida) * 8)), y - altura - 140, y - altura - 60, 'fora')}</g>`;
+  // quem senta onde: sorteio fixo dos lugares, enchendo conforme a ocupação
+  const total = ARQ_BLOCOS.length * ARQ_DEGRAUS * ARQ_POR_FILA, n = Math.round(total * ocup);
+  const r = rng('arq-lugares'), ordem = Array.from({ length: total }, (_, i) => [r(), i]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+  const ocupado = new Set(ordem.slice(0, n));
+  const passo = 52, yTopo = y - ARQ_DEGRAUS * passo;       // o degrau de trás é o mais alto
+  ARQ_BLOCOS.forEach(([xa, xb], b) => {
+    // estrutura: pés, travessas e corrimão de trás
+    s += `<path d="M${xa + 8},${y + 20} V${yTopo - 74} M${xb - 8},${y + 20} V${yTopo - 74} M${(xa + xb) / 2},${y + 20} V${yTopo - 74}" stroke="${OUT}" stroke-width="13" stroke-linecap="round"/>
+      <path d="M${xa + 8},${y + 20} V${yTopo - 74} M${xb - 8},${y + 20} V${yTopo - 74} M${(xa + xb) / 2},${y + 20} V${yTopo - 74}" stroke="#7f5539" stroke-width="7" stroke-linecap="round"/>
+      <rect x="${xa - 4}" y="${yTopo - 70}" width="${xb - xa + 8}" height="12" rx="4" fill="#9c6644" stroke="${OUT}" stroke-width="4"/>`;
+    for (let d = 0; d < ARQ_DEGRAUS; d++) {
+      const py = yTopo + d * passo;                          // tábua do assento deste degrau
+      // espelho do degrau (tábuas escuras) + assento
+      s += `<rect x="${xa}" y="${py + 12}" width="${xb - xa}" height="${passo}" fill="#8a5a3c" stroke="${OUT}" stroke-width="4"/>
+        <path d="M${xa + 4},${py + 12 + passo / 2} H${xb - 4}" stroke="#6f472e" stroke-width="3"/>
+        <rect x="${xa - 10}" y="${py}" width="${xb - xa + 20}" height="14" rx="4" fill="#c79a6b" stroke="${OUT}" stroke-width="4"/>`;
+      // torcedores sentados neste degrau (o corpo encosta na tábua)
+      const rr = rng(`arq-${b}-${d}`);
+      for (let i = 0; i < ARQ_POR_FILA; i++) {
+        const cor = rr() > 0.4 ? corTorcida(rr) : CAMISAS_SORTIDAS[Math.floor(rr() * CAMISAS_SORTIDAS.length)], pele = PELES[Math.floor(rr() * PELES.length)];
+        if (!ocupado.has((b * ARQ_DEGRAUS + d) * ARQ_POR_FILA + i)) continue;
+        const x = xa + 20 + (i + 0.5) * ((xb - xa - 40) / ARQ_POR_FILA) + (rr() - 0.5) * 6;
+        const pulo = Math.abs(Math.sin(t * 6 + i * 1.7 + d + b)) * 5;
+        s += `<g transform="translate(0 ${-pulo.toFixed(1)})"><rect data-v="Vert" x="${x - 14}" y="${py - 32}" width="28" height="34" rx="10" fill="${cor}" stroke="${OUT}" stroke-width="3"/>
+          <circle data-v="Esfera" cx="${x}" cy="${py - 40}" r="13" fill="${pele}" stroke="${OUT}" stroke-width="3"/></g>`;
+      }
+    }
+  });
+  // gente de fora (lotado): em pé atrás do corrimão
+  if (torcida > cap) s = `<g opacity=".95">${torcedores(Math.min(60, Math.round(20 + Math.log10(torcida) * 8)), yTopo - 118, yTopo - 76, 'fora')}</g>` + s;
   return s;
 }
 
@@ -557,51 +623,128 @@ function kombi({ t = 0, andando = false } = {}) {
     ${roda(-170)}${roda(180)}</g>`;
 }
 
-// dy > 0 "abaixa a câmera": o bar vai para a parte de baixo e libera o céu para os cartões
-function sede(estrutura, { t = 0, dy = 0 } = {}) {
+// ------------------------------------------------------------ sede (Bar da Cida)
+// Tudo na MESMA escala (1 pessoa ≈ 300 px de altura em s = 1): porta do bar ≈ 290, barraca ≈ 330, varal ≈ 310.
+// Planos, de trás pra frente: morro → muro dos vizinhos → calçada (vai do muro até o meio-fio, passando ao
+// lado do bar) → bar, varal e barraca EM CIMA da calçada → rua de terra, onde ficam o Tião e a Dona Cida.
+const SEDE = { fundo: 1668, base: 1740, calcada: 1822, x0: 272, x1: 808, topo: 1160, pe: 1898 };
+function sombraChao(cx, cy, rx, ry = 14, op = 0.22) { return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="#000" opacity="${op}"/>`; }
+
+function sede(estrutura, { t = 0 } = {}) {
   const novo = estrutura.telhado;
-  let s = '';
-  s += bairro(820);
-  s += `<rect x="-10" y="820" width="${W + 20}" height="${H - 820}" fill="#cfc2a8"/><rect x="-10" y="1180" width="${W + 20}" height="${H - 1180}" fill="url(#gterra)"/>`;
-  // prédio do bar / sede
-  if (window.ESTILO3D) s += `<path d="M910,640 l46,-30 v560 l-46,30z" fill="#b89f7a"/><path d="M910,640 l46,-30 v560 l-46,30z" fill="url(#g3dVert)"/>
-    <ellipse cx="560" cy="1215" rx="470" ry="44" fill="url(#g3dSombra)"/>`;
-  s += `<rect data-v="Casa" x="170" y="640" width="740" height="560" fill="#f2e2c4" stroke="${OUT}" stroke-width="7"/>
-    ${[0, 1, 2, 3, 4].map(i => `<rect x="${220 + i * 120}" y="${900 + (i % 2) * 40}" width="60" height="26" fill="#c97a40" stroke="${OUT}" stroke-width="3" opacity=".7"/>`).join('')}`;
-  if (novo) s += `<path d="M130,650 L540,500 L950,650Z" fill="#d1495b" stroke="${OUT}" stroke-width="7"/>
-    ${[0, 1, 2, 3].map(i => `<path d="M${200 + i * 30},${640 - i * 11} L540,${510 + i * 25}" stroke="#a23b4a" stroke-width="5" opacity=".0"/>`).join('')}
-    <path d="M230,615 H850 M330,578 H750 M430,541 H650" stroke="#a23b4a" stroke-width="6"/>`;
-  else s += `<path d="M140,660 L940,620 L930,660 L150,680Z" fill="#9aa5b1" stroke="${OUT}" stroke-width="6"/>
-    <rect x="420" y="628" width="90" height="34" fill="#6c757d" stroke="${OUT}" stroke-width="4" transform="rotate(-5 465 645)"/>
-    <circle cx="700" cy="640" r="10" fill="${OUT}"/><circle cx="300" cy="655" r="8" fill="${OUT}"/>`;
-  s += `<g class="rotulo"><rect data-v="Vert" x="260" y="700" width="560" height="110" rx="14" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="7"/>
-    <text x="540" y="785" text-anchor="middle" font-family="Anton" font-size="74" fill="${CORES.vinho}">BAR DA CIDA</text>
-    <text x="540" y="860" text-anchor="middle" font-family="Anton" font-size="36" fill="${OUT}" letter-spacing="4">SEDE SOCIAL · ${esc(window._sigla || '')}</text></g>
-    <path d="M200,880 H880 L860,940 H220Z" fill="#e63946" stroke="${OUT}" stroke-width="6"/>
-    ${[0, 1, 2, 3, 4, 5].map(i => `<path d="M${215 + i * 113},882 h56 l-6,56 h-46z" fill="#fff"/>`).join('')}
-    ${window.ESTILO3D ? `<path d="M200,880 H880 L860,940 H220Z" fill="url(#g3dVert)"/><rect x="220" y="940" width="640" height="46" fill="url(#g3dSombraChao)"/>` : ''}
-    <rect data-v="Casa" x="460" y="960" width="160" height="240" fill="#6f4518" stroke="${OUT}" stroke-width="6"/>
-    <rect data-v="Vidro" x="230" y="980" width="180" height="140" fill="#8ecae6" stroke="${OUT}" stroke-width="6"/><path d="M320,980 V1120 M230,1050 H410" stroke="${OUT}" stroke-width="5"/>
-    <rect data-v="Vidro" x="670" y="980" width="180" height="140" fill="#8ecae6" stroke="${OUT}" stroke-width="6"/><path d="M760,980 V1120 M670,1050 H850" stroke="${OUT}" stroke-width="5"/>`;
-  // mesas de plástico e engradado
-  const mesa = (x, cor) => `<rect x="${x - 70}" y="1250" width="140" height="18" rx="6" fill="${cor}" stroke="${OUT}" stroke-width="5"/>
-    <path d="M${x - 55},1268 l-10,70 M${x + 55},1268 l10,70" stroke="${cor}" stroke-width="10"/>`;
-  s += mesa(150, '#ffbe0b') + mesa(930, '#e63946') + `<rect x="840" y="1150" width="110" height="70" fill="#e63946" stroke="${OUT}" stroke-width="5"/>
-    ${[0, 1, 2].map(i => `<rect x="${852 + i * 32}" y="1132" width="18" height="36" rx="6" fill="#6a994e" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
-  if (estrutura.lanchonete) s += lanchonete(estrutura.lanchonete);
-  return ceu(t) + (dy ? `<g transform="translate(0 ${dy})">${s}</g><rect x="-10" y="${H}" width="${W + 20}" height="${dy}" fill="url(#gterra)"/>` : s);
+  const { fundo, base, calcada, x0, x1, topo } = SEDE, lw = x1 - x0, cx = (x0 + x1) / 2;
+  const px = 52, py = base - fundo - 14;                     // profundidade do prédio (parede lateral)
+  let s = `<g opacity=".93">${bairro(1450)}</g>`;
+  // muro dos vizinhos (plano de fundo), com sombra no pé
+  s += `<rect x="-10" y="1452" width="${W + 20}" height="${fundo - 1452}" fill="#e3d5b8" stroke="${OUT}" stroke-width="4"/>
+    <rect x="-10" y="1444" width="${W + 20}" height="12" fill="#cbb994" stroke="${OUT}" stroke-width="3"/>
+    ${Array.from({ length: 12 }, (_, i) => `<path d="M${i * 95 + 20},1458 v${fundo - 1462}" stroke="#d3c3a0" stroke-width="3"/>`).join('')}
+    <path d="M70,1520 q40,-12 90,0 t90,0" stroke="#e76f51" stroke-width="9" fill="none" opacity=".5"/>
+    <path d="M860,1570 q40,-12 90,0 t90,0" stroke="#3a86ff" stroke-width="9" fill="none" opacity=".45"/>`;
+  // calçada: do pé do muro até o meio-fio (lajotas convergindo = profundidade); depois a rua de terra
+  s += `<path d="M-10,${fundo} H${W + 10} V${calcada} H-10Z" fill="#d2c9bd" stroke="${OUT}" stroke-width="4"/>
+    <rect x="-10" y="${fundo}" width="${W + 20}" height="14" fill="#000" opacity=".1"/>
+    ${Array.from({ length: 15 }, (_, i) => { const xa = W / 2 + (i - 7) * 78, xb = W / 2 + (i - 7) * 104; return `<path d="M${xa},${fundo} L${xb},${calcada}" stroke="#b8ad9f" stroke-width="3"/>`; }).join('')}
+    <path d="M-10,${fundo + 42} H${W + 10} M-10,${fundo + 96} H${W + 10}" stroke="#b8ad9f" stroke-width="3"/>
+    <rect x="-10" y="${calcada}" width="${W + 20}" height="18" fill="#a59a8c" stroke="${OUT}" stroke-width="4"/>
+    <rect x="-10" y="${calcada + 18}" width="${W + 20}" height="${H - calcada}" fill="url(#gterra)"/>
+    <rect x="-10" y="${calcada + 18}" width="${W + 20}" height="16" fill="#000" opacity=".12"/>`;
+  { const r = rng('rua-sede'); for (let i = 0; i < 9; i++) s += `<ellipse cx="${(r() * W).toFixed(0)}" cy="${(calcada + 40 + r() * 60).toFixed(0)}" rx="${(14 + r() * 26).toFixed(0)}" ry="${(4 + r() * 5).toFixed(0)}" fill="#8b4a22" opacity=".35"/>`; }
+  // ---- o bar: sombra no chão, parede lateral (vai até o fundo da calçada) e fachada
+  s += `<path d="M${x0 + 10},${base} L${x1},${base} L${x1 + px},${base - py} L${x1 + px + 46},${base - py + 16} L${x1 + 40},${base + 22} L${x0 + 30},${base + 22}Z" fill="#000" opacity=".2"/>`;
+  s += `<path d="M${x1},${topo} l${px},${-py} V${base - py} L${x1},${base}Z" fill="#c9b48e" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M${x1 + 6},${topo + 60} l${px - 12},${-py * 0.9} M${x1 + 6},${topo + 250} l${px - 12},${-py * 0.9} M${x1 + 6},${topo + 440} l${px - 12},${-py * 0.9}" stroke="#b39d75" stroke-width="3"/>
+    <rect data-v="Casa" x="${x0}" y="${topo}" width="${lw}" height="${base - topo}" fill="#f2e2c4" stroke="${OUT}" stroke-width="7"/>
+    <rect x="${x0 + 4}" y="${base - 46}" width="${lw - 8}" height="42" fill="#d9c7a3"/>
+    <path d="M${x0 + 4},${base - 46} H${x1 - 4}" stroke="#c4b08a" stroke-width="3"/>`;
+  if (novo) s += `<path d="M${x0 - 36},${topo + 14} L${cx},${topo - 150} L${x1 + px + 30},${topo - py + 14} L${x1 + 36},${topo + 14}Z" fill="#d1495b" stroke="${OUT}" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M${x0 + 40},${topo - 30} H${x1 - 30} M${x0 + 140},${topo - 72} H${x1 - 120} M${x0 + 230},${topo - 112} H${x1 - 210}" stroke="#a23b4a" stroke-width="6"/>`;
+  else s += `<path d="M${x0 - 22},${topo + 20} L${x0 - 12},${topo - 14} L${x1 + px + 22},${topo - py - 22} L${x1 + px + 22},${topo - py + 6} L${x1 + 18},${topo + 20}Z" fill="#9aa5b1" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>
+    ${Array.from({ length: 9 }, (_, i) => `<path d="M${x0 + 30 + i * 62},${topo + 16} l8,${-30 - i * 0.6}" stroke="#7d8892" stroke-width="3"/>`).join('')}
+    <rect x="${cx - 80}" y="${topo - 34}" width="92" height="30" fill="#6c757d" stroke="${OUT}" stroke-width="4" transform="rotate(-4 ${cx - 34} ${topo - 19})"/>
+    <circle cx="${x1 - 70}" cy="${topo - 14}" r="9" fill="${OUT}"/>`;
+  s += `<g class="rotulo"><rect data-v="Vert" x="${cx - 240}" y="${topo + 72}" width="480" height="96" rx="14" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="7"/>
+    <text x="${cx}" y="${topo + 146}" text-anchor="middle" font-family="Anton" font-size="66" fill="${CORES.vinho}">BAR DA CIDA</text>
+    <text x="${cx}" y="${topo + 210}" text-anchor="middle" font-family="Anton" font-size="32" fill="${OUT}" letter-spacing="4">SEDE SOCIAL · ${esc(window._sigla || '')}</text></g>`;
+  // toldo listrado (avança sobre a calçada) e a sombra dele na fachada
+  const ty = topo + 228;
+  s += `<rect x="${x0 + 6}" y="${ty + 56}" width="${lw - 12}" height="34" fill="#000" opacity=".13"/>
+    <path d="M${x0 - 4},${ty} H${x1 + 4} L${x1 + 22},${ty + 58} H${x0 - 22}Z" fill="#e63946" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>
+    ${Array.from({ length: 6 }, (_, i) => { const a = x0 - 4 + (i + 0.5) * ((lw + 8) / 6), b = x0 - 22 + (i + 0.5) * ((lw + 44) / 6), w = lw / 12; return `<path d="M${a - w / 2 + w / 2},${ty + 3} h${w / 2} L${b + w * 0.55},${ty + 55} h${-w * 0.55}Z" fill="#fff"/>`; }).join('')}
+    <path d="M${x0 - 22},${ty + 58} H${x1 + 22} v10 q-${(lw + 44) / 12},14 -${(lw + 44) / 6},0 q-${(lw + 44) / 12},14 -${(lw + 44) / 6},0 q-${(lw + 44) / 12},14 -${(lw + 44) / 6},0 q-${(lw + 44) / 12},14 -${(lw + 44) / 6},0 q-${(lw + 44) / 12},14 -${(lw + 44) / 6},0 q-${(lw + 44) / 12},14 -${(lw + 44) / 6},0Z" fill="#c1121f" stroke="${OUT}" stroke-width="5" stroke-linejoin="round"/>`;
+  // porta (da altura de uma pessoa) e janelas com peitoril
+  const dTop = base - 290, jTop = base - 268;
+  s += `<rect x="${cx - 78}" y="${dTop - 8}" width="156" height="${base - dTop + 8}" fill="#4a2e12" stroke="${OUT}" stroke-width="6"/>
+    <rect data-v="Casa" x="${cx - 66}" y="${dTop + 4}" width="132" height="${base - dTop - 4}" fill="#7a4d1f" stroke="${OUT}" stroke-width="4"/>
+    <rect x="${cx - 50}" y="${dTop + 22}" width="100" height="100" rx="4" fill="none" stroke="#5c3812" stroke-width="5"/>
+    <rect x="${cx - 50}" y="${dTop + 140}" width="100" height="120" rx="4" fill="none" stroke="#5c3812" stroke-width="5"/>
+    <circle cx="${cx + 46}" cy="${base - 140}" r="8" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="3"/>
+    <rect x="${cx - 92}" y="${base - 10}" width="184" height="16" fill="#b8ad9f" stroke="${OUT}" stroke-width="4"/>
+    ${[x0 + 26, x1 - 26 - 148].map(x => `<rect x="${x - 6}" y="${jTop - 6}" width="160" height="150" fill="#fff4dc" stroke="${OUT}" stroke-width="5"/>
+      <rect data-v="Vidro" x="${x + 4}" y="${jTop + 4}" width="140" height="130" fill="#8ecae6" stroke="${OUT}" stroke-width="4"/>
+      <path d="M${x + 74},${jTop + 4} V${jTop + 134} M${x + 4},${jTop + 68} H${x + 144}" stroke="${OUT}" stroke-width="5"/>
+      <path d="M${x + 14},${jTop + 14} l36,0 l-28,36z" fill="#fff" opacity=".5"/>
+      <rect x="${x - 14}" y="${jTop + 144}" width="176" height="14" fill="#c97a40" stroke="${OUT}" stroke-width="4"/>`).join('')}`;
+  // ---- varal (à esquerda) e barraca (à direita): em cima da calçada, ao lado do bar
+  if (estrutura.varal_camisas) s += varalCamisas(t);
+  if (estrutura.lanchonete) s += lanchonete(estrutura.lanchonete, 836, base + 40);
+  // ---- na rua (primeiro plano): mesa de plástico e engradado, na escala das pessoas
+  const my = calcada + 62, mx = 122;
+  s += sombraChao(mx, my + 86, 92, 11) + `<path d="M${mx - 64},${my + 16} l-12,68 M${mx + 64},${my + 16} l12,68" stroke="${OUT}" stroke-width="15" stroke-linecap="round"/>
+    <path d="M${mx - 64},${my + 16} l-12,68 M${mx + 64},${my + 16} l12,68" stroke="#e9a800" stroke-width="8" stroke-linecap="round"/>
+    <path d="M${mx - 88},${my} h176 l-10,18 h-156z" fill="#ffbe0b" stroke="${OUT}" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="${mx - 30}" y="${my - 40}" width="17" height="40" rx="5" fill="#6a994e" stroke="${OUT}" stroke-width="3"/><rect x="${mx - 27}" y="${my - 52}" width="11" height="14" rx="3" fill="#6a994e" stroke="${OUT}" stroke-width="3"/>
+    <path d="M${mx + 8},${my - 30} h26 l-4,30 h-18z" fill="#fff" stroke="${OUT}" stroke-width="3"/>`;
+  const ex = 942, ey = calcada + 76;
+  s += sombraChao(ex + 58, ey + 72, 80, 10) + `<rect x="${ex}" y="${ey}" width="116" height="70" rx="4" fill="#e63946" stroke="${OUT}" stroke-width="5"/>
+    <path d="M${ex},${ey + 24} h116 M${ex + 39},${ey + 24} v46 M${ex + 78},${ey + 24} v46" stroke="${OUT}" stroke-width="3"/>
+    ${[0, 1, 2].map(i => `<rect x="${ex + 12 + i * 36}" y="${ey - 22}" width="18" height="38" rx="6" fill="#6a994e" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
+  return ceu(t) + s;
 }
 
-function lanchonete(nome, x = 44, y = 1010) {
+// varal com as camisas do Poeira à venda (R$ 25): dois postes de madeira na calçada, à esquerda do bar
+function varalCamisas(t = 0) {
+  const b = SEDE.base + 44, xa = 34, xb = 236, topo = b - 318, mx = (xa + xb) / 2;
+  const camisa = (x, y, k) => `<g transform="translate(${x} ${y}) rotate(${Math.sin(t * 2 + k) * 4}) scale(1.12)">
+      <path d="M-26,0 L-12,-6 Q0,4 12,-6 L26,0 L36,18 L24,24 L22,58 H-22 L-24,24 L-36,18Z" fill="${CORES.vinho}" stroke="${OUT}" stroke-width="4" stroke-linejoin="round"/>
+      <rect x="-22" y="26" width="44" height="10" fill="${CORES.amarelo}"/>
+      <rect x="${k % 2 ? 4 : -16}" y="40" width="12" height="11" rx="2" fill="#c9a227" stroke="${OUT}" stroke-width="2"/>
+      <path d="M-5,-5 v-9 M5,-5 v-9" stroke="#f1faee" stroke-width="3.5" stroke-linecap="round"/></g>`;
+  let s = sombraChao(mx + 16, b + 4, 118, 9, 0.18);
+  s += `<path d="M${xa},${b} V${topo} M${xb},${b} V${topo}" stroke="${OUT}" stroke-width="18" stroke-linecap="round"/>
+    <path d="M${xa},${b} V${topo} M${xb},${b} V${topo}" stroke="#9c6644" stroke-width="10" stroke-linecap="round"/>
+    <path d="M${xa - 3},${b - 60} v-150 M${xb - 3},${b - 90} v-120" stroke="#b98a62" stroke-width="3" stroke-linecap="round"/>
+    <path d="M${xa},${topo + 12} Q${mx},${topo + 44} ${xb},${topo + 12}" fill="none" stroke="${OUT}" stroke-width="6"/>
+    <path d="M${xa},${topo + 12} Q${mx},${topo + 44} ${xb},${topo + 12}" fill="none" stroke="#f1faee" stroke-width="3"/>`;
+  s += camisa(mx - 62, topo + 36, 0) + camisa(mx, topo + 44, 1) + camisa(mx + 62, topo + 36, 2);
+  // plaquinha de preço num cavalete, no chão
+  s += `<path d="M${mx - 44},${b} l14,-96 M${mx + 44},${b} l-14,-96" stroke="${OUT}" stroke-width="9" stroke-linecap="round"/>
+    <g class="rotulo"><rect x="${mx - 78}" y="${b - 158}" width="156" height="92" rx="8" fill="#fff4dc" stroke="${OUT}" stroke-width="5"/>
+    <text x="${mx}" y="${b - 124}" text-anchor="middle" font-family="Anton" font-size="23" fill="${OUT}">CAMISA DO POEIRA</text>
+    <text x="${mx}" y="${b - 82}" text-anchor="middle" font-family="Anton" font-size="38" fill="${CORES.vinho}">R$ 25</text></g>`;
+  return s;
+}
+
+// barraca de lanche: do tamanho de uma barraca de verdade (um pouco mais alta que uma pessoa).
+// (x, yChao) = canto de baixo à esquerda; k = escala.
+function lanchonete(nome, x = 836, yChao = SEDE.base + 40, k = 1) {
   const txt = nome.length > 22 ? nome.replace('Lanchonete', 'Lanch.') : nome;
-  const tam = Math.min(30, 250 / Math.max(1, medir(txt, 1)));   // cabe sempre na placa
-  return `<g transform="translate(${x} ${y}) scale(.68)">
-    <rect x="0" y="0" width="240" height="220" fill="#d4a373" stroke="${OUT}" stroke-width="6"/>
-    <g class="rotulo"><rect x="-20" y="-40" width="280" height="56" rx="10" fill="#fff4dc" stroke="${OUT}" stroke-width="6"/>
-    <text x="120" y="${-12 + tam * 0.36}" text-anchor="middle" font-family="Anton" font-size="${tam}" fill="${CORES.vinho}">${esc(txt)}</text></g>
-    <rect x="20" y="40" width="200" height="90" fill="#3d2b1f" stroke="${OUT}" stroke-width="5"/>
-    <text x="120" y="100" text-anchor="middle" font-size="44">🌭🥤</text>
-    <rect x="-10" y="130" width="260" height="22" fill="#e63946" stroke="${OUT}" stroke-width="5"/></g>`;
+  const w = 226, tam = Math.min(30, 196 / Math.max(1, medir(txt, 1)));   // cabe sempre na placa
+  return `<g transform="translate(${x} ${yChao}) scale(${k})">
+    <path d="M10,0 H${w} l34,-20 l0,12 l-30,22 H24Z" fill="#000" opacity=".2"/>
+    <path d="M${w},-150 l22,-14 V-14 L${w},0Z" fill="#a9825a" stroke="${OUT}" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="0" y="-150" width="${w}" height="150" fill="#d4a373" stroke="${OUT}" stroke-width="6"/>
+    <path d="M10,-100 H${w - 10} M10,-50 H${w - 10}" stroke="#b98a62" stroke-width="3"/>
+    <rect x="-10" y="-166" width="${w + 20}" height="20" fill="#f4e3c1" stroke="${OUT}" stroke-width="5"/>
+    <path d="M8,-166 V-292 M${w - 8},-166 V-292" stroke="${OUT}" stroke-width="13" stroke-linecap="round"/>
+    <path d="M8,-166 V-292 M${w - 8},-166 V-292" stroke="#9c6644" stroke-width="7" stroke-linecap="round"/>
+    <rect x="16" y="-280" width="${w - 32}" height="112" fill="#3d2b1f"/>
+    <text x="${w / 2}" y="-196" text-anchor="middle" font-size="58">🌭🥤</text>
+    <path d="M-18,-292 H${w + 18} L${w + 32},-248 H-32Z" fill="#e63946" stroke="${OUT}" stroke-width="5" stroke-linejoin="round"/>
+    ${[0, 1, 2].map(i => `<path d="M${-18 + (w + 36) * (i * 2 + 1) / 6 - 2},-290 h${(w + 36) / 6} l${4 + i * 3},40 h${-(w + 64) / 6}Z" fill="#fff"/>`).join('')}
+    <path d="M-18,-292 H${w + 18} L${w + 32},-248 H-32Z" fill="none" stroke="${OUT}" stroke-width="5" stroke-linejoin="round"/>
+    <g class="rotulo"><rect x="${w / 2 - 108}" y="-346" width="216" height="50" rx="9" fill="#fff4dc" stroke="${OUT}" stroke-width="5"/>
+    <text x="${w / 2}" y="${-321 + tam * 0.36}" text-anchor="middle" font-family="Anton" font-size="${tam}" fill="${CORES.vinho}">${esc(txt)}</text></g></g>`;
 }
 
 function fundoEscuro() {
@@ -611,7 +754,7 @@ function fundoEscuro() {
 
 Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
-  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).
@@ -637,11 +780,15 @@ function boneco(x, y, r, { torcendo = false, t = 0, i = 0, zoom = 1 } = {}) {
     <circle data-v="Esfera" cy="${-14 * k}" r="${11 * k}" fill="${pele}" stroke="${OUT}" stroke-width="${2.5 * k}"/></g>`;
 }
 
+// arquibancadinha de madeira na vista aérea: 2 blocos de 3 degraus, um de cada lado do gol
+const AEREO_BLOCOS = [[196, 462], [618, 884]], AEREO_FILAS = [738, 712, 686];   // enche da frente pra trás
 // posições de assento conforme a capacidade (dois bancos -> arquibancada em volta)
 function assentos(cap) {
   const pos = [];
   if (cap <= 500) {  // dois bancos de madeira atrás do gol
-    for (const [x0, x1] of [[250, 500], [580, 830]]) for (let i = 0; i < 17; i++) for (const y of [700, 728]) pos.push([x0 + (i + 0.5) * (x1 - x0) / 17, y]);
+    // 4 fileiras por banco (sentados nos bancos e em pé atrás/na frente): atrás do gol fica cheio
+    for (const y of AEREO_FILAS) for (const [x0, x1] of AEREO_BLOCOS) for (let i = 0; i < 18; i++)
+      pos.push([x0 + 8 + (i + 0.5) * (x1 - x0 - 16) / 18, y]);
     return pos;
   }
   const filasFundo = cap > 2000 ? 4 : 2;
@@ -659,7 +806,8 @@ function posicoesExtras() {
   for (const [x, y, w] of LAJES) for (let i = 0; i < Math.max(1, Math.floor(w / 28)); i++) laje.push([x + 12 + i * 26, y - 2]);
   return { beira, muro, arvore, laje };
 }
-const ARVORES_ESTADIO = [[70, 560], [190, 600], [890, 600], [1010, 560], [520, 540]];
+// copas das árvores em volta do campo (o tronco fica atrás do muro); a torcida sobe nelas quando lota
+const ARVORES_ESTADIO = [[60, 525], [185, 548], [895, 548], [1020, 525], [540, 505]];
 let LAJES = [];
 
 function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0, nome = '' } = {}) {
@@ -669,18 +817,29 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
   // morro ao fundo (as lajes viram arquibancada quando lota)
   s += `<g transform="translate(0 -230)">${bairro(780)}</g>`;
   LAJES = (window._lajes || []).map(([x, y, w]) => [x, y - 230, w]).filter(([, y]) => y > 150 && y < 540).sort((a, b) => b[1] - a[1]);
-  s += `<rect x="-10" y="560" width="${W + 20}" height="${H - 560}" fill="#8a9a5b"/>`;
-  s += ARVORES_ESTADIO.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${62 + (i % 2) * 10}" fill="${i % 2 ? '#3a7d44' : '#4f9d55'}" stroke="${OUT}" stroke-width="5"/>`).join('');
-  s += `<rect x="-10" y="610" width="${W + 20}" height="34" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
+  // névoa leve no morro (está longe) e a mata escura de onde saem as árvores; o muro passa NA FRENTE delas
+  s += `<rect x="-10" y="120" width="${W + 20}" height="440" fill="#bfe3f7" opacity=".16"/>
+    <rect x="-10" y="528" width="${W + 20}" height="90" fill="#27583a"/>`;
+  s += copas(ARVORES_ESTADIO.map(([x, y], i) => [x, y, 58 + (i % 2) * 10, i % 3]), 'arv-estadio');
+  s += chaoEstadio(estrutura);
+  s += `<rect x="-10" y="644" width="${W + 20}" height="20" fill="#000" opacity=".18"/>
+    <rect x="-10" y="610" width="${W + 20}" height="34" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
+    <rect x="-10" y="604" width="${W + 20}" height="9" fill="#cfc6ba" stroke="${OUT}" stroke-width="3"/>
+    <path d="M40,624 h120 M900,632 h130" stroke="#e76f51" stroke-width="8" opacity=".6"/><path d="M60,636 h80 M930,620 h80" stroke="#3a86ff" stroke-width="7" opacity=".55"/>
     <text x="${W / 2}" y="638" text-anchor="middle" font-family="Anton" font-size="26" fill="${CORES.vinho}" letter-spacing="6">${esc(nome.toUpperCase())}</text>`;
   // arquibancada
-  if (cap <= 500) s += [[250, 500], [580, 830]].map(([a, b]) => `<rect x="${a}" y="712" width="${b - a}" height="12" fill="#b08968" stroke="${OUT}" stroke-width="4"/><rect x="${a}" y="740" width="${b - a}" height="12" fill="#b08968" stroke="${OUT}" stroke-width="4"/>`).join('');
+  if (cap <= 500) s += AEREO_BLOCOS.map(([a, b]) => `<path d="M${a + 6},760 H${b + 18} l14,-10 V690 H${a + 20}Z" fill="#000" opacity=".16"/>
+      <rect x="${a}" y="676" width="${b - a}" height="82" fill="#8a5a3c" stroke="${OUT}" stroke-width="4"/>
+      <path d="M${a + 6},676 V758 M${b - 6},676 V758 M${(a + b) / 2},676 V758" stroke="#6f472e" stroke-width="4"/>
+      ${AEREO_FILAS.map(y => `<rect x="${a - 5}" y="${y + 8}" width="${b - a + 10}" height="9" rx="3" fill="#c79a6b" stroke="${OUT}" stroke-width="3"/>`).join('')}
+      <rect x="${a - 3}" y="668" width="${b - a + 6}" height="8" rx="3" fill="#9c6644" stroke="${OUT}" stroke-width="3"/>`).join('');
   else {
     s += `<path d="M230,${cap > 2000 ? 620 : 680} H850 L840,750 H240Z" fill="${cap > 2000 ? '#adb5bd' : '#b08968'}" stroke="${OUT}" stroke-width="5"/>`;
     for (const lado of [-1, 1]) s += `<path d="M${xBorda(790, lado) + lado * 30},790 L${xBorda(790, lado) + lado * (cap > 2000 ? 150 : 110)},790 L${xBorda(1680, lado) + lado * (cap > 2000 ? 190 : 140)},1680 L${xBorda(1680, lado) + lado * 30},1680Z" fill="${cap > 2000 ? '#adb5bd' : '#b08968'}" stroke="${OUT}" stroke-width="5"/>`;
   }
-  // campo
+  // campo (com sombra projetada nas bordas, para descolar do chão)
   const { yTopo, yBase, xTopo, xBase } = CAMPO;
+  s += `<path d="M${xTopo[0] + 6},${yTopo + 10} H${xTopo[1] + 14} L${xBase[1] + 22},${yBase + 14} H${xBase[0] + 8}Z" fill="#000" opacity=".16"/>`;
   s += `<path d="M${xTopo[0]},${yTopo} H${xTopo[1]} L${xBase[1]},${yBase} H${xBase[0]}Z" fill="${grama ? CORES.grama1 : CORES.terra1}" stroke="${OUT}" stroke-width="6"/>`;
   if (grama) for (let i = 0; i < 6; i++) { const y0 = yTopo + i * (yBase - yTopo) / 6, y1 = y0 + (yBase - yTopo) / 12; s += `<path d="M${xBorda(y0, -1)},${y0} H${xBorda(y0, 1)} L${xBorda(y1, 1)},${y1} H${xBorda(y1, -1)}Z" fill="${CORES.grama2}"/>`; }
   else { const r = rng('aereo'); for (let i = 0; i < 18; i++) s += `<ellipse cx="${200 + r() * 680}" cy="${800 + r() * 850}" rx="${12 + r() * 26}" ry="${4 + r() * 7}" fill="#8b4a22" opacity=".45"/>`; }
@@ -692,10 +851,13 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
     <path d="M490,${yTopo} V${yTopo - 40} H590 V${yTopo}" fill="none" stroke="#fff" stroke-width="7"/>`;
   if (estrutura.rede) s += Array.from({ length: 6 }, (_, i) => `<path d="M${492 + i * 19},${yTopo - 38} V${yTopo}" stroke="#fff" stroke-width="2" opacity=".8"/>`).join('');
   if (estrutura.banco_reservas) s += `<g transform="translate(${xBorda(1230, 1) + 30} 1230) rotate(66) scale(.55)">${bancoReservas(0, 0)}</g>`;
+  s += entornoAereo();
   // torcida desenhada: assentos primeiro, depois as faixas de "não cabe mais"
-  const total = bonecos(Math.min(torcida, 1e7));
-  const visiveis = Math.round(bonecos(torcidaAntes) + (total - bonecos(torcidaAntes)) * revelar);
-  const seats = assentos(cap), lugares = bonecos(cap);
+  const seats = assentos(cap), lugares = seats.length;
+  // até lotar: proporcional aos lugares (a arquibancada enche de verdade); depois, as faixas de "não cabe mais"
+  const vis = n => n <= cap ? Math.round(lugares * n / cap) : lugares + bonecos(n) - bonecos(cap);
+  const total = vis(Math.min(torcida, 1e7));
+  const visiveis = Math.round(vis(torcidaAntes) + (total - vis(torcidaAntes)) * revelar);
   const ex = posicoesExtras();
   const ordem = [...seats.slice(0, Math.min(seats.length, lugares)).map(p => [...p, 'arq'])];
   for (const [faixa, tam] of FAIXAS_TORCIDA) ordem.push(...ex[faixa].slice(0, tam).map(p => [...p, faixa]));
@@ -703,9 +865,51 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
   const pessoas = ordem.slice(0, visiveis).map((p, i) => ({ x: p[0], y: p[1], i, faixa: p[2], rr: rng('p' + i) }));
   pessoas.sort((a, b) => a.y - b.y);
   s += pessoas.map(p => boneco(p.x, p.y, p.rr, { torcendo: true, t, i: p.i, zoom: { arvore: 1.35, laje: 1.5, muro: 1.15 }[p.faixa] || 1 })).join('');
+  s += alambrado(1790);
   return s;
 }
-Object.assign(window, { estadioAereo, bonecos, FAIXAS_TORCIDA });
+// chão em volta do campo: grama com manchas, trilha de terra até o portão e alambrado no primeiro plano
+function chaoEstadio(estrutura) {
+  let s = `<defs><linearGradient id="gchaoAereo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d9b4e"/><stop offset="1" stop-color="#93ad5c"/></linearGradient></defs>
+    <rect x="-10" y="600" width="${W + 20}" height="${H - 600}" fill="url(#gchaoAereo)"/>`;
+  const r = rng('chao-aereo');
+  for (let i = 0; i < 26; i++) {
+    const x = r() * W, y = 680 + r() * 1220;
+    if (x > xBorda(y, -1) - 30 && x < xBorda(y, 1) + 30) continue;  // fora do campo
+    s += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(30 + r() * 60).toFixed(0)}" ry="${(8 + r() * 14).toFixed(0)}" fill="${r() > 0.5 ? '#6f8c45' : '#a3bb6a'}" opacity=".7"/>`;
+  }
+  for (let i = 0; i < 40; i++) {  // tufos de capim
+    const x = r() * W, y = 700 + r() * 1200;
+    if (x > xBorda(y, -1) - 20 && x < xBorda(y, 1) + 20) continue;
+    s += `<path d="M${x.toFixed(0)},${y.toFixed(0)} l-6,-14 M${x.toFixed(0)},${y.toFixed(0)} l1,-17 M${x.toFixed(0)},${y.toFixed(0)} l7,-13" stroke="#4f6f2f" stroke-width="3" stroke-linecap="round"/>`;
+  }
+  // trilha de terra do pé do morro até o campo
+  s += `<path d="M${W / 2 - 60},${H} C${W / 2 - 40},1850 ${W / 2 + 20},1800 ${W / 2 + 10},1712 L${W / 2 + 70},1712 C${W / 2 + 90},1800 ${W / 2 + 40},1850 ${W / 2 + 60},${H}Z" fill="#c9a26b" opacity=".85"/>`;
+  return s;
+}
+// profundidade na vista aérea: cerca de madeira e árvores dos dois lados, crescendo conforme chegam perto da câmera
+function entornoAereo() {
+  let s = '';
+  for (const lado of [-1, 1]) {
+    const xf = y => xBorda(y, lado) + lado * (58 + (y - 760) * 0.085);
+    const ys = []; for (let y = 700, passo = 46; y < 1760; y += passo, passo *= 1.13) ys.push(y);
+    // travessas (duas) e mourões
+    s += `<path d="M${xf(ys[0])},${ys[0] - 22} L${xf(1760)},${1760 - 62}" stroke="${OUT}" stroke-width="7"/><path d="M${xf(ys[0])},${ys[0] - 22} L${xf(1760)},${1760 - 62}" stroke="#b08968" stroke-width="3.5"/>
+      <path d="M${xf(ys[0])},${ys[0] - 10} L${xf(1760)},${1760 - 28}" stroke="${OUT}" stroke-width="7"/><path d="M${xf(ys[0])},${ys[0] - 10} L${xf(1760)},${1760 - 28}" stroke="#b08968" stroke-width="3.5"/>`;
+    for (const y of ys) { const k = escalaY(y), x = xf(y); s += `<ellipse cx="${x + 8 * k}" cy="${y}" rx="${14 * k}" ry="${4 * k}" fill="#000" opacity=".2"/>
+      <path d="M${x},${y} v${-58 * k}" stroke="${OUT}" stroke-width="${11 * k}" stroke-linecap="round"/><path d="M${x},${y} v${-58 * k}" stroke="#9c6644" stroke-width="${6 * k}" stroke-linecap="round"/>`; }
+  }
+  // árvores fora da cerca: pequenas lá no fundo, grandes aqui perto
+  for (const [x, y, R, k] of [[118, 838, 34, 0], [972, 846, 36, 1], [64, 1010, 48, 2], [1030, 1040, 50, 0], [18, 1300, 70, 1], [1068, 1340, 72, 2]]) s += arvore(x, y, R, 'lado' + x, k);
+  return s;
+}
+function alambrado(y = 1780) {
+  let s = `<path d="M-10,${y} H${W + 10}" stroke="${OUT}" stroke-width="7"/><path d="M-10,${y} H${W + 10}" stroke="#adb5bd" stroke-width="3"/>`;
+  for (let x = 20; x < W; x += 120) s += `<path d="M${x},${y + 120} V${y - 6}" stroke="${OUT}" stroke-width="10" stroke-linecap="round"/><path d="M${x},${y + 120} V${y - 6}" stroke="#ced4da" stroke-width="5" stroke-linecap="round"/>`;
+  for (let x = -20; x < W + 20; x += 22) s += `<path d="M${x},${y} l22,22 M${x + 22},${y} l-22,22" stroke="#adb5bd" stroke-width="2" opacity=".7"/>`;
+  return s;
+}
+Object.assign(window, { estadioAereo, bonecos, FAIXAS_TORCIDA, copas, arvore, alambrado });
 
 // ------------------------------------------------------------ escudo oficial do Poeira FC
 // Usado na foto de perfil (video/logo.mjs) e no escudo dentro dos vídeos.

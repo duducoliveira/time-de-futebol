@@ -1,0 +1,297 @@
+{
+  "dia": 6,
+  "seguidores_ontem": 271,
+  "seguidores_hoje": 318,
+  "post_anterior": {
+    "id": "18474736474137019",
+    "caption": "DIA 5 do Poeira FC ⚽\n\nO que a gente faz agora? O comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 27,
+    "like_count": 253,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/DfjjyzWPFc4/",
+    "timestamp": "2026-11-10T09:14:50+0000"
+  },
+  "curtidas": 253,
+  "receita_curtidas": 253,
+  "caixa_atual": 0.0,
+  "caixa_com_curtidas": 253.0,
+  "top_comentarios": [
+    {
+      "usuario": "talles_silva",
+      "texto": "Abre um loja pra vender as blusas do poeira",
+      "curtidas": 20,
+      "id": "17994892455105923",
+      "timestamp": "2026-11-10T09:18:42+0000"
+    },
+    {
+      "usuario": "gilbertoteles_",
+      "texto": "Como treinador, quero parabenizar todo o elenco pela nossa primeira vitória. Fico muito feliz com o resultado e, principalmente, com a entrega de cada jogador dentro de campo. Estamos construindo um projeto e precisamos continuar evoluindo. Minha decisão é colocar grama no campo para melhorar as condições de jogo. Agora é manter os pés no chão, trabalhar forte e buscar mais vitórias. Ainda temos muito pela frente! Vamos, Poeira FC!",
+      "curtidas": 10,
+      "id": "18157546156502016",
+      "timestamp": "2026-11-10T12:39:02+0000"
+    },
+    {
+      "usuario": "isaq_ueestevao",
+      "texto": "Sugestão: Cada repostagem 5 reais no caixa do clube",
+      "curtidas": 9,
+      "id": "18110365390961138",
+      "timestamp": "2026-11-10T12:31:17+0000"
+    },
+    {
+      "usuario": "_guigs12",
+      "texto": "Tem que fazer uniforme para o time para ficar com outra cara, com isso já oferece camisas para a torcida ao mesmo tempo que vamos estar fazendo pra jogo vai vender o da torcida e vai pagar pelo menos metade do custo",
+      "curtidas": 4,
+      "id": "18119407480791644",
+      "timestamp": "2026-11-10T09:41:56+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Faz um campo melhor e se tiver dinheiro fazer umas arquibancadas melhores",
+      "curtidas": 1,
+      "id": "17975019066170346",
+      "timestamp": "2026-11-10T09:31:24+0000"
+    },
+    {
+      "usuario": "lernerbruninho",
+      "texto": "Me coloca no time, pode ser de volante, não passa nada, quebro mais que mareia, do pescoço pra baixo é canela",
+      "curtidas": 1,
+      "id": "18207490294373067",
+      "timestamp": "2026-11-10T09:41:41+0000"
+    },
+    {
+      "usuario": "leof._014",
+      "texto": "Fazer o uniforme e uma loja com a camisa do poeira",
+      "curtidas": 1,
+      "id": "18115406377877821",
+      "timestamp": "2026-11-10T10:12:03+0000"
+    },
+    {
+      "usuario": "dede_todeschini",
+      "texto": "Abre uma loja pra vender adereços do clube, camiseta, copos, promoções de ingresso pros jogos, uma vaquinha pra \"Poeira Levantada\", a nova torcida organizada",
+      "curtidas": 1,
+      "id": "17908347993656610",
+      "timestamp": "2026-11-10T11:06:09+0000"
+    },
+    {
+      "usuario": "flavinhorodriques",
+      "texto": "Uma churrasqueira com espetinho... Q gera 1 real de lucro por cada curtida..",
+      "curtidas": 0,
+      "id": "18120860894321056",
+      "timestamp": "2026-11-10T09:22:22+0000"
+    },
+    {
+      "usuario": "ig_brdck",
+      "texto": "Faz uma rifa onde o torcedor vai na Kombi para o clássico e assitir o jogo junto ao treinador, assim gera uma renda extra e uma experiência de várzea",
+      "curtidas": 0,
+      "id": "17986580664107335",
+      "timestamp": "2026-11-10T09:43:50+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "talles_silva",
+      "curtidas": 20,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 1,
+      "usuario": "gilbertoteles_",
+      "curtidas": 10,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Técnico de verdade custa R$ 1200 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 2,
+      "usuario": "isaq_ueestevao",
+      "curtidas": 9,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "_guigs12",
+      "curtidas": 4,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Uniforme novo custa R$ 300 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 4,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Arquibancada nova custa R$ 1200 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 5,
+      "usuario": "lernerbruninho",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 6,
+      "usuario": "leof._014",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Uniforme novo custa R$ 300 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 7,
+      "usuario": "dede_todeschini",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 8,
+      "usuario": "flavinhorodriques",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Lanchonete do {autor} já foi feito",
+      "revisar": false
+    },
+    {
+      "indice": 9,
+      "usuario": "ig_brdck",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Kombi do time já foi feito",
+      "revisar": false
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": null,
+    "acoes": [
+      "uniforme",
+      "varal"
+    ],
+    "autor": "talles_silva",
+    "titulo": "Uniforme + varal de camisas",
+    "interpretacao": "A costureira do bairro fez o uniforme do time por R$ 200 e a Dona Cida montou um varal de camisas (R$ 25 cada) do lado do bar.",
+    "custo": 250,
+    "efeitos": {
+      "estrutura.uniforme": "novo",
+      "estrutura.uniforme_remendado": true,
+      "estrutura.varal_camisas": true,
+      "regras.camisas_pct_torcida": 3,
+      "regras.preco_camisa": 25,
+      "clube.forca": "+1",
+      "personagens.costureira": {
+        "nome": "Dona Neide",
+        "cargo": "costureira do bairro"
+      }
+    },
+    "narracao_obra": "A Dona Neide, costureira do bairro, topou fazer o uniforme do time inteiro por R$ 200. Tem remendo aqui, linha de outra cor ali, mas agora é todo mundo de vinho e amarelo! E com mais cinquenta, a Dona Cida levantou um varal do lado do bar: camisa do Poeira a vinte e cinco. Todo jogo em casa, tem camisa à venda no varal!"
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "A gente junta R$ 700 pro gramado ou faz outra coisa agora? Comenta GRAMADO ou IDEIA: sua sugestão.",
+    "opcoes": [
+      "Juntar pro gramado (R$ 700)?",
+      "IDEIA: outra coisa agora?"
+    ]
+  },
+  "tema": "UNIFORME NOVO!",
+  "tema_falado": "Uniforme novo",
+  "historia": {
+    "comentarios": [
+      {
+        "narracao": "O comentário mais curtido foi do Talles: abrir uma loja pra vender as camisas do Poeira. E o Guigs completou: uniforme pro time, vendendo camisa pra torcida. As duas ideias foram aprovadas!",
+        "comentarios": [
+          {
+            "usuario": "talles_silva",
+            "texto": "Abre um loja pra vender as blusas do poeira",
+            "curtidas": 20,
+            "chave": "talles",
+            "carimbo": "aprovado",
+            "chave_carimbo": "guigs"
+          },
+          {
+            "usuario": "_guigs12",
+            "texto": "Tem que fazer uniforme para o time, e já oferece camisas para a torcida",
+            "curtidas": 4,
+            "chave": "guigs",
+            "carimbo": "aprovado",
+            "chave_carimbo": "aprovadas",
+            "selo": "E COMPLETOU"
+          }
+        ]
+      }
+    ],
+    "antes_jogo": [
+      {
+        "tipo": "comentarios",
+        "narracao": "E tem muita gente pedindo pra entrar no time: o Rabisco, o Todeschini, e até massagista com galeto solidário! Então anota: quando o Poeira chegar a 500 torcedores, tem peneira nova! Manda esse vídeo pros amigos!",
+        "dados": {
+          "comentarios": [
+            {
+              "usuario": "isaq_ueestevao",
+              "texto": "Rabisco - ponta esquerda, faz obra de arte",
+              "curtidas": 9,
+              "chave": "rabisco",
+              "carimbo": "peneira",
+              "chave_carimbo": "anota",
+              "selo": "QUER JOGAR"
+            },
+            {
+              "usuario": "dede_todeschini",
+              "texto": "Todeschini - 9 pivôzão, reserva do Saci",
+              "curtidas": 0,
+              "chave": "todeschini",
+              "carimbo": "peneira",
+              "chave_carimbo": "anota",
+              "selo": "QUER JOGAR"
+            },
+            {
+              "usuario": "emersonfala",
+              "texto": "Me contrata pra massagista: faço galeto!",
+              "curtidas": 0,
+              "chave": "massagista",
+              "carimbo": "peneira",
+              "chave_carimbo": "anota",
+              "selo": "QUER TRABALHAR"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "piada": {
+    "pular": true
+  },
+  "decisao_fala": "Um dos pedidos que mais aparece é o gramado. Só que pra plantar grama a gente precisa de R$ 700, e no caixa tem 3. E aí: a gente espera juntar pro gramado, ou faz outra coisa agora? Comenta GRAMADO pra esperar, ou IDEIA com a sua sugestão. O comentário mais curtido decide!",
+  "legenda": "DIA 6 do Poeira FC ⚽\n\nA gente junta R$ 700 pro gramado ou faz outra coisa agora? Comenta GRAMADO ou IDEIA: sua sugestão. O comentário viável mais curtido decide.\n\nPeneira nova quando o Poeira chegar a 500 torcedores: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}

@@ -112,6 +112,16 @@ def nivel_torcida(torcida: int, capacidade: int) -> str:
     return "tudo"
 
 
+# Variações da fala da torcida (escolhida pelo dia, para não repetir a do vídeo anterior)
+FALAS_TORCIDA_VARIAS = {
+    "enchendo": [
+        "Atrás do gol já tá ficando apertado: tem gente dividindo banco!",
+        "Chegou torcedor de tudo quanto é canto do bairro!",
+        "A arquibancada tá ganhando cor: é vinho pra todo lado!",
+        "Já tem fila pra sentar no banco de madeira!",
+        "Tem torcedor novo que nem sabe o nome dos jogadores. Mas já grita!",
+    ],
+}
 FALAS_TORCIDA = {
     "vazio": "A arquibancada continua vazia. Chama os amigos!",
     "enchendo": "Olha a arquibancada começando a encher!",
@@ -260,7 +270,7 @@ def _simular_com_desfecho(m: str, v: str, forca: dict, semente: str, nome: str, 
     """Simula até sair o desfecho combinado (ex: perder a estreia), de forma determinística.
     regra: {"resultado": "derrota", "max_gols_sofridos": 3, "marca_gol": true,
             "gols_nossos_a_partir_do_minuto": 46}"""
-    for i in range(500):
+    for i in range(20000):
         r = simular(m, v, forca, semente=f"{semente}-{i}")
         if _desfecho(r, nome) != regra.get("resultado", _desfecho(r, nome)):
             continue
@@ -275,6 +285,13 @@ def _simular_com_desfecho(m: str, v: str, forca: dict, semente: str, nome: str, 
         if nossos > regra.get("max_gols_nossos", 99):
             continue
         # gols muito colados (43' e 44') parecem repetidos na narração
+        # ex: "NNA" = Poeira, Poeira, adversário (nessa ordem)
+        seq = regra.get("sequencia")
+        if seq and "".join("N" if g["time"] == nome else "A" for g in r["gols"]) != seq:
+            continue
+        fim = regra.get("ultimo_gol_a_partir_do_minuto")
+        if fim and (not r["gols"] or r["gols"][-1]["minuto"] < fim):
+            continue
         gap = regra.get("intervalo_minimo_gols")
         if gap and any(b["minuto"] - a["minuto"] < gap for a, b in zip(r["gols"], r["gols"][1:])):
             continue
@@ -354,7 +371,9 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
              caixa_antes=caixa_ontem, caixa=e["caixa"], curtidas=briefing["curtidas"])
         nivel = nivel_torcida(hoje, e["estrutura"]["capacidade"])
         nivel_ontem = nivel_torcida(antes, e["estrutura"]["capacidade"])
-        cena("estadio", FALAS_TORCIDA[nivel] + (" Isso é novidade!" if nivel != nivel_ontem and nivel in
+        variacoes = FALAS_TORCIDA_VARIAS.get(nivel) or [FALAS_TORCIDA[nivel]]
+        fala_torcida = briefing.get("fala_torcida") or variacoes[(dia - 1) % len(variacoes)]
+        cena("estadio", fala_torcida + (" Isso é novidade!" if nivel != nivel_ontem and nivel in
              ("arvore", "laje", "tudo") else ""), [f"{_n(hoje)} TORCEDORES", ROTULO_NIVEL.get(nivel, "")],
              antes=antes, torcida=hoje, nivel=nivel)
 
@@ -472,8 +491,12 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             ns, ds = (gm, gv) if partida["mandante"] == nome else (gv, gm)
             # Jogos com 4+ gols: narra só o 1º gol do Poeira (empolgado) e o último gol do jogo.
             # Os do meio aparecem no placar. Até 3 gols: narra todos.
-            if len(gols) > 3 and i not in (primeiro_nosso, len(gols) - 1):
+            if regra_jogo.get("narrar_gols"):  # ex: [2, 3] = só o 2º e o 3º gol
+                if i + 1 not in regra_jogo["narrar_gols"]:
+                    continue
+            elif len(gols) > 3 and i not in (primeiro_nosso, len(gols) - 1):
                 continue
+            fixo = (regra_jogo.get("textos_gol") or {}).get(str(i + 1))
             ultimo = i == len(gols) - 1 and len(gols) > 1
             if nosso:
                 art = _artilheiro(e, rng)
@@ -486,13 +509,15 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                     art = next(({"numero": n, **j} for n, j in e["elenco"].items() if j["nome"] == quem), art)
                 g["autor"] = art["nome"]
                 gritos = [x for x in GRITOS_GOL if x not in usados] or GRITOS_GOL
-                if decisivo and i == ultimo_nosso:
+                if fixo:
+                    grito = fixo
+                elif decisivo and i == ultimo_nosso:
                     grito = decisivo["grito"]
                 else:
                     grito = regra_jogo.get("grito_gol") or rng.choice(gritos)
                 usados.append(grito)
                 txt = grito.format(N=nome.upper(), A=art["nome"].upper(), m=g["minuto"], ns=_n(ns), ds=_n(ds))
-                roteirizado = grito in (decisivo.get("grito"), regra_jogo.get("grito_gol"))
+                roteirizado = grito in (decisivo.get("grito"), regra_jogo.get("grito_gol"), fixo)
                 if not roteirizado:
                     limpo = txt.replace("Que golaço!", "").replace("Que pintura!", "").rstrip()
                     if ns == ds:
@@ -512,12 +537,24 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 if piada_gol:
                     usadas.append(piada_gol)
                 txt = f"Gol do {adv}, aos {g['minuto']}. {piada_gol}".strip()
-                if ultimo and ns < ds and any(x["time"] == nome for x in gols[:i]):
+                if fixo:
+                    if piada_gol:
+                        usadas.remove(piada_gol)
+                    txt = fixo.format(adv=adv, m=g["minuto"], ns=_n(ns), ds=_n(ds))
+                elif ultimo and ns < ds and any(x["time"] == nome for x in gols[:i]):
                     txt = (f"Ah, não... Gol do {adv}, aos {g['minuto']}. Eles viraram o jogo: "
                            f"{_n(ds)} a {_n(ns)}. {'A torcida ficou em silêncio.' if casa else 'A casa deles veio abaixo.'}")
                 elif ultimo and ns == ds:
                     txt = f"Ah, não... Gol do {adv}, aos {g['minuto']}. Empatou: {_n(ds)} a {_n(ns)}."
-            cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"],
+            culpado = None
+            ap = regra_jogo.get("apelido_no_gol")  # ex: o gol sofrido é culpa do lateral "Salário do Mês"
+            if ap and str(i + 1) == str(ap.get("gol")) and ap["numero"] in e["elenco"]:
+                j = e["elenco"][ap["numero"]]
+                j["apelido"] = ap["apelido"]
+                e.setdefault("piadas_usadas", []).append(ap["apelido"])
+                culpado = {"numero": ap["numero"], "nome": j["nome"], "apelido": ap["apelido"], "posicao": ap.get("posicao", "")}
+                est.evento(e, f"{j['nome']} ganhou o apelido {ap['apelido']}")
+            cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"], culpado=culpado,
                  minuto=g["minuto"], nosso=nosso, estilo_voz="grito" if nosso else "normal", autor=g.get("autor"), placar=[gm, gv],
                  mandante=partida["mandante"], visitante=partida["visitante"])
         if not gols:
@@ -551,12 +588,20 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 est.lancar(e, bilheteria, f"bilheteria rodada {liga['rodada']} ({publico} pagantes)")
             if lanche:
                 est.lancar(e, lanche, f"lanchonete rodada {liga['rodada']}")
+            camisas = venda = 0
+            if e["estrutura"].get("varal_camisas") and publico:
+                camisas = round(publico * e["regras"].get("camisas_pct_torcida", 3) / 100)
+                venda = camisas * e["regras"].get("preco_camisa", 25)
+                if venda:
+                    est.lancar(e, venda, f"varal de camisas rodada {liga['rodada']} ({camisas} camisas)")
             if publico:
                 extra = (f" Mais {_n(lanche)} da {e['estrutura'].get('lanchonete') or 'lanchonete'}." if lanche else "")
+                if venda:
+                    extra += f" E no varal, {_n(camisas)} camisas vendidas: mais {_n(venda)}."
                 cena("bilheteria", f"Na bilheteria: {_n(publico)} pagantes, a {e['regras']['ingresso']} reais "
                      f"cada. {_n(bilheteria)} reais pro clube!{extra}",
                      [f"{_n(publico)} × R$ {e['regras']['ingresso']} = {_moeda(e, bilheteria)}"],
-                     publico=publico, ingresso=e["regras"]["ingresso"], receita=bilheteria + lanche,
+                     publico=publico, ingresso=e["regras"]["ingresso"], receita=bilheteria + lanche + venda, camisas=camisas,
                      caixa=e["caixa"])
 
         tab = tabela(times, liga["resultados"])
@@ -590,6 +635,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         txt = (f"No caixa, {_n(e['caixa'])} reais. " if e["caixa"] > 0 else
                "Caixa zerado! Agora é com as curtidas de vocês. ") + f"{prox['pergunta']} O comentário mais curtido decide."
     if not chamada:
+        txt = briefing.get("decisao_fala") or txt
         cena("decisao", txt, [f"DECISÃO #{dia}", "COMENTÁRIO MAIS CURTIDO DECIDE"],
              opcoes=prox["opcoes"], caixa=e["caixa"])
 

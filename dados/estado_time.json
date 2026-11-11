@@ -8,21 +8,23 @@
     "buffer_canal_id": "6aed11bde29c69a171783476",
     "repo_videos": "duducoliveira/poeirafc-videos",
     "fundado_no_dia": 0,
-    "forca": 29,
+    "forca": 30,
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 5,
-  "caixa": 0.0,
+  "dia": 6,
+  "caixa": 3.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
     "ingresso": 2,
     "gasto_lanchonete_por_torcedor": 1,
-    "comentario_vencedor": "mais curtido no post do dia anterior"
+    "comentario_vencedor": "mais curtido no post do dia anterior",
+    "camisas_pct_torcida": 3,
+    "preco_camisa": 25
   },
   "torcida": {
-    "seguidores": 271,
+    "seguidores": 318,
     "historico": [
       {
         "dia": 1,
@@ -48,6 +50,11 @@
         "dia": 5,
         "seguidores": 271,
         "data": "2026-11-10T02:18:59+00:00"
+      },
+      {
+        "dia": 6,
+        "seguidores": 318,
+        "data": "2026-11-11T02:14:41+00:00"
       }
     ]
   },
@@ -57,7 +64,7 @@
     "arquibancada": "dois bancos de madeira",
     "telhado": false,
     "vestiario": "um banheiro sem porta",
-    "uniforme": "cada um com uma camisa",
+    "uniforme": "novo",
     "rede": true,
     "bolas": false,
     "iluminacao": false,
@@ -65,7 +72,9 @@
     "tecnico": false,
     "kombi": true,
     "banco_reservas": true,
-    "cabare_proibido": true
+    "cabare_proibido": true,
+    "uniforme_remendado": true,
+    "varal_camisas": true
   },
   "personagens": {
     "narrador": {
@@ -89,6 +98,10 @@
       "instagram": "gilbertoteles_",
       "chave": "gilberto",
       "esquema": "3-4-2-1"
+    },
+    "costureira": {
+      "nome": "Dona Neide",
+      "cargo": "costureira do bairro"
     }
   },
   "elenco": {
@@ -120,7 +133,8 @@
     "6": {
       "nome": "Chinelinho",
       "posicao": "LE",
-      "traco": "joga com chuteira emprestada dois números maior"
+      "traco": "joga com chuteira emprestada dois números maior",
+      "apelido": "Salário do Mês"
     },
     "7": {
       "nome": "Foguete",
@@ -218,7 +232,7 @@
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 3,
+    "rodada": 4,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -270,10 +284,34 @@
           "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
         },
         "intervalo_minimo_gols": 12
+      },
+      "4": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "max_gols_sofridos": 1,
+        "max_gols_nossos": 2,
+        "motivo": "fora, contra o Real Laje: o Poeira faz 2 a 0 e toma um no fim, culpa do lateral Salário do Mês",
+        "sequencia": "NNA",
+        "ultimo_gol_a_partir_do_minuto": 80,
+        "intervalo_minimo_gols": 10,
+        "narrar_gols": [
+          2,
+          3
+        ],
+        "textos_gol": {
+          "2": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! E o jogo já tá dois a zero pro Poeira!",
+          "3": "Gol do {adv}, aos {m}. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Dois a um. Segura, Poeira!"
+        },
+        "apelido_no_gol": {
+          "gol": 3,
+          "numero": "6",
+          "apelido": "Salário do Mês",
+          "posicao": "lateral"
+        }
       }
     },
     "times": {
-      "Poeira FC": 29,
+      "Poeira FC": 30,
       "Leões do Brejo": 50,
       "Atlético Padaria": 45,
       "Ferro-Velho EC": 42,
@@ -558,6 +596,96 @@
           }
         ],
         "rodada": 3
+      },
+      {
+        "mandante": "Real Laje",
+        "visitante": "Poeira FC",
+        "gols_mandante": 1,
+        "gols_visitante": 2,
+        "gols": [
+          {
+            "minuto": 31,
+            "time": "Poeira FC"
+          },
+          {
+            "minuto": 65,
+            "time": "Poeira FC",
+            "autor": "Bujão"
+          },
+          {
+            "minuto": 82,
+            "time": "Real Laje"
+          }
+        ],
+        "rodada": 4
+      },
+      {
+        "mandante": "Juventude do Asfalto",
+        "visitante": "Estrela da Feira",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 38,
+            "time": "Juventude do Asfalto"
+          }
+        ],
+        "rodada": 4
+      },
+      {
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Veteranos do Bairro",
+        "gols_mandante": 0,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 50,
+            "time": "Veteranos do Bairro"
+          }
+        ],
+        "rodada": 4
+      },
+      {
+        "mandante": "Ferro-Velho EC",
+        "visitante": "Grêmio Vila Barro",
+        "gols_mandante": 1,
+        "gols_visitante": 3,
+        "gols": [
+          {
+            "minuto": 13,
+            "time": "Grêmio Vila Barro"
+          },
+          {
+            "minuto": 14,
+            "time": "Grêmio Vila Barro"
+          },
+          {
+            "minuto": 28,
+            "time": "Grêmio Vila Barro"
+          },
+          {
+            "minuto": 30,
+            "time": "Ferro-Velho EC"
+          }
+        ],
+        "rodada": 4
+      },
+      {
+        "mandante": "Atlético Padaria",
+        "visitante": "Leões do Brejo",
+        "gols_mandante": 1,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 60,
+            "time": "Atlético Padaria"
+          },
+          {
+            "minuto": 80,
+            "time": "Leões do Brejo"
+          }
+        ],
+        "rodada": 4
       }
     ],
     "rival": {
@@ -567,124 +695,124 @@
     },
     "tabela": [
       {
-        "time": "Leões do Brejo",
-        "j": 3,
-        "v": 2,
+        "time": "Juventude do Asfalto",
+        "j": 4,
+        "v": 3,
         "e": 1,
         "d": 0,
-        "gp": 4,
-        "gc": 2,
-        "pts": 7,
+        "gp": 3,
+        "gc": 0,
+        "pts": 10,
         "pos": 1,
-        "sg": 2
+        "sg": 3
       },
       {
-        "time": "Juventude do Asfalto",
-        "j": 3,
+        "time": "Leões do Brejo",
+        "j": 4,
         "v": 2,
-        "e": 1,
+        "e": 2,
         "d": 0,
-        "gp": 2,
-        "gc": 0,
-        "pts": 7,
+        "gp": 5,
+        "gc": 3,
+        "pts": 8,
         "pos": 2,
         "sg": 2
       },
       {
-        "time": "Ferro-Velho EC",
-        "j": 3,
+        "time": "Poeira FC",
+        "j": 4,
         "v": 2,
-        "e": 0,
-        "d": 1,
-        "gp": 2,
-        "gc": 4,
-        "pts": 6,
-        "pos": 3,
-        "sg": -2
-      },
-      {
-        "time": "Atlético Padaria",
-        "j": 3,
-        "v": 1,
         "e": 1,
         "d": 1,
-        "gp": 3,
-        "gc": 2,
-        "pts": 4,
+        "gp": 7,
+        "gc": 6,
+        "pts": 7,
+        "pos": 3,
+        "sg": 1
+      },
+      {
+        "time": "Grêmio Vila Barro",
+        "j": 4,
+        "v": 2,
+        "e": 0,
+        "d": 2,
+        "gp": 7,
+        "gc": 6,
+        "pts": 6,
         "pos": 4,
         "sg": 1
       },
       {
-        "time": "Poeira FC",
-        "j": 3,
-        "v": 1,
-        "e": 1,
-        "d": 1,
-        "gp": 5,
-        "gc": 5,
-        "pts": 4,
+        "time": "Ferro-Velho EC",
+        "j": 4,
+        "v": 2,
+        "e": 0,
+        "d": 2,
+        "gp": 3,
+        "gc": 7,
+        "pts": 6,
         "pos": 5,
+        "sg": -4
+      },
+      {
+        "time": "Atlético Padaria",
+        "j": 4,
+        "v": 1,
+        "e": 2,
+        "d": 1,
+        "gp": 4,
+        "gc": 3,
+        "pts": 5,
+        "pos": 6,
+        "sg": 1
+      },
+      {
+        "time": "Veteranos do Bairro",
+        "j": 4,
+        "v": 1,
+        "e": 2,
+        "d": 1,
+        "gp": 4,
+        "gc": 4,
+        "pts": 5,
+        "pos": 7,
         "sg": 0
       },
       {
         "time": "Amigos do Churrasco FC",
-        "j": 3,
+        "j": 4,
         "v": 1,
         "e": 0,
-        "d": 2,
+        "d": 3,
         "gp": 5,
-        "gc": 3,
+        "gc": 4,
         "pts": 3,
-        "pos": 6,
-        "sg": 2
-      },
-      {
-        "time": "Grêmio Vila Barro",
-        "j": 3,
-        "v": 1,
-        "e": 0,
-        "d": 2,
-        "gp": 4,
-        "gc": 5,
-        "pts": 3,
-        "pos": 7,
-        "sg": -1
+        "pos": 8,
+        "sg": 1
       },
       {
         "time": "Real Laje",
-        "j": 3,
+        "j": 4,
         "v": 1,
         "e": 0,
-        "d": 2,
-        "gp": 2,
-        "gc": 3,
-        "pts": 3,
-        "pos": 8,
-        "sg": -1
-      },
-      {
-        "time": "Estrela da Feira",
-        "j": 3,
-        "v": 1,
-        "e": 0,
-        "d": 2,
-        "gp": 4,
-        "gc": 6,
+        "d": 3,
+        "gp": 3,
+        "gc": 5,
         "pts": 3,
         "pos": 9,
         "sg": -2
       },
       {
-        "time": "Veteranos do Bairro",
-        "j": 3,
-        "v": 0,
-        "e": 2,
-        "d": 1,
-        "gp": 3,
-        "gc": 4,
-        "pts": 2,
+        "time": "Estrela da Feira",
+        "j": 4,
+        "v": 1,
+        "e": 0,
+        "d": 3,
+        "gp": 4,
+        "gc": 7,
+        "pts": 3,
         "pos": 10,
-        "sg": -1
+        "sg": -3
       }
     ]
   },
@@ -776,6 +904,18 @@
         "publicado": "2026-11-10T06:14-03:00",
         "id": "18474736474137019"
       }
+    },
+    {
+      "dia": 6,
+      "data": "2026-11-11T02:14:41+00:00",
+      "proxima_decisao": {
+        "pergunta": "A gente junta R$ 700 pro gramado ou faz outra coisa agora? Comenta GRAMADO ou IDEIA: sua sugestão.",
+        "opcoes": [
+          "Juntar pro gramado (R$ 700)?",
+          "IDEIA: outra coisa agora?"
+        ]
+      },
+      "post": null
     }
   ],
   "decisoes": [
@@ -806,6 +946,20 @@
       "autor": "joaoc_89",
       "curtidas": 0,
       "texto": "Kombi do Poeira"
+    },
+    {
+      "dia": 6,
+      "acao": "uniforme",
+      "autor": "talles_silva",
+      "curtidas": 0,
+      "texto": "Uniforme + varal de camisas"
+    },
+    {
+      "dia": 6,
+      "acao": "varal",
+      "autor": "talles_silva",
+      "curtidas": 0,
+      "texto": "Uniforme + varal de camisas"
     }
   ],
   "enquetes": [],
@@ -869,6 +1023,18 @@
       "valor": -1247.0,
       "descricao": "Kombi do Poeira",
       "saldo": 0.0
+    },
+    {
+      "dia": 6,
+      "valor": 253,
+      "descricao": "curtidas do dia 5",
+      "saldo": 253.0
+    },
+    {
+      "dia": 6,
+      "valor": -250.0,
+      "descricao": "Uniforme + varal de camisas",
+      "saldo": 3.0
     }
   ],
   "linha_do_tempo": [
@@ -910,13 +1076,27 @@
     {
       "dia": 5,
       "evento": "Rodada 3: Estrela da Feira 1 x 2 Poeira FC (vitória)"
+    },
+    {
+      "dia": 6,
+      "evento": "A costureira do bairro fez o uniforme do time por R$ 200 e a Dona Cida montou um varal de camisas (R$ 25 cada) do lado do bar.",
+      "autor": "talles_silva"
+    },
+    {
+      "dia": 6,
+      "evento": "Chinelinho ganhou o apelido Salário do Mês"
+    },
+    {
+      "dia": 6,
+      "evento": "Rodada 4: Real Laje 1 x 2 Poeira FC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-10T02:18:59+00:00",
+  "atualizado_em": "2026-11-11T02:14:41+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
-    "Supino"
+    "Supino",
+    "Salário do Mês"
   ],
   "piadas_gol_usadas": [
     "A zaga parou pra ver. Literalmente parou.",

@@ -32,7 +32,7 @@ def test_ranking_ignora_proprio_perfil_e_spam():
 def test_comentario_viavel_mais_curtido():
     from timefc import catalogo
     e = _estado()
-    top = [{"usuario": "rico", "texto": "faz refletores e grama!", "curtidas": 900},
+    top = [{"usuario": "rico", "texto": "faz refletores e vestiário!", "curtidas": 900},
            {"usuario": "nada", "texto": "vai corinthians", "curtidas": 500},
            {"usuario": "fulano", "texto": "uma lanchonete com meu nome", "curtidas": 200}]
     d, av = catalogo.escolher(e, top, caixa=946, dia=2)
