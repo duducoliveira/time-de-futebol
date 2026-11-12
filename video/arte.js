@@ -325,6 +325,7 @@ const PERSONAGENS = {
     microfone: true, camisa: '#ffd166', listra: '#f4a261', calcao: '#495057', meiao: '#fff', pose: 'microfone', larg: 1.15, barriga: true },
   costureira: { pele: '#c68642', cabelo: 'coque', corCabelo: '#d0d0d0', oculos: true, camisa: '#9d4edd', avental: '#ffd6e0',
     aventalTxt: 'NEIDE', calcao: '#5a189a', meiao: '#9d4edd', chinelo: true, expr: 'feliz', larg: 1.05, alt: 0.9, idade: true, fita: true },
+  tecnico: { pele: '#e0ac69', cabelo: 'curto', corCabelo: '#2b1d14', oculos: true, camisa: '#f1faee', listra: CORES.vinho, calcao: '#343a40', meiao: '#343a40', expr: 'serio', apito: true },
   presidente: { pele: '#8d5524', cabelo: 'coque', corCabelo: '#5a5a5a', oculos: true, brinco: true, camisa: '#e76f51',
     avental: '#fff4dc', aventalTxt: 'CIDA', calcao: '#6d597a', meiao: '#e76f51', chinelo: true, expr: 'serio', larg: 1.1, alt: 0.95, idade: true },
 };

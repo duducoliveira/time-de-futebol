@@ -183,6 +183,9 @@ def piada_do_dia(e: dict, briefing: dict, adv: str, rng: random.Random) -> dict 
     if pedido.get("alvo") == "seguidor" or pedido.get("narracao"):
         if pedido.get("apelido"):
             e["piadas_usadas"].append(pedido["apelido"])
+            if pedido.get("alvo") == "nosso" and pedido.get("numero") in e["elenco"]:  # apelido novo fica no elenco
+                e["elenco"][pedido["numero"]]["apelido"] = pedido["apelido"]
+                est.evento(e, f"{e['elenco'][pedido['numero']]['nome']} ganhou o apelido {pedido['apelido']}")
         return {"alvo": pedido.get("alvo", "seguidor"), **{k: v for k, v in pedido.items() if k != "alvo"}}
     banco = json.loads(ARQ_APELIDOS.read_text(encoding="utf-8"))["apelidos"]
     livres = [a for a in banco if a["apelido"] not in e["piadas_usadas"]] or banco
@@ -270,6 +273,19 @@ def _simular_com_desfecho(m: str, v: str, forca: dict, semente: str, nome: str, 
     """Simula até sair o desfecho combinado (ex: perder a estreia), de forma determinística.
     regra: {"resultado": "derrota", "max_gols_sofridos": 3, "marca_gol": true,
             "gols_nossos_a_partir_do_minuto": 46}"""
+    if regra.get("sequencia"):  # placar todo roteirizado: monta o jogo direto (minutos sorteados, de forma fixa)
+        seq, rng = regra["sequencia"], random.Random(f"{semente}-seq")
+        gap, fim = regra.get("intervalo_minimo_gols", 5), regra.get("ultimo_gol_a_partir_do_minuto", 0)
+        adv = v if m == nome else m
+        for _ in range(5000):
+            mins = sorted(rng.sample(range(3, 91), len(seq)))
+            if all(b - a >= gap for a, b in zip(mins, mins[1:])) and mins[-1] >= fim and \
+                    not (regra.get("gols_nossos_a_partir_do_minuto") and any(
+                        x < regra["gols_nossos_a_partir_do_minuto"] for x, c in zip(mins, seq) if c == "N")):
+                gols = [{"minuto": x, "time": nome if c == "N" else adv} for x, c in zip(mins, seq)]
+                return {"mandante": m, "visitante": v, "gols": gols,
+                        "gols_mandante": sum(g["time"] == m for g in gols),
+                        "gols_visitante": sum(g["time"] == v for g in gols)}
     for i in range(20000):
         r = simular(m, v, forca, semente=f"{semente}-{i}")
         if _desfecho(r, nome) != regra.get("resultado", _desfecho(r, nome)):
@@ -635,7 +651,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         txt = (f"No caixa, {_n(e['caixa'])} reais. " if e["caixa"] > 0 else
                "Caixa zerado! Agora é com as curtidas de vocês. ") + f"{prox['pergunta']} O comentário mais curtido decide."
     if not chamada:
-        txt = briefing.get("decisao_fala") or txt
+        if briefing.get("decisao_fala"):
+            txt = briefing["decisao_fala"].replace("{caixa}", _n(e["caixa"]))
         cena("decisao", txt, [f"DECISÃO #{dia}", "COMENTÁRIO MAIS CURTIDO DECIDE"],
              opcoes=prox["opcoes"], caixa=e["caixa"])
 

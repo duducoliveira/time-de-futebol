@@ -184,6 +184,41 @@
           "apelido": "Salário do Mês",
           "posicao": "lateral"
         }
+      },
+      "5": {
+        "resultado": "empate",
+        "mando": "casa",
+        "marca_gol": true,
+        "motivo": "em casa contra o líder, na Tática do Pombo Atômico (2-3-5): toma 3, faz 3; o Benício empata no fim",
+        "sequencia": "AANNAN",
+        "ultimo_gol_a_partir_do_minuto": 85,
+        "intervalo_minimo_gols": 6,
+        "narrar_gols": [
+          3,
+          6
+        ],
+        "textos_gol": {
+          "3": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! O Juventude fez dois, mas o Pombo Atômico decolou: dois a um!"
+        },
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOOL! É DO BENÍCIO, aos {m}! [excited] O segundo dele no jogo! Prometeu três, entregou dois... e empatou com o líder: três a três!"
+        },
+        "cena_depois": {
+          "tipo": "tatica",
+          "narracao": "E a Tática do Pombo Atômico? Funcionou... pela metade. Com só dois zagueiros, a defesa tomou três gols. Mas com cinco atacantes, o ataque fez três! Empate com o líder, professor Gilberto. O pombo voou!",
+          "texto_tela": [
+            "POMBO ATÔMICO: O BALANÇO"
+          ],
+          "dados": {
+            "formacao": [
+              2,
+              3,
+              5
+            ],
+            "balanco": true
+          }
+        }
       }
     },
     "times": {

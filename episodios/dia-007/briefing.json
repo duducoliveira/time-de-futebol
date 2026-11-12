@@ -1,0 +1,267 @@
+{
+  "dia": 7,
+  "seguidores_ontem": 318,
+  "seguidores_hoje": 347,
+  "post_anterior": {
+    "id": "18404195653162538",
+    "caption": "DIA 6 do Poeira FC ⚽\n\nA gente junta R$ 700 pro gramado ou faz outra coisa agora? Comenta GRAMADO ou IDEIA: sua sugestão. O comentário viável mais curtido decide.\n\nPeneira nova quando o Poeira chegar a 500 torcedores: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 24,
+    "like_count": 217,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/DfmHESouFgr/",
+    "timestamp": "2026-11-11T09:01:55+0000"
+  },
+  "curtidas": 217,
+  "receita_curtidas": 217,
+  "caixa_atual": 3.0,
+  "caixa_com_curtidas": 220.0,
+  "top_comentarios": [
+    {
+      "usuario": "gilbertoteles_",
+      "texto": "GILBERTO TELES – ATENÇÃO, ELENCO! Primeiro, obrigado aos meus guerreiros pelo último jogo. Empatamos, caímos para 6º, mas ninguém aqui vai abaixar a cabeça!\n\nPara o próximo confronto, anuncio oficialmente a TÁTICA DO POMBO ATÔMICO! 🐦💣\n\nFormação 2-3-5: dois zagueiros seguram o rojão, três jogadores no meio fazem uma roda de oração e cinco atacantes invadem a área adversária como se tivesse distribuição de cesta básica!\n\nO goleiro está proibido de sair jogando curto: é chutão para a lua! Os laterais vão cruzar até a bola pedir aposentadoria. Se o adversário marcar, a gente marca também. Se fizer dois, fazemos três. Se fizer quatro, chamamos o VAR e um padre!\n\nNossa estratégia é simples: ninguém sabe o que vamos fazer, nem eu! O importante é sair com os três pontos!\n\n#poeirafc",
+      "curtidas": 13,
+      "id": "18140385424731978",
+      "timestamp": "2026-11-11T09:20:41+0000"
+    },
+    {
+      "usuario": "_guigs12",
+      "texto": "Gramado nem é importante agora se continuar crescendo não vai ter onde os torcedores ficarem, tem que aumentar a arquibancada para os torcedores assim vai vender ainda mais camisas",
+      "curtidas": 4,
+      "id": "18648354085062121",
+      "timestamp": "2026-11-11T09:52:41+0000"
+    },
+    {
+      "usuario": "ian_da_varzea",
+      "texto": "Barraquinha de lanches e bebidas prós torcedores",
+      "curtidas": 2,
+      "id": "18068136332789771",
+      "timestamp": "2026-11-11T09:14:39+0000"
+    },
+    {
+      "usuario": "isaq_ueestevao",
+      "texto": "Dia 2 pedindo a contratação do Rabisco",
+      "curtidas": 1,
+      "id": "18078390806461927",
+      "timestamp": "2026-11-11T09:38:42+0000"
+    },
+    {
+      "usuario": "allisonxzn__",
+      "texto": "Guarda O dinheiro da loja para entrar em campeonato que vale o dobro do dinheiro🙌",
+      "curtidas": 1,
+      "id": "17910475983332878",
+      "timestamp": "2026-11-11T10:04:38+0000"
+    },
+    {
+      "usuario": "antoniecharlles",
+      "texto": "Vamos por um sinteticozinho os times da várzea não vão saber jogar nele, e vamos ter vantagem nos confrontos em casa.",
+      "curtidas": 1,
+      "id": "18119041940046226",
+      "timestamp": "2026-11-11T10:11:54+0000"
+    },
+    {
+      "usuario": "bielmuniizz",
+      "texto": "Me contrata para ser barbeiro dos jogadores, sou barbeiro a 5 anos, tem que jogar alinhado",
+      "curtidas": 1,
+      "id": "18017041058975689",
+      "timestamp": "2026-11-11T10:29:42+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Eu como jogador do poeira FC venho aqui prometer aos nossos torcedores q seremos campeões do campeonato e serei artilheiro e iremos fazer uma festa quando fomos campeões, próximo jogo é hat trick meu!!!",
+      "curtidas": 1,
+      "id": "18182361487447646",
+      "timestamp": "2026-11-11T10:31:28+0000"
+    },
+    {
+      "usuario": "sementinhadobemong",
+      "texto": "Não , mantém o campo original , só poeira , Terrão , eu sou Serginho , o Ganso , camisa 10 , Quero participar da peneira .",
+      "curtidas": 1,
+      "id": "18135183607674627",
+      "timestamp": "2026-11-11T12:15:21+0000"
+    },
+    {
+      "usuario": "performance.rocha",
+      "texto": "Gramado",
+      "curtidas": 0,
+      "id": "17958614442270318",
+      "timestamp": "2026-11-11T09:23:51+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "gilbertoteles_",
+      "curtidas": 13,
+      "viavel": true,
+      "acoes": [
+        "bolas"
+      ],
+      "custo": 80.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 1,
+      "usuario": "_guigs12",
+      "curtidas": 4,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Grama no campo custa R$ 700 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 2,
+      "usuario": "ian_da_varzea",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "isaq_ueestevao",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 4,
+      "usuario": "allisonxzn__",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "antoniecharlles",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 6,
+      "usuario": "bielmuniizz",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 7,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Atacante novo custa R$ 1000 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 8,
+      "usuario": "sementinhadobemong",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Meia novo custa R$ 900 e o caixa não cobre",
+      "revisar": false
+    },
+    {
+      "indice": 9,
+      "usuario": "performance.rocha",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Grama no campo custa R$ 700 e o caixa não cobre",
+      "revisar": false
+    }
+  ],
+  "enquetes": [],
+  "decisao": null,
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "Já dá pro gramado (R$ 700): planta agora ou tem ideia melhor? Comenta GRAMADO ou IDEIA: sua sugestão.",
+    "opcoes": [
+      "Plantar o gramado (R$ 700)?",
+      "IDEIA: outra coisa?"
+    ]
+  },
+  "tema": "POMBO ATÔMICO!",
+  "tema_falado": "Pombo Atômico",
+  "historia": {
+    "comentarios": [
+      {
+        "narracao": "Ontem a pergunta foi: juntar pro gramado ou fazer outra coisa? O Guigs pediu mais arquibancada: fica pra quando lotar. E o Benício, com boa parte da torcida, mandou guardar o dinheiro pro gramado. Decisão tomada: hoje o Poeira não gasta nada!",
+        "comentarios": [
+          {
+            "usuario": "_guigs12",
+            "texto": "Tem que aumentar a arquibancada para os torcedores",
+            "curtidas": 4,
+            "chave": "guigs",
+            "carimbo": "lotar",
+            "chave_carimbo": "lotar",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          },
+          {
+            "usuario": "beniciocarmocarvalho",
+            "texto": "Guardamos o dinheiro por enquanto até termos o suficiente para um gramado de grama natural",
+            "curtidas": 1,
+            "chave": "benício",
+            "carimbo": "aprovado",
+            "chave_carimbo": "decisão",
+            "selo": "GUARDAR PRO GRAMADO"
+          }
+        ]
+      }
+    ],
+    "antes_jogo": [
+      {
+        "tipo": "tatica",
+        "narracao": "E pro jogo de hoje, o técnico Gilberto Teles anunciou a Tática do Pombo Atômico! Dois zagueiros seguram o rojão, três no meio fazem uma roda de oração, e cinco atacantes invadem a área como se tivesse distribuição de cesta básica. Se o adversário fizer dois, a gente faz três!",
+        "texto_tela": [
+          "TÁTICA DO POMBO ATÔMICO"
+        ],
+        "dados": {
+          "formacao": [
+            2,
+            3,
+            5
+          ],
+          "instagram": "gilbertoteles_"
+        }
+      }
+    ]
+  },
+  "piada": {
+    "alvo": "nosso",
+    "numero": "10",
+    "nome": "Maestro",
+    "posicao": "meia",
+    "apelido": "Chave de Carro",
+    "piada": "sempre some quando você mais precisa",
+    "narracao": "E o nosso camisa dez, o Maestro, ganhou apelido novo: meia Chave de Carro. Sempre some quando você mais precisa!",
+    "texto_tela": [
+      "#10 MAESTRO"
+    ]
+  },
+  "decisao_fala": "No caixa, {caixa} reais. Já dá pro gramado, que custa R$ 700! E aí: planta a grama agora, ou tem ideia melhor? Comenta GRAMADO ou IDEIA com a sua sugestão. O comentário mais curtido decide!",
+  "encerramento": "Amanhã tem Poeira contra o Amigos do Churrasco. E lembra: quando o Poeira chegar a 500 torcedores, tem peneira nova! Então manda esse vídeo pros seus amigos virarem torcedores também. Segue, curte e comenta. Até amanhã!",
+  "legenda": "DIA 7 do Poeira FC ⚽\n\nJá dá pro gramado (R$ 700): planta agora ou tem ideia melhor? Comenta GRAMADO ou IDEIA: sua sugestão. O comentário viável mais curtido decide.\n\nPeneira nova quando o Poeira chegar a 500 torcedores: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}

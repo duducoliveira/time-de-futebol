@@ -346,7 +346,8 @@ Object.assign(TIPOS, {
 });
 
 const CARIMBOS = { inviavel: ['INVIÁVEL POR ENQUANTO', '#e63946'], aprovado: ['APROVADO!', '#2e8b57'],
-  anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'] };
+  anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'],
+  peneira: ['PENEIRA AOS 500!', '#3a86ff'], lotar: ['QUANDO LOTAR', '#f77f00'] };
 
 const CAPA_LAYOUT = 'abaixo_titulo';  // ou 'acima_tiao'
 
@@ -449,7 +450,51 @@ Object.assign(TIPOS, {
   },
 });
 
+// prancheta do técnico: formação desenhada num campinho (ex: [2, 3, 5] = Pombo Atômico)
+function prancheta(t, c, formacao, { balanco = false } = {}) {
+  const w = 700, h = 640, x0 = -w / 2, y0 = -h / 2;
+  let s = `<rect x="${x0 - 26 + 10}" y="${y0 - 26 + 14}" width="${w + 52}" height="${h + 52}" rx="26" fill="#000" opacity=".25"/>
+    <rect x="${x0 - 26}" y="${y0 - 26}" width="${w + 52}" height="${h + 52}" rx="26" fill="#9c6644" stroke="${OUT}" stroke-width="8"/>
+    <rect x="-90" y="${y0 - 58}" width="180" height="56" rx="14" fill="#adb5bd" stroke="${OUT}" stroke-width="7"/><circle cy="${y0 - 34}" r="11" fill="${OUT}"/>
+    <rect x="${x0}" y="${y0}" width="${w}" height="${h}" rx="10" fill="#2e8b57" stroke="${OUT}" stroke-width="6"/>
+    <path d="M${x0},0 H${-x0}" stroke="#ffffffaa" stroke-width="5"/><circle r="70" fill="none" stroke="#ffffffaa" stroke-width="5"/>
+    <rect x="-150" y="${y0}" width="300" height="86" fill="none" stroke="#ffffffaa" stroke-width="5"/>
+    <rect x="-150" y="${-y0 - 86}" width="300" height="86" fill="none" stroke="#ffffffaa" stroke-width="5"/>`;
+  // linhas da formação, de baixo (defesa) para cima (ataque); o goleiro fica no pé da prancheta
+  const linhas = [[1], ...formacao.map(n => Array.from({ length: n }))];
+  const chaves = ['', 'zagueiros', 'meio', 'atacantes'];
+  linhas.forEach((linha, k) => {
+    const n = linha.length, y = -y0 - 52 - k * ((h - 150) / (linhas.length - 1));
+    const t0 = balanco ? 0.3 + k * 0.12 : k ? quando(c, chaves[k] || '', 1 + k * 1.2) - 0.15 : 0.4;
+    for (let i = 0; i < n; i++) {
+      let x = (i - (n - 1) / 2) * Math.min(150, (w - 110) / Math.max(1, n - 1)), yy = y;
+      if (k === 2 && n === 3) { const a = t * 1.6 + i * 2.094; x = Math.cos(a) * 62; yy = y + Math.sin(a) * 34; }   // roda de oração
+      if (k === 3) yy = y + (i % 2) * 22 - Math.max(0, Math.sin(t * 3 + i)) * 14;                                  // invadindo a área
+      const cor = k === 0 ? CORES.amarelo : CORES.vinho;
+      s += pop(t, t0 + i * 0.08, x, yy, `<circle r="30" fill="${cor}" stroke="${OUT}" stroke-width="6"/><circle r="30" fill="none" stroke="${k === 0 ? CORES.vinho : CORES.amarelo}" stroke-width="4" stroke-dasharray="6 6"/>`, 0.25, false);
+      if (k === 3 && t > t0 + 0.6) s += `<path d="M${x},${yy - 40} v-34 m-12,14 l12,-14 l12,14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>`;
+    }
+  });
+  if (balanco) {  // depois do jogo: o que deu certo e o que não deu
+    s += pop(t, quando(c, 'defesa', 2.5), 0, -y0 - 150, `<rect x="-250" y="-52" width="500" height="92" rx="12" fill="#fff4dc" transform="rotate(-5)"/>` + carimbo('DEFESA: TOMOU 3', '#e63946', -5, 50), 0.3, false);
+    s += pop(t, quando(c, 'ataque', 5), 0, y0 + 150, `<rect x="-215" y="-52" width="430" height="92" rx="12" fill="#fff4dc" transform="rotate(4)"/>` + carimbo('ATAQUE: FEZ 3', '#2e8b57', 4, 50), 0.3, false);
+  } else s += pop(t, 0.6, w / 2 - 70, y0 + 20, `<text font-size="96" text-anchor="middle" transform="rotate(${Math.sin(t * 4) * 8})">🐦</text><text x="46" y="-44" font-size="50">💣</text>`, 0.3, false);
+  return s;
+}
+
 Object.assign(TIPOS, {
+  // tática do técnico: prancheta com a formação (antes do jogo) ou com o balanço (depois)
+  tatica(t, d, c, E) {
+    const dd = c.dados;
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.04, z1: 1.1 });
+    s += `<rect width="${W}" height="${H}" fill="${CORES.marinho}" opacity=".35"/>`;
+    s += pop(t, 0.1, W / 2, 250, pilula(c.texto_tela[0] || 'A TÁTICA', { tam: 54, bg: CORES.vinho, rot: -2 }));
+    s += pop(t, 0.25, W / 2, 700, prancheta(t, c, dd.formacao || [4, 4, 2], { balanco: !!dd.balanco }), 0.35, false);
+    s += popPessoa(t, 0.3, 830, 1905, pessoa({ ...PERSONAGENS.tecnico, pose: dd.balanco ? 'comemora' : 'aponta', expr: dd.balanco ? 'feliz' : 'serio' }, t, { s: 1.35, espelho: !dd.balanco }));
+    s += pop(t, 0.7, 330, 1560, pilula('PROF. GILBERTO TELES', { tam: 36, bg: CORES.marinho, rot: -3 }));
+    if (dd.instagram) s += pop(t, 0.9, 330, 1640, pilula('@' + dd.instagram, { tam: 28, bg: CORES.creme, cor: OUT, py: 8 }));
+    return s;
+  },
   // piada do dia: posição + apelido + o porquê (jogador nosso, do adversário ou seguidor)
   apelido(t, d, c, E) {
     const dd = c.dados;
