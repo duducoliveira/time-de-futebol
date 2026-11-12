@@ -578,7 +578,10 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                  nosso=None, placar=[0, 0], mandante=partida["mandante"], visitante=partida["visitante"])
         resultado = "vitória" if nossos > deles else "empate" if nossos == deles else "derrota"
         frase = {"vitória": f"Vitória do {nome}, {nossos} a {deles}!",
-                 "empate": f"Empate em {nossos} a {deles}. Um ponto é um ponto.",
+                 "empate": f"Empate em {nossos} a {deles}. " + [
+                     "Um ponto é um ponto.", "Ninguém ganhou, ninguém perdeu, e todo mundo saiu reclamando do juiz.",
+                     "Cada um leva um pontinho pra casa.", "Ficou tudo igual, menos o joelho do Bujão.",
+                     "Um ponto na conta, e segue o campeonato."][(dia + nossos + 1) % 5],
                  "derrota": f"Derrota por {deles} a {nossos}. Faz parte."}[resultado]
         if resultado == "vitória" and not any(r for r in e["linha_do_tempo"] if "vitória" in r.get("evento", "")):
             frase = f"Primeira vitória da história do {nome}! {nossos} a {deles}!"
@@ -614,10 +617,13 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 extra = (f" Mais {_n(lanche)} da {e['estrutura'].get('lanchonete') or 'lanchonete'}." if lanche else "")
                 if venda:
                     extra += f" E no varal, {_n(camisas)} camisas vendidas: mais {_n(venda)}."
+                if lanche or venda:
+                    extra += f" Somando tudo: {_n(bilheteria + lanche + venda)} reais, e o caixa foi pra {_n(e['caixa'])}!"
                 cena("bilheteria", f"Na bilheteria: {_n(publico)} pagantes, a {e['regras']['ingresso']} reais "
                      f"cada. {_n(bilheteria)} reais pro clube!{extra}",
                      [f"{_n(publico)} × R$ {e['regras']['ingresso']} = {_moeda(e, bilheteria)}"],
-                     publico=publico, ingresso=e["regras"]["ingresso"], receita=bilheteria + lanche + venda, camisas=camisas,
+                     publico=publico, ingresso=e["regras"]["ingresso"], receita=bilheteria + lanche + venda, camisas=camisas, bilheteria=bilheteria, lanche=lanche, venda=venda,
+                     barraca=e["estrutura"].get("lanchonete") or "", preco_camisa=e["regras"].get("preco_camisa", 25),
                      caixa=e["caixa"])
 
         tab = tabela(times, liga["resultados"])

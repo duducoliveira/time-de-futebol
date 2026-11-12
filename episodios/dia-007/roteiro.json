@@ -398,7 +398,7 @@
     {
       "id": "10-fim_de_jogo",
       "tipo": "fim_de_jogo",
-      "narracao": "Apita o árbitro! Empate em 3 a 3. Um ponto é um ponto.",
+      "narracao": "Apita o árbitro! Empate em 3 a 3. Ninguém ganhou, ninguém perdeu, e todo mundo saiu reclamando do juiz.",
       "texto_tela": [
         "FIM DE JOGO",
         "Poeira FC 3 x 3 Juventude do Asfalto"
@@ -476,7 +476,7 @@
     {
       "id": "12-bilheteria",
       "tipo": "bilheteria",
-      "narracao": "Na bilheteria: 347 pagantes, a 2 reais cada. 694 reais pro clube! Mais 347 da Barraca do Guigs. E no varal, 10 camisas vendidas: mais 250.",
+      "narracao": "Na bilheteria: 347 pagantes, a 2 reais cada. 694 reais pro clube! Mais 347 da Barraca do Guigs. E no varal, 10 camisas vendidas: mais 250. Somando tudo: 1.291 reais, e o caixa foi pra 1.511!",
       "texto_tela": [
         "347 × R$ 2 = R$ 694"
       ],
@@ -485,6 +485,11 @@
         "ingresso": 2,
         "receita": 1291,
         "camisas": 10,
+        "bilheteria": 694,
+        "lanche": 347,
+        "venda": 250,
+        "barraca": "Barraca do Guigs",
+        "preco_camisa": 25,
         "caixa": 1511.0,
         "hud": {
           "torcida": 347,

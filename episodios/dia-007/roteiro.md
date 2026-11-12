@@ -50,7 +50,7 @@ Torcida: 347 · Caixa: R$ 1.511 · Posição: 7º
 ## 10-fim_de_jogo
 **Na tela:** FIM DE JOGO | Poeira FC 3 x 3 Juventude do Asfalto
 
-> Apita o árbitro! Empate em 3 a 3. Um ponto é um ponto.
+> Apita o árbitro! Empate em 3 a 3. Ninguém ganhou, ninguém perdeu, e todo mundo saiu reclamando do juiz.
 
 ## 11-tatica
 **Na tela:** POMBO ATÔMICO: O BALANÇO
@@ -60,7 +60,7 @@ Torcida: 347 · Caixa: R$ 1.511 · Posição: 7º
 ## 12-bilheteria
 **Na tela:** 347 × R$ 2 = R$ 694
 
-> Na bilheteria: 347 pagantes, a 2 reais cada. 694 reais pro clube! Mais 347 da Barraca do Guigs. E no varal, 10 camisas vendidas: mais 250.
+> Na bilheteria: 347 pagantes, a 2 reais cada. 694 reais pro clube! Mais 347 da Barraca do Guigs. E no varal, 10 camisas vendidas: mais 250. Somando tudo: 1.291 reais, e o caixa foi pra 1.511!
 
 ## 13-tabela
 **Na tela:** TERCEIRA DIVISÃO DA VÁRZEA | 7º LUGAR

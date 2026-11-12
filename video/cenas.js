@@ -225,10 +225,23 @@ const TIPOS = {
     if (dd.resultado === 'vitória') s += pop(t, 1.0, W / 2, 825, tituloGrande('VITÓRIA!', { tam: 96, cor: CORES.amarelo, rot: -3 }));
     return s;
   },
+  // renda do jogo em casa: bilheteria + barraca + varal, somando até o total do caixa
   bilheteria(t, d, c, E) {
-    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: c.dados.publico }), { z0: 1.3, z1: 1.22, cy: 800 });
-    s += pop(t, 0.2, W / 2, 400, pilula('BILHETERIA', { tam: 54, bg: CORES.marinho }));
-    s += pop(t, 0.6, W / 2, 530, pilula(c.texto_tela[0] || '', { tam: 58, bg: '#2e8b57', rot: -2 }));
+    const dd = c.dados, R = v => `${E.moeda} ${Math.round(v).toLocaleString('pt-BR')}`;
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: dd.publico }), { z0: 1.3, z1: 1.22, cy: 800 });
+    s += pop(t, 0.2, W / 2, 300, pilula('RENDA DO JOGO', { tam: 54, bg: CORES.marinho }));
+    const linhas = [['🎟️ BILHETERIA', dd.bilheteria ?? dd.receita, 'pagantes', '#2e8b57']];
+    if (dd.lanche) linhas.push([`🌭 ${(dd.barraca || 'LANCHONETE').toUpperCase()}`, dd.lanche, 'mais', '#f77f00']);
+    if (dd.venda) linhas.push([`👕 ${dd.camisas} CAMISAS`, dd.venda, 'varal', CORES.vinho]);
+    linhas.forEach(([rot, v, chave, cor], i) => {
+      const t0 = i ? quando(c, chave, 1 + i * 1.5) : 0.5;
+      s += pop(t, t0, W / 2, 440 + i * 128, `<g transform="rotate(${i % 2 ? 1.5 : -1.5})">${pilula(`${rot}  +${R(v)}`, { tam: 46, bg: cor })}</g>`);
+    });
+    if (linhas.length > 1) {
+      const tT = quando(c, 'somando', d * 0.75);
+      s += pop(t, tT, W / 2, 440 + linhas.length * 128 + 12, pilula(`TOTAL  +${R(dd.receita)}`, { tam: 56, bg: CORES.amarelo, cor: OUT, rot: -2 }));
+      s += pop(t, quando(c, 'caixa', tT + 1), W / 2, 1640, `<g transform="scale(.8)">${painelCaixa(dd.caixa, E.moeda, 'CAIXA')}</g>`);
+    }
     return s;
   },
   tabela(t, d, c, E) {

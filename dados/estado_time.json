@@ -59,7 +59,7 @@
       {
         "dia": 7,
         "seguidores": 347,
-        "data": "2026-11-12T01:26:46+00:00"
+        "data": "2026-11-12T01:38:47+00:00"
       }
     ]
   },
@@ -1062,14 +1062,12 @@
         "buffer_id": "6af3d454d9a6812579c6f48e",
         "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-006.mp4",
         "agendado_para": "2026-11-11T06:00-03:00",
-        "status": "scheduled",
-        "id": "18404195653162538",
-        "permalink": "https://www.instagram.com/reel/DfmHESouFgr/"
+        "status": "scheduled"
       }
     },
     {
       "dia": 7,
-      "data": "2026-11-12T01:26:46+00:00",
+      "data": "2026-11-12T01:38:47+00:00",
       "proxima_decisao": {
         "pergunta": "Já dá pro gramado (R$ 700): planta agora ou tem ideia melhor? Comenta GRAMADO ou IDEIA: sua sugestão.",
         "opcoes": [
@@ -1077,7 +1075,12 @@
           "IDEIA: outra coisa?"
         ]
       },
-      "post": null
+      "post": {
+        "buffer_id": "6af51a4f3d8c751bfd08e028",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-007.mp4",
+        "agendado_para": "2026-11-12T06:00-03:00",
+        "status": "scheduled"
+      }
     }
   ],
   "decisoes": [
@@ -1285,7 +1288,7 @@
       "evento": "Rodada 5: Poeira FC 3 x 3 Juventude do Asfalto (empate)"
     }
   ],
-  "atualizado_em": "2026-11-12T01:26:46+00:00",
+  "atualizado_em": "2026-11-12T01:38:47+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
