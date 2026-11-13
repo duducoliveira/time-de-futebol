@@ -135,6 +135,19 @@ const TIPOS = {
       s += popPessoa(t, virada + 0.35, 545, SEDE.pe, pessoa(jogador('9', E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1, fase: 1 }));
       s += popPessoa(t, virada + 0.5, 715, SEDE.pe, pessoa({ ...PERSONAGENS.costureira, pose: 'acena' }, t, { s: 1.05, fase: 2 }));
     }
+    if ((acoes.includes('charanga') || acoes.includes('pomponetes')) && t >= virada) {
+      const gente = [];
+      if (acoes.includes('charanga')) gente.push(
+        [{ pele: '#8d5524', cabelo: 'careca', camisa: CORES.vinho, listra: CORES.amarelo, calcao: '#343a40', instrumento: 'bumbo', larg: 1.25, barriga: true, expr: 'feliz' }, 'bumbo'],
+        [{ pele: '#e0ac69', cabelo: 'curto', corCabelo: '#2b1d14', bone: CORES.amarelo, camisa: CORES.vinho, calcao: '#343a40', instrumento: 'pandeiro', expr: 'feliz' }, 'pandeiro']);
+      if (acoes.includes('pomponetes')) gente.push(
+        [{ pele: '#c68642', cabelo: 'coque', corCabelo: '#1b1b1b', camisa: CORES.amarelo, listra: CORES.vinho, calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: 'comemora', expr: 'feliz' }, 'pomponetes'],
+        [{ pele: '#f1c27d', cabelo: 'coque', corCabelo: '#7a4b2a', camisa: CORES.amarelo, listra: CORES.vinho, calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: 'comemora', expr: 'feliz' }, 'pomponetes']);
+      gente.forEach(([p, chave], i) => {
+        const x = 575 + (i - (gente.length - 1) / 2) * 175;
+        s += popPessoa(t, Math.max(virada + 0.1 * i, quando(c, chave, virada) - 0.1 + i * 0.12), x, SEDE.pe, pessoa(p, t, { s: 1, fase: i }));
+      });
+    }
     (c.dados.novos_jogadores || []).forEach((j, i) => {
       const num = Object.keys(E.elenco).find(k => E.elenco[k].nome === j.nome) || '12';
       s += popPessoa(t, virada + 0.2, 540 + i * 200, 1880, pessoa(jogador(num, E, { pose: 'comemora' }), t, { s: 1.9 }));
@@ -261,7 +274,7 @@ const TIPOS = {
     let s = camera(t, d, sede(E.estrutura, { t }) + narrador(t, E, 345, SEDE.pe, 1, { pose: 'aponta' }) + presidente(t, E, 742, SEDE.pe, 1), CAM_SEDE);
     const ops = c.dados.opcoes || [];
     const cores = ['#e63946', '#3a86ff', '#2e8b57'];
-    ops.forEach((o, i) => s += pop(t, 0.3 + i * 0.25, 210 + i * 330, 560, `<g transform="rotate(${[-4, 2, 5][i] || 0})">${cartaoOpcao(o, iconeOpcao(o), cores[i % 3])}</g>`));
+    ops.forEach((o, i) => s += pop(t, 0.3 + i * 0.25, W / 2 + (i - (ops.length - 1) / 2) * 330, 560, `<g transform="rotate(${[-4, 2, 5][i] || 0})">${cartaoOpcao(o, iconeOpcao(o), cores[i % 3])}</g>`));
     s += pop(t, 1.2, W / 2, 860, cartaoComentario('voce', 'sua ideia aqui...', 0, { selo: 'COMENTÁRIO MAIS CURTIDO DECIDE', w: 820 }));
     s += pop(t, 0.1, W / 2, 300, pilula(c.texto_tela[0] || '', { tam: 56, bg: '#2e8b57', rot: -3 }));
     return s;
@@ -359,7 +372,7 @@ Object.assign(TIPOS, {
 });
 
 const CARIMBOS = { inviavel: ['INVIÁVEL POR ENQUANTO', '#e63946'], aprovado: ['APROVADO!', '#2e8b57'],
-  anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'],
+  anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'], terrao: ['O TERRÃO FICA!', '#8b4a22'],
   peneira: ['PENEIRA AOS 500!', '#3a86ff'], lotar: ['QUANDO LOTAR', '#f77f00'] };
 
 const CAPA_LAYOUT = 'abaixo_titulo';  // ou 'acima_tiao'
@@ -475,7 +488,7 @@ function prancheta(t, c, formacao, { balanco = false } = {}) {
     <rect x="-150" y="${-y0 - 86}" width="300" height="86" fill="none" stroke="#ffffffaa" stroke-width="5"/>`;
   // linhas da formação, de baixo (defesa) para cima (ataque); o goleiro fica no pé da prancheta
   const linhas = [[1], ...formacao.map(n => Array.from({ length: n }))];
-  const chaves = ['', 'zagueiros', 'meio', 'atacantes'];
+  const chaves = ['', ...(c.dados.chaves || ['zagueiros', 'meio', 'atacantes'])];
   linhas.forEach((linha, k) => {
     const n = linha.length, y = -y0 - 52 - k * ((h - 150) / (linhas.length - 1));
     const t0 = balanco ? 0.3 + k * 0.12 : k ? quando(c, chaves[k] || '', 1 + k * 1.2) - 0.15 : 0.4;
@@ -489,8 +502,10 @@ function prancheta(t, c, formacao, { balanco = false } = {}) {
     }
   });
   if (balanco) {  // depois do jogo: o que deu certo e o que não deu
-    s += pop(t, quando(c, 'defesa', 2.5), 0, -y0 - 150, `<rect x="-250" y="-52" width="500" height="92" rx="12" fill="#fff4dc" transform="rotate(-5)"/>` + carimbo('DEFESA: TOMOU 3', '#e63946', -5, 50), 0.3, false);
-    s += pop(t, quando(c, 'ataque', 5), 0, y0 + 150, `<rect x="-215" y="-52" width="430" height="92" rx="12" fill="#fff4dc" transform="rotate(4)"/>` + carimbo('ATAQUE: FEZ 3', '#2e8b57', 4, 50), 0.3, false);
+    const [cd, ca] = c.dados.carimbos || [['DEFESA: TOMOU 3', '#e63946'], ['ATAQUE: FEZ 3', '#2e8b57']];
+    const fundo = (txt, rot) => { const w = medir(txt, 50) + 70; return `<rect x="${-w / 2}" y="-52" width="${w}" height="92" rx="12" fill="#fff4dc" transform="rotate(${rot})"/>`; };
+    s += pop(t, quando(c, 'defesa', 2.5), 0, -y0 - 150, fundo(cd[0], -5) + carimbo(cd[0], cd[1], -5, 50), 0.3, false);
+    s += pop(t, quando(c, 'ataque', 5), 0, y0 + 150, fundo(ca[0], 4) + carimbo(ca[0], ca[1], 4, 50), 0.3, false);
   } else s += pop(t, 0.6, w / 2 - 70, y0 + 20, `<text font-size="96" text-anchor="middle" transform="rotate(${Math.sin(t * 4) * 8})">🐦</text><text x="46" y="-44" font-size="50">💣</text>`, 0.3, false);
   return s;
 }

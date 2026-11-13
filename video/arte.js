@@ -241,6 +241,27 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   if (p.numero) s1 += `<text y="${topo + tronco * 0.66}" text-anchor="middle" font-family="Anton" font-size="${44 * Math.min(lf, 1.3)}" fill="#fff" stroke="${OUT}" stroke-width="5" paint-order="stroke">${p.numero}</text>`;
   if (p.barriga) s1 += `<path d="M${-tw * 0.42},${topo + tronco * 0.5} Q0,${topo + tronco + 6} ${tw * 0.42},${topo + tronco * 0.5}" fill="none" stroke="${OUT}" stroke-width="4" opacity=".4"/>`;
 
+  // pomponetes: pompom em cada mão
+  if (p.pompons) for (const [mx, my] of maos) {
+    for (let i = 0; i < 9; i++) { const a = i * 0.7; s1 += `<circle cx="${(mx + Math.cos(a) * 16).toFixed(1)}" cy="${(my + Math.sin(a) * 16).toFixed(1)}" r="15" fill="${OUT}"/>`; }
+    for (let i = 0; i < 9; i++) { const a = i * 0.7; s1 += `<circle cx="${(mx + Math.cos(a) * 16).toFixed(1)}" cy="${(my + Math.sin(a) * 16).toFixed(1)}" r="11" fill="${i % 2 ? p.pompons : '#fff'}"/>`; }
+  }
+  // charanga: bumbo/surdo na frente da barriga, pandeiro na mão
+  if (p.instrumento === 'bumbo' || p.instrumento === 'surdo') {
+    const r = p.instrumento === 'bumbo' ? 50 : 40, cy = topo + tronco * 0.62;
+    s1 += `<path d="M${-tw * 0.4},${topo + 8} L${r * 0.6},${cy - r}" stroke="#e63946" stroke-width="7"/>
+      <rect x="${-r}" y="${cy - r * 0.8}" width="${r * 2}" height="${r * 1.6}" rx="10" fill="${p.instrumento === 'bumbo' ? CORES.vinho : '#adb5bd'}" stroke="${OUT}" stroke-width="6"/>
+      <path d="M${-r},${cy - r * 0.8} l${r * 0.5},${r * 1.6} l${r * 0.5},${-r * 1.6} l${r * 0.5},${r * 1.6} l${r * 0.5},${-r * 1.6}" fill="none" stroke="${CORES.amarelo}" stroke-width="4"/>
+      <ellipse cx="0" cy="${cy - r * 0.8}" rx="${r}" ry="${r * 0.28}" fill="#fff4dc" stroke="${OUT}" stroke-width="5"/>`;
+    const [mx, my] = maos[1];
+    s1 += `<path d="M${mx},${my} l${-20 + Math.sin(t * 14) * 8},${-30}" stroke="${OUT}" stroke-width="7" stroke-linecap="round"/><circle cx="${mx - 20 + Math.sin(t * 14) * 8}" cy="${my - 32}" r="9" fill="#fff4dc" stroke="${OUT}" stroke-width="4"/>`;
+  }
+  if (p.instrumento === 'pandeiro') {  // na mão, do lado do corpo (fora do tronco e longe do rosto)
+    const [mx, my] = [ox + 40, topo + tronco * 0.45];
+    s1 += `<g transform="translate(${mx} ${my}) rotate(${Math.sin(t * 12) * 18})"><circle r="34" fill="#f4e3c1" stroke="${OUT}" stroke-width="6"/>
+      ${[0, 1, 2, 3, 4].map(i => `<circle cx="${Math.cos(i * 1.257) * 34}" cy="${Math.sin(i * 1.257) * 34}" r="7" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="3"/>`).join('')}</g>`;
+  }
+
   // microfone de rádio
   if (p.microfone) {
     const [mx, my] = maos[1];
@@ -558,7 +579,7 @@ function bancoReservasFrente() {
 
 function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   const grama = estrutura.gramado === 'grama';
-  let s = ceu(t) + bairro(760) + (window._local?.tema === 'feira' ? feira(760, t) : '') + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
+  let s = ceu(t) + bairro(760) + (window._local?.tema === 'feira' ? feira(760, t) : '') + (window._local?.tema === 'churrasco' ? churrasco(760, t) : '') + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
   s += `<path d="M-200,950 H1280 L1500,${H} H-420Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}" stroke="${OUT}" stroke-width="5"/>`;
   if (grama) for (let i = 0; i < 8; i++) s += `<path d="M${-200 + i * 185},950 h92 l${120 + i * 4},${H - 950} h-150z" fill="${CORES.grama2}" opacity=".8"/>`;
   else {
@@ -574,6 +595,22 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   // o banco de reservas aparece na imagem própria da lateral (lateral()), não aqui
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
+  return s;
+}
+
+// casa do Amigos do Churrasco: churrasqueiras de tambor atrás da arquibancada, com fumaça subindo
+function churrasco(yBase, t = 0) {
+  let s = '';
+  for (const [x, k] of [[90, 0], [300, 1], [780, 2], [990, 3]]) {
+    const y = yBase - 60;
+    for (let i = 0; i < 5; i++) {  // fumaça
+      const fase = (t * 0.35 + i * 0.2 + k * 0.13) % 1, fy = y - 60 - fase * 260, fx = x + Math.sin(fase * 6 + k) * 26;
+      s += `<circle cx="${fx.toFixed(1)}" cy="${fy.toFixed(1)}" r="${(22 + fase * 40).toFixed(1)}" fill="#dee2e6" opacity="${(0.75 * (1 - fase)).toFixed(2)}"/>`;
+    }
+    s += `<path d="M${x - 46},${y + 70} l12,-40 M${x + 46},${y + 70} l-12,-40" stroke="${OUT}" stroke-width="8"/>
+      <path d="M${x - 58},${y - 20} h116 a58,40 0 0 1 -116,0Z" fill="#495057" stroke="${OUT}" stroke-width="6"/>
+      <path d="M${x - 62},${y - 20} h124" stroke="${OUT}" stroke-width="8"/><path d="M${x - 50},${y - 30} h100" stroke="#e63946" stroke-width="7" opacity=".8"/>`;
+  }
   return s;
 }
 

@@ -481,7 +481,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         rival = (liga.get("rival") or {}).get("time") == adv
         if not casa:  # jogo fora: o cenário (muro, torcida, decoração) é do dono da casa
             local_jogo.update(nome=adv, sigla=_sigla(adv), torcida=briefing.get("torcida_adversario", 320),
-                              tema="feira" if "Feira" in adv else "")
+                              tema="feira" if "Feira" in adv else "churrasco" if "Churrasco" in adv else "")
         fala_pre = (f"É clássico! Rodada {liga['rodada']}, {'em casa, ' if casa else 'na casa do '}"
                     f"{'contra o ' if casa else ''}maior rival do Poeira: o {adv}. "
                     f"{liga['rival']['historia'].capitalize()}." if rival else

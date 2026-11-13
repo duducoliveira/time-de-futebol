@@ -12,8 +12,8 @@
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 7,
-  "caixa": 1511.0,
+  "dia": 8,
+  "caixa": 1342.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -24,7 +24,7 @@
     "preco_camisa": 25
   },
   "torcida": {
-    "seguidores": 347,
+    "seguidores": 374,
     "historico": [
       {
         "dia": 1,
@@ -60,6 +60,11 @@
         "dia": 7,
         "seguidores": 347,
         "data": "2026-11-12T01:38:47+00:00"
+      },
+      {
+        "dia": 8,
+        "seguidores": 374,
+        "data": "2026-11-13T02:19:52+00:00"
       }
     ]
   },
@@ -79,7 +84,10 @@
     "banco_reservas": true,
     "cabare_proibido": true,
     "uniforme_remendado": true,
-    "varal_camisas": true
+    "varal_camisas": true,
+    "charanga": true,
+    "pomponetes": true,
+    "terrao_por_escolha": true
   },
   "personagens": {
     "narrador": {
@@ -238,7 +246,7 @@
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 5,
+    "rodada": 6,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -347,6 +355,38 @@
               5
             ],
             "balanco": true
+          }
+        }
+      },
+      "6": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "sequencia": "NN",
+        "intervalo_minimo_gols": 12,
+        "motivo": "fora, contra o Amigos do Churrasco, no Pombo Atômico 2.0 (3-2-5): a zaga reforçada não toma gol",
+        "cena_depois": {
+          "tipo": "tatica",
+          "narracao": "E o Pombo Atômico 2.0? Dessa vez, a defesa não tomou nenhum gol: os seguranças da boate não deixaram ninguém entrar. E o ataque fez dois! Professor Gilberto, o pombo aprendeu a voar!",
+          "texto_tela": [
+            "POMBO ATÔMICO 2.0: O BALANÇO"
+          ],
+          "dados": {
+            "formacao": [
+              3,
+              2,
+              5
+            ],
+            "balanco": true,
+            "carimbos": [
+              [
+                "DEFESA: ZERO GOL",
+                "#2e8b57"
+              ],
+              [
+                "ATAQUE: FEZ 2",
+                "#2e8b57"
+              ]
+            ]
           }
         }
       }
@@ -829,6 +869,109 @@
           }
         ],
         "rodada": 5
+      },
+      {
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Poeira FC",
+        "gols": [
+          {
+            "minuto": 33,
+            "time": "Poeira FC",
+            "autor": "Khauan"
+          },
+          {
+            "minuto": 55,
+            "time": "Poeira FC",
+            "autor": "Bujão"
+          }
+        ],
+        "gols_mandante": 0,
+        "gols_visitante": 2,
+        "rodada": 6
+      },
+      {
+        "mandante": "Ferro-Velho EC",
+        "visitante": "Juventude do Asfalto",
+        "gols_mandante": 3,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 35,
+            "time": "Ferro-Velho EC"
+          },
+          {
+            "minuto": 38,
+            "time": "Ferro-Velho EC"
+          },
+          {
+            "minuto": 52,
+            "time": "Ferro-Velho EC"
+          },
+          {
+            "minuto": 61,
+            "time": "Juventude do Asfalto"
+          }
+        ],
+        "rodada": 6
+      },
+      {
+        "mandante": "Atlético Padaria",
+        "visitante": "Real Laje",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 65,
+            "time": "Atlético Padaria"
+          }
+        ],
+        "rodada": 6
+      },
+      {
+        "mandante": "Leões do Brejo",
+        "visitante": "Estrela da Feira",
+        "gols_mandante": 1,
+        "gols_visitante": 3,
+        "gols": [
+          {
+            "minuto": 12,
+            "time": "Estrela da Feira"
+          },
+          {
+            "minuto": 14,
+            "time": "Estrela da Feira"
+          },
+          {
+            "minuto": 21,
+            "time": "Estrela da Feira"
+          },
+          {
+            "minuto": 53,
+            "time": "Leões do Brejo"
+          }
+        ],
+        "rodada": 6
+      },
+      {
+        "mandante": "Grêmio Vila Barro",
+        "visitante": "Veteranos do Bairro",
+        "gols_mandante": 2,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 24,
+            "time": "Grêmio Vila Barro"
+          },
+          {
+            "minuto": 33,
+            "time": "Veteranos do Bairro"
+          },
+          {
+            "minuto": 34,
+            "time": "Grêmio Vila Barro"
+          }
+        ],
+        "rodada": 6
       }
     ],
     "rival": {
@@ -838,119 +981,119 @@
     },
     "tabela": [
       {
-        "time": "Juventude do Asfalto",
-        "j": 5,
+        "time": "Atlético Padaria",
+        "j": 6,
         "v": 3,
         "e": 2,
-        "d": 0,
-        "gp": 6,
-        "gc": 3,
+        "d": 1,
+        "gp": 8,
+        "gc": 4,
         "pts": 11,
         "pos": 1,
-        "sg": 3
+        "sg": 4
       },
       {
-        "time": "Leões do Brejo",
-        "j": 5,
-        "v": 2,
-        "e": 3,
-        "d": 0,
-        "gp": 6,
-        "gc": 4,
-        "pts": 9,
-        "pos": 2,
-        "sg": 2
-      },
-      {
-        "time": "Atlético Padaria",
-        "j": 5,
-        "v": 2,
+        "time": "Juventude do Asfalto",
+        "j": 6,
+        "v": 3,
         "e": 2,
         "d": 1,
         "gp": 7,
-        "gc": 4,
-        "pts": 8,
-        "pos": 3,
-        "sg": 3
-      },
-      {
-        "time": "Grêmio Vila Barro",
-        "j": 5,
-        "v": 2,
-        "e": 1,
-        "d": 2,
-        "gp": 8,
-        "gc": 7,
-        "pts": 7,
-        "pos": 4,
+        "gc": 6,
+        "pts": 11,
+        "pos": 2,
         "sg": 1
       },
       {
-        "time": "Ferro-Velho EC",
-        "j": 5,
-        "v": 2,
+        "time": "Grêmio Vila Barro",
+        "j": 6,
+        "v": 3,
         "e": 1,
         "d": 2,
-        "gp": 3,
-        "gc": 7,
-        "pts": 7,
-        "pos": 5,
-        "sg": -4
-      },
-      {
-        "time": "Amigos do Churrasco FC",
-        "j": 5,
-        "v": 2,
-        "e": 0,
-        "d": 3,
-        "gp": 7,
-        "gc": 5,
-        "pts": 6,
-        "pos": 6,
+        "gp": 10,
+        "gc": 8,
+        "pts": 10,
+        "pos": 3,
         "sg": 2
       },
       {
+        "time": "Ferro-Velho EC",
+        "j": 6,
+        "v": 3,
+        "e": 1,
+        "d": 2,
+        "gp": 6,
+        "gc": 8,
+        "pts": 10,
+        "pos": 4,
+        "sg": -2
+      },
+      {
         "time": "Poeira FC",
-        "j": 5,
-        "v": 1,
+        "j": 6,
+        "v": 2,
         "e": 3,
         "d": 1,
-        "gp": 9,
+        "gp": 11,
         "gc": 9,
-        "pts": 6,
+        "pts": 9,
+        "pos": 5,
+        "sg": 2
+      },
+      {
+        "time": "Leões do Brejo",
+        "j": 6,
+        "v": 2,
+        "e": 3,
+        "d": 1,
+        "gp": 7,
+        "gc": 7,
+        "pts": 9,
+        "pos": 6,
+        "sg": 0
+      },
+      {
+        "time": "Estrela da Feira",
+        "j": 6,
+        "v": 2,
+        "e": 1,
+        "d": 3,
+        "gp": 7,
+        "gc": 8,
+        "pts": 7,
         "pos": 7,
+        "sg": -1
+      },
+      {
+        "time": "Amigos do Churrasco FC",
+        "j": 6,
+        "v": 2,
+        "e": 0,
+        "d": 4,
+        "gp": 7,
+        "gc": 7,
+        "pts": 6,
+        "pos": 8,
         "sg": 0
       },
       {
         "time": "Veteranos do Bairro",
-        "j": 5,
+        "j": 6,
         "v": 1,
         "e": 2,
-        "d": 2,
-        "gp": 5,
-        "gc": 7,
+        "d": 3,
+        "gp": 6,
+        "gc": 9,
         "pts": 5,
-        "pos": 8,
-        "sg": -2
+        "pos": 9,
+        "sg": -3
       },
       {
         "time": "Real Laje",
-        "j": 5,
+        "j": 6,
         "v": 1,
         "e": 1,
-        "d": 3,
-        "gp": 4,
-        "gc": 6,
-        "pts": 4,
-        "pos": 9,
-        "sg": -2
-      },
-      {
-        "time": "Estrela da Feira",
-        "j": 5,
-        "v": 1,
-        "e": 1,
-        "d": 3,
+        "d": 4,
         "gp": 4,
         "gc": 7,
         "pts": 4,
@@ -1079,8 +1222,21 @@
         "buffer_id": "6af51a4f3d8c751bfd08e028",
         "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-007.mp4",
         "agendado_para": "2026-11-12T06:00-03:00",
-        "status": "scheduled"
+        "status": "scheduled",
+        "id": "18507546682103911",
+        "permalink": "https://www.instagram.com/reel/Dfor34ABCpk/"
       }
+    },
+    {
+      "dia": 8,
+      "data": "2026-11-13T02:19:52+00:00",
+      "proxima_decisao": {
+        "pergunta": "O Poeira tá com mais dinheiro que vendedor de picolé na praia em janeiro! O que a gente faz com esse dinheiro? Deixa a sua ideia.",
+        "opcoes": [
+          "Sua ideia aqui?"
+        ]
+      },
+      "post": null
     }
   ],
   "decisoes": [
@@ -1125,6 +1281,20 @@
       "autor": "talles_silva",
       "curtidas": 0,
       "texto": "Uniforme + varal de camisas"
+    },
+    {
+      "dia": 8,
+      "acao": "charanga",
+      "autor": "dede_todeschini",
+      "curtidas": 0,
+      "texto": "Charanga + pomponetes"
+    },
+    {
+      "dia": 8,
+      "acao": "pomponetes",
+      "autor": "dede_todeschini",
+      "curtidas": 0,
+      "texto": "Charanga + pomponetes"
     }
   ],
   "enquetes": [],
@@ -1224,6 +1394,18 @@
       "valor": 250,
       "descricao": "varal de camisas rodada 5 (10 camisas)",
       "saldo": 1511.0
+    },
+    {
+      "dia": 8,
+      "valor": 181,
+      "descricao": "curtidas do dia 7",
+      "saldo": 1692.0
+    },
+    {
+      "dia": 8,
+      "valor": -350.0,
+      "descricao": "Charanga + pomponetes",
+      "saldo": 1342.0
     }
   ],
   "linha_do_tempo": [
@@ -1286,15 +1468,25 @@
     {
       "dia": 7,
       "evento": "Rodada 5: Poeira FC 3 x 3 Juventude do Asfalto (empate)"
+    },
+    {
+      "dia": 8,
+      "evento": "A torcida vetou o gramado (o terrão fica) e o clube montou a charanga do Poeira e as pomponetes.",
+      "autor": "dede_todeschini"
+    },
+    {
+      "dia": 8,
+      "evento": "Rodada 6: Amigos do Churrasco FC 0 x 2 Poeira FC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-12T01:38:47+00:00",
+  "atualizado_em": "2026-11-13T02:19:52+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
     "Supino",
     "Salário do Mês",
-    "Chave de Carro"
+    "Chave de Carro",
+    "Fila de Banco"
   ],
   "piadas_gol_usadas": [
     "A zaga parou pra ver. Literalmente parou.",

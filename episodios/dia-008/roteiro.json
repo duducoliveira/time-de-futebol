@@ -1,0 +1,1058 @@
+{
+  "dia": 8,
+  "clube": "Poeira FC",
+  "caixa": 1342.0,
+  "torcida": 374,
+  "posicao": 5,
+  "partida": {
+    "mandante": "Amigos do Churrasco FC",
+    "visitante": "Poeira FC",
+    "gols": [
+      {
+        "minuto": 33,
+        "time": "Poeira FC",
+        "autor": "Khauan"
+      },
+      {
+        "minuto": 55,
+        "time": "Poeira FC",
+        "autor": "Bujão"
+      }
+    ],
+    "gols_mandante": 0,
+    "gols_visitante": 2,
+    "rodada": 6
+  },
+  "cenas": [
+    {
+      "id": "01-capa",
+      "tipo": "capa",
+      "narracao": "Dia 8: O terrão fica!",
+      "texto_tela": [
+        "DIA 8"
+      ],
+      "dados": {
+        "tema": "O TERRÃO FICA!",
+        "antes": 347,
+        "hud": {
+          "torcida": 374,
+          "caixa": 1692.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true
+        }
+      }
+    },
+    {
+      "id": "02-evolucao",
+      "tipo": "evolucao",
+      "narracao": "Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. Ontem, 347 torcedores. Hoje: 374! E o caixa saiu de R$ 1.511 pra 1.692!",
+      "texto_tela": [
+        "DIA 8"
+      ],
+      "dados": {
+        "antes": 347,
+        "torcida": 374,
+        "caixa_antes": 1511.0,
+        "caixa": 1692.0,
+        "curtidas": 181,
+        "hud": {
+          "torcida": 374,
+          "caixa": 1692.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true
+        }
+      }
+    },
+    {
+      "id": "03-estadio",
+      "tipo": "estadio",
+      "narracao": "A arquibancada está quase lotada!",
+      "texto_tela": [
+        "374 TORCEDORES"
+      ],
+      "dados": {
+        "antes": 347,
+        "torcida": 374,
+        "nivel": "quase",
+        "hud": {
+          "torcida": 374,
+          "caixa": 1692.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true
+        }
+      }
+    },
+    {
+      "id": "04-comentarios",
+      "tipo": "comentarios",
+      "narracao": "Ontem a pergunta foi: plantar o gramado? E a torcida respondeu: Poeira é terrão! O Ganso disse que é do terrão que saem os craques. Gramado vetado! E duas ideias foram aprovadas: a charanga, do Todesca, e as pomponetes, do Fernando.",
+      "texto_tela": [],
+      "dados": {
+        "comentarios": [
+          {
+            "usuario": "sementinhadobemong",
+            "texto": "Mantém o campo no terrão, é daí que saem grandes craques",
+            "curtidas": 4,
+            "chave": "ganso",
+            "carimbo": "terrao",
+            "chave_carimbo": "vetado",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          },
+          {
+            "usuario": "dede_todeschini",
+            "texto": "Tenta investir numa charanguinha do Poeira",
+            "curtidas": 0,
+            "chave": "charanga",
+            "carimbo": "aprovado",
+            "chave_carimbo": "todesca",
+            "selo": "IDEIA APROVADA"
+          },
+          {
+            "usuario": "fernandogontijo13",
+            "texto": "Usa o dinheiro pra contratar as pomponetes, vai atrair mais torcedores",
+            "curtidas": 0,
+            "chave": "pomponetes",
+            "carimbo": "aprovado",
+            "chave_carimbo": "fernando",
+            "selo": "IDEIA APROVADA"
+          }
+        ],
+        "hud": {
+          "torcida": 374,
+          "caixa": 1692.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true
+        }
+      }
+    },
+    {
+      "id": "05-obra",
+      "tipo": "obra",
+      "narracao": "Com o dinheiro, a Dona Cida comprou bumbo, surdo e pandeiro pra charanga do Poeira: R$ 150. E as pomponetes ganharam pompom e uniforme por mais duzentos. Agora o Poeira tem batucada e coreografia!",
+      "texto_tela": [
+        "CHARANGA + POMPONETES",
+        "-R$ 350"
+      ],
+      "dados": {
+        "acoes": [
+          "charanga",
+          "pomponetes"
+        ],
+        "custo": 350.0,
+        "caixa": 1342.0,
+        "antes": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true
+        },
+        "depois": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        },
+        "novos_jogadores": [],
+        "autor": "dede_todeschini",
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        }
+      }
+    },
+    {
+      "id": "06-tatica",
+      "tipo": "tatica",
+      "narracao": "E o professor Gilberto mudou a tática: é o Pombo Atômico 2.0! Agora são três zagueiros, que trabalham como seguranças de boate em noite de confusão. Dois volantes fazem reunião de condomínio no meio-campo. E cinco atacantes correm como se o último ônibus pra casa estivesse saindo!",
+      "texto_tela": [
+        "POMBO ATÔMICO 2.0"
+      ],
+      "dados": {
+        "formacao": [
+          3,
+          2,
+          5
+        ],
+        "instagram": "gilbertoteles_",
+        "chaves": [
+          "zagueiros",
+          "volantes",
+          "atacantes"
+        ],
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        }
+      }
+    },
+    {
+      "id": "07-pre_jogo",
+      "tipo": "pre_jogo",
+      "narracao": "Rodada 6, fora de casa, contra o Amigos do Churrasco FC. Detalhe: o jogo só começa depois que a picanha sai.",
+      "texto_tela": [
+        "RODADA 6",
+        "FORA DE CASA"
+      ],
+      "dados": {
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        },
+        "local": {
+          "nome": "Amigos do Churrasco FC",
+          "sigla": "ACH",
+          "torcida": 320,
+          "tema": "churrasco"
+        }
+      }
+    },
+    {
+      "id": "08-apelido",
+      "tipo": "apelido",
+      "narracao": "Fica de olho no lateral do Amigos do Churrasco FC, o Fila de Banco: não anda de jeito nenhum!",
+      "texto_tela": [
+        "DE OLHO NO AMIGOS DO CHURRASCO FC"
+      ],
+      "dados": {
+        "alvo": "adversario",
+        "time": "Amigos do Churrasco FC",
+        "posicao": "lateral",
+        "apelido": "Fila de Banco",
+        "piada": "não anda de jeito nenhum",
+        "numero": "5",
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        },
+        "local": {
+          "nome": "Amigos do Churrasco FC",
+          "sigla": "ACH",
+          "torcida": 320,
+          "tema": "churrasco"
+        }
+      }
+    },
+    {
+      "id": "09-gol",
+      "tipo": "gol",
+      "narracao": "[shouting] GOOOOOOOOL DO POEIRA! [excited] KHAUAN! Aos 33 minutos! Pode comemorar, torcida!",
+      "texto_tela": [
+        "33'",
+        "GOOOOL!"
+      ],
+      "dados": {
+        "culpado": null,
+        "minuto": 33,
+        "nosso": true,
+        "estilo_voz": "grito",
+        "autor": "Khauan",
+        "placar": [
+          0,
+          1
+        ],
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        },
+        "local": {
+          "nome": "Amigos do Churrasco FC",
+          "sigla": "ACH",
+          "torcida": 320,
+          "tema": "churrasco"
+        }
+      }
+    },
+    {
+      "id": "10-gol",
+      "tipo": "gol",
+      "narracao": "[shouting] GOOOOOOOOOL! [excited] Chora, goleiro! BUJÃO manda pra rede aos 55! É DO POEIRA! Ampliou: 2 a 0!",
+      "texto_tela": [
+        "55'",
+        "GOOOOL!"
+      ],
+      "dados": {
+        "culpado": null,
+        "minuto": 55,
+        "nosso": true,
+        "estilo_voz": "grito",
+        "autor": "Bujão",
+        "placar": [
+          0,
+          2
+        ],
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        },
+        "local": {
+          "nome": "Amigos do Churrasco FC",
+          "sigla": "ACH",
+          "torcida": 320,
+          "tema": "churrasco"
+        }
+      }
+    },
+    {
+      "id": "11-fim_de_jogo",
+      "tipo": "fim_de_jogo",
+      "narracao": "Apita o árbitro! Vitória do Poeira, 2 a 0!",
+      "texto_tela": [
+        "FIM DE JOGO",
+        "Amigos do Churrasco FC 0 x 2 Poeira FC"
+      ],
+      "dados": {
+        "resultado": "vitória",
+        "placar": [
+          0,
+          2
+        ],
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        },
+        "local": {
+          "nome": "Amigos do Churrasco FC",
+          "sigla": "ACH",
+          "torcida": 320,
+          "tema": "churrasco"
+        }
+      }
+    },
+    {
+      "id": "12-tatica",
+      "tipo": "tatica",
+      "narracao": "E o Pombo Atômico 2.0? Dessa vez, a defesa não tomou nenhum gol: os seguranças da boate não deixaram ninguém entrar. E o ataque fez dois! Professor Gilberto, o pombo aprendeu a voar!",
+      "texto_tela": [
+        "POMBO ATÔMICO 2.0: O BALANÇO"
+      ],
+      "dados": {
+        "formacao": [
+          3,
+          2,
+          5
+        ],
+        "balanco": true,
+        "carimbos": [
+          [
+            "DEFESA: ZERO GOL",
+            "#2e8b57"
+          ],
+          [
+            "ATAQUE: FEZ 2",
+            "#2e8b57"
+          ]
+        ],
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        },
+        "local": {
+          "nome": "Amigos do Churrasco FC",
+          "sigla": "ACH",
+          "torcida": 320,
+          "tema": "churrasco"
+        }
+      }
+    },
+    {
+      "id": "13-tabela",
+      "tipo": "tabela",
+      "narracao": "Na tabela, o Poeira está em 5º lugar.",
+      "texto_tela": [
+        "TERCEIRA DIVISÃO DA VÁRZEA",
+        "5º LUGAR"
+      ],
+      "dados": {
+        "tabela": [
+          {
+            "time": "Atlético Padaria",
+            "j": 6,
+            "v": 3,
+            "e": 2,
+            "d": 1,
+            "gp": 8,
+            "gc": 4,
+            "pts": 11,
+            "pos": 1,
+            "sg": 4
+          },
+          {
+            "time": "Juventude do Asfalto",
+            "j": 6,
+            "v": 3,
+            "e": 2,
+            "d": 1,
+            "gp": 7,
+            "gc": 6,
+            "pts": 11,
+            "pos": 2,
+            "sg": 1
+          },
+          {
+            "time": "Grêmio Vila Barro",
+            "j": 6,
+            "v": 3,
+            "e": 1,
+            "d": 2,
+            "gp": 10,
+            "gc": 8,
+            "pts": 10,
+            "pos": 3,
+            "sg": 2
+          },
+          {
+            "time": "Ferro-Velho EC",
+            "j": 6,
+            "v": 3,
+            "e": 1,
+            "d": 2,
+            "gp": 6,
+            "gc": 8,
+            "pts": 10,
+            "pos": 4,
+            "sg": -2
+          },
+          {
+            "time": "Poeira FC",
+            "j": 6,
+            "v": 2,
+            "e": 3,
+            "d": 1,
+            "gp": 11,
+            "gc": 9,
+            "pts": 9,
+            "pos": 5,
+            "sg": 2
+          },
+          {
+            "time": "Leões do Brejo",
+            "j": 6,
+            "v": 2,
+            "e": 3,
+            "d": 1,
+            "gp": 7,
+            "gc": 7,
+            "pts": 9,
+            "pos": 6,
+            "sg": 0
+          },
+          {
+            "time": "Estrela da Feira",
+            "j": 6,
+            "v": 2,
+            "e": 1,
+            "d": 3,
+            "gp": 7,
+            "gc": 8,
+            "pts": 7,
+            "pos": 7,
+            "sg": -1
+          },
+          {
+            "time": "Amigos do Churrasco FC",
+            "j": 6,
+            "v": 2,
+            "e": 0,
+            "d": 4,
+            "gp": 7,
+            "gc": 7,
+            "pts": 6,
+            "pos": 8,
+            "sg": 0
+          },
+          {
+            "time": "Veteranos do Bairro",
+            "j": 6,
+            "v": 1,
+            "e": 2,
+            "d": 3,
+            "gp": 6,
+            "gc": 9,
+            "pts": 5,
+            "pos": 9,
+            "sg": -3
+          },
+          {
+            "time": "Real Laje",
+            "j": 6,
+            "v": 1,
+            "e": 1,
+            "d": 4,
+            "gp": 4,
+            "gc": 7,
+            "pts": 4,
+            "pos": 10,
+            "sg": -3
+          }
+        ],
+        "posicao": 5,
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        }
+      }
+    },
+    {
+      "id": "14-decisao",
+      "tipo": "decisao",
+      "narracao": "No caixa, 1.342 reais. O Poeira tá com mais dinheiro que vendedor de picolé na praia em janeiro! E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+      "texto_tela": [
+        "DECISÃO #8",
+        "COMENTÁRIO MAIS CURTIDO DECIDE"
+      ],
+      "dados": {
+        "opcoes": [
+          "Sua ideia aqui?"
+        ],
+        "caixa": 1342.0,
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        }
+      }
+    },
+    {
+      "id": "15-encerramento",
+      "tipo": "encerramento",
+      "narracao": "Amanhã tem Poeira contra o Ferro-Velho. E lembra: quando o Poeira chegar a 500 torcedores, tem peneira nova! Manda esse vídeo pros seus amigos virarem torcedores também. Segue, curte e comenta. Até amanhã!",
+      "texto_tela": [
+        "@poeira.fc"
+      ],
+      "dados": {
+        "proximo": [
+          "Poeira FC",
+          "Ferro-Velho EC"
+        ],
+        "hud": {
+          "torcida": 374,
+          "caixa": 1342.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": false,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true
+        }
+      }
+    }
+  ],
+  "estado": {
+    "clube": {
+      "nome": "Poeira FC",
+      "nome_falado": "Poeira",
+      "sigla": "PFC",
+      "instagram": "@poeira.fc",
+      "instagram_id": "17841453282683112",
+      "buffer_canal_id": "6aed11bde29c69a171783476",
+      "repo_videos": "duducoliveira/poeirafc-videos",
+      "fundado_no_dia": 0,
+      "forca": 30,
+      "estadio": "Campo do Poeira",
+      "piada_estadio": "E quando venta, você entende o nome do time."
+    },
+    "estrutura": {
+      "gramado": "terrão",
+      "capacidade": 500,
+      "arquibancada": "dois bancos de madeira",
+      "telhado": false,
+      "vestiario": "um banheiro sem porta",
+      "uniforme": "novo",
+      "rede": true,
+      "bolas": false,
+      "iluminacao": false,
+      "lanchonete": "Barraca do Guigs",
+      "tecnico": false,
+      "kombi": true,
+      "banco_reservas": true,
+      "cabare_proibido": true,
+      "uniforme_remendado": true,
+      "varal_camisas": true,
+      "charanga": true,
+      "pomponetes": true,
+      "terrao_por_escolha": true
+    },
+    "elenco": {
+      "1": {
+        "nome": "Baixinho",
+        "posicao": "GOL",
+        "traco": "1,63 m; pula muito, alcança pouco"
+      },
+      "2": {
+        "nome": "Zé Marmita",
+        "posicao": "LD",
+        "traco": "entregador; sai no intervalo pra fazer entrega"
+      },
+      "3": {
+        "nome": "Tonhão",
+        "posicao": "ZAG",
+        "traco": "pedreiro; nunca perdeu uma dividida, nunca acertou um passe"
+      },
+      "4": {
+        "nome": "Professor",
+        "posicao": "ZAG",
+        "traco": "51 anos; não corre, se posiciona"
+      },
+      "5": {
+        "nome": "Padeiro",
+        "posicao": "VOL",
+        "traco": "chega direto do forno, com pão pra todo mundo"
+      },
+      "6": {
+        "nome": "Chinelinho",
+        "posicao": "LE",
+        "traco": "joga com chuteira emprestada dois números maior",
+        "apelido": "Salário do Mês"
+      },
+      "7": {
+        "nome": "Foguete",
+        "posicao": "PD",
+        "traco": "o mais rápido do bairro; não tem freio"
+      },
+      "8": {
+        "nome": "Nenê",
+        "posicao": "MEI",
+        "traco": "16 anos, filho da Dona Cida; o único que sabe jogar"
+      },
+      "9": {
+        "nome": "Bujão",
+        "posicao": "CA",
+        "traco": "118 kg; finaliza muito bem, parado"
+      },
+      "10": {
+        "nome": "Maestro",
+        "posicao": "MEI",
+        "traco": "44 anos; conta do teste que fez num time grande em 98",
+        "apelido": "Chave de Carro"
+      },
+      "11": {
+        "nome": "Sumido",
+        "posicao": "PE",
+        "traco": "ninguém sabe onde mora; aparece só no jogo"
+      },
+      "12": {
+        "nome": "Gabriel",
+        "posicao": "ZAG",
+        "traco": "se apresentou nos comentários: 'Gabriel, zagueiro'",
+        "instagram": "gabriel_rzt1221",
+        "chegou_no_dia": 2,
+        "chave": "gabriel",
+        "apelido": "Whisky do Paraguai"
+      },
+      "13": {
+        "nome": "Fé no Justo",
+        "posicao": "VOL",
+        "traco": "levantou a mão nos comentários",
+        "instagram": "_fe_no_justo_._777",
+        "chegou_no_dia": 2,
+        "chave": "fé"
+      },
+      "14": {
+        "nome": "Zé Kaun",
+        "posicao": "PE",
+        "traco": "respondeu com três emojis e foi contratado",
+        "instagram": "j_o_s_e_k_a_u_n",
+        "chegou_no_dia": 2,
+        "chave": "zé",
+        "apelido": "Viagra em Idoso"
+      },
+      "15": {
+        "nome": "Khauan",
+        "posicao": "CA",
+        "traco": "chegou pela peneira: 'bora subir esse time'",
+        "instagram": "khauan.ribero",
+        "chegou_no_dia": 4,
+        "chave": "khauan"
+      },
+      "16": {
+        "nome": "Rodrigo Moura",
+        "posicao": "LD",
+        "apelido": "Soldado de Guerra",
+        "traco": "vai, mas ninguém sabe se volta",
+        "instagram": "rodrigo_smoura01",
+        "chegou_no_dia": 4,
+        "chave": "rodrigo"
+      },
+      "17": {
+        "nome": "Benício",
+        "posicao": "MEI",
+        "traco": "o ex-Biquinho, meia camisa 7",
+        "instagram": "beniciocarmocarvalho",
+        "chegou_no_dia": 4,
+        "chave": "biquinho"
+      },
+      "18": {
+        "nome": "Saci",
+        "posicao": "CA",
+        "apelido": "Uma Perna Só",
+        "traco": "só faz gol de bicicleta",
+        "instagram": "alisoonjesus",
+        "chegou_no_dia": 4,
+        "chave": "saci"
+      },
+      "19": {
+        "nome": "Kelvin",
+        "posicao": "PD",
+        "traco": "ponta direita da peneira",
+        "instagram": "kelvinzy29",
+        "chegou_no_dia": 4,
+        "chave": "kelvin"
+      }
+    },
+    "personagens": {
+      "narrador": {
+        "nome": "Tião",
+        "papel": "locutor da rádio comunitária, narra tudo como se fosse final de Copa",
+        "voz": "rpNe0HOx7heUulPiOEaG"
+      },
+      "presidente": {
+        "nome": "Dona Cida",
+        "papel": "dona do bar da esquina; presidente, tesoureira e roupeira do clube"
+      },
+      "diretor": {
+        "nome": "Ragazzo",
+        "cargo": "diretor de futebol (estagiário)",
+        "instagram": "gabriel_ragazzo1",
+        "chave": "ragazzo"
+      },
+      "tecnico": {
+        "nome": "Gilberto Teles",
+        "cargo": "técnico",
+        "instagram": "gilbertoteles_",
+        "chave": "gilberto",
+        "esquema": "3-4-2-1"
+      },
+      "costureira": {
+        "nome": "Dona Neide",
+        "cargo": "costureira do bairro"
+      }
+    },
+    "liga": "Terceira Divisão da Várzea",
+    "moeda": "R$"
+  },
+  "legenda": "DIA 8 do Poeira FC ⚽\n\nO Poeira tá com mais dinheiro que vendedor de picolé na praia em janeiro! O que a gente faz com esse dinheiro? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nPeneira nova quando o Poeira chegar a 500 torcedores: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "primeiro_comentario": "O Poeira tá com mais dinheiro que vendedor de picolé na praia em janeiro! O que a gente faz com esse dinheiro? Deixa a sua ideia. 👇"
+}

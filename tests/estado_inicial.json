@@ -219,6 +219,38 @@
             "balanco": true
           }
         }
+      },
+      "6": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "sequencia": "NN",
+        "intervalo_minimo_gols": 12,
+        "motivo": "fora, contra o Amigos do Churrasco, no Pombo Atômico 2.0 (3-2-5): a zaga reforçada não toma gol",
+        "cena_depois": {
+          "tipo": "tatica",
+          "narracao": "E o Pombo Atômico 2.0? Dessa vez, a defesa não tomou nenhum gol: os seguranças da boate não deixaram ninguém entrar. E o ataque fez dois! Professor Gilberto, o pombo aprendeu a voar!",
+          "texto_tela": [
+            "POMBO ATÔMICO 2.0: O BALANÇO"
+          ],
+          "dados": {
+            "formacao": [
+              3,
+              2,
+              5
+            ],
+            "balanco": true,
+            "carimbos": [
+              [
+                "DEFESA: ZERO GOL",
+                "#2e8b57"
+              ],
+              [
+                "ATAQUE: FEZ 2",
+                "#2e8b57"
+              ]
+            ]
+          }
+        }
       }
     },
     "times": {
