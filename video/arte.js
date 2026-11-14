@@ -463,7 +463,17 @@ function muro(y, nome) {
     <path d="M60,${y + 18} q40,-12 90,0 t90,0" stroke="#e76f51" stroke-width="10" fill="none" opacity=".7"/>
     <path d="M820,${y + 70} q40,-14 90,0 t90,0" stroke="#3a86ff" stroke-width="10" fill="none" opacity=".7"/>
     <text class="${window._closeGol ? '' : 'rotulo'}" x="265" y="${y + 62}" text-anchor="middle" font-family="Anton" font-size="${Math.min(46, 270 / Math.max(1, medir(nome.toUpperCase(), 1)))}" fill="${corMuro}" opacity=".9">${esc(nome.toUpperCase())}</text>
-    <text class="${window._closeGol ? '' : 'rotulo'}" x="835" y="${y + 64}" text-anchor="middle" font-family="Anton" font-size="52" fill="${corMuro}" opacity=".85" letter-spacing="6">${esc(sgMuro)}</text>`;
+    <text class="${window._closeGol ? '' : 'rotulo'}" x="835" y="${y + 64}" text-anchor="middle" font-family="Anton" font-size="52" fill="${corMuro}" opacity=".85" letter-spacing="6">${esc(sgMuro)}</text>` + (!L && window._placas ? placasMuro(y) : '');
+}
+// placa de publicidade atrás do gol: os anúncios dos comerciantes do bairro vão trocando (como placa giratória)
+function placasMuro(y) {
+  const anuncios = [['#ffd166', OUT, 'BORRACHARIA DO ZÉ'], ['#3a86ff', '#fff', 'SALÃO DA KEKA'], ['#e63946', '#fff', 'AÇOUGUE BOI GORDO']];
+  const [bg, cor, txt] = anuncios[Math.floor((window._tQuadro || 0) / 2.2) % anuncios.length];
+  const cx = 540, w = 250, tam = Math.min(30, (w - 20) / Math.max(1, medir(txt, 1)));
+  return `<rect x="${cx - w / 2 + 4}" y="${y + 14}" width="${w}" height="56" rx="6" fill="#000" opacity=".18"/>
+    <rect x="${cx - w / 2}" y="${y + 10}" width="${w}" height="56" rx="6" fill="${bg}" stroke="${OUT}" stroke-width="4"/>
+    <circle cx="${cx - w / 2 + 8}" cy="${y + 18}" r="3" fill="${OUT}"/><circle cx="${cx + w / 2 - 8}" cy="${y + 18}" r="3" fill="${OUT}"/>
+    <text x="${cx}" y="${y + 38 + tam * 0.36}" text-anchor="middle" font-family="Anton" font-size="${tam}" fill="${cor}">${esc(txt)}</text>`;
 }
 
 // cor da camisa da torcida: a nossa (vinho) ou, no jogo fora, a do dono da casa (com uns poucos do Poeira)

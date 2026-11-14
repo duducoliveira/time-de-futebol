@@ -1,0 +1,282 @@
+{
+  "dia": 9,
+  "seguidores_ontem": 374,
+  "seguidores_hoje": 388,
+  "post_anterior": {
+    "id": "18457431190121692",
+    "caption": "DIA 8 do Poeira FC ⚽\n\nO Poeira tá com mais dinheiro que vendedor de picolé na praia em janeiro! O que a gente faz com esse dinheiro? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nPeneira nova quando o Poeira chegar a 500 torcedores: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 13,
+    "like_count": 160,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/DfrQn7IqFRT/",
+    "timestamp": "2026-11-13T09:02:50+0000"
+  },
+  "curtidas": 160,
+  "receita_curtidas": 160,
+  "caixa_atual": 1342.0,
+  "caixa_com_curtidas": 1502.0,
+  "top_comentarios": [
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Eu como jogador do poeira quero agradecer a todos por esse grande jogo, e venho aqui falar para a torcida que vamos ser campeões eu garanto e serei artilheiro, todo jogo pelo menos um gol meu em!!",
+      "curtidas": 2,
+      "id": "18104986970531529",
+      "timestamp": "2026-11-13T09:35:04+0000"
+    },
+    {
+      "usuario": "talles_silva",
+      "texto": "Melhorar o banco e um vestiario para os jogadores, isso melhora alto astral logo melhora a performance dos jogadores",
+      "curtidas": 2,
+      "id": "18081230543721415",
+      "timestamp": "2026-11-13T09:56:13+0000"
+    },
+    {
+      "usuario": "lf_coronheira099",
+      "texto": "Essa formação é perigosa em contra ataque do time adversário",
+      "curtidas": 1,
+      "id": "18226421944339776",
+      "timestamp": "2026-11-13T09:50:55+0000"
+    },
+    {
+      "usuario": "gilbertoteles_",
+      "texto": "GILBERTO TELES – ANÚNCIO OFICIAL! 🐦💣\n\nAntes do próximo jogo, teremos treino obrigatório! Os zagueiros vão treinar defesa de porta de banco, os volantes terão aula de oração em grupo e os atacantes vão praticar corrida atrás do caminhão do gás!\n\nQuero todo mundo preparado! A vitória por 2x0 foi só o aquecimento. O POMBO ATÔMICO NÃO TIRA FOLGA! 😂🔥",
+      "curtidas": 1,
+      "id": "18101933342386855",
+      "timestamp": "2026-11-13T17:08:34+0000"
+    },
+    {
+      "usuario": "fernandogontijo13",
+      "texto": "Contrata um mascote anão, igual o rapozinho do Cruzeiro",
+      "curtidas": 0,
+      "id": "18130219021873039",
+      "timestamp": "2026-11-13T09:38:10+0000"
+    },
+    {
+      "usuario": "samuel_teles_oliveira",
+      "texto": "Eu quero ser jogador",
+      "curtidas": 0,
+      "id": "18167316490430955",
+      "timestamp": "2026-11-13T10:14:45+0000"
+    },
+    {
+      "usuario": "isaq_ueestevao",
+      "texto": "Dia 4 pedindo a contratação do Rabisco 🙌🔥",
+      "curtidas": 0,
+      "id": "18637580614020532",
+      "timestamp": "2026-11-13T10:44:30+0000"
+    },
+    {
+      "usuario": "gustavo.hermont",
+      "texto": "Charanguinhaa",
+      "curtidas": 0,
+      "id": "18151738141649402",
+      "timestamp": "2026-11-13T10:47:11+0000"
+    },
+    {
+      "usuario": "sementinhadobemong",
+      "texto": "Eu quero ser o camisa 10 e jogar no meio campo Sou o Ganso . Vamos ser campeão",
+      "curtidas": 0,
+      "id": "18162163525507153",
+      "timestamp": "2026-11-13T11:57:33+0000"
+    },
+    {
+      "usuario": "kelvinzy29",
+      "texto": "Pra cima meu time, ganhamos com sobra! Espero fazer meu primeiro gol no próximo jogo 🔥🔥",
+      "curtidas": 0,
+      "id": "18106376597530262",
+      "timestamp": "2026-11-13T12:22:19+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 2,
+      "viavel": true,
+      "acoes": [
+        "atacante"
+      ],
+      "custo": 1000.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 1,
+      "usuario": "talles_silva",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Vestiário reformado precisa de Telhado novo no vestiário antes",
+      "revisar": false
+    },
+    {
+      "indice": 2,
+      "usuario": "lf_coronheira099",
+      "curtidas": 1,
+      "viavel": true,
+      "acoes": [
+        "atacante"
+      ],
+      "custo": 1000.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 3,
+      "usuario": "gilbertoteles_",
+      "curtidas": 1,
+      "viavel": true,
+      "acoes": [
+        "zagueiro"
+      ],
+      "custo": 800.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 4,
+      "usuario": "fernandogontijo13",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "samuel_teles_oliveira",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 6,
+      "usuario": "isaq_ueestevao",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 7,
+      "usuario": "gustavo.hermont",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 8,
+      "usuario": "sementinhadobemong",
+      "curtidas": 0,
+      "viavel": true,
+      "acoes": [
+        "meia"
+      ],
+      "custo": 900.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 9,
+      "usuario": "kelvinzy29",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": null,
+    "acoes": [
+      "telhado",
+      "placas"
+    ],
+    "autor": "talles_silva",
+    "titulo": "Telhado + placas",
+    "interpretacao": "Telhado novo no vestiário (primeiro passo pro vestiário do Talles) e placas de publicidade no muro (ideia do Filipe): R$ 50 por jogo em casa.",
+    "custo": 600,
+    "efeitos": {
+      "estrutura.telhado": true,
+      "clube.forca": "+1",
+      "estrutura.placas": true,
+      "regras.placas_por_jogo": 50
+    },
+    "narracao_obra": "Telhado novo na sede e no vestiário: R$ 600. Acabou a goteira no banho dos jogadores! E as placas no muro não custaram nada: a borracharia, o salão e o açougue do bairro pagam cinquenta reais por jogo em casa pra anunciar."
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+    "opcoes": [
+      "Sua ideia aqui?"
+    ]
+  },
+  "tema": "TELHADO NOVO!",
+  "tema_falado": "Telhado novo",
+  "historia": {
+    "comentarios": [
+      {
+        "narracao": "O Talles pediu vestiário pros jogadores: o primeiro passo é o telhado. Aprovado! E o Filipe deu a ideia das placas de publicidade no muro. Aprovado também!",
+        "comentarios": [
+          {
+            "usuario": "talles_silva",
+            "texto": "Melhorar o banco e um vestiario para os jogadores, isso melhora alto astral",
+            "curtidas": 2,
+            "chave": "talles",
+            "carimbo": "aprovado",
+            "chave_carimbo": "telhado",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          },
+          {
+            "usuario": "filipe.nicoli",
+            "texto": "Publicidade, coloca placa de publicidade. Todo mês pinga dinheiro",
+            "curtidas": 0,
+            "chave": "filipe",
+            "carimbo": "aprovado",
+            "chave_carimbo": "também",
+            "selo": "IDEIA APROVADA"
+          }
+        ]
+      }
+    ],
+    "antes_jogo": [
+      {
+        "tipo": "treino",
+        "narracao": "E o professor Gilberto marcou treino obrigatório! Os zagueiros treinaram defesa de porta de banco. Os volantes tiveram aula de oração em grupo. E os atacantes? Correram atrás do caminhão do gás! O Pombo Atômico não tira folga!",
+        "texto_tela": [
+          "TREINO OBRIGATÓRIO"
+        ],
+        "dados": {}
+      }
+    ]
+  },
+  "piada": {
+    "alvo": "nosso",
+    "numero": "11",
+    "nome": "Sumido",
+    "posicao": "ponta",
+    "apelido": "Ex-Namorada",
+    "piada": "aparece quando você menos espera",
+    "narracao": "E o nosso ponta Sumido ganhou apelido novo: ponta Ex-Namorada. Aparece quando você menos espera!",
+    "texto_tela": [
+      "#11 SUMIDO"
+    ]
+  },
+  "decisao_fala": "No caixa, {caixa} reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+  "legenda": "DIA 9 do Poeira FC ⚽\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nPeneira nova quando o Poeira chegar a 500 torcedores: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "encerramento": "Amanhã tem Poeira contra o Atlético Padaria, o líder! E lembra: quando o Poeira chegar a 500 torcedores, tem peneira nova. Manda esse vídeo pros seus amigos virarem torcedores também. Segue, curte e comenta. Até amanhã!"
+}

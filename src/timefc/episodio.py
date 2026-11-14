@@ -613,16 +613,21 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 venda = camisas * e["regras"].get("preco_camisa", 25)
                 if venda:
                     est.lancar(e, venda, f"varal de camisas rodada {liga['rodada']} ({camisas} camisas)")
+            placas = e["regras"].get("placas_por_jogo", 0) if e["estrutura"].get("placas") else 0
+            if placas:
+                est.lancar(e, placas, f"placas de publicidade rodada {liga['rodada']}")
             if publico:
                 extra = (f" Mais {_n(lanche)} da {e['estrutura'].get('lanchonete') or 'lanchonete'}." if lanche else "")
                 if venda:
                     extra += f" E no varal, {_n(camisas)} camisas vendidas: mais {_n(venda)}."
-                if lanche or venda:
-                    extra += f" Somando tudo: {_n(bilheteria + lanche + venda)} reais, e o caixa foi pra {_n(e['caixa'])}!"
+                if placas:
+                    extra += f" E as placas de publicidade: mais {_n(placas)}."
+                if lanche or venda or placas:
+                    extra += f" Somando tudo: {_n(bilheteria + lanche + venda + placas)} reais, e o caixa foi pra {_n(e['caixa'])}!"
                 cena("bilheteria", f"Na bilheteria: {_n(publico)} pagantes, a {e['regras']['ingresso']} reais "
                      f"cada. {_n(bilheteria)} reais pro clube!{extra}",
                      [f"{_n(publico)} × R$ {e['regras']['ingresso']} = {_moeda(e, bilheteria)}"],
-                     publico=publico, ingresso=e["regras"]["ingresso"], receita=bilheteria + lanche + venda, camisas=camisas, bilheteria=bilheteria, lanche=lanche, venda=venda,
+                     publico=publico, ingresso=e["regras"]["ingresso"], receita=bilheteria + lanche + venda + placas, camisas=camisas, placas=placas, bilheteria=bilheteria, lanche=lanche, venda=venda,
                      barraca=e["estrutura"].get("lanchonete") or "", preco_camisa=e["regras"].get("preco_camisa", 25),
                      caixa=e["caixa"])
 

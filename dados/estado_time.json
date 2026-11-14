@@ -8,12 +8,12 @@
     "buffer_canal_id": "6aed11bde29c69a171783476",
     "repo_videos": "duducoliveira/poeirafc-videos",
     "fundado_no_dia": 0,
-    "forca": 30,
+    "forca": 31,
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 8,
-  "caixa": 1342.0,
+  "dia": 9,
+  "caixa": 2416.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -21,10 +21,11 @@
     "gasto_lanchonete_por_torcedor": 1,
     "comentario_vencedor": "mais curtido no post do dia anterior",
     "camisas_pct_torcida": 3,
-    "preco_camisa": 25
+    "preco_camisa": 25,
+    "placas_por_jogo": 50
   },
   "torcida": {
-    "seguidores": 374,
+    "seguidores": 388,
     "historico": [
       {
         "dia": 1,
@@ -65,6 +66,11 @@
         "dia": 8,
         "seguidores": 374,
         "data": "2026-11-13T02:19:52+00:00"
+      },
+      {
+        "dia": 9,
+        "seguidores": 388,
+        "data": "2026-11-14T01:38:13+00:00"
       }
     ]
   },
@@ -72,7 +78,7 @@
     "gramado": "terrão",
     "capacidade": 500,
     "arquibancada": "dois bancos de madeira",
-    "telhado": false,
+    "telhado": true,
     "vestiario": "um banheiro sem porta",
     "uniforme": "novo",
     "rede": true,
@@ -87,7 +93,8 @@
     "varal_camisas": true,
     "charanga": true,
     "pomponetes": true,
-    "terrao_por_escolha": true
+    "terrao_por_escolha": true,
+    "placas": true
   },
   "personagens": {
     "narrador": {
@@ -173,7 +180,8 @@
     "11": {
       "nome": "Sumido",
       "posicao": "PE",
-      "traco": "ninguém sabe onde mora; aparece só no jogo"
+      "traco": "ninguém sabe onde mora; aparece só no jogo",
+      "apelido": "Ex-Namorada"
     },
     "12": {
       "nome": "Gabriel",
@@ -246,7 +254,7 @@
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 6,
+    "rodada": 7,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -389,10 +397,21 @@
             ]
           }
         }
+      },
+      "7": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "sequencia": "N",
+        "ultimo_gol_a_partir_do_minuto": 40,
+        "motivo": "em casa contra o Ferro-Velho: 1 a 0, primeiro gol do Kelvin (que pediu nos comentários)",
+        "gol_decisivo": {
+          "artilheiro": "Kelvin",
+          "grito": "[shouting] GOOOOOOL DO KELVIN! [excited] O primeiro gol dele com a camisa do Poeira, aos {m}! Ele pediu nos comentários, e o Poeira entregou: um a zero!"
+        }
       }
     },
     "times": {
-      "Poeira FC": 30,
+      "Poeira FC": 31,
       "Leões do Brejo": 50,
       "Atlético Padaria": 45,
       "Ferro-Velho EC": 42,
@@ -972,6 +991,79 @@
           }
         ],
         "rodada": 6
+      },
+      {
+        "mandante": "Poeira FC",
+        "visitante": "Ferro-Velho EC",
+        "gols": [
+          {
+            "minuto": 51,
+            "time": "Poeira FC",
+            "autor": "Kelvin"
+          }
+        ],
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "rodada": 7
+      },
+      {
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Atlético Padaria",
+        "gols_mandante": 1,
+        "gols_visitante": 2,
+        "gols": [
+          {
+            "minuto": 51,
+            "time": "Amigos do Churrasco FC"
+          },
+          {
+            "minuto": 62,
+            "time": "Atlético Padaria"
+          },
+          {
+            "minuto": 70,
+            "time": "Atlético Padaria"
+          }
+        ],
+        "rodada": 7
+      },
+      {
+        "mandante": "Juventude do Asfalto",
+        "visitante": "Leões do Brejo",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 24,
+            "time": "Juventude do Asfalto"
+          }
+        ],
+        "rodada": 7
+      },
+      {
+        "mandante": "Real Laje",
+        "visitante": "Grêmio Vila Barro",
+        "gols_mandante": 0,
+        "gols_visitante": 0,
+        "gols": [],
+        "rodada": 7
+      },
+      {
+        "mandante": "Estrela da Feira",
+        "visitante": "Veteranos do Bairro",
+        "gols_mandante": 2,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 27,
+            "time": "Estrela da Feira"
+          },
+          {
+            "minuto": 45,
+            "time": "Estrela da Feira"
+          }
+        ],
+        "rodada": 7
       }
     ],
     "rival": {
@@ -982,123 +1074,123 @@
     "tabela": [
       {
         "time": "Atlético Padaria",
-        "j": 6,
-        "v": 3,
+        "j": 7,
+        "v": 4,
         "e": 2,
         "d": 1,
-        "gp": 8,
-        "gc": 4,
-        "pts": 11,
+        "gp": 10,
+        "gc": 5,
+        "pts": 14,
         "pos": 1,
-        "sg": 4
+        "sg": 5
       },
       {
         "time": "Juventude do Asfalto",
-        "j": 6,
-        "v": 3,
+        "j": 7,
+        "v": 4,
         "e": 2,
         "d": 1,
-        "gp": 7,
+        "gp": 8,
         "gc": 6,
-        "pts": 11,
+        "pts": 14,
         "pos": 2,
-        "sg": 1
-      },
-      {
-        "time": "Grêmio Vila Barro",
-        "j": 6,
-        "v": 3,
-        "e": 1,
-        "d": 2,
-        "gp": 10,
-        "gc": 8,
-        "pts": 10,
-        "pos": 3,
         "sg": 2
-      },
-      {
-        "time": "Ferro-Velho EC",
-        "j": 6,
-        "v": 3,
-        "e": 1,
-        "d": 2,
-        "gp": 6,
-        "gc": 8,
-        "pts": 10,
-        "pos": 4,
-        "sg": -2
       },
       {
         "time": "Poeira FC",
-        "j": 6,
-        "v": 2,
+        "j": 7,
+        "v": 3,
         "e": 3,
         "d": 1,
-        "gp": 11,
+        "gp": 12,
         "gc": 9,
-        "pts": 9,
-        "pos": 5,
+        "pts": 12,
+        "pos": 3,
+        "sg": 3
+      },
+      {
+        "time": "Grêmio Vila Barro",
+        "j": 7,
+        "v": 3,
+        "e": 2,
+        "d": 2,
+        "gp": 10,
+        "gc": 8,
+        "pts": 11,
+        "pos": 4,
         "sg": 2
       },
       {
-        "time": "Leões do Brejo",
-        "j": 6,
-        "v": 2,
-        "e": 3,
-        "d": 1,
-        "gp": 7,
-        "gc": 7,
-        "pts": 9,
-        "pos": 6,
-        "sg": 0
-      },
-      {
         "time": "Estrela da Feira",
-        "j": 6,
-        "v": 2,
+        "j": 7,
+        "v": 3,
         "e": 1,
         "d": 3,
+        "gp": 9,
+        "gc": 8,
+        "pts": 10,
+        "pos": 5,
+        "sg": 1
+      },
+      {
+        "time": "Ferro-Velho EC",
+        "j": 7,
+        "v": 3,
+        "e": 1,
+        "d": 3,
+        "gp": 6,
+        "gc": 9,
+        "pts": 10,
+        "pos": 6,
+        "sg": -3
+      },
+      {
+        "time": "Leões do Brejo",
+        "j": 7,
+        "v": 2,
+        "e": 3,
+        "d": 2,
         "gp": 7,
         "gc": 8,
-        "pts": 7,
+        "pts": 9,
         "pos": 7,
         "sg": -1
       },
       {
         "time": "Amigos do Churrasco FC",
-        "j": 6,
+        "j": 7,
         "v": 2,
         "e": 0,
-        "d": 4,
-        "gp": 7,
-        "gc": 7,
+        "d": 5,
+        "gp": 8,
+        "gc": 9,
         "pts": 6,
         "pos": 8,
-        "sg": 0
+        "sg": -1
       },
       {
-        "time": "Veteranos do Bairro",
-        "j": 6,
+        "time": "Real Laje",
+        "j": 7,
         "v": 1,
         "e": 2,
-        "d": 3,
-        "gp": 6,
-        "gc": 9,
+        "d": 4,
+        "gp": 4,
+        "gc": 7,
         "pts": 5,
         "pos": 9,
         "sg": -3
       },
       {
-        "time": "Real Laje",
-        "j": 6,
+        "time": "Veteranos do Bairro",
+        "j": 7,
         "v": 1,
-        "e": 1,
+        "e": 2,
         "d": 4,
-        "gp": 4,
-        "gc": 7,
-        "pts": 4,
+        "gp": 6,
+        "gc": 11,
+        "pts": 5,
         "pos": 10,
-        "sg": -3
+        "sg": -5
       }
     ]
   },
@@ -1240,8 +1332,21 @@
         "buffer_id": "6af67cf1fb90ccefdd155953",
         "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-008.mp4",
         "agendado_para": "2026-11-13T06:00-03:00",
-        "status": "scheduled"
+        "status": "scheduled",
+        "id": "18457431190121692",
+        "permalink": "https://www.instagram.com/reel/DfrQn7IqFRT/"
       }
+    },
+    {
+      "dia": 9,
+      "data": "2026-11-14T01:38:13+00:00",
+      "proxima_decisao": {
+        "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+        "opcoes": [
+          "Sua ideia aqui?"
+        ]
+      },
+      "post": null
     }
   ],
   "decisoes": [
@@ -1300,6 +1405,20 @@
       "autor": "dede_todeschini",
       "curtidas": 0,
       "texto": "Charanga + pomponetes"
+    },
+    {
+      "dia": 9,
+      "acao": "telhado",
+      "autor": "talles_silva",
+      "curtidas": 0,
+      "texto": "Telhado + placas"
+    },
+    {
+      "dia": 9,
+      "acao": "placas",
+      "autor": "talles_silva",
+      "curtidas": 0,
+      "texto": "Telhado + placas"
     }
   ],
   "enquetes": [],
@@ -1411,6 +1530,42 @@
       "valor": -350.0,
       "descricao": "Charanga + pomponetes",
       "saldo": 1342.0
+    },
+    {
+      "dia": 9,
+      "valor": 160,
+      "descricao": "curtidas do dia 8",
+      "saldo": 1502.0
+    },
+    {
+      "dia": 9,
+      "valor": -600.0,
+      "descricao": "Telhado + placas",
+      "saldo": 902.0
+    },
+    {
+      "dia": 9,
+      "valor": 776,
+      "descricao": "bilheteria rodada 7 (388 pagantes)",
+      "saldo": 1678.0
+    },
+    {
+      "dia": 9,
+      "valor": 388,
+      "descricao": "lanchonete rodada 7",
+      "saldo": 2066.0
+    },
+    {
+      "dia": 9,
+      "valor": 300,
+      "descricao": "varal de camisas rodada 7 (12 camisas)",
+      "saldo": 2366.0
+    },
+    {
+      "dia": 9,
+      "valor": 50,
+      "descricao": "placas de publicidade rodada 7",
+      "saldo": 2416.0
     }
   ],
   "linha_do_tempo": [
@@ -1482,16 +1637,30 @@
     {
       "dia": 8,
       "evento": "Rodada 6: Amigos do Churrasco FC 0 x 2 Poeira FC (vitória)"
+    },
+    {
+      "dia": 9,
+      "evento": "Telhado novo no vestiário (primeiro passo pro vestiário do Talles) e placas de publicidade no muro (ideia do Filipe): R$ 50 por jogo em casa.",
+      "autor": "talles_silva"
+    },
+    {
+      "dia": 9,
+      "evento": "Sumido ganhou o apelido Ex-Namorada"
+    },
+    {
+      "dia": 9,
+      "evento": "Rodada 7: Poeira FC 1 x 0 Ferro-Velho EC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-13T02:19:52+00:00",
+  "atualizado_em": "2026-11-14T01:38:13+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
     "Supino",
     "Salário do Mês",
     "Chave de Carro",
-    "Fila de Banco"
+    "Fila de Banco",
+    "Ex-Namorada"
   ],
   "piadas_gol_usadas": [
     "A zaga parou pra ver. Literalmente parou.",

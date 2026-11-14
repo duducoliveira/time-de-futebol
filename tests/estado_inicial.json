@@ -251,6 +251,17 @@
             ]
           }
         }
+      },
+      "7": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "sequencia": "N",
+        "ultimo_gol_a_partir_do_minuto": 40,
+        "motivo": "em casa contra o Ferro-Velho: 1 a 0, primeiro gol do Kelvin (que pediu nos comentários)",
+        "gol_decisivo": {
+          "artilheiro": "Kelvin",
+          "grito": "[shouting] GOOOOOOL DO KELVIN! [excited] O primeiro gol dele com a camisa do Poeira, aos {m}! Ele pediu nos comentários, e o Poeira entregou: um a zero!"
+        }
       }
     },
     "times": {

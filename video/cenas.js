@@ -246,6 +246,7 @@ const TIPOS = {
     const linhas = [['🎟️ BILHETERIA', dd.bilheteria ?? dd.receita, 'pagantes', '#2e8b57']];
     if (dd.lanche) linhas.push([`🌭 ${(dd.barraca || 'LANCHONETE').toUpperCase()}`, dd.lanche, 'mais', '#f77f00']);
     if (dd.venda) linhas.push([`👕 ${dd.camisas} CAMISAS`, dd.venda, 'varal', CORES.vinho]);
+    if (dd.placas) linhas.push(['📣 PLACAS', dd.placas, 'placas', '#3a86ff']);
     linhas.forEach(([rot, v, chave, cor], i) => {
       const t0 = i ? quando(c, chave, 1 + i * 1.5) : 0.5;
       s += pop(t, t0, W / 2, 440 + i * 128, `<g transform="rotate(${i % 2 ? 1.5 : -1.5})">${pilula(`${rot}  +${R(v)}`, { tam: 46, bg: cor })}</g>`);
@@ -511,6 +512,29 @@ function prancheta(t, c, formacao, { balanco = false } = {}) {
 }
 
 Object.assign(TIPOS, {
+  // treino obrigatório: o técnico apita e o elenco corre (atacantes atrás do caminhão do gás)
+  treino(t, d, c, E) {
+    let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: 0 }), { z0: 1.06, z1: 1.12 });
+    s += pop(t, 0.1, W / 2, 300, pilula(c.texto_tela[0] || 'TREINO OBRIGATÓRIO', { tam: 58, bg: CORES.vinho, rot: -2 }));
+    // caminhão do gás atravessando ao fundo, com os atacantes correndo atrás
+    const tg = quando(c, 'caminhão', d * 0.55), p = clamp((t - tg + 0.3) / 3.2);
+    if (t > tg - 0.3) {
+      const cx = -380 + p * 1900;  // caminhão ~1,7x a altura de uma pessoa (mesma linha dos jogadores)
+      s += `<g transform="translate(${cx} 1440) scale(1.2)"><ellipse cy="6" rx="190" ry="16" fill="#000" opacity=".2"/>
+        <rect x="-170" y="-150" width="230" height="140" rx="10" fill="#e9ecef" stroke="${OUT}" stroke-width="7"/>
+        ${[0, 1, 2].map(i => `<rect x="${-160 + i * 72}" y="-205" width="56" height="70" rx="22" fill="#e63946" stroke="${OUT}" stroke-width="5"/>`).join('')}
+        <path d="M60,-120 h70 l50,50 v60 h-120z" fill="#3a86ff" stroke="${OUT}" stroke-width="7" stroke-linejoin="round"/><path d="M80,-110 h40 l30,32 h-70z" fill="#8ecae6" stroke="${OUT}" stroke-width="4"/>
+        ${[-110, 120].map(x => `<circle cx="${x}" cy="-8" r="30" fill="#222" stroke="${OUT}" stroke-width="6"/>`).join('')}
+        <text x="-55" y="-62" text-anchor="middle" font-family="Anton" font-size="34" fill="${OUT}">GÁS</text></g>`;
+      ['15', '18', '9'].forEach((n, i) => s += pessoa(jogador(n, E, { pose: 'chute', expr: 'surpreso' }), t, { x: cx - 330 - i * 120, y: 1440, s: 0.55, fase: i }));
+    }
+    // zagueiros e volantes fazendo a "aula" na frente
+    const tz = quando(c, 'zagueiros', 1);
+    ['3', '4'].forEach((n, i) => s += popPessoa(t, tz + i * 0.15, 150 + i * 170, 1900, pessoa(jogador(n, E, { pose: 'caixa', expr: 'serio' }), t, { s: 0.95, fase: i })));
+    s += popPessoa(t, 0.3, 830, 1905, pessoa({ ...PERSONAGENS.tecnico, pose: 'aponta', expr: 'bravo' }, t, { s: 1.2, espelho: true }));
+    if (Math.floor(t * 2.5) % 2 === 0 && t > 0.6) s += pop(t, 0.6, 640, 1610, `<text font-size="64">📢</text>`, 0.2, false);
+    return s;
+  },
   // tática do técnico: prancheta com a formação (antes do jogo) ou com o balanço (depois)
   tatica(t, d, c, E) {
     const dd = c.dados;
@@ -664,6 +688,8 @@ window.quadro = tGlobal => {
   let E = c.dados.estrutura ? { ...DADOS.estado, estrutura: c.dados.estrutura } : DADOS.estado;
   // jogo fora: campo, muro e torcida do dono da casa (a nossa estrutura fica no Campo do Poeira)
   window._local = c.dados.local || null;
+  window._placas = !!(E.estrutura && E.estrutura.placas);
+  window._tQuadro = tGlobal;
   if (window._local) E = { ...E, _torcida: window._local.torcida ?? 300,
     estrutura: { ...E.estrutura, gramado: 'terrão', capacidade: 500, rede: true, iluminacao: false } };
   const fn = TIPOS[c.tipo] || TIPOS.abertura;
