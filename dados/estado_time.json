@@ -1346,7 +1346,12 @@
           "Sua ideia aqui?"
         ]
       },
-      "post": null
+      "post": {
+        "buffer_id": "6af7bf644b28296eb12a9626",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-009.mp4",
+        "agendado_para": "2026-11-14T06:00-03:00",
+        "status": "scheduled"
+      }
     }
   ],
   "decisoes": [
