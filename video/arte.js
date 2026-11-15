@@ -589,7 +589,7 @@ function bancoReservasFrente() {
 
 function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   const grama = estrutura.gramado === 'grama';
-  let s = ceu(t) + bairro(760) + (window._local?.tema === 'feira' ? feira(760, t) : '') + (window._local?.tema === 'churrasco' ? churrasco(760, t) : '') + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
+  let s = ceu(t) + bairro(760) + (window._local?.tema === 'feira' ? feira(760, t) : '') + (window._local?.tema === 'churrasco' ? churrasco(760, t) : '') + (window._local?.tema === 'padaria' ? padaria(760, t) : '') + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
   s += `<path d="M-200,950 H1280 L1500,${H} H-420Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}" stroke="${OUT}" stroke-width="5"/>`;
   if (grama) for (let i = 0; i < 8; i++) s += `<path d="M${-200 + i * 185},950 h92 l${120 + i * 4},${H - 950} h-150z" fill="${CORES.grama2}" opacity=".8"/>`;
   else {
@@ -605,6 +605,44 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   // o banco de reservas aparece na imagem própria da lateral (lateral()), não aqui
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
+  return s;
+}
+
+// Caramelo, o mascote: vira-lata caramelo com coleira vinho e plaquinha do escudo. Origem: chão (patas).
+// Proporção: ~45% da altura de uma pessoa (cachorro médio).
+function caramelo(t = 0, { espelho = false } = {}) {
+  const rabo = Math.sin(t * 14) * 18;
+  return `<g transform="scale(${espelho ? -1 : 1} 1)"><ellipse cx="0" cy="0" rx="78" ry="10" fill="#000" opacity=".2"/>
+    <path d="M-62,-62 q-30,${-20 + rabo * 0.3} -34,${-56 + rabo}" fill="none" stroke="${OUT}" stroke-width="18" stroke-linecap="round"/>
+    <path d="M-62,-62 q-30,${-20 + rabo * 0.3} -34,${-56 + rabo}" fill="none" stroke="#d4893f" stroke-width="10" stroke-linecap="round"/>
+    ${[-46, -22, 30, 52].map((x, i) => `<path d="M${x},-40 v38" stroke="${OUT}" stroke-width="20" stroke-linecap="round"/><path d="M${x},-40 v38" stroke="${i % 2 ? '#d4893f' : '#c47a33'}" stroke-width="12" stroke-linecap="round"/>`).join('')}
+    <ellipse cx="0" cy="-66" rx="72" ry="36" fill="#d4893f" stroke="${OUT}" stroke-width="6"/>
+    <ellipse cx="6" cy="-52" rx="44" ry="16" fill="#f1c27d" opacity=".8"/>
+    <g transform="translate(66 -104)">
+      <path d="M-20,-30 l-14,-30 l26,18Z M16,-34 l14,-30 l-2,32Z" fill="#a8622a" stroke="${OUT}" stroke-width="5" stroke-linejoin="round"/>
+      <circle r="38" fill="#d4893f" stroke="${OUT}" stroke-width="6"/>
+      <ellipse cx="26" cy="12" rx="22" ry="16" fill="#f1c27d" stroke="${OUT}" stroke-width="5"/>
+      <ellipse cx="42" cy="6" rx="8" ry="6" fill="${OUT}"/>
+      <circle cx="-2" cy="-8" r="6" fill="${OUT}"/><circle cx="20" cy="-10" r="6" fill="${OUT}"/>
+      <path d="M22,24 q8,16 18,4" fill="#e63946" stroke="${OUT}" stroke-width="3"/></g>
+    <path d="M42,-96 q20,14 42,6" fill="none" stroke="${CORES.vinho}" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="60" cy="-80" r="11" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="4"/></g>`;
+}
+
+// casa do Atlético Padaria: forno de lenha de tijolo com fumaça e pães na pá
+function padaria(yBase, t = 0) {
+  let s = '';
+  for (const [x, k] of [[150, 0], [930, 1]]) {
+    const y = yBase - 40;
+    for (let i = 0; i < 5; i++) { const fase = (t * 0.3 + i * 0.2 + k * 0.17) % 1;
+      s += `<circle cx="${(x + 30 + Math.sin(fase * 6 + k) * 22).toFixed(1)}" cy="${(y - 190 - fase * 220).toFixed(1)}" r="${(20 + fase * 36).toFixed(1)}" fill="#e9ecef" opacity="${(0.7 * (1 - fase)).toFixed(2)}"/>`; }
+    s += `<rect x="${x + 14}" y="${y - 200}" width="34" height="80" fill="#b5523b" stroke="${OUT}" stroke-width="5"/>
+      <path d="M${x - 90},${y} V${y - 60} a90,80 0 0 1 180,0 V${y}Z" fill="#c8664c" stroke="${OUT}" stroke-width="6"/>
+      ${[0, 1, 2].map(r => `<path d="M${x - 84},${y - 18 - r * 26} H${x + 84}" stroke="#a34b36" stroke-width="3"/>`).join('')}
+      <path d="M${x - 40},${y} V${y - 40} a40,34 0 0 1 80,0 V${y}Z" fill="#2b1d14" stroke="${OUT}" stroke-width="5"/>
+      <path d="M${x - 28},${y - 6} q28,-28 56,0" fill="#ff8c42" opacity=".85"/>
+      ${[0, 1, 2].map(i => `<ellipse cx="${x - 20 + i * 20}" cy="${y - 10}" rx="12" ry="7" fill="#e9b872" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
+  }
   return s;
 }
 
@@ -802,7 +840,7 @@ function fundoEscuro() {
 
 Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
-  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, caramelo, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).

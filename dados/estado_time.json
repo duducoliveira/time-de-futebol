@@ -12,8 +12,8 @@
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 9,
-  "caixa": 2416.0,
+  "dia": 10,
+  "caixa": 2543,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -22,10 +22,10 @@
     "comentario_vencedor": "mais curtido no post do dia anterior",
     "camisas_pct_torcida": 3,
     "preco_camisa": 25,
-    "placas_por_jogo": 50
+    "placas_por_jogo": 150
   },
   "torcida": {
-    "seguidores": 388,
+    "seguidores": 401,
     "historico": [
       {
         "dia": 1,
@@ -71,6 +71,11 @@
         "dia": 9,
         "seguidores": 388,
         "data": "2026-11-14T01:38:13+00:00"
+      },
+      {
+        "dia": 10,
+        "seguidores": 401,
+        "data": "2026-11-15T07:04:14+00:00"
       }
     ]
   },
@@ -94,7 +99,8 @@
     "charanga": true,
     "pomponetes": true,
     "terrao_por_escolha": true,
-    "placas": true
+    "placas": true,
+    "mascote": "Caramelo"
   },
   "personagens": {
     "narrador": {
@@ -254,7 +260,7 @@
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 7,
+    "rodada": 8,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -407,6 +413,21 @@
         "gol_decisivo": {
           "artilheiro": "Kelvin",
           "grito": "[shouting] GOOOOOOL DO KELVIN! [excited] O primeiro gol dele com a camisa do Poeira, aos {m}! Ele pediu nos comentários, e o Poeira entregou: um a zero!"
+        }
+      },
+      "8": {
+        "resultado": "derrota",
+        "marca_gol": true,
+        "sequencia": "ANA",
+        "intervalo_minimo_gols": 12,
+        "ultimo_gol_a_partir_do_minuto": 75,
+        "motivo": "fora, contra o líder Atlético Padaria: derrota apertada, 2 a 1; o Benício cumpre a promessa de um gol por jogo",
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Ele prometeu um gol por jogo e cumpriu de novo, aos {m}! Tudo igual na casa do líder: um a um!"
+        },
+        "textos_gol": {
+          "3": "Gol do {adv}, aos {m}. O líder desempatou: dois a um. Doeu, mas o Poeira vendeu caro na casa do líder."
         }
       }
     },
@@ -1064,6 +1085,96 @@
           }
         ],
         "rodada": 7
+      },
+      {
+        "mandante": "Atlético Padaria",
+        "visitante": "Poeira FC",
+        "gols": [
+          {
+            "minuto": 26,
+            "time": "Atlético Padaria"
+          },
+          {
+            "minuto": 70,
+            "time": "Poeira FC",
+            "autor": "Benício"
+          },
+          {
+            "minuto": 84,
+            "time": "Atlético Padaria"
+          }
+        ],
+        "gols_mandante": 2,
+        "gols_visitante": 1,
+        "rodada": 8
+      },
+      {
+        "mandante": "Leões do Brejo",
+        "visitante": "Ferro-Velho EC",
+        "gols_mandante": 2,
+        "gols_visitante": 2,
+        "gols": [
+          {
+            "minuto": 6,
+            "time": "Leões do Brejo"
+          },
+          {
+            "minuto": 7,
+            "time": "Leões do Brejo"
+          },
+          {
+            "minuto": 15,
+            "time": "Ferro-Velho EC"
+          },
+          {
+            "minuto": 57,
+            "time": "Ferro-Velho EC"
+          }
+        ],
+        "rodada": 8
+      },
+      {
+        "mandante": "Grêmio Vila Barro",
+        "visitante": "Amigos do Churrasco FC",
+        "gols_mandante": 2,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 19,
+            "time": "Grêmio Vila Barro"
+          },
+          {
+            "minuto": 82,
+            "time": "Grêmio Vila Barro"
+          }
+        ],
+        "rodada": 8
+      },
+      {
+        "mandante": "Veteranos do Bairro",
+        "visitante": "Juventude do Asfalto",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 66,
+            "time": "Veteranos do Bairro"
+          }
+        ],
+        "rodada": 8
+      },
+      {
+        "mandante": "Estrela da Feira",
+        "visitante": "Real Laje",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 23,
+            "time": "Estrela da Feira"
+          }
+        ],
+        "rodada": 8
       }
     ],
     "rival": {
@@ -1074,123 +1185,123 @@
     "tabela": [
       {
         "time": "Atlético Padaria",
-        "j": 7,
-        "v": 4,
+        "j": 8,
+        "v": 5,
         "e": 2,
-        "d": 1,
-        "gp": 10,
-        "gc": 5,
-        "pts": 14,
-        "pos": 1,
-        "sg": 5
-      },
-      {
-        "time": "Juventude do Asfalto",
-        "j": 7,
-        "v": 4,
-        "e": 2,
-        "d": 1,
-        "gp": 8,
-        "gc": 6,
-        "pts": 14,
-        "pos": 2,
-        "sg": 2
-      },
-      {
-        "time": "Poeira FC",
-        "j": 7,
-        "v": 3,
-        "e": 3,
         "d": 1,
         "gp": 12,
-        "gc": 9,
-        "pts": 12,
-        "pos": 3,
-        "sg": 3
+        "gc": 6,
+        "pts": 17,
+        "pos": 1,
+        "sg": 6
       },
       {
         "time": "Grêmio Vila Barro",
-        "j": 7,
-        "v": 3,
+        "j": 8,
+        "v": 4,
         "e": 2,
         "d": 2,
+        "gp": 12,
+        "gc": 8,
+        "pts": 14,
+        "pos": 2,
+        "sg": 4
+      },
+      {
+        "time": "Juventude do Asfalto",
+        "j": 8,
+        "v": 4,
+        "e": 2,
+        "d": 2,
+        "gp": 8,
+        "gc": 7,
+        "pts": 14,
+        "pos": 3,
+        "sg": 1
+      },
+      {
+        "time": "Estrela da Feira",
+        "j": 8,
+        "v": 4,
+        "e": 1,
+        "d": 3,
         "gp": 10,
         "gc": 8,
-        "pts": 11,
+        "pts": 13,
         "pos": 4,
         "sg": 2
       },
       {
-        "time": "Estrela da Feira",
-        "j": 7,
+        "time": "Poeira FC",
+        "j": 8,
         "v": 3,
-        "e": 1,
-        "d": 3,
-        "gp": 9,
-        "gc": 8,
-        "pts": 10,
+        "e": 3,
+        "d": 2,
+        "gp": 13,
+        "gc": 11,
+        "pts": 12,
         "pos": 5,
-        "sg": 1
+        "sg": 2
       },
       {
         "time": "Ferro-Velho EC",
-        "j": 7,
+        "j": 8,
         "v": 3,
-        "e": 1,
+        "e": 2,
         "d": 3,
-        "gp": 6,
-        "gc": 9,
-        "pts": 10,
+        "gp": 8,
+        "gc": 11,
+        "pts": 11,
         "pos": 6,
         "sg": -3
       },
       {
         "time": "Leões do Brejo",
-        "j": 7,
+        "j": 8,
         "v": 2,
-        "e": 3,
+        "e": 4,
         "d": 2,
-        "gp": 7,
-        "gc": 8,
-        "pts": 9,
+        "gp": 9,
+        "gc": 10,
+        "pts": 10,
         "pos": 7,
         "sg": -1
       },
       {
-        "time": "Amigos do Churrasco FC",
-        "j": 7,
+        "time": "Veteranos do Bairro",
+        "j": 8,
         "v": 2,
-        "e": 0,
-        "d": 5,
-        "gp": 8,
-        "gc": 9,
-        "pts": 6,
-        "pos": 8,
-        "sg": -1
-      },
-      {
-        "time": "Real Laje",
-        "j": 7,
-        "v": 1,
         "e": 2,
         "d": 4,
-        "gp": 4,
-        "gc": 7,
-        "pts": 5,
+        "gp": 7,
+        "gc": 11,
+        "pts": 8,
+        "pos": 8,
+        "sg": -4
+      },
+      {
+        "time": "Amigos do Churrasco FC",
+        "j": 8,
+        "v": 2,
+        "e": 0,
+        "d": 6,
+        "gp": 8,
+        "gc": 11,
+        "pts": 6,
         "pos": 9,
         "sg": -3
       },
       {
-        "time": "Veteranos do Bairro",
-        "j": 7,
+        "time": "Real Laje",
+        "j": 8,
         "v": 1,
         "e": 2,
-        "d": 4,
-        "gp": 6,
-        "gc": 11,
+        "d": 5,
+        "gp": 4,
+        "gc": 8,
         "pts": 5,
         "pos": 10,
-        "sg": -5
+        "sg": -4
       }
     ]
   },
@@ -1350,7 +1461,26 @@
         "buffer_id": "6af7bf644b28296eb12a9626",
         "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-009.mp4",
         "agendado_para": "2026-11-14T06:00-03:00",
-        "status": "scheduled"
+        "status": "scheduled",
+        "id": "18159001420516696",
+        "permalink": "https://www.instagram.com/reel/Dft1Z5aP4zo/"
+      }
+    },
+    {
+      "dia": 10,
+      "data": "2026-11-15T07:04:14+00:00",
+      "proxima_decisao": {
+        "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+        "opcoes": [
+          "Sua ideia aqui?"
+        ]
+      },
+      "post": {
+        "buffer_id": "6af95bbce5a113497ad0d76c",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-010.mp4",
+        "agendado_para": "2026-11-15T06:00-03:00",
+        "status": "scheduled",
+        "sem_aprovacao": "regra das 4h"
       }
     }
   ],
@@ -1424,6 +1554,13 @@
       "autor": "talles_silva",
       "curtidas": 0,
       "texto": "Telhado + placas"
+    },
+    {
+      "dia": 10,
+      "acao": "mascote",
+      "autor": "filipe.nicoli",
+      "curtidas": 0,
+      "texto": "Mascote: o Caramelo"
     }
   ],
   "enquetes": [],
@@ -1571,6 +1708,18 @@
       "valor": 50,
       "descricao": "placas de publicidade rodada 7",
       "saldo": 2416.0
+    },
+    {
+      "dia": 10,
+      "valor": 127,
+      "descricao": "curtidas do dia 9",
+      "saldo": 2543.0
+    },
+    {
+      "dia": 10,
+      "valor": -100.0,
+      "descricao": "Mascote: o Caramelo",
+      "saldo": 2443.0
     }
   ],
   "linha_do_tempo": [
@@ -1655,9 +1804,18 @@
     {
       "dia": 9,
       "evento": "Rodada 7: Poeira FC 1 x 0 Ferro-Velho EC (vitória)"
+    },
+    {
+      "dia": 10,
+      "evento": "Adotamos o Caramelo, vira-lata do bairro, como mascote (ideia do Filipe). E corrigimos as placas: 3 anunciantes x R$ 50 = R$ 150 por jogo em casa; a diferença do último jogo (R$ 100) entrou no caixa.",
+      "autor": "filipe.nicoli"
+    },
+    {
+      "dia": 10,
+      "evento": "Rodada 8: Atlético Padaria 2 x 1 Poeira FC (derrota)"
     }
   ],
-  "atualizado_em": "2026-11-14T01:38:13+00:00",
+  "atualizado_em": "2026-11-15T07:04:14+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
@@ -1665,10 +1823,12 @@
     "Salário do Mês",
     "Chave de Carro",
     "Fila de Banco",
-    "Ex-Namorada"
+    "Ex-Namorada",
+    "Muro de Arrimo"
   ],
   "piadas_gol_usadas": [
     "A zaga parou pra ver. Literalmente parou.",
-    "Ninguém marcou ninguém. Foi democrático."
+    "Ninguém marcou ninguém. Foi democrático.",
+    "O Professor disse que estava se posicionando."
   ]
 }

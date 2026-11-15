@@ -262,6 +262,21 @@
           "artilheiro": "Kelvin",
           "grito": "[shouting] GOOOOOOL DO KELVIN! [excited] O primeiro gol dele com a camisa do Poeira, aos {m}! Ele pediu nos comentários, e o Poeira entregou: um a zero!"
         }
+      },
+      "8": {
+        "resultado": "derrota",
+        "marca_gol": true,
+        "sequencia": "ANA",
+        "intervalo_minimo_gols": 12,
+        "ultimo_gol_a_partir_do_minuto": 75,
+        "motivo": "fora, contra o líder Atlético Padaria: derrota apertada, 2 a 1; o Benício cumpre a promessa de um gol por jogo",
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Ele prometeu um gol por jogo e cumpriu de novo, aos {m}! Tudo igual na casa do líder: um a um!"
+        },
+        "textos_gol": {
+          "3": "Gol do {adv}, aos {m}. O líder desempatou: dois a um. Doeu, mas o Poeira vendeu caro na casa do líder."
+        }
       }
     },
     "times": {

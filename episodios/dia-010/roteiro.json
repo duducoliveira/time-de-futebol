@@ -1,0 +1,1046 @@
+{
+  "dia": 10,
+  "clube": "Poeira FC",
+  "caixa": 2543,
+  "torcida": 401,
+  "posicao": 5,
+  "partida": {
+    "mandante": "Atlético Padaria",
+    "visitante": "Poeira FC",
+    "gols": [
+      {
+        "minuto": 26,
+        "time": "Atlético Padaria"
+      },
+      {
+        "minuto": 70,
+        "time": "Poeira FC",
+        "autor": "Benício"
+      },
+      {
+        "minuto": 84,
+        "time": "Atlético Padaria"
+      }
+    ],
+    "gols_mandante": 2,
+    "gols_visitante": 1,
+    "rodada": 8
+  },
+  "cenas": [
+    {
+      "id": "01-capa",
+      "tipo": "capa",
+      "narracao": "Dia 10: Mascote novo!",
+      "texto_tela": [
+        "DIA 10"
+      ],
+      "dados": {
+        "tema": "MASCOTE NOVO!",
+        "antes": 388,
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true
+        }
+      }
+    },
+    {
+      "id": "02-evolucao",
+      "tipo": "evolucao",
+      "narracao": "Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. Ontem, 388 torcedores. Hoje: 401! E o caixa saiu de R$ 2.416 pra 2.543!",
+      "texto_tela": [
+        "DIA 10"
+      ],
+      "dados": {
+        "antes": 388,
+        "torcida": 401,
+        "caixa_antes": 2416.0,
+        "caixa": 2543.0,
+        "curtidas": 127,
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true
+        }
+      }
+    },
+    {
+      "id": "03-estadio",
+      "tipo": "estadio",
+      "narracao": "A arquibancada está quase lotada!",
+      "texto_tela": [
+        "401 TORCEDORES"
+      ],
+      "dados": {
+        "antes": 388,
+        "torcida": 401,
+        "nivel": "quase",
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true
+        }
+      }
+    },
+    {
+      "id": "04-comentarios",
+      "tipo": "comentarios",
+      "narracao": "O comentário mais curtido foi do Filipe: todo time de respeito tem mascote, e ele votou no Cachorro Caramelo. Aprovado! E o Filipe ainda pegou um erro nosso: são três anunciantes, de cinquenta reais cada. Cento e cinquenta por jogo! Corrigido.",
+      "texto_tela": [],
+      "dados": {
+        "comentarios": [
+          {
+            "usuario": "filipe.nicoli",
+            "texto": "Devia ter um Mascote do time, todo time de respeito tem mascote. Voto no Cachorro Caramelo",
+            "curtidas": 7,
+            "chave": "filipe",
+            "carimbo": "aprovado",
+            "chave_carimbo": "aprovado",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          },
+          {
+            "usuario": "filipe.nicoli",
+            "texto": "50 reais por publicidade x 3 anunciantes = 150,00 por jogo",
+            "curtidas": 1,
+            "chave": "erro",
+            "carimbo": "corrigido",
+            "chave_carimbo": "corrigido",
+            "selo": "PEGOU NO ERRO"
+          }
+        ],
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true
+        }
+      }
+    },
+    {
+      "id": "05-obra",
+      "tipo": "obra",
+      "narracao": "E o Poeira adotou o Caramelo! Vira-lata do bairro, agora com ração, vacina e coleira com o escudo do clube: R$ 100. E a diferença das placas, cem reais, já voltou pro caixa. Ficou elas por elas!",
+      "texto_tela": [
+        "MASCOTE: O CARAMELO",
+        "-R$ 100"
+      ],
+      "dados": {
+        "acoes": [
+          "mascote"
+        ],
+        "custo": 100.0,
+        "caixa": 2543,
+        "antes": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true
+        },
+        "depois": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        },
+        "novos_jogadores": [],
+        "autor": "filipe.nicoli",
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        }
+      }
+    },
+    {
+      "id": "06-pre_jogo",
+      "tipo": "pre_jogo",
+      "narracao": "Rodada 8, fora de casa, contra o Atlético Padaria. Detalhe: o time inteiro trabalha na mesma padaria. Chegam cheirando a pão.",
+      "texto_tela": [
+        "RODADA 8",
+        "FORA DE CASA"
+      ],
+      "dados": {
+        "mandante": "Atlético Padaria",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        },
+        "local": {
+          "nome": "Atlético Padaria",
+          "sigla": "APA",
+          "torcida": 320,
+          "tema": "padaria"
+        }
+      }
+    },
+    {
+      "id": "07-apelido",
+      "tipo": "apelido",
+      "narracao": "Fica de olho no zagueiro do Atlético Padaria, o Muro de Arrimo: segura qualquer coisa!",
+      "texto_tela": [
+        "DE OLHO NO ATLÉTICO PADARIA"
+      ],
+      "dados": {
+        "alvo": "adversario",
+        "time": "Atlético Padaria",
+        "posicao": "zagueiro",
+        "apelido": "Muro de Arrimo",
+        "piada": "segura qualquer coisa",
+        "numero": "3",
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        },
+        "local": {
+          "nome": "Atlético Padaria",
+          "sigla": "APA",
+          "torcida": 320,
+          "tema": "padaria"
+        }
+      }
+    },
+    {
+      "id": "08-gol",
+      "tipo": "gol",
+      "narracao": "Gol do Atlético Padaria, aos 26. O Professor disse que estava se posicionando.",
+      "texto_tela": [
+        "26'",
+        "GOL DO ATLÉTICO PADARIA"
+      ],
+      "dados": {
+        "culpado": null,
+        "minuto": 26,
+        "nosso": false,
+        "estilo_voz": "normal",
+        "autor": null,
+        "placar": [
+          1,
+          0
+        ],
+        "mandante": "Atlético Padaria",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        },
+        "local": {
+          "nome": "Atlético Padaria",
+          "sigla": "APA",
+          "torcida": 320,
+          "tema": "padaria"
+        }
+      }
+    },
+    {
+      "id": "09-gol",
+      "tipo": "gol",
+      "narracao": "[shouting] GOOOOOL DO BENÍCIO! [excited] Ele prometeu um gol por jogo e cumpriu de novo, aos 70! Tudo igual na casa do líder: um a um!",
+      "texto_tela": [
+        "70'",
+        "GOOOOL!"
+      ],
+      "dados": {
+        "culpado": null,
+        "minuto": 70,
+        "nosso": true,
+        "estilo_voz": "grito",
+        "autor": "Benício",
+        "placar": [
+          1,
+          1
+        ],
+        "mandante": "Atlético Padaria",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        },
+        "local": {
+          "nome": "Atlético Padaria",
+          "sigla": "APA",
+          "torcida": 320,
+          "tema": "padaria"
+        }
+      }
+    },
+    {
+      "id": "10-gol",
+      "tipo": "gol",
+      "narracao": "Gol do Atlético Padaria, aos 84. O líder desempatou: dois a um. Doeu, mas o Poeira vendeu caro na casa do líder.",
+      "texto_tela": [
+        "84'",
+        "GOL DO ATLÉTICO PADARIA"
+      ],
+      "dados": {
+        "culpado": null,
+        "minuto": 84,
+        "nosso": false,
+        "estilo_voz": "normal",
+        "autor": null,
+        "placar": [
+          2,
+          1
+        ],
+        "mandante": "Atlético Padaria",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        },
+        "local": {
+          "nome": "Atlético Padaria",
+          "sigla": "APA",
+          "torcida": 320,
+          "tema": "padaria"
+        }
+      }
+    },
+    {
+      "id": "11-fim_de_jogo",
+      "tipo": "fim_de_jogo",
+      "narracao": "Apita o árbitro! Derrota por 2 a 1. Faz parte.",
+      "texto_tela": [
+        "FIM DE JOGO",
+        "Atlético Padaria 2 x 1 Poeira FC"
+      ],
+      "dados": {
+        "resultado": "derrota",
+        "placar": [
+          2,
+          1
+        ],
+        "mandante": "Atlético Padaria",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        },
+        "local": {
+          "nome": "Atlético Padaria",
+          "sigla": "APA",
+          "torcida": 320,
+          "tema": "padaria"
+        }
+      }
+    },
+    {
+      "id": "12-tabela",
+      "tipo": "tabela",
+      "narracao": "Na tabela, o Poeira está em 5º lugar.",
+      "texto_tela": [
+        "TERCEIRA DIVISÃO DA VÁRZEA",
+        "5º LUGAR"
+      ],
+      "dados": {
+        "tabela": [
+          {
+            "time": "Atlético Padaria",
+            "j": 8,
+            "v": 5,
+            "e": 2,
+            "d": 1,
+            "gp": 12,
+            "gc": 6,
+            "pts": 17,
+            "pos": 1,
+            "sg": 6
+          },
+          {
+            "time": "Grêmio Vila Barro",
+            "j": 8,
+            "v": 4,
+            "e": 2,
+            "d": 2,
+            "gp": 12,
+            "gc": 8,
+            "pts": 14,
+            "pos": 2,
+            "sg": 4
+          },
+          {
+            "time": "Juventude do Asfalto",
+            "j": 8,
+            "v": 4,
+            "e": 2,
+            "d": 2,
+            "gp": 8,
+            "gc": 7,
+            "pts": 14,
+            "pos": 3,
+            "sg": 1
+          },
+          {
+            "time": "Estrela da Feira",
+            "j": 8,
+            "v": 4,
+            "e": 1,
+            "d": 3,
+            "gp": 10,
+            "gc": 8,
+            "pts": 13,
+            "pos": 4,
+            "sg": 2
+          },
+          {
+            "time": "Poeira FC",
+            "j": 8,
+            "v": 3,
+            "e": 3,
+            "d": 2,
+            "gp": 13,
+            "gc": 11,
+            "pts": 12,
+            "pos": 5,
+            "sg": 2
+          },
+          {
+            "time": "Ferro-Velho EC",
+            "j": 8,
+            "v": 3,
+            "e": 2,
+            "d": 3,
+            "gp": 8,
+            "gc": 11,
+            "pts": 11,
+            "pos": 6,
+            "sg": -3
+          },
+          {
+            "time": "Leões do Brejo",
+            "j": 8,
+            "v": 2,
+            "e": 4,
+            "d": 2,
+            "gp": 9,
+            "gc": 10,
+            "pts": 10,
+            "pos": 7,
+            "sg": -1
+          },
+          {
+            "time": "Veteranos do Bairro",
+            "j": 8,
+            "v": 2,
+            "e": 2,
+            "d": 4,
+            "gp": 7,
+            "gc": 11,
+            "pts": 8,
+            "pos": 8,
+            "sg": -4
+          },
+          {
+            "time": "Amigos do Churrasco FC",
+            "j": 8,
+            "v": 2,
+            "e": 0,
+            "d": 6,
+            "gp": 8,
+            "gc": 11,
+            "pts": 6,
+            "pos": 9,
+            "sg": -3
+          },
+          {
+            "time": "Real Laje",
+            "j": 8,
+            "v": 1,
+            "e": 2,
+            "d": 5,
+            "gp": 4,
+            "gc": 8,
+            "pts": 5,
+            "pos": 10,
+            "sg": -4
+          }
+        ],
+        "posicao": 5,
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        }
+      }
+    },
+    {
+      "id": "13-decisao",
+      "tipo": "decisao",
+      "narracao": "No caixa, 2.543 reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+      "texto_tela": [
+        "DECISÃO #10",
+        "COMENTÁRIO MAIS CURTIDO DECIDE"
+      ],
+      "dados": {
+        "opcoes": [
+          "Sua ideia aqui?"
+        ],
+        "caixa": 2543,
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        }
+      }
+    },
+    {
+      "id": "14-encerramento",
+      "tipo": "encerramento",
+      "narracao": "Amanhã tem Poeira contra o Leões do Brejo. E faltam menos de cem torcedores pra peneira dos 500! Manda esse vídeo pros seus amigos virarem torcedores também. Segue, curte e comenta. Até amanhã!",
+      "texto_tela": [
+        "@poeira.fc"
+      ],
+      "dados": {
+        "proximo": [
+          "Poeira FC",
+          "Leões do Brejo"
+        ],
+        "hud": {
+          "torcida": 401,
+          "caixa": 2543
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 500,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "um banheiro sem porta",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": false,
+          "iluminacao": false,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo"
+        }
+      }
+    }
+  ],
+  "estado": {
+    "clube": {
+      "nome": "Poeira FC",
+      "nome_falado": "Poeira",
+      "sigla": "PFC",
+      "instagram": "@poeira.fc",
+      "instagram_id": "17841453282683112",
+      "buffer_canal_id": "6aed11bde29c69a171783476",
+      "repo_videos": "duducoliveira/poeirafc-videos",
+      "fundado_no_dia": 0,
+      "forca": 31,
+      "estadio": "Campo do Poeira",
+      "piada_estadio": "E quando venta, você entende o nome do time."
+    },
+    "estrutura": {
+      "gramado": "terrão",
+      "capacidade": 500,
+      "arquibancada": "dois bancos de madeira",
+      "telhado": true,
+      "vestiario": "um banheiro sem porta",
+      "uniforme": "novo",
+      "rede": true,
+      "bolas": false,
+      "iluminacao": false,
+      "lanchonete": "Barraca do Guigs",
+      "tecnico": false,
+      "kombi": true,
+      "banco_reservas": true,
+      "cabare_proibido": true,
+      "uniforme_remendado": true,
+      "varal_camisas": true,
+      "charanga": true,
+      "pomponetes": true,
+      "terrao_por_escolha": true,
+      "placas": true,
+      "mascote": "Caramelo"
+    },
+    "elenco": {
+      "1": {
+        "nome": "Baixinho",
+        "posicao": "GOL",
+        "traco": "1,63 m; pula muito, alcança pouco"
+      },
+      "2": {
+        "nome": "Zé Marmita",
+        "posicao": "LD",
+        "traco": "entregador; sai no intervalo pra fazer entrega"
+      },
+      "3": {
+        "nome": "Tonhão",
+        "posicao": "ZAG",
+        "traco": "pedreiro; nunca perdeu uma dividida, nunca acertou um passe"
+      },
+      "4": {
+        "nome": "Professor",
+        "posicao": "ZAG",
+        "traco": "51 anos; não corre, se posiciona"
+      },
+      "5": {
+        "nome": "Padeiro",
+        "posicao": "VOL",
+        "traco": "chega direto do forno, com pão pra todo mundo"
+      },
+      "6": {
+        "nome": "Chinelinho",
+        "posicao": "LE",
+        "traco": "joga com chuteira emprestada dois números maior",
+        "apelido": "Salário do Mês"
+      },
+      "7": {
+        "nome": "Foguete",
+        "posicao": "PD",
+        "traco": "o mais rápido do bairro; não tem freio"
+      },
+      "8": {
+        "nome": "Nenê",
+        "posicao": "MEI",
+        "traco": "16 anos, filho da Dona Cida; o único que sabe jogar"
+      },
+      "9": {
+        "nome": "Bujão",
+        "posicao": "CA",
+        "traco": "118 kg; finaliza muito bem, parado"
+      },
+      "10": {
+        "nome": "Maestro",
+        "posicao": "MEI",
+        "traco": "44 anos; conta do teste que fez num time grande em 98",
+        "apelido": "Chave de Carro"
+      },
+      "11": {
+        "nome": "Sumido",
+        "posicao": "PE",
+        "traco": "ninguém sabe onde mora; aparece só no jogo",
+        "apelido": "Ex-Namorada"
+      },
+      "12": {
+        "nome": "Gabriel",
+        "posicao": "ZAG",
+        "traco": "se apresentou nos comentários: 'Gabriel, zagueiro'",
+        "instagram": "gabriel_rzt1221",
+        "chegou_no_dia": 2,
+        "chave": "gabriel",
+        "apelido": "Whisky do Paraguai"
+      },
+      "13": {
+        "nome": "Fé no Justo",
+        "posicao": "VOL",
+        "traco": "levantou a mão nos comentários",
+        "instagram": "_fe_no_justo_._777",
+        "chegou_no_dia": 2,
+        "chave": "fé"
+      },
+      "14": {
+        "nome": "Zé Kaun",
+        "posicao": "PE",
+        "traco": "respondeu com três emojis e foi contratado",
+        "instagram": "j_o_s_e_k_a_u_n",
+        "chegou_no_dia": 2,
+        "chave": "zé",
+        "apelido": "Viagra em Idoso"
+      },
+      "15": {
+        "nome": "Khauan",
+        "posicao": "CA",
+        "traco": "chegou pela peneira: 'bora subir esse time'",
+        "instagram": "khauan.ribero",
+        "chegou_no_dia": 4,
+        "chave": "khauan"
+      },
+      "16": {
+        "nome": "Rodrigo Moura",
+        "posicao": "LD",
+        "apelido": "Soldado de Guerra",
+        "traco": "vai, mas ninguém sabe se volta",
+        "instagram": "rodrigo_smoura01",
+        "chegou_no_dia": 4,
+        "chave": "rodrigo"
+      },
+      "17": {
+        "nome": "Benício",
+        "posicao": "MEI",
+        "traco": "o ex-Biquinho, meia camisa 7",
+        "instagram": "beniciocarmocarvalho",
+        "chegou_no_dia": 4,
+        "chave": "biquinho"
+      },
+      "18": {
+        "nome": "Saci",
+        "posicao": "CA",
+        "apelido": "Uma Perna Só",
+        "traco": "só faz gol de bicicleta",
+        "instagram": "alisoonjesus",
+        "chegou_no_dia": 4,
+        "chave": "saci"
+      },
+      "19": {
+        "nome": "Kelvin",
+        "posicao": "PD",
+        "traco": "ponta direita da peneira",
+        "instagram": "kelvinzy29",
+        "chegou_no_dia": 4,
+        "chave": "kelvin"
+      }
+    },
+    "personagens": {
+      "narrador": {
+        "nome": "Tião",
+        "papel": "locutor da rádio comunitária, narra tudo como se fosse final de Copa",
+        "voz": "rpNe0HOx7heUulPiOEaG"
+      },
+      "presidente": {
+        "nome": "Dona Cida",
+        "papel": "dona do bar da esquina; presidente, tesoureira e roupeira do clube"
+      },
+      "diretor": {
+        "nome": "Ragazzo",
+        "cargo": "diretor de futebol (estagiário)",
+        "instagram": "gabriel_ragazzo1",
+        "chave": "ragazzo"
+      },
+      "tecnico": {
+        "nome": "Gilberto Teles",
+        "cargo": "técnico",
+        "instagram": "gilbertoteles_",
+        "chave": "gilberto",
+        "esquema": "3-4-2-1"
+      },
+      "costureira": {
+        "nome": "Dona Neide",
+        "cargo": "costureira do bairro"
+      }
+    },
+    "liga": "Terceira Divisão da Várzea",
+    "moeda": "R$"
+  },
+  "legenda": "DIA 10 do Poeira FC ⚽🐕\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam menos de 100 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "primeiro_comentario": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia. 👇"
+}

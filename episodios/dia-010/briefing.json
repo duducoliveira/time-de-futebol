@@ -1,0 +1,258 @@
+{
+  "dia": 10,
+  "seguidores_ontem": 388,
+  "seguidores_hoje": 401,
+  "post_anterior": {
+    "id": "18159001420516696",
+    "caption": "DIA 9 do Poeira FC ⚽\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nPeneira nova quando o Poeira chegar a 500 torcedores: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 13,
+    "like_count": 127,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/Dft1Z5aP4zo/",
+    "timestamp": "2026-11-14T09:03:02+0000"
+  },
+  "curtidas": 127,
+  "receita_curtidas": 127,
+  "caixa_atual": 2416.0,
+  "caixa_com_curtidas": 2543.0,
+  "top_comentarios": [
+    {
+      "usuario": "filipe.nicoli",
+      "texto": "Devia ter uma votação para um Mascote do time, todo time de respeito tem mascote kkkkk Voto no Cachorro Caramelo 😂",
+      "curtidas": 7,
+      "id": "18498077626110259",
+      "timestamp": "2026-11-14T09:30:15+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "fazer uma arquibancada melhor para os torcedores e um barzinho para eles tbm.",
+      "curtidas": 4,
+      "id": "17898855129413430",
+      "timestamp": "2026-11-14T09:11:42+0000"
+    },
+    {
+      "usuario": "mateus.stelmasuk",
+      "texto": "Quero abrir a organizada 🙌",
+      "curtidas": 1,
+      "id": "18092678792298328",
+      "timestamp": "2026-11-14T10:24:18+0000"
+    },
+    {
+      "usuario": "fernandogontijo13",
+      "texto": "Mascote anão",
+      "curtidas": 1,
+      "id": "18143155966628472",
+      "timestamp": "2026-11-14T12:17:44+0000"
+    },
+    {
+      "usuario": "talles_silva",
+      "texto": "Fazer um CT para o poeira, com massagistas e etc",
+      "curtidas": 0,
+      "id": "18638052454043805",
+      "timestamp": "2026-11-14T10:00:27+0000"
+    },
+    {
+      "usuario": "antoniecharlles",
+      "texto": "Gramadinho sintético, vamos envolver nossos adversários nele...",
+      "curtidas": 0,
+      "id": "18435638119148674",
+      "timestamp": "2026-11-14T10:00:45+0000"
+    },
+    {
+      "usuario": "gilran_matos",
+      "texto": "Eu quero grama por favo",
+      "curtidas": 0,
+      "id": "18026997722931194",
+      "timestamp": "2026-11-14T10:34:29+0000"
+    },
+    {
+      "usuario": "kelvinzy29",
+      "texto": "Seria bom procurar mais patrocinadores para colocar nas camisas dos jogadores",
+      "curtidas": 0,
+      "id": "18018745670968142",
+      "timestamp": "2026-11-14T12:35:08+0000"
+    },
+    {
+      "usuario": "leonardo.moura.10",
+      "texto": "Vamos fazer poeira",
+      "curtidas": 0,
+      "id": "18015388628971915",
+      "timestamp": "2026-11-14T12:38:42+0000"
+    },
+    {
+      "usuario": "_davioliveirag",
+      "texto": "Mais um torcedor aq",
+      "curtidas": 0,
+      "id": "18135106153671200",
+      "timestamp": "2026-11-14T15:07:17+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "filipe.nicoli",
+      "curtidas": 7,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 1,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 4,
+      "viavel": true,
+      "acoes": [
+        "arquibancada"
+      ],
+      "custo": 1200.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 2,
+      "usuario": "mateus.stelmasuk",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "fernandogontijo13",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 4,
+      "usuario": "talles_silva",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "antoniecharlles",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 6,
+      "usuario": "gilran_matos",
+      "curtidas": 0,
+      "viavel": true,
+      "acoes": [
+        "grama"
+      ],
+      "custo": 700.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 7,
+      "usuario": "kelvinzy29",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "Uniforme novo já foi feito",
+      "revisar": false
+    },
+    {
+      "indice": 8,
+      "usuario": "leonardo.moura.10",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 9,
+      "usuario": "_davioliveirag",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": null,
+    "acoes": [
+      "mascote"
+    ],
+    "autor": "filipe.nicoli",
+    "titulo": "Mascote: o Caramelo",
+    "interpretacao": "Adotamos o Caramelo, vira-lata do bairro, como mascote (ideia do Filipe). E corrigimos as placas: 3 anunciantes x R$ 50 = R$ 150 por jogo em casa; a diferença do último jogo (R$ 100) entrou no caixa.",
+    "custo": 100,
+    "efeitos": {
+      "estrutura.mascote": "Caramelo",
+      "regras.placas_por_jogo": 150,
+      "caixa": "+100"
+    },
+    "narracao_obra": "E o Poeira adotou o Caramelo! Vira-lata do bairro, agora com ração, vacina e coleira com o escudo do clube: R$ 100. E a diferença das placas, cem reais, já voltou pro caixa. Ficou elas por elas!"
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+    "opcoes": [
+      "Sua ideia aqui?"
+    ]
+  },
+  "tema": "MASCOTE NOVO!",
+  "tema_falado": "Mascote novo",
+  "historia": {
+    "comentarios": [
+      {
+        "narracao": "O comentário mais curtido foi do Filipe: todo time de respeito tem mascote, e ele votou no Cachorro Caramelo. Aprovado! E o Filipe ainda pegou um erro nosso: são três anunciantes, de cinquenta reais cada. Cento e cinquenta por jogo! Corrigido.",
+        "comentarios": [
+          {
+            "usuario": "filipe.nicoli",
+            "texto": "Devia ter um Mascote do time, todo time de respeito tem mascote. Voto no Cachorro Caramelo",
+            "curtidas": 7,
+            "chave": "filipe",
+            "carimbo": "aprovado",
+            "chave_carimbo": "aprovado",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          },
+          {
+            "usuario": "filipe.nicoli",
+            "texto": "50 reais por publicidade x 3 anunciantes = 150,00 por jogo",
+            "curtidas": 1,
+            "chave": "erro",
+            "carimbo": "corrigido",
+            "chave_carimbo": "corrigido",
+            "selo": "PEGOU NO ERRO"
+          }
+        ]
+      }
+    ]
+  },
+  "piada": {
+    "alvo": "adversario",
+    "apelido": "Muro de Arrimo"
+  },
+  "decisao_fala": "No caixa, {caixa} reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+  "encerramento": "Amanhã tem Poeira contra o Leões do Brejo. E faltam menos de cem torcedores pra peneira dos 500! Manda esse vídeo pros seus amigos virarem torcedores também. Segue, curte e comenta. Até amanhã!",
+  "legenda": "DIA 10 do Poeira FC ⚽🐕\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam menos de 100 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}

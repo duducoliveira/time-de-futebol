@@ -135,6 +135,12 @@ const TIPOS = {
       s += popPessoa(t, virada + 0.35, 545, SEDE.pe, pessoa(jogador('9', E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1, fase: 1 }));
       s += popPessoa(t, virada + 0.5, 715, SEDE.pe, pessoa({ ...PERSONAGENS.costureira, pose: 'acena' }, t, { s: 1.05, fase: 2 }));
     }
+    if (acoes.includes('mascote') && t >= virada) {  // o Caramelo chega e a Dona Cida recebe
+      const tc = Math.max(virada + 0.2, quando(c, 'caramelo', virada) - 0.2), p = easeOut(prog(t, tc, 1.0));
+      s += `<g transform="translate(${-200 + p * 640} ${SEDE.pe})">${caramelo(t)}</g>`;
+      s += popPessoa(t, virada + 0.3, 760, SEDE.pe, pessoa({ ...PERSONAGENS.presidente, expr: 'feliz', pose: 'acena' }, t, { s: 1 }));
+      s += pop(t, tc + 1.0, W / 2, 1010, pilula('CARAMELO · MASCOTE', { tam: 40, bg: '#d4893f', cor: OUT, rot: -3 }));
+    }
     if ((acoes.includes('charanga') || acoes.includes('pomponetes')) && t >= virada) {
       const gente = [];
       if (acoes.includes('charanga')) gente.push(
@@ -373,7 +379,7 @@ Object.assign(TIPOS, {
 });
 
 const CARIMBOS = { inviavel: ['INVIÁVEL POR ENQUANTO', '#e63946'], aprovado: ['APROVADO!', '#2e8b57'],
-  anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'], terrao: ['O TERRÃO FICA!', '#8b4a22'],
+  anotado: ['ANOTADO', '#f77f00'], depois: ['VEM JUNTO COM O ESTÁDIO', '#e63946'], terrao: ['O TERRÃO FICA!', '#8b4a22'], corrigido: ['CORRIGIDO!', '#2e8b57'],
   peneira: ['PENEIRA AOS 500!', '#3a86ff'], lotar: ['QUANDO LOTAR', '#f77f00'] };
 
 const CAPA_LAYOUT = 'abaixo_titulo';  // ou 'acima_tiao'
