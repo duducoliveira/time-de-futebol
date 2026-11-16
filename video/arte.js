@@ -236,8 +236,6 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   s1 += `<rect class="vol3d" x="${-tw / 2}" y="${topo}" width="${tw}" height="${tronco}" rx="${28 * lf}" fill="url(#g3dCorpo)" opacity="0"/>`;  // volume do tronco (só no estilo 3D)
   if (p.avental) s1 += `<path d="M${-tw * 0.34},${topo + 14} H${tw * 0.34} V${topo + tronco + 22} Q0,${topo + tronco + 34} ${-tw * 0.34},${topo + tronco + 22} Z" fill="${p.avental}" stroke="${OUT}" stroke-width="5"/>
       <text y="${topo + tronco * 0.62}" text-anchor="middle" font-family="Anton" font-size="26" fill="${OUT}">${esc(p.aventalTxt || '')}</text>`;
-  if (p.patrocinio) s1 += `<rect x="${-tw * 0.36}" y="${topo + 10}" width="${tw * 0.72}" height="18" rx="4" fill="#fff" stroke="${OUT}" stroke-width="2.5"/>
-    <text y="${topo + 24}" text-anchor="middle" font-family="Anton" font-size="13" fill="${OUT}">${esc(p.patrocinio)}</text>`;
   if (p.bandeira) {  // bandeirão no mastro, balançando
     const [mx, my] = maos[1], w = Math.sin(t * 5) * 14;
     s1 += `<path d="M${mx},${my + 30} V${my - 230}" stroke="${OUT}" stroke-width="10" stroke-linecap="round"/><path d="M${mx},${my + 30} V${my - 230}" stroke="#b08968" stroke-width="5"/>
@@ -247,6 +245,10 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   if (p.fita) s1 += `<path d="M${-tw * 0.3},${topo + 4} Q0,${topo + 40} ${tw * 0.3},${topo + 4} M${-tw * 0.3},${topo + 4} l-8,${tronco * 0.7} M${tw * 0.3},${topo + 4} l8,${tronco * 0.6}"
       fill="none" stroke="#ffd60a" stroke-width="10" stroke-linecap="round"/><path d="M${-tw * 0.3 - 6},${topo + 30} h10 M${-tw * 0.3 - 6},${topo + 50} h10 M${tw * 0.3 + 2},${topo + 30} h10" stroke="${OUT}" stroke-width="2"/>`;
   if (p.numero) s1 += `<text y="${topo + tronco * 0.66}" text-anchor="middle" font-family="Anton" font-size="${44 * Math.min(lf, 1.3)}" fill="#fff" stroke="${OUT}" stroke-width="5" paint-order="stroke">${p.numero}</text>`;
+  // patrocínio: faixa branca logo abaixo do número, sempre dentro da camisa (o texto se ajusta à largura)
+  if (p.patrocinio) { const pw = tw * 0.7, py = topo + tronco * 0.71;
+    s1 += `<rect x="${-pw / 2}" y="${py}" width="${pw}" height="17" rx="4" fill="#fff" stroke="${OUT}" stroke-width="2.5"/>
+    <text y="${py + 13}" text-anchor="middle" font-family="Anton" font-size="12" textLength="${pw - 8}" lengthAdjust="spacingAndGlyphs" fill="${OUT}">${esc(p.patrocinio)}</text>`; }
   if (p.barriga) s1 += `<path d="M${-tw * 0.42},${topo + tronco * 0.5} Q0,${topo + tronco + 6} ${tw * 0.42},${topo + tronco * 0.5}" fill="none" stroke="${OUT}" stroke-width="4" opacity=".4"/>`;
 
   // pomponetes: pompom em cada mão
