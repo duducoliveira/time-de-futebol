@@ -135,6 +135,16 @@ const TIPOS = {
       s += popPessoa(t, virada + 0.35, 545, SEDE.pe, pessoa(jogador('9', E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1, fase: 1 }));
       s += popPessoa(t, virada + 0.5, 715, SEDE.pe, pessoa({ ...PERSONAGENS.costureira, pose: 'acena' }, t, { s: 1.05, fase: 2 }));
     }
+    if ((acoes.includes('organizada') || acoes.includes('patrocinio')) && t >= virada) {
+      const fum = t - virada;
+      for (let i = 0; i < 6; i++) { const f = (fum * 0.35 + i / 6) % 1;
+        s += `<circle cx="${(200 + i * 140 + Math.sin(f * 6 + i) * 30).toFixed(0)}" cy="${(1800 - f * 520).toFixed(0)}" r="${(40 + f * 70).toFixed(0)}" fill="${i % 2 ? CORES.amarelo : CORES.vinho}" opacity="${(0.5 * (1 - f)).toFixed(2)}"/>`; }
+      if (acoes.includes('organizada')) {
+        s += popPessoa(t, virada + 0.2, 330, SEDE.pe, pessoa({ pele: '#a0673e', cabelo: 'raspado', corCabelo: '#1b1b1b', camisa: CORES.vinho, listra: CORES.amarelo, calcao: '#343a40', bandeira: CORES.vinho, pose: 'acena', expr: 'feliz' }, t, { s: 1 }));
+        s += popPessoa(t, virada + 0.35, 500, SEDE.pe, pessoa({ pele: '#f1c27d', cabelo: 'curto', corCabelo: '#2b1d14', camisa: CORES.amarelo, listra: CORES.vinho, calcao: '#343a40', pose: 'comemora', expr: 'feliz' }, t, { s: 1, fase: 1 }));
+      }
+      if (acoes.includes('patrocinio')) s += popPessoa(t, Math.max(virada + 0.5, quando(c, 'academia', virada) - 0.1), 760, SEDE.pe, pessoa(jogador('9', E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1, fase: 2 }));
+    }
     if (acoes.includes('mascote') && t >= virada) {  // o Caramelo chega e a Dona Cida recebe
       const tc = Math.max(virada + 0.2, quando(c, 'caramelo', virada) - 0.2), p = easeOut(prog(t, tc, 1.0));
       s += `<g transform="translate(${-200 + p * 640} ${SEDE.pe})">${caramelo(t)}</g>`;

@@ -236,6 +236,14 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   s1 += `<rect class="vol3d" x="${-tw / 2}" y="${topo}" width="${tw}" height="${tronco}" rx="${28 * lf}" fill="url(#g3dCorpo)" opacity="0"/>`;  // volume do tronco (só no estilo 3D)
   if (p.avental) s1 += `<path d="M${-tw * 0.34},${topo + 14} H${tw * 0.34} V${topo + tronco + 22} Q0,${topo + tronco + 34} ${-tw * 0.34},${topo + tronco + 22} Z" fill="${p.avental}" stroke="${OUT}" stroke-width="5"/>
       <text y="${topo + tronco * 0.62}" text-anchor="middle" font-family="Anton" font-size="26" fill="${OUT}">${esc(p.aventalTxt || '')}</text>`;
+  if (p.patrocinio) s1 += `<rect x="${-tw * 0.36}" y="${topo + 10}" width="${tw * 0.72}" height="18" rx="4" fill="#fff" stroke="${OUT}" stroke-width="2.5"/>
+    <text y="${topo + 24}" text-anchor="middle" font-family="Anton" font-size="13" fill="${OUT}">${esc(p.patrocinio)}</text>`;
+  if (p.bandeira) {  // bandeirão no mastro, balançando
+    const [mx, my] = maos[1], w = Math.sin(t * 5) * 14;
+    s1 += `<path d="M${mx},${my + 30} V${my - 230}" stroke="${OUT}" stroke-width="10" stroke-linecap="round"/><path d="M${mx},${my + 30} V${my - 230}" stroke="#b08968" stroke-width="5"/>
+      <path d="M${mx},${my - 226} q60,${-14 + w} 130,0 t130,0 v110 q-65,${14 - w} -130,0 t-130,0Z" fill="${p.bandeira}" stroke="${OUT}" stroke-width="5"/>
+      <path d="M${mx},${my - 190} q60,${-14 + w} 130,0 t130,0 v34 q-65,${14 - w} -130,0 t-130,0Z" fill="${CORES.amarelo}"/>`;
+  }
   if (p.fita) s1 += `<path d="M${-tw * 0.3},${topo + 4} Q0,${topo + 40} ${tw * 0.3},${topo + 4} M${-tw * 0.3},${topo + 4} l-8,${tronco * 0.7} M${tw * 0.3},${topo + 4} l8,${tronco * 0.6}"
       fill="none" stroke="#ffd60a" stroke-width="10" stroke-linecap="round"/><path d="M${-tw * 0.3 - 6},${topo + 30} h10 M${-tw * 0.3 - 6},${topo + 50} h10 M${tw * 0.3 + 2},${topo + 30} h10" stroke="${OUT}" stroke-width="2"/>`;
   if (p.numero) s1 += `<text y="${topo + tronco * 0.66}" text-anchor="middle" font-family="Anton" font-size="${44 * Math.min(lf, 1.3)}" fill="#fff" stroke="${OUT}" stroke-width="5" paint-order="stroke">${p.numero}</text>`;
@@ -371,8 +379,11 @@ const JOGADORES = {
   '19': { pele: '#8d5524', cabelo: 'black', corCabelo: '#1b1b1b', camisa: '#06d6a0', expr: 'feliz', larg: 0.9 },
 };
 
+// visual fixo por jogador (vale mesmo se ele trocar de número): Benício era o 17, Foguete era o 7
+const VISUAL_POR_NOME = { 'Benício': '17', 'Foguete': '7' };
 function jogador(numero, estado, extra = {}) {
-  const base = JOGADORES[numero] || (() => {
+  const nomeJ = (estado.elenco[numero] || {}).nome;
+  const base = (VISUAL_POR_NOME[nomeJ] && JOGADORES[VISUAL_POR_NOME[nomeJ]]) || JOGADORES[numero] || (() => {
     const r = rng('jog' + numero);
     return { pele: PELES[Math.floor(r() * PELES.length)], cabelo: ['curto', 'raspado', 'cacheado', 'black'][Math.floor(r() * 4)],
       corCabelo: '#1b1b1b', camisa: CAMISAS_SORTIDAS[Math.floor(r() * CAMISAS_SORTIDAS.length)],
@@ -381,6 +392,7 @@ function jogador(numero, estado, extra = {}) {
   const uniforme = estado.estrutura.uniforme === 'novo';
   const remendos = uniforme && !!estado.estrutura.uniforme_remendado;
   return { ...base, numero, ...(uniforme ? { camisa: CORES.vinho, listra: CORES.amarelo, calcao: '#fff', meiao: CORES.vinho, remendos } : {}),
+    ...(uniforme && estado.estrutura.patrocinio ? { patrocinio: estado.estrutura.patrocinio } : {}),
     ...(base.luvas && uniforme ? { camisa: CORES.amarelo, listra: CORES.vinho, calcao: CORES.vinho, meiao: CORES.amarelo, corLuva: '#fff' } : {}), ...extra };
 }
 
@@ -544,6 +556,19 @@ function arquibancada(estrutura, torcida, y = 850, t = 0) {
       }
     }
   });
+  // torcida organizada (Poeira Levantada): bandeirões e fumaça vinho/amarela atrás dos degraus, só em casa
+  if (estrutura.organizada && !window._local) {
+    let o = '';
+    for (const [x, k] of [[150, 0], [430, 1], [700, 2], [960, 3]]) {
+      for (let i = 0; i < 4; i++) { const f = (t * 0.4 + i * 0.25 + k * 0.11) % 1;
+        o += `<circle cx="${(x + Math.sin(f * 5 + k) * 30).toFixed(1)}" cy="${(yTopo - 60 - f * 200).toFixed(1)}" r="${(26 + f * 46).toFixed(1)}" fill="${k % 2 ? CORES.amarelo : CORES.vinho}" opacity="${(0.55 * (1 - f)).toFixed(2)}"/>`; }
+    }
+    for (const [x, k] of [[260, 0], [820, 1]]) { const w = Math.sin(t * 4 + k * 2) * 12;
+      o += `<path d="M${x},${yTopo - 20} V${yTopo - 200}" stroke="${OUT}" stroke-width="9"/>
+        <path d="M${x},${yTopo - 196} q50,${-12 + w} 110,0 t110,0 v86 q-55,${12 - w} -110,0 t-110,0Z" fill="${CORES.vinho}" stroke="${OUT}" stroke-width="5"/>
+        <path d="M${x},${yTopo - 166} q50,${-12 + w} 110,0 t110,0 v26 q-55,${12 - w} -110,0 t-110,0Z" fill="${CORES.amarelo}"/>`; }
+    s = o + s;
+  }
   // gente de fora (lotado): em pé atrás do corrimão
   if (torcida > cap) s = `<g opacity=".95">${torcedores(Math.min(60, Math.round(20 + Math.log10(torcida) * 8)), yTopo - 118, yTopo - 76, 'fora')}</g>` + s;
   return s;

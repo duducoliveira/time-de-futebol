@@ -277,6 +277,17 @@
         "textos_gol": {
           "3": "Gol do {adv}, aos {m}. O líder desempatou: dois a um. Doeu, mas o Poeira vendeu caro na casa do líder."
         }
+      },
+      "9": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "sequencia": "NNA",
+        "intervalo_minimo_gols": 10,
+        "motivo": "em casa contra o Leões do Brejo: 2 a 1, o Benício estreia a camisa 7 com gol",
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Estreou a camisa sete com gol, aos {m}! Mais um jogo, mais um gol: dois a zero!"
+        }
       }
     },
     "times": {

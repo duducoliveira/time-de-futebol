@@ -1,0 +1,229 @@
+{
+  "dia": 11,
+  "seguidores_ontem": 401,
+  "seguidores_hoje": 415,
+  "post_anterior": {
+    "id": "17914575720559567",
+    "caption": "DIA 10 do Poeira FC ⚽🐕\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam menos de 100 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 8,
+    "like_count": 125,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/DfwaTBvBwnO/",
+    "timestamp": "2026-11-15T09:02:48+0000"
+  },
+  "curtidas": 125,
+  "receita_curtidas": 125,
+  "caixa_atual": 2543,
+  "caixa_com_curtidas": 2668,
+  "top_comentarios": [
+    {
+      "usuario": "murilo_siqueira1983",
+      "texto": "Ter fumaça sinalizadores e bandeiras para apoiar o poeira FC, vai deixar eles mais incentivados, voto",
+      "curtidas": 4,
+      "id": "18063549131539312",
+      "timestamp": "2026-11-15T10:07:48+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Fazer uma arquibancada bem melhor para nossos torcedores e objetos de torcida organizada para eles, para botarmos medos em quem nós enfrentar",
+      "curtidas": 2,
+      "id": "18131640919841717",
+      "timestamp": "2026-11-15T11:10:30+0000"
+    },
+    {
+      "usuario": "_guigs12",
+      "texto": "Acho que está na hora de arrumar um patrocínio de uma academia ou qualquer coisa do tipo que beneficie os jogadores isso vai ajudar eles nos jogos",
+      "curtidas": 1,
+      "id": "18142044199543972",
+      "timestamp": "2026-11-15T10:45:22+0000"
+    },
+    {
+      "usuario": "yan_alexx05",
+      "texto": "Eu sou torcedor já",
+      "curtidas": 1,
+      "id": "18075608297774928",
+      "timestamp": "2026-11-15T10:55:38+0000"
+    },
+    {
+      "usuario": "dede_todeschini",
+      "texto": "A Charanga do Todesca se sente pequena, precisamos que a torcida se envolva, instrumentos de sopro, além de faixas e sinalizadores! Vamooo Poeiraaa!",
+      "curtidas": 0,
+      "id": "17919311508532424",
+      "timestamp": "2026-11-15T16:52:07+0000"
+    },
+    {
+      "usuario": "gilbertoteles_",
+      "texto": "Antes do próximo jogo, fica decretado o churrasco da concentração! Quem perder no FIFA lava os uniformes, quem chegar atrasado paga o refrigerante e quem fizer gol está autorizado a comemorar como se tivesse ganhado a Copa do Mundo!\n\nO professor Gilberto Teles já avisou: aqui é futebol, amizade e resenha! Só não pode faltar no jogo, porque a cesta básica não vai se distribuir sozinha\n\nPróximo jogo vamos sair com os 3 pontos!!!.🔥",
+      "curtidas": 0,
+      "id": "18127607413936619",
+      "timestamp": "2026-11-15T17:59:42+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "murilo_siqueira1983",
+      "curtidas": 4,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 1,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 2,
+      "viavel": true,
+      "acoes": [
+        "arquibancada"
+      ],
+      "custo": 1200.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 2,
+      "usuario": "_guigs12",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "yan_alexx05",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 4,
+      "usuario": "dede_todeschini",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "gilbertoteles_",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": null,
+    "acoes": [
+      "organizada",
+      "patrocinio"
+    ],
+    "autor": "murilo_siqueira1983",
+    "titulo": "Organizada + patrocínio",
+    "interpretacao": "Kit da organizada Poeira Levantada (bandeirão, faixas, fumaça colorida e corneta pra charanga) e patrocínio da Academia Músculo de Aço na camisa.",
+    "custo": 300,
+    "efeitos": {
+      "estrutura.organizada": "Poeira Levantada",
+      "estrutura.patrocinio": "MÚSCULO DE AÇO",
+      "clube.forca": "+1"
+    },
+    "narracao_obra": "Nasceu a organizada Poeira Levantada! Bandeirão, faixas, fumaça vinho e amarela, e uma corneta pra charanga do Todesca: R$ 300. E a Academia Músculo de Aço, aqui do bairro, virou patrocinadora: a marca vai na camisa e o elenco treina de graça!"
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+    "opcoes": [
+      "Sua ideia aqui?"
+    ]
+  },
+  "tema": "POEIRA LEVANTADA!",
+  "tema_falado": "Poeira Levantada",
+  "historia": {
+    "comentarios": [
+      {
+        "narracao": "O comentário mais curtido foi do Murilo: fumaça, sinalizadores e bandeiras pra apoiar o Poeira. Aprovado! E o Guigs pediu um patrocínio de academia pros jogadores. Aprovado também!",
+        "comentarios": [
+          {
+            "usuario": "murilo_siqueira1983",
+            "texto": "Ter fumaça sinalizadores e bandeiras para apoiar o poeira FC, vai deixar eles mais incentivados",
+            "curtidas": 4,
+            "chave": "murilo",
+            "carimbo": "aprovado",
+            "chave_carimbo": "aprovado",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          },
+          {
+            "usuario": "_guigs12",
+            "texto": "Arrumar um patrocínio de uma academia que beneficie os jogadores",
+            "curtidas": 1,
+            "chave": "guigs",
+            "carimbo": "aprovado",
+            "chave_carimbo": "também",
+            "selo": "IDEIA APROVADA"
+          }
+        ]
+      }
+    ],
+    "renumerar": {
+      "17": "7",
+      "7": "77"
+    },
+    "antes_jogo": [
+      {
+        "tipo": "comentarios",
+        "narracao": "E o Benício pediu a camisa sete três vezes. O Foguete topou trocar: agora ele é o Foguete setenta e sete. E a sete é do Benício! Antes do jogo ainda teve o churrasco da concentração do professor Gilberto: quem chegou atrasado pagou o refrigerante.",
+        "dados": {
+          "comentarios": [
+            {
+              "usuario": "beniciocarmocarvalho",
+              "texto": "Quero que o meu número seja o 7",
+              "curtidas": 1,
+              "chave": "benício",
+              "carimbo": "aprovado",
+              "chave_carimbo": "trocar",
+              "selo": "3º PEDIDO"
+            },
+            {
+              "usuario": "gilbertoteles_",
+              "texto": "Fica decretado o churrasco da concentração! Quem chegar atrasado paga o refrigerante",
+              "curtidas": 0,
+              "chave": "churrasco",
+              "carimbo": "anotado",
+              "chave_carimbo": "refrigerante",
+              "selo": "PROFESSOR GILBERTO"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "piada": {
+    "alvo": "nosso",
+    "numero": "13",
+    "nome": "Fé no Justo",
+    "posicao": "volante",
+    "apelido": "Pedágio",
+    "piada": "ninguém passa sem pagar",
+    "narracao": "E o Fé no Justo ganhou apelido novo: volante Pedágio. Ninguém passa sem pagar!",
+    "texto_tela": [
+      "#13 FÉ NO JUSTO"
+    ]
+  },
+  "decisao_fala": "No caixa, {caixa} reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+  "legenda": "DIA 11 do Poeira FC ⚽🔥\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam menos de 100 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "encerramento": "Amanhã tem Poeira contra o Grêmio Vila Barro, o líder! E faltam menos de cem torcedores pra peneira dos 500. Manda esse vídeo pros seus amigos virarem torcedores também. Segue, curte e comenta. Até amanhã!"
+}

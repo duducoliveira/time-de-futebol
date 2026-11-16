@@ -395,6 +395,15 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
 
         d = briefing.get("decisao")
         hist = briefing.get("historia") or {}
+        # troca de número (ex: {"17": "7", "7": "77"}): aplicada de uma vez, antes das cenas
+        if hist.get("renumerar"):
+            mapa = hist["renumerar"]
+            movidos = {mapa[n]: e["elenco"][n] for n in mapa if n in e["elenco"]}
+            for n in mapa:
+                e["elenco"].pop(n, None)
+            e["elenco"].update(movidos)
+            e["elenco"] = dict(sorted(e["elenco"].items(), key=lambda kv: int(kv[0])))
+            est.evento(e, "Troca de camisas: " + ", ".join(f"{j['nome']} agora é o {n}" for n, j in movidos.items()))
         # comentários roteirizados: cenas com vários comentários e carimbos (inviável/aprovado...)
         for cc in hist.get("comentarios", []):
             cena("comentarios", cc["narracao"], cc.get("texto_tela", []), comentarios=cc["comentarios"])
