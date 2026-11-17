@@ -11,7 +11,11 @@ function camera(t, dur, conteudo, { z0 = 1, z1 = 1.06, cx = W / 2, cy = H / 2 } 
 }
 
 // câmera das cenas na sede: zoom leve, ancorado no chão (o cenário e as pessoas andam juntos)
-const CAM_SEDE = { z0: 1, z1: 1.04, cy: 1750 };
+const CAM_SEDE_PADRAO = { z0: 1, z1: 1.04, cy: 1750 };
+let CAM_SEDE = CAM_SEDE_PADRAO;
+// com o prédio do vestiário a sede fica mais larga: a câmera abre (tudo diminui junto, na mesma proporção)
+const camSede = est => (est && est.vestiario_predio) ? { z0: 0.72, z1: 0.73, cy: 1750 } : CAM_SEDE_PADRAO;
+const zoomSede = (est, svg) => { const k = camSede(est).z0; return k === 1 ? svg : `<g transform="translate(${W / 2} 1750) scale(${k}) translate(${-W / 2} -1750)">${svg}</g>`; };
 
 function narrador(t, E, x = 300, y = 1720, s = 1.45, extra = {}) { return pessoa({ ...PERSONAGENS.narrador, ...extra }, t, { x, y, s }); }
 function presidente(t, E, x = 780, y = 1720, s = 1.45, extra = {}) { return pessoa({ ...PERSONAGENS.presidente, ...extra }, t, { x, y, s, fase: 1.3 }); }
@@ -121,11 +125,13 @@ const TIPOS = {
     const tBanco = acoes.includes('banco_reservas') ? Math.max(virada + 0.8, quando(c, 'banquinho', quando(c, 'banco', d * 0.6)) - 0.2) : Infinity;
     const fundo = t >= tBanco ? lateral(est, { t, nome: NOME(E) })
       : noCampo ? campo(est, { t, nome: NOME(E), torcida: 0 }) : sede(est, { t });
-    let s = camera(t, d, fundo, noCampo || t >= tBanco ? {} : { z1: 1 });  // na sede a câmera fica parada (as pessoas pisam no chão)
+    const naSede = !noCampo && t < tBanco;
+    let s = camera(t, d, naSede ? zoomSede(c.dados.depois, fundo) : fundo, naSede ? { z1: 1 } : {});  // na sede a câmera fica parada (as pessoas pisam no chão)
     if (t >= virada && t < virada + 0.5) {
       const p = (t - virada) / 0.5;
       for (let i = 0; i < 10; i++) s += `<circle cx="${100 + i * 95}" cy="${1000 + Math.sin(i) * 180}" r="${60 + p * 120}" fill="#fff" opacity="${0.8 * (1 - p)}"/>`;
     }
+    const s0 = s.length;  // daqui até os letreiros: gente e objetos na cena (entram no mesmo zoom da sede)
     if (acoes.includes('kombi') && t >= virada) {  // a Kombi chega andando e estaciona na frente do bar
       const p = easeOut(prog(t, virada, 1.2));
       s += `<g transform="translate(${-400 + p * 940} 1908) scale(1.1)">${kombi({ t, andando: p < 1 })}</g>`;
@@ -134,6 +140,11 @@ const TIPOS = {
       s += popPessoa(t, virada + 0.2, 380, SEDE.pe, pessoa(jogador('17', E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1 }));
       s += popPessoa(t, virada + 0.35, 545, SEDE.pe, pessoa(jogador('9', E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1, fase: 1 }));
       s += popPessoa(t, virada + 0.5, 715, SEDE.pe, pessoa({ ...PERSONAGENS.costureira, pose: 'acena' }, t, { s: 1.05, fase: 2 }));
+    }
+    if ((acoes.includes('vestiario') || acoes.includes('aquecimento')) && t >= virada) {
+      if (acoes.includes('aquecimento')) [240, 330, 740, 850].forEach((x, i) => s += pop(t, quando(c, 'cones', virada + 0.4) + i * 0.1, x, SEDE.pe - 4, cone(0, 0, 0.9), 0.3, false));
+      s += popPessoa(t, virada + 0.2, 430, SEDE.pe, pessoa(jogador('7', E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1 }));
+      s += popPessoa(t, virada + 0.35, 650, SEDE.pe, pessoa(jogador('18', E, { pose: 'acena', expr: 'feliz' }), t, { s: 1, fase: 1 }));
     }
     if ((acoes.includes('organizada') || acoes.includes('patrocinio')) && t >= virada) {
       const fum = t - virada;
@@ -168,6 +179,8 @@ const TIPOS = {
       const num = Object.keys(E.elenco).find(k => E.elenco[k].nome === j.nome) || '12';
       s += popPessoa(t, virada + 0.2, 540 + i * 200, 1880, pessoa(jogador(num, E, { pose: 'comemora' }), t, { s: 1.9 }));
     });
+    if (naSede) s = s.slice(0, s0) + zoomSede(c.dados.depois, s.slice(s0));
+    if (acoes.includes('vestiario') && t >= virada) s += pop(t, quando(c, 'chuveiro', virada + 0.6), W / 2, 1010, pilula('🚿 CHUVEIRO QUENTE', { tam: 42, bg: '#3a86ff', rot: -2 }));
     s += pop(t, 0.1, W / 2, 330, pilula(c.texto_tela[0] || '', { tam: 52, bg: '#2e8b57', rot: -2 }));
     if (c.texto_tela[1]) s += pop(t, virada + 0.1, W / 2, 580, texto(c.texto_tela[1], { tam: 110, cor: '#e63946', bw: 16 }));
     const [px, py] = noCampo ? [260, 1830] : [W / 2, 820];  // na sede, o painel vai pro céu (embaixo tem gente e varal)
@@ -706,6 +719,7 @@ window.quadro = tGlobal => {
   window._local = c.dados.local || null;
   window._placas = !!(E.estrutura && E.estrutura.placas);
   window._tQuadro = tGlobal;
+  CAM_SEDE = camSede(E.estrutura);
   if (window._local) E = { ...E, _torcida: window._local.torcida ?? 300,
     estrutura: { ...E.estrutura, gramado: 'terrão', capacidade: 500, rede: true, iluminacao: false } };
   const fn = TIPOS[c.tipo] || TIPOS.abertura;

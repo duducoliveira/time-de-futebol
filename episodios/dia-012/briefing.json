@@ -1,0 +1,287 @@
+{
+  "dia": 12,
+  "seguidores_ontem": 415,
+  "seguidores_hoje": 436,
+  "post_anterior": {
+    "id": "18250786795314008",
+    "caption": "DIA 11 do Poeira FC ⚽🔥\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam menos de 100 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 15,
+    "like_count": 129,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/Dfy_Cf_SIjL/",
+    "timestamp": "2026-11-16T09:02:20+0000"
+  },
+  "curtidas": 129,
+  "receita_curtidas": 129,
+  "caixa_atual": 4063.0,
+  "caixa_com_curtidas": 4192.0,
+  "top_comentarios": [
+    {
+      "usuario": "antoniecharlles",
+      "texto": "Início da criação de um CT para recuperação e treinamentos.",
+      "curtidas": 3,
+      "id": "18100592243548538",
+      "timestamp": "2026-11-16T12:34:54+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Quero agradecer a todos o jogadores por essa vitória de hoje👏👏, e venho aqui de novo prometer a torcida que vamos honrar a torcida e seremos campeões do campeonato comigo sendo artilheiro e com nosso técnico Gilberto Teles sendo o melhor técnico do campeonato 🔥🔥🔥",
+      "curtidas": 1,
+      "id": "17907667476352734",
+      "timestamp": "2026-11-16T10:00:09+0000"
+    },
+    {
+      "usuario": "teus__a",
+      "texto": "Contata líderes de torcida pra fazer apresentação em todo jogo do poeira",
+      "curtidas": 1,
+      "id": "17995824294064138",
+      "timestamp": "2026-11-16T12:50:22+0000"
+    },
+    {
+      "usuario": "fernandogontijo13",
+      "texto": "Cadê as pomponetes???",
+      "curtidas": 0,
+      "id": "18189571282418794",
+      "timestamp": "2026-11-16T10:06:04+0000"
+    },
+    {
+      "usuario": "tiagobifanno",
+      "texto": "bora que eu pego a 17 em\natacante nato sou eu",
+      "curtidas": 0,
+      "id": "18249243706315434",
+      "timestamp": "2026-11-16T10:09:46+0000"
+    },
+    {
+      "usuario": "juliio_moraiss",
+      "texto": "Espero ser o goleiro : meu nome Júlio César 🙅🏻‍♂️",
+      "curtidas": 0,
+      "id": "17918310435273083",
+      "timestamp": "2026-11-16T10:20:17+0000"
+    },
+    {
+      "usuario": "dre_zin.fs",
+      "texto": "Me põe no lateral direita",
+      "curtidas": 0,
+      "id": "18020364938949074",
+      "timestamp": "2026-11-16T10:30:08+0000"
+    },
+    {
+      "usuario": "ribamarsanttos12",
+      "texto": "Mereço uma vaga nesse time tenho nome de lenda do futebol, só que sou goleiro l😂😂",
+      "curtidas": 0,
+      "id": "17896360089683482",
+      "timestamp": "2026-11-16T10:34:50+0000"
+    },
+    {
+      "usuario": "_guigs12",
+      "texto": "Daria pra fazer vestiários né para se trocar, tomar um banho dps do jogo",
+      "curtidas": 0,
+      "id": "17979453861178816",
+      "timestamp": "2026-11-16T13:08:03+0000"
+    },
+    {
+      "usuario": "johnvicente22",
+      "texto": "Poderia investir nos objetos para o aquecimento pré jogo, cones, bolas e outras",
+      "curtidas": 0,
+      "id": "18118417973594073",
+      "timestamp": "2026-11-16T15:39:39+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "antoniecharlles",
+      "curtidas": 3,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 1,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 1,
+      "viavel": true,
+      "acoes": [
+        "atacante",
+        "tecnico"
+      ],
+      "custo": 2200.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 2,
+      "usuario": "teus__a",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "fernandogontijo13",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 4,
+      "usuario": "tiagobifanno",
+      "curtidas": 0,
+      "viavel": true,
+      "acoes": [
+        "atacante"
+      ],
+      "custo": 1000.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 5,
+      "usuario": "juliio_moraiss",
+      "curtidas": 0,
+      "viavel": true,
+      "acoes": [
+        "goleiro"
+      ],
+      "custo": 800.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 6,
+      "usuario": "dre_zin.fs",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 7,
+      "usuario": "ribamarsanttos12",
+      "curtidas": 0,
+      "viavel": true,
+      "acoes": [
+        "goleiro"
+      ],
+      "custo": 800.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 8,
+      "usuario": "_guigs12",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 9,
+      "usuario": "johnvicente22",
+      "curtidas": 0,
+      "viavel": true,
+      "acoes": [
+        "bolas"
+      ],
+      "custo": 80.0,
+      "motivo": null,
+      "revisar": false
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": null,
+    "acoes": [
+      "vestiario",
+      "aquecimento"
+    ],
+    "autor": "antoniecharlles",
+    "titulo": "Vestiário + aquecimento",
+    "interpretacao": "Vestiário reformado com chuveiro quente (primeiro passo do CT, pedido do Antonie e do Guigs) e cones e bolas para o aquecimento (pedido do John).",
+    "custo": 1700,
+    "efeitos": {
+      "estrutura.vestiario": "vestiário com chuveiro quente",
+      "estrutura.aquecimento": true,
+      "estrutura.bolas": true,
+      "clube.forca": "+2",
+      "estrutura.vestiario_predio": true
+    },
+    "narracao_obra": "O vestiário ganhou prédio próprio, do lado do bar, com chuveiro quente: R$ 1.600. É o primeiro passo do CT do Poeira! E mais cem pra cones e bolas de aquecimento. Agora o time aquece antes e toma banho quente depois."
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+    "opcoes": [
+      "Sua ideia aqui?"
+    ]
+  },
+  "tema": "VESTIÁRIO NOVO!",
+  "tema_falado": "Vestiário novo",
+  "historia": {
+    "comentarios": [
+      {
+        "narracao": "O comentário mais curtido foi do Antonie: começar um CT pro Poeira. E o Guigs pediu vestiário pra tomar banho depois do jogo. O primeiro passo do CT é o vestiário. Aprovado!",
+        "comentarios": [
+          {
+            "usuario": "antoniecharlles",
+            "texto": "Início da criação de um CT para recuperação e treinamentos.",
+            "curtidas": 3,
+            "chave": "antonie",
+            "carimbo": "aprovado",
+            "chave_carimbo": "aprovado",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          },
+          {
+            "usuario": "_guigs12",
+            "texto": "Daria pra fazer vestiários né para se trocar, tomar um banho dps do jogo",
+            "curtidas": 0,
+            "chave": "guigs",
+            "carimbo": "aprovado",
+            "chave_carimbo": "aprovado",
+            "selo": "IDEIA JUNTO"
+          }
+        ]
+      }
+    ],
+    "antes_jogo": [
+      {
+        "tipo": "comentarios",
+        "narracao": "E o Fernando perguntou: cadê as pomponetes? Elas viajaram com o time e hoje estão dançando na beira do campo, do lado da arquibancada!",
+        "dados": {
+          "comentarios": [
+            {
+              "usuario": "fernandogontijo13",
+              "texto": "Cadê as pomponetes???",
+              "curtidas": 0,
+              "chave": "fernando",
+              "carimbo": "aprovado",
+              "chave_carimbo": "viajaram",
+              "selo": "PERGUNTA DA TORCIDA"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "piada": {
+    "alvo": "adversario",
+    "apelido": "Cometa"
+  },
+  "decisao_fala": "No caixa, {caixa} reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+  "encerramento": "Amanhã tem Poeira contra o Veteranos do Bairro, em casa. Faltam só sessenta e quatro torcedores pra peneira dos 500! E a camisa dezessete tá livre... Manda esse vídeo pros amigos. Segue, curte e comenta. Até amanhã!",
+  "legenda": "DIA 12 do Poeira FC ⚽\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam só 64 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}

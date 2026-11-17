@@ -119,6 +119,9 @@ def avaliar(estado: dict, comentario: dict, caixa: float) -> dict:
     feitas, motivo, gasto = [], None, 0.0
     for chave in pedidas:
         item = CATALOGO[chave]
+        if item.get("posicao"):  # jogador novo só entra pela peneira (decisão do usuário, Dia 12)
+            motivo = motivo or "jogador novo só pela peneira"
+            continue
         if item["unico"] and _ja_feito(estado, chave):
             motivo = motivo or f"{item['titulo']} já foi feito"
             continue
@@ -171,7 +174,15 @@ def escolher(estado: dict, top: list[dict], caixa: float, dia: int) -> tuple[dic
     """Retorna (decisão do comentário viável mais curtido, avaliação de cada comentário)."""
     avaliacoes = []
     decisao = None
+    do_clube = {(j.get("instagram") or "").lower() for j in estado.get("elenco", {}).values()} | \
+               {(p.get("instagram") or "").lower() for p in estado.get("personagens", {}).values() if isinstance(p, dict)}
+    do_clube.discard("")
     for i, c in enumerate(top):
+        if c["usuario"].lower() in do_clube:  # jogador/técnico do Poeira: promessa ou tática, não pedido
+            avaliacoes.append({"indice": i, "usuario": c["usuario"], "curtidas": c["curtidas"], "viavel": False,
+                               "acoes": [], "custo": 0.0, "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+                               "revisar": True})
+            continue
         av = avaliar(estado, c, caixa)
         avaliacoes.append({"indice": i, "usuario": c["usuario"], "curtidas": c["curtidas"], **av})
         if decisao is None and av["viavel"]:
@@ -182,7 +193,8 @@ def escolher(estado: dict, top: list[dict], caixa: float, dia: int) -> tuple[dic
 def sugerir_opcoes(estado: dict, caixa_previsto: float, n: int = 2) -> list[str]:
     """Opções para a próxima decisão: o que cabe no caixa e ainda não foi feito."""
     candidatos = [(k, v) for k, v in CATALOGO.items()
-                  if not (v["unico"] and _ja_feito(estado, k))
+                  if not v.get("posicao")  # jogador só pela peneira
+                  and not (v["unico"] and _ja_feito(estado, k))
                   and (not v.get("requer") or _ja_feito(estado, v["requer"]))
                   # arquibancada nova só quando a torcida não couber mais
                   and (k != "arquibancada" or estado["torcida"]["seguidores"] > estado["estrutura"]["capacidade"])]

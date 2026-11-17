@@ -64,10 +64,11 @@ def test_tres_dias():
             {"id": "4", "username": "z", "text": "outra lanchonete", "like_count": 9, "timestamp": "1"}]
     b = ep.preparar(e, 13200, {"id": "y", "permalink": "q", "like_count": 16000}, coms, "clube")
     assert b["avaliacao_comentarios"][0]["motivo"].endswith("já foi feito")
-    assert b["decisao"]["acoes"] == ["goleiro"]
+    # jogador novo só entra pela peneira: "goleiro novo" não é viável
+    assert b["decisao"] is None and b["avaliacao_comentarios"][1]["motivo"] == "jogador novo só pela peneira"
     e, r = ep.fechar(e, b)
     assert e["elenco"]["1"]["apelido"] == "Muralha"
-    assert "12" in e["elenco"] and e["elenco"]["12"]["posicao"] == "GOL"
+    assert "12" not in e["elenco"]  # ninguém foi contratado fora da peneira
     assert sum(l["j"] for l in tabela(list(e["liga"]["times"]), e["liga"]["resultados"])) == 20
     assert round(sum(x["valor"] for x in e["extrato"]), 2) == e["caixa"]
 

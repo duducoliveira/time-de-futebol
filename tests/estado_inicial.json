@@ -288,6 +288,21 @@
           "artilheiro": "Benício",
           "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Estreou a camisa sete com gol, aos {m}! Mais um jogo, mais um gol: dois a zero!"
         }
+      },
+      "10": {
+        "resultado": "empate",
+        "marca_gol": true,
+        "sequencia": "AN",
+        "intervalo_minimo_gols": 15,
+        "ultimo_gol_a_partir_do_minuto": 70,
+        "motivo": "fora, contra o líder Grêmio Vila Barro: o ponta Cometa (que aparece uma vez por temporada) marca, e o Benício empata",
+        "textos_gol": {
+          "1": "Gol do {adv}, aos {m}. E adivinha quem fez? O Cometa! Aquele que aparece uma vez por temporada. Resolveu aparecer logo contra a gente!"
+        },
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Mais um jogo, mais um gol, aos {m}! Tudo igual na casa do líder: um a um!"
+        }
       }
     },
     "times": {

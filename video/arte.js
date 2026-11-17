@@ -405,7 +405,7 @@ function ceu(t) {
       <ellipse cx="0" cy="0" rx="90" ry="38" fill="#fff"/><ellipse cx="-50" cy="12" rx="60" ry="30" fill="#fff"/><ellipse cx="55" cy="10" rx="65" ry="30" fill="#fff"/></g>`).join('');
   return `<defs><linearGradient id="gceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${CORES.ceu1}"/><stop offset="1" stop-color="${CORES.ceu2}"/></linearGradient>
     <linearGradient id="gterra" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${CORES.terra2}"/><stop offset="1" stop-color="${CORES.terra1}"/></linearGradient></defs>
-    <rect width="${W}" height="${H}" fill="url(#gceu)"/>${nuvens}`;
+    <rect x="-700" y="-900" width="${W + 1400}" height="${H + 1800}" fill="url(#gceu)"/>${nuvens}`;
 }
 
 // morro com casinhas e caixas d'água: o "bairro" atrás do campo
@@ -437,14 +437,14 @@ function arvore(x, yChao, R = 60, seed = 'arv', k) {
     ${copas([[x, yChao - R * 1.55, R, k]], seed)}`;
 }
 
-function bairro(yBase = 780) {
+function bairro(yBase = 780, { xMin = -50, xMax = 1130 } = {}) {
   const r = rng('bairro');
-  let s = `<path d="M-50,${yBase} C150,${yBase - 380} 420,${yBase - 470} 640,${yBase - 380} C820,${yBase - 300} 1000,${yBase - 360} 1130,${yBase - 280} V${yBase + 40} H-50Z" data-v="Morro" fill="#7fb069" stroke="${OUT}" stroke-width="5"/>`;
+  let s = `<path d="M${xMin},${yBase} ${xMin < -50 ? `L${xMin},${yBase - 200} C-200,${yBase - 330} -100,${yBase - 360} -50,${yBase - 300}` : ''} C150,${yBase - 380} 420,${yBase - 470} 640,${yBase - 380} C820,${yBase - 300} 1000,${yBase - 360} 1130,${yBase - 280} ${xMax > 1130 ? `C1200,${yBase - 250} 1300,${yBase - 300} ${xMax},${yBase - 220}` : ''} V${yBase + 40} H${xMin}Z" data-v="Morro" fill="#7fb069" stroke="${OUT}" stroke-width="5"/>`;
   const cores = ['#f4a259', '#f7d488', '#e76f51', '#90be6d', '#f1faee', '#a8dadc', '#e9c46a', '#d4a373', '#cdb4db', '#ffafcc'];
   const casas = [];
   for (let fila = 0; fila < 6; fila++) {
     const y = yBase - 40 - fila * 62;
-    for (let x = -30 + (fila % 2) * 40; x < 1110; x += 70 + r() * 50) {
+    for (let x = xMin + 20 + (fila % 2) * 40; x < xMax - 20; x += 70 + r() * 50) {
       const cume = yBase - 380 + Math.abs(x - 560) * 0.32 - (x > 820 ? 60 : 0);
       if (y - 60 < cume) continue;
       const w = 60 + r() * 55, h = 55 + r() * 40;
@@ -464,7 +464,7 @@ function bairro(yBase = 780) {
   }
   // fileira de árvores na frente do morro: copas que se juntam numa mata só, com volume
   const fila = [];
-  for (let x = -40; x < 1120; x += 62 + r() * 20) fila.push([x, yBase - 14 + r() * 12, 36 + r() * 20]);
+  for (let x = xMin + 10; x < xMax - 10; x += 62 + r() * 20) fila.push([x, yBase - 14 + r() * 12, 36 + r() * 20]);
   s += copas(fila, 'mata' + yBase);
   return s;
 }
@@ -629,6 +629,11 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
     <ellipse cx="${W / 2}" cy="1260" rx="240" ry="70" fill="none" stroke="${linha}" stroke-width="8"/>
     <path d="M330,950 L300,1060 H780 L750,950" fill="none" stroke="${linha}" stroke-width="7"/>`;
   s += trave(W / 2, 955, 0.8, !grama, !!estrutura.rede);
+  // pomponetes do Poeira dançando na beira do campo, ao lado da arquibancada (viajam com o time)
+  if (estrutura.pomponetes) [[50, 0], [125, 1], [955, 2], [1030, 3]].forEach(([x, i]) => {
+    s += pessoa({ pele: PELES[(i * 2 + 1) % PELES.length], cabelo: 'coque', corCabelo: i % 2 ? '#7a4b2a' : '#1b1b1b', camisa: CORES.amarelo, listra: CORES.vinho,
+      calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: Math.sin(t * 4 + i) > 0 ? 'comemora' : 'acena', expr: 'feliz' }, t, { x, y: 1075, s: 0.36, fase: i });
+  });
   // o banco de reservas aparece na imagem própria da lateral (lateral()), não aqui
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
@@ -637,6 +642,10 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
 
 // Caramelo, o mascote: vira-lata caramelo com coleira vinho e plaquinha do escudo. Origem: chão (patas).
 // Proporção: ~45% da altura de uma pessoa (cachorro médio).
+function cone(x, y, k = 1) {
+  return `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cy="2" rx="30" ry="7" fill="#000" opacity=".2"/><path d="M-28,0 h56 l-6,-8 h-44z" fill="#f77f00" stroke="${OUT}" stroke-width="4"/>
+    <path d="M-20,-8 L-5,-64 h10 L20,-8Z" fill="#f77f00" stroke="${OUT}" stroke-width="4" stroke-linejoin="round"/><path d="M-14,-28 h28 l-3,-12 h-22z" fill="#fff"/></g>`;
+}
 function caramelo(t = 0, { espelho = false } = {}) {
   const rabo = Math.sin(t * 14) * 18;
   return `<g transform="scale(${espelho ? -1 : 1} 1)"><ellipse cx="0" cy="0" rx="78" ry="10" fill="#000" opacity=".2"/>
@@ -747,21 +756,22 @@ function sede(estrutura, { t = 0 } = {}) {
   const novo = estrutura.telhado;
   const { fundo, base, calcada, x0, x1, topo } = SEDE, lw = x1 - x0, cx = (x0 + x1) / 2;
   const px = 52, py = base - fundo - 14;                     // profundidade do prédio (parede lateral)
-  let s = `<g opacity=".93">${bairro(1450)}</g>`;
+  const predio = !!estrutura.vestiario_predio;
+  let s = `<g opacity=".93">${bairro(1450, { xMin: -420, xMax: 1500 })}</g>`;
   // muro dos vizinhos (plano de fundo), com sombra no pé
-  s += `<rect x="-10" y="1452" width="${W + 20}" height="${fundo - 1452}" fill="#e3d5b8" stroke="${OUT}" stroke-width="4"/>
-    <rect x="-10" y="1444" width="${W + 20}" height="12" fill="#cbb994" stroke="${OUT}" stroke-width="3"/>
-    ${Array.from({ length: 12 }, (_, i) => `<path d="M${i * 95 + 20},1458 v${fundo - 1462}" stroke="#d3c3a0" stroke-width="3"/>`).join('')}
+  s += `<rect x="-420" y="1452" width="${W + 840}" height="${fundo - 1452}" fill="#e3d5b8" stroke="${OUT}" stroke-width="4"/>
+    <rect x="-420" y="1444" width="${W + 840}" height="12" fill="#cbb994" stroke="${OUT}" stroke-width="3"/>
+    ${Array.from({ length: 21 }, (_, i) => `<path d="M${i * 95 - 400},1458 v${fundo - 1462}" stroke="#d3c3a0" stroke-width="3"/>`).join('')}
     <path d="M70,1520 q40,-12 90,0 t90,0" stroke="#e76f51" stroke-width="9" fill="none" opacity=".5"/>
     <path d="M860,1570 q40,-12 90,0 t90,0" stroke="#3a86ff" stroke-width="9" fill="none" opacity=".45"/>`;
   // calçada: do pé do muro até o meio-fio (lajotas convergindo = profundidade); depois a rua de terra
-  s += `<path d="M-10,${fundo} H${W + 10} V${calcada} H-10Z" fill="#d2c9bd" stroke="${OUT}" stroke-width="4"/>
-    <rect x="-10" y="${fundo}" width="${W + 20}" height="14" fill="#000" opacity=".1"/>
-    ${Array.from({ length: 15 }, (_, i) => { const xa = W / 2 + (i - 7) * 78, xb = W / 2 + (i - 7) * 104; return `<path d="M${xa},${fundo} L${xb},${calcada}" stroke="#b8ad9f" stroke-width="3"/>`; }).join('')}
-    <path d="M-10,${fundo + 42} H${W + 10} M-10,${fundo + 96} H${W + 10}" stroke="#b8ad9f" stroke-width="3"/>
-    <rect x="-10" y="${calcada}" width="${W + 20}" height="18" fill="#a59a8c" stroke="${OUT}" stroke-width="4"/>
-    <rect x="-10" y="${calcada + 18}" width="${W + 20}" height="${H - calcada}" fill="url(#gterra)"/>
-    <rect x="-10" y="${calcada + 18}" width="${W + 20}" height="16" fill="#000" opacity=".12"/>`;
+  s += `<path d="M-420,${fundo} H${W + 420} V${calcada} H-420Z" fill="#d2c9bd" stroke="${OUT}" stroke-width="4"/>
+    <rect x="-420" y="${fundo}" width="${W + 840}" height="14" fill="#000" opacity=".1"/>
+    ${Array.from({ length: 25 }, (_, i) => { const xa = W / 2 + (i - 12) * 78, xb = W / 2 + (i - 12) * 104; return `<path d="M${xa},${fundo} L${xb},${calcada}" stroke="#b8ad9f" stroke-width="3"/>`; }).join('')}
+    <path d="M-420,${fundo + 42} H${W + 420} M-420,${fundo + 96} H${W + 420}" stroke="#b8ad9f" stroke-width="3"/>
+    <rect x="-420" y="${calcada}" width="${W + 840}" height="18" fill="#a59a8c" stroke="${OUT}" stroke-width="4"/>
+    <rect x="-420" y="${calcada + 18}" width="${W + 840}" height="${H - calcada + 400}" fill="url(#gterra)"/>
+    <rect x="-420" y="${calcada + 18}" width="${W + 840}" height="16" fill="#000" opacity=".12"/>`;
   { const r = rng('rua-sede'); for (let i = 0; i < 9; i++) s += `<ellipse cx="${(r() * W).toFixed(0)}" cy="${(calcada + 40 + r() * 60).toFixed(0)}" rx="${(14 + r() * 26).toFixed(0)}" ry="${(4 + r() * 5).toFixed(0)}" fill="#8b4a22" opacity=".35"/>`; }
   // ---- o bar: sombra no chão, parede lateral (vai até o fundo da calçada) e fachada
   s += `<path d="M${x0 + 10},${base} L${x1},${base} L${x1 + px},${base - py} L${x1 + px + 46},${base - py + 16} L${x1 + 40},${base + 22} L${x0 + 30},${base + 22}Z" fill="#000" opacity=".2"/>`;
@@ -799,7 +809,8 @@ function sede(estrutura, { t = 0 } = {}) {
       <path d="M${x + 14},${jTop + 14} l36,0 l-28,36z" fill="#fff" opacity=".5"/>
       <rect x="${x - 14}" y="${jTop + 144}" width="176" height="14" fill="#c97a40" stroke="${OUT}" stroke-width="4"/>`).join('')}`;
   // ---- varal (à esquerda) e barraca (à direita): em cima da calçada, ao lado do bar
-  if (estrutura.varal_camisas) s += varalCamisas(t);
+  if (predio) s += vestiarioPredio(t, estrutura);
+  if (estrutura.varal_camisas) s += varalCamisas(t, predio ? 1076 : 34);
   if (estrutura.lanchonete) s += lanchonete(estrutura.lanchonete, 836, base + 40);
   // ---- na rua (primeiro plano): mesa de plástico e engradado, na escala das pessoas
   const my = calcada + 62, mx = 122;
@@ -815,9 +826,31 @@ function sede(estrutura, { t = 0 } = {}) {
   return ceu(t) + s;
 }
 
+// Prédio do vestiário (à esquerda do bar, na calçada): térreo, porta da altura de uma pessoa, basculante
+// soltando vapor do chuveiro quente. Mesma perspectiva do bar (parede lateral à direita).
+function vestiarioPredio(t = 0, estrutura = {}) {
+  const x0 = -165, x1 = 150, base = SEDE.base, topo = base - 360, px = 36, py = 22, cx = (x0 + x1) / 2;
+  let s = `<path d="M${x0 + 10},${base} H${x1} l${px + 30},${-py + 8} l-20,30 H${x0 + 20}Z" fill="#000" opacity=".18"/>
+    <path d="M${x1},${topo} l${px},${-py} V${base - py} L${x1},${base}Z" fill="#b9c4cc" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>
+    <rect x="${x0}" y="${topo}" width="${x1 - x0}" height="${base - topo}" fill="#dfe7ec" stroke="${OUT}" stroke-width="7"/>
+    ${[0, 1, 2, 3, 4, 5].map(i => `<path d="M${x0 + 4},${topo + 40 + i * 52} H${x1 - 4}" stroke="#c8d3da" stroke-width="3"/>`).join('')}
+    <path d="M${x0 - 20},${topo + 12} L${x0 - 8},${topo - 34} L${x1 + px + 14},${topo - py - 40} L${x1 + px + 14},${topo - py - 8} L${x1 + 16},${topo + 12}Z" fill="${estrutura.telhado ? '#d1495b' : '#9aa5b1'}" stroke="${OUT}" stroke-width="6" stroke-linejoin="round"/>
+    <g class="rotulo"><rect x="${cx - 118}" y="${topo + 26}" width="236" height="58" rx="10" fill="${CORES.vinho}" stroke="${OUT}" stroke-width="6"/>
+    <text x="${cx}" y="${topo + 68}" text-anchor="middle" font-family="Anton" font-size="38" fill="${CORES.amarelo}" letter-spacing="2">VESTIÁRIO</text></g>
+    <rect x="${cx - 60}" y="${topo + 104}" width="120" height="34" rx="4" fill="#8ecae6" stroke="${OUT}" stroke-width="5"/>
+    <path d="M${cx - 60},${topo + 121} H${cx + 60}" stroke="${OUT}" stroke-width="3"/>
+    <rect x="${cx - 62}" y="${base - 286}" width="124" height="286" fill="#3a86ff" stroke="${OUT}" stroke-width="6"/>
+    <rect x="${cx - 48}" y="${base - 270}" width="96" height="110" rx="4" fill="none" stroke="#2a6fd6" stroke-width="5"/>
+    <circle cx="${cx + 40}" cy="${base - 140}" r="7" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="3"/>
+    <rect x="${cx - 74}" y="${base - 10}" width="148" height="14" fill="#b8ad9f" stroke="${OUT}" stroke-width="4"/>`;
+  for (let i = 0; i < 4; i++) { const f = (t * 0.35 + i * 0.25) % 1;   // vapor do chuveiro quente
+    s += `<circle cx="${(cx - 30 + i * 20 + Math.sin(f * 6 + i) * 12).toFixed(1)}" cy="${(topo + 100 - f * 150).toFixed(1)}" r="${(12 + f * 22).toFixed(1)}" fill="#fff" opacity="${(0.75 * (1 - f)).toFixed(2)}"/>`; }
+  return s;
+}
+
 // varal com as camisas do Poeira à venda (R$ 25): dois postes de madeira na calçada, à esquerda do bar
-function varalCamisas(t = 0) {
-  const b = SEDE.base + 44, xa = 34, xb = 236, topo = b - 318, mx = (xa + xb) / 2;
+function varalCamisas(t = 0, x0 = 34) {
+  const b = SEDE.base + 44, xa = x0, xb = x0 + 202, topo = b - 318, mx = (xa + xb) / 2;
   const camisa = (x, y, k) => `<g transform="translate(${x} ${y}) rotate(${Math.sin(t * 2 + k) * 4}) scale(1.12)">
       <path d="M-26,0 L-12,-6 Q0,4 12,-6 L26,0 L36,18 L24,24 L22,58 H-22 L-24,24 L-36,18Z" fill="${CORES.vinho}" stroke="${OUT}" stroke-width="4" stroke-linejoin="round"/>
       <rect x="-22" y="26" width="44" height="10" fill="${CORES.amarelo}"/>
@@ -867,7 +900,7 @@ function fundoEscuro() {
 
 Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
-  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, caramelo, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, caramelo, cone, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).
