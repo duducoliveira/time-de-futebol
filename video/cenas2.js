@@ -20,98 +20,25 @@ function camChaves(t, chaves) {
 }
 const naCamera = (cam, svg) => `<g transform="translate(540 ${cam.sy.toFixed(1)}) scale(${cam.z.toFixed(4)}) translate(${(-cam.x).toFixed(1)} ${(-cam.y).toFixed(1)})">${svg}</g>`;
 
-// ---- bar por dentro, em perspectiva: teto, paredes laterais e piso convergem para a parede do fundo.
-const ATRAS = 1392;   // pé de quem está atrás do balcão (o balcão esconde as pernas)
-// Escala: pessoa no balcão (pé em ~1330) s≈0,95; no primeiro plano (pé em ~1900) s≈1,35. Porta da rua ≈ 290.
-const BAR = { fx0: 150, fx1: 930, fy0: 250, fy1: 1250, mural: [170, 470, 350, 290], quadro: [560, 470, 350, 290] };
-function barDentro(t = 0, E = {}, { mural = true, quadro = true, atras = '' } = {}) {
-  const { fx0, fx1, fy0, fy1 } = BAR;
-  let s = `<rect x="-600" y="-600" width="${W + 1200}" height="${H + 1200}" fill="#3d2b1f"/>`;
-  // teto (forro de madeira) e paredes laterais
-  s += `<path d="M-600,-600 H${W + 600} L${fx1},${fy0} H${fx0}Z" fill="#a47148"/>
-    ${Array.from({ length: 13 }, (_, i) => { const u = i / 12; return `<path d="M${-600 + u * (W + 1200)},-600 L${fx0 + u * (fx1 - fx0)},${fy0}" stroke="#8a5a36" stroke-width="4"/>`; }).join('')}
-    <path d="M-600,-600 L${fx0},${fy0} V${fy1} L-600,${H + 600}Z" fill="#e8c38f"/>
-    <path d="M${W + 600},-600 L${fx1},${fy0} V${fy1} L${W + 600},${H + 600}Z" fill="#e2b984"/>
-    <path d="M-600,${fy1 + 420} L${fx0},${fy1 - 300} V${fy1} L-600,${H + 600}Z" fill="#c98a52" opacity=".9"/>
-    <path d="M${W + 600},${fy1 + 420} L${fx1},${fy1 - 300} V${fy1} L${W + 600},${H + 600}Z" fill="#bd7f48" opacity=".9"/>`;
-  // parede do fundo
-  s += `<rect x="${fx0}" y="${fy0}" width="${fx1 - fx0}" height="${fy1 - fy0}" fill="#f3d9b1" stroke="${OUT}" stroke-width="4"/>
-    <rect x="${fx0}" y="${fy1 - 300}" width="${fx1 - fx0}" height="300" fill="#c98a52"/>
-    ${Array.from({ length: 10 }, (_, i) => `<path d="M${fx0 + i * 78},${fy1 - 300} v300" stroke="#a96d3b" stroke-width="3"/>`).join('')}
-    <rect x="${fx0}" y="${fy1 - 308}" width="${fx1 - fx0}" height="12" fill="#8d5a2b"/>`;
-  // TV (passando o escudo), relógio, flâmula do Poeira e prateleira com garrafas
-  s += `<path d="M260,${fy0} v30 M340,${fy0} v30" stroke="${OUT}" stroke-width="5"/>
-    <rect x="200" y="280" width="200" height="130" rx="8" fill="#212529" stroke="${OUT}" stroke-width="5"/><rect x="210" y="290" width="180" height="108" fill="#1d3557"/>
-    <g transform="translate(300 344) scale(.21)">${escudoPoeira({})}</g><rect x="214" y="294" width="42" height="15" rx="3" fill="#e63946"/><text x="235" y="306" text-anchor="middle" font-family="Anton" font-size="11" fill="#fff">AO VIVO</text>
-    <circle cx="860" cy="330" r="38" fill="#fff" stroke="${OUT}" stroke-width="5"/><path d="M860,330 l0,-24 M860,330 l${Math.cos(t * 0.5) * 18},${Math.sin(t * 0.5) * 18}" stroke="${OUT}" stroke-width="4" stroke-linecap="round"/>
-    <path d="M430,290 h120 l-60,95z" fill="${CORES.vinho}" stroke="${OUT}" stroke-width="4"/><path d="M445,300 h90 l-45,70z" fill="${CORES.amarelo}" opacity=".9"/><text x="490" y="330" text-anchor="middle" font-family="Anton" font-size="20" fill="${CORES.vinho}">PFC</text>
-    <rect x="590" y="400" width="210" height="10" fill="#8d5a2b" stroke="${OUT}" stroke-width="3"/>`;
-  { const r = rng('garrafas-bar'); for (let x = 598; x < 790; x += 22 + r() * 6) { const h = 36 + r() * 26, cor = ['#2d6a4f', '#9d0208', '#e9c46a', '#6d597a', '#c97a40'][Math.floor(r() * 5)];
-    s += `<rect x="${x}" y="${400 - h}" width="14" height="${h}" rx="4" fill="${cor}" stroke="${OUT}" stroke-width="2"/><rect x="${x + 4}" y="${400 - h - 12}" width="6" height="13" fill="${cor}" stroke="${OUT}" stroke-width="1.5"/>`; } }
-  // mural de recados e quadro-negro na parede do fundo
-  if (mural) { const [x, y, w, h] = BAR.mural; s += corticaBoard(x, y, w, h);
-    const r = rng('recados'); if (mural !== 'vazio') for (let i = 0; i < 5; i++) s += `<rect x="${x + 20 + (i % 3) * 110}" y="${y + 25 + Math.floor(i / 3) * 130}" width="90" height="80" fill="${PAPEL[i % 5]}" stroke="${OUT}" stroke-width="2" transform="rotate(${(r() - 0.5) * 12} ${x + 65 + (i % 3) * 110} ${y + 65 + Math.floor(i / 3) * 130})"/><circle cx="${x + 65 + (i % 3) * 110}" cy="${y + 32 + Math.floor(i / 3) * 130}" r="6" fill="#e63946"/>`; }
-  if (quadro) { const [x, y, w, h] = BAR.quadro; s += quadroNegroMoldura(x, y, w, h) + (quadro === 'vazio' ? '' : `<text x="${x + w / 2}" y="${y + 70}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="34" fill="${CHALK}" opacity=".9">HOJE TEM JOGO!</text>
-    <text x="${x + w / 2}" y="${y + 130}" text-anchor="middle" font-family="Nunito" font-weight="700" font-size="26" fill="${CHALK}" opacity=".8">pastel · caldo · refri</text>
-    <text x="${x + w / 2}" y="${y + 230}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="24" fill="#ffd8a8" opacity=".85">FIADO SÓ AMANHÃ</text>`); }
-  // freezer de sorvete e engradados no pé da parede
-  s += `<rect x="790" y="1020" width="130" height="230" rx="10" fill="#f1faee" stroke="${OUT}" stroke-width="4"/><rect x="800" y="1032" width="110" height="60" rx="6" fill="#a8dadc"/><text x="855" y="1130" text-anchor="middle" font-family="Anton" font-size="20" fill="#1d3557">SORVETES</text>
-    ${[0, 1, 2].map(i => `<rect x="${170 + (i % 2) * 6}" y="${1180 - i * 46}" width="110" height="46" fill="#e63946" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
-  // porta da rua na parede direita (luz entrando) e janela na esquerda
-  s += `<path d="M${W + 20},560 L${fx1 + 40},640 V1180 L${W + 20},1360Z" fill="#fff4cc" stroke="${OUT}" stroke-width="5"/>
-    <path d="M${W + 20},1360 L${fx1 + 40},1180 L${fx1 - 60},1250 L${W - 40},1600Z" fill="#fff4cc" opacity=".35"/>
-    <path d="M-20,420 L${fx0 - 40},500 V820 L-20,880Z" fill="#a8dadc" stroke="${OUT}" stroke-width="5"/><path d="M50,445 V860" stroke="${OUT}" stroke-width="4"/>`;
-  // lâmpadas penduradas (com luz) e ventilador de teto
-  [[330, 170], [750, 170]].forEach(([x, y]) => { s += `<path d="M${x},${y - 200} V${y}" stroke="${OUT}" stroke-width="3"/><path d="M${x - 40},${y + 30} q40,-50 80,0z" fill="#495057" stroke="${OUT}" stroke-width="3"/>
-    <ellipse cx="${x}" cy="${y + 60}" rx="140" ry="90" fill="#ffe8a3" opacity=".22"/><circle cx="${x}" cy="${y + 32}" r="12" fill="#fff3bf"/>`; });
-  s += `<g transform="translate(540 120)"><path d="M0,-200 V0" stroke="${OUT}" stroke-width="4"/>${[0, 1, 2].map(i => { const a = t * 6 + i * 2.094; return `<ellipse cx="${Math.cos(a) * 70}" cy="${Math.sin(a) * 12}" rx="70" ry="10" fill="#8d5a2b" stroke="${OUT}" stroke-width="2"/>`; }).join('')}<circle r="14" fill="#495057" stroke="${OUT}" stroke-width="3"/></g>`;
-  // piso de ladrilho em perspectiva
-  s += `<path d="M${fx0},${fy1} H${fx1} L${W + 600},${H + 600} H-600Z" fill="#efe3cf"/>
-    ${Array.from({ length: 15 }, (_, i) => { const u = i / 14; return `<path d="M${fx0 + u * (fx1 - fx0)},${fy1} L${-600 + u * (W + 1200)},${H + 600}" stroke="#d5c4a8" stroke-width="3"/>`; }).join('')}
-    ${[0.06, 0.15, 0.27, 0.42, 0.6, 0.82].map(k => { const y = fy1 + (H + 600 - fy1) * k, xa = fx0 + (-600 - fx0) * k, xb = fx1 + (W + 600 - fx1) * k; return `<path d="M${xa},${y} H${xb}" stroke="#d5c4a8" stroke-width="3"/>`; }).join('')}`;
-  // quem está atrás do balcão (pé em ~1460, escondido): o balcão de 1,05 m cobre da cintura pra baixo
-  s += atras;
-  // balcão com banquinhos
-  s += `<path d="M110,1300 H970 L1000,1330 H80Z" fill="#6f4518" stroke="${OUT}" stroke-width="5"/>
-    <rect x="80" y="1330" width="920" height="170" fill="#a0673e" stroke="${OUT}" stroke-width="5"/>
-    ${Array.from({ length: 8 }, (_, i) => `<path d="M${120 + i * 120},1336 v158" stroke="#8d5a2b" stroke-width="5"/>`).join('')}
-    <rect x="80" y="1490" width="920" height="16" fill="#000" opacity=".15"/>
-    ${[260, 540, 820].map(x => `<ellipse cx="${x}" cy="1560" rx="60" ry="16" fill="#e63946" stroke="${OUT}" stroke-width="4"/><path d="M${x},1572 V1680 M${x - 34},1690 h68" stroke="${OUT}" stroke-width="9" stroke-linecap="round"/>`).join('')}
-    <path d="M330,1300 l12,-60 h40 l12,60z" fill="#ffd6a5" stroke="${OUT}" stroke-width="3"/><circle cx="362" cy="1230" r="20" fill="#ffd166" stroke="${OUT}" stroke-width="3"/>`;
-  return s;
+// ---- o bar da Dona Cida por dentro fica em bar.js (sala em perspectiva, medidas reais, três quadros na parede)
+// câmera do bar: começa na vista geral e entra no quadro `qual` (chega em tZoom); depois só respira um pouco
+function camBar(t, d, qual, tZoom = 1.2) {
+  const z = barZoom(qual);
+  return camChaves(t, [[0, ...BAR_GERAL], [0.3, ...BAR_GERAL], [tZoom, ...z], [Math.max(d, tZoom + 0.1), z[0], z[1], z[2] * 1.03, z[3]]]);
 }
-// plano geral do bar (Dona Cida no balcão) → a câmera entra no mural ou no quadro, que fica do tamanho da tela
-// (área útil na tela: y ≈ 165..955). Devolve o SVG do fundo; o conteúdo vai por cima, em coordenadas de tela.
-function entraNaParede(t, d, E, qual) {
-  const [x, y, w, h] = BAR[qual], quadro = qual === 'quadro' ? 'vazio' : true, mural = qual === 'mural' ? 'vazio' : true;
-  const cam = camChaves(t, [[0, 540, 920, 1, 960], [0.2, 540, 920, 1, 960], [1.0, x + w / 2, y + h / 2, 2.75, 560], [Math.max(d, 1.1), x + w / 2, y + h / 2, 2.85, 560]]);
-  const mundo = barDentro(t, E, { quadro, mural, atras: presidente(t, E, qual === 'mural' ? 760 : 330, ATRAS, 0.95, { expr: 'feliz' }) }) + narrador(t, E, qual === 'mural' ? 300 : 760, 1900, 1.35, { pose: 'microfone' });
-  // depois que a câmera entra na parede, o Tião e a Dona Cida aparecem em primeiro plano (perto da câmera)
-  return naCamera(cam, mundo) + frenteBar(t, E, qual === 'mural' ? 1 : -1);
+// com a câmera no quadro, a parte de baixo (prateleira, balcão) escurece de leve: o olho vai para o quadro
+function focoQuadro(cam) {
+  const k = clamp((cam.z - 1.6) / 2);
+  return k > 0 ? `<defs><linearGradient id="gfoco" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a120b" stop-opacity="0"/><stop offset="1" stop-color="#1a120b" stop-opacity=".55"/></linearGradient></defs>
+    <rect x="0" y="960" width="${W}" height="${H - 960}" fill="url(#gfoco)" opacity="${k.toFixed(3)}"/>` : '';
 }
-// depois que a câmera entra no quadro da parede, o Tião e a Dona Cida sobem em primeiro plano (perto da câmera,
-// cortados na cintura), olhando para o quadro; lado = 1: Tião à esquerda
-function frenteBar(t, E, lado = 1, t0 = 0.9) {
-  const k = easeOut(clamp((t - t0) / 0.5));
-  if (k <= 0) return '';
-  const y = FRENTE(1.35) + (1 - k) * 220;
-  return `<g opacity="${k.toFixed(3)}">${narrador(t, E, lado > 0 ? 250 : 830, y, 1.35, { pose: 'aponta' })}${presidente(t, E, lado > 0 ? 830 : 250, y, 1.35, { expr: 'feliz' })}</g>`;
-}
-function corticaBoard(x, y, w, h) {
-  const r = rng('cortica' + x);
-  return `<rect x="${x - 14}" y="${y - 14}" width="${w + 28}" height="${h + 28}" rx="8" fill="#8d5a2b" stroke="${OUT}" stroke-width="6"/>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#c9965e"/>
-    ${Array.from({ length: 60 }, () => `<circle cx="${(x + r() * w).toFixed(0)}" cy="${(y + r() * h).toFixed(0)}" r="${(1.5 + r() * 2.5).toFixed(1)}" fill="#a87543" opacity=".7"/>`).join('')}`;
-}
-function quadroNegroMoldura(x, y, w, h) {
-  return `<rect x="${x - 16}" y="${y - 16}" width="${w + 32}" height="${h + 32}" rx="6" fill="#8d5a2b" stroke="${OUT}" stroke-width="6"/>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#2f4f3a"/>
-    <rect x="${x + 10}" y="${y + 10}" width="${w - 20}" height="${h - 20}" fill="#ffffff" opacity=".03"/>
-    <rect x="${x + w * 0.1}" y="${y + h + 2}" width="${w * 0.8}" height="12" fill="#6f4518" stroke="${OUT}" stroke-width="3"/>`;
-}
+// conteúdo que aparece aos poucos (entra com um leve "assentar")
+const surge = (t, t0, dur = 0.35) => easeOut(clamp((t - t0) / dur));
+
 // bilhete de papel preso com tacha (comentário no mural)
-function bilhete(usuario, txt, curtidas, { w = 430, cor = '#fff4b8', rot = 0, selo = '', tam = 30 } = {}) {
-  const linhas = quebrar(txt, tam, w - 60).slice(0, 4), lh = tam * 1.33, h = 110 + linhas.length * lh + (selo ? 30 : 0);
+const alturaBilhete = (txt, { w = 430, selo = '', tam = 30, linhas: max = 4 } = {}) => 110 + Math.min(max, quebrar(txt, tam, w - 60).length) * tam * 1.33 + (selo ? 30 : 0);
+function bilhete(usuario, txt, curtidas, { w = 430, cor = '#fff4b8', rot = 0, selo = '', tam = 30, linhas: max = 4 } = {}) {
+  const linhas = quebrar(txt, tam, w - 60).slice(0, max), lh = tam * 1.33, h = 110 + linhas.length * lh + (selo ? 30 : 0);
   return `<g transform="rotate(${rot})">
     <rect x="${-w / 2 + 8}" y="${-h / 2 + 10}" width="${w}" height="${h}" fill="#000" opacity=".22"/>
     <rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="${cor}" stroke="${OUT}" stroke-width="3"/>
@@ -127,27 +54,33 @@ const VARIACOES = {
   // ---- comentários no mural de recados do bar (bilhetes presos, carimbados quando a narração chega neles)
   comentarios: {
     mural(t, d, c, E) {
-      // plano geral do bar com a Dona Cida no balcão → a câmera entra no mural (fica do tamanho da tela)
-      const [mx, my, mw, mh] = BAR.mural, cam = camChaves(t, [[0, 540, 900, 1, 960], [0.25, 540, 900, 1, 960], [1.0, mx + mw / 2, my + mh / 2, 2.75, 560], [d, mx + mw / 2, my + mh / 2, 2.85, 560]]);
-      let mundo = barDentro(t, E, { mural: true, quadro: true, atras: presidente(t, E, 700, ATRAS, 0.95, { pose: 'aponta', expr: 'feliz' }) }) + narrador(t, E, 300, 1900, 1.35, { pose: 'microfone' });
-      let s = naCamera(cam, mundo) + frenteBar(t, E, 1);
+      // vista geral do bar (Tião no salão, Dona Cida atrás do balcão) → a câmera entra no quadro de recados,
+      // onde os comentários estão pregados como bilhetes; o carimbo bate quando a narração chega nele
+      const cam = camBar(t, d, 'recados'), rosto = cam.z < 1.3, q = QUADROS.recados;
       const lista = (c.dados.comentarios || []).slice(0, 3), n = lista.length;
+      const pos = n === 1 ? [[500, 360]] : n === 2 ? [[262, 240], [738, 500]] : [[255, 190], [745, 230], [500, 545]];
+      const fmt = n === 1 ? { w: 820, tam: 50, linhas: 5 } : n === 2 ? { w: 470, tam: 38, linhas: 5 } : { w: 440, tam: 32, linhas: 3 };
+      let conteudo = '';
       lista.forEach((cm, i) => {
-        const t0 = Math.max(1.0, cm.chave ? quando(c, cm.chave, 0.3 + i * 2) : 0.3 + i * 2);
-        const x = n === 1 ? W / 2 : n === 2 ? [310, 770][i] : [300, 780, 540][i], y = n === 3 ? [330, 400, 760][i] : n === 2 ? [400, 680][i] : 560;
-        const rot = [-4, 3, -2][i], cor = PAPEL[i % PAPEL.length];
-        const ent = easeOut(prog(t, t0 - 0.15, 0.4));
-        if (ent > 0) s += `<g class="ui" transform="translate(${x} ${y - (1 - ent) * 120}) scale(${0.9 + 0.1 * ent})" opacity="${clamp(ent * 2)}">${bilhete(cm.usuario, cm.texto, cm.curtidas, { rot, cor, selo: cm.selo || '', w: n === 1 ? 760 : 470, tam: n === 1 ? 40 : 34 })}</g>`;
-        if (cm.carimbo && CARIMBOS[cm.carimbo]) {
-          const t1 = Math.max(t0 + 0.4, cm.chave_carimbo ? quando(c, cm.chave_carimbo, t0 + 1.2) : t0 + 1.2);
-          s += pop(t, t1, x + 40, y + 60, carimbo(CARIMBOS[cm.carimbo][0], CARIMBOS[cm.carimbo][1], -10, 38), 0.3, false);
+        const t0 = Math.max(1.25 + i * 0.15, cm.chave ? quando(c, cm.chave, 0.3 + i * 2) : 0.3 + i * 2), k = surge(t, t0 - 0.1);
+        if (k <= 0) return;
+        const [x, y] = pos[i], rot = [-4, 3, -2][i];
+        const op = { ...fmt, rot, cor: PAPEL[i % PAPEL.length], selo: cm.selo || '' };
+        conteudo += `<g transform="translate(${x} ${y}) scale(${(1.12 - 0.12 * k).toFixed(3)})" opacity="${k.toFixed(3)}">${bilhete(cm.usuario, cm.texto, cm.curtidas, op)}</g>`;
+        if (cm.carimbo && CARIMBOS[cm.carimbo]) {   // o carimbo bate na borda de baixo do bilhete (não tampa o texto)
+          const t1 = Math.max(t0 + 0.4, cm.chave_carimbo ? quando(c, cm.chave_carimbo, t0 + 1.2) : t0 + 1.2), kc = clamp((t - t1) / 0.25);
+          const hB = alturaBilhete(cm.texto, op);
+          if (kc > 0) conteudo += `<g transform="translate(${x - fmt.w * 0.12} ${y + hB / 2 + 6}) scale(${(1.6 - 0.6 * easeOutBack(kc)).toFixed(3)})" opacity="${kc}">${carimbo(CARIMBOS[cm.carimbo][0], CARIMBOS[cm.carimbo][1], -8, n === 1 ? 52 : 38)}</g>`;
         }
       });
-      return s;
+      const mundo = barDentro(t, E, { caixa: c.dados.hud?.caixa, conteudo: { recados: conteudo },
+        atras: [{ quem: 'cida', X: -0.3, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.05, d: BAR_FRENTE, pose: 'microfone', rosto }] });
+      return naCamera(cam, mundo) + focoQuadro(cam);
     },
     // ---- comentários no celular da Dona Cida (lista do Instagram, o comentário da vez acende)
     celular(t, d, c, E) {
-      let s = naCamera({ x: 540, y: 1100, z: 1.25, sy: 870 }, barDentro(t, E, { atras: presidente(t, E, 760, ATRAS, 0.95, { expr: 'feliz' }) })) + `<rect width="${W}" height="${H}" fill="#fff" opacity=".4"/>`;
+      // o bar ao fundo, meio apagado; na frente, o celular da Dona Cida com os comentários
+      let s = naCamera({ x: 540, y: 1075, z: 1.15, sy: 900 }, barDentro(t, E, { caixa: c.dados.hud?.caixa, atras: [{ quem: 'cida', X: 0.8, rosto: false }] })) + `<rect width="${W}" height="${H}" fill="#fff" opacity=".45"/>`;
       const lista = (c.dados.comentarios || []).slice(0, 4);
       const px = 175, py = 140, pw = 730, ph = 980;
       s += `<g transform="rotate(-3 540 640)">
@@ -178,56 +111,68 @@ const VARIACOES = {
       s += `</g>`;
       // a mão segurando o celular
       s += `<path d="M${px + pw - 30},${py + ph - 160} q90,20 110,140 q10,90 -60,140 l-160,40 q-60,-40 -20,-110 q40,-40 130,-210z" fill="#8d5524" stroke="${OUT}" stroke-width="6"/>`;
-      s += presidente(t, E, 270, 1960, 1.25, { expr: 'feliz' });
+      s += presidente(t, E, 270, FRENTE(1.3), 1.3, { expr: 'feliz' });
       return s;
     },
   },
   // ---- decisão no mural: as opções viram bilhetes e sobra um post-it em branco
   decisao: {
     quadro(t, d, c, E) {
-      let s = entraNaParede(t, d, E, 'quadro');
-      const giz = (txt, y, tam, t0, cor = CHALK) => { const p = clamp((t - Math.max(1.0, t0)) / 0.5); return p > 0 ? `<text x="540" y="${y}" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="${tam}" fill="${cor}" opacity="${p}">${esc(txt)}</text>` : ''; };
-      s += giz((c.texto_tela[0] || '').toUpperCase(), 250, 50, 0.1);
-      s += giz(`CAIXA: ${E.moeda} ${Math.round(c.dados.caixa || 0).toLocaleString('pt-BR')}`, 370, 66, 0.5, '#ffe066');
-      s += giz('E AGORA, O QUE A GENTE FAZ?', 500, 50, 1.0);
-      const ops = (c.dados.opcoes || []).filter(o => !/sua ideia/i.test(o));
-      ops.forEach((o, i) => s += giz('• ' + o, 600 + i * 70, 42, 1.4 + i * 0.3));
-      s += giz('SUA IDEIA NOS COMENTÁRIOS ✍', 620 + ops.length * 70 + 40, 44, 1.8, '#a5d8ff');
-      s += giz('O MAIS CURTIDO DECIDE!', 620 + ops.length * 70 + 130, 48, 2.2, '#ffe066');
-      return s;
+      // a câmera entra no quadro branco do caixa; a Dona Cida escreve o valor e a pergunta do dia (pincel)
+      const cam = camBar(t, d, 'caixa'), rosto = cam.z < 1.3, R = v => `${E.moeda} ${Math.round(v || 0).toLocaleString('pt-BR')}`;
+      const ops = (c.dados.opcoes || []).filter(o => !/sua ideia/i.test(o)).slice(0, 3), tB = 1.25;
+      const tV = Math.max(tB, quando(c, 'caixa', tB) - 0.1), tA = Math.max(tV + 0.5, quando(c, 'agora', tV + 1) - 0.1);
+      const tI = Math.max(tA + 0.5, quando(c, 'ideia', tA + 1.2) - 0.1), tD = Math.max(tI + 0.4, quando(c, 'decide', tI + 1) - 0.4);
+      let conteudo = pincel((c.texto_tela[0] || 'DECISÃO').toUpperCase(), 500, 92, 72, { cor: CORES.vinho, op: surge(t, tB - 0.3) })
+        + pincel(R(c.dados.caixa), 500, ops.length ? 225 : 250, ops.length ? 120 : 150, { cor: '#2b8a3e', op: surge(t, tV) });
+      if (surge(t, tV) > 0) conteudo += `<path d="M230,${ops.length ? 250 : 282} q270,${18} 540,0" stroke="#2b8a3e" stroke-width="9" fill="none" stroke-linecap="round" opacity="${surge(t, tV + 0.3)}"/>`;
+      conteudo += pincel('E AGORA, O QUE A GENTE FAZ?', 500, ops.length ? 320 : 370, 56, { cor: '#1971c2', op: surge(t, tA) });
+      ops.forEach((o, i) => { conteudo += pincel('• ' + o, 500, 385 + i * 52, 44, { cor: '#495057', op: surge(t, tA + 0.4 + i * 0.3) }); });
+      const yI = ops.length ? 400 + ops.length * 52 : 465;
+      conteudo += pincel('SUA IDEIA NOS COMENTÁRIOS', 500, yI, 54, { cor: '#1d3557', op: surge(t, tI) });
+      conteudo += pincel('O MAIS CURTIDO DECIDE!', 500, yI + 82, 62, { cor: '#e03131', op: surge(t, tD) });
+      const mundo = barDentro(t, E, { caixa: c.dados.caixa, conteudo: { caixa: conteudo },
+        atras: [{ quem: 'cida', X: 1.05, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.05, d: BAR_FRENTE, pose: 'microfone', rosto }] });
+      return naCamera(cam, mundo) + focoQuadro(cam);
     },
     mural(t, d, c, E) {
-      let s = entraNaParede(t, d, E, 'mural');
-      const ops = (c.dados.opcoes || []).filter(o => !/sua ideia/i.test(o));
-      s += pop(t, 1.0, W / 2, 230, pilula(c.texto_tela[0] || '', { tam: 50, bg: '#2e8b57', rot: -3 }));
-      s += pop(t, 1.2, 320, 430, bilhete('dona.cida', `No caixa: ${E.moeda} ${Math.round(c.dados.caixa || 0).toLocaleString('pt-BR')}`, 0, { w: 440, cor: '#d8f3dc', rot: -4, tam: 38 }));
-      if (!ops.length) s += pop(t, 1.5, 330, 720, bilhete('dona.cida', 'E agora, o que a gente faz com esse dinheiro?', 0, { w: 440, cor: '#ffffff', rot: 3, tam: 34 }));
-      ops.forEach((o, i) => s += pop(t, 1.5 + i * 0.3, 280 + i * 260, 720, bilhete('torcida', o, 0, { w: 360, cor: PAPEL[(i + 1) % PAPEL.length], rot: [-5, 4, -2][i] || 0 })));
-      s += pop(t, 1.9, 770, 640, `<g transform="rotate(5)"><rect x="-160" y="-140" width="320" height="280" fill="#ffe066" stroke="${OUT}" stroke-width="4"/>
-        <rect x="-160" y="-140" width="320" height="42" fill="#fcc419"/>
-        <text y="-20" text-anchor="middle" font-family="Anton" font-size="50" fill="${OUT}">SUA IDEIA</text>
-        <text y="46" text-anchor="middle" font-family="Anton" font-size="50" fill="${OUT}">AQUI ✍</text>
-        <text y="105" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="24" fill="#495057">nos comentários</text></g>`);
+      // a decisão no quadro de recados: o bilhete do caixa, as ideias da torcida e o post-it em branco
+      const cam = camBar(t, d, 'recados'), rosto = cam.z < 1.3, R = v => `${E.moeda} ${Math.round(v || 0).toLocaleString('pt-BR')}`;
+      const ops = (c.dados.opcoes || []).filter(o => !/sua ideia/i.test(o)).slice(0, 2), tB = 1.25;
+      const nota = (x, y, t0, svg) => { const k = surge(t, t0); return k > 0 ? `<g transform="translate(${x} ${y}) scale(${(1.12 - 0.12 * k).toFixed(3)})" opacity="${k.toFixed(3)}">${svg}</g>` : ''; };
+      let conteudo = nota(265, 190, tB, bilhete('dona.cida', `No caixa: ${R(c.dados.caixa)}`, 0, { w: 440, cor: '#d8f3dc', rot: -4, tam: 40 }));
+      if (!ops.length) conteudo += nota(270, 500, Math.max(tB + 0.4, quando(c, 'agora', tB + 1) - 0.1), bilhete('dona.cida', 'E agora, o que a gente faz com esse dinheiro?', 0, { w: 440, cor: '#ffffff', rot: 3, tam: 36 }));
+      ops.forEach((o, i) => { conteudo += nota(265, 470 + i * 0, tB + 0.6 + i * 0.3, bilhete('torcida', o, 0, { w: 420, cor: PAPEL[(i + 1) % PAPEL.length], rot: [3, -3][i], tam: 34 })); });
+      conteudo += nota(745, 380, Math.max(tB + 0.8, quando(c, 'ideia', tB + 1.5) - 0.1), `<g transform="rotate(5)"><rect x="-190" y="-170" width="380" height="340" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>
+        <rect x="-190" y="-170" width="380" height="52" fill="#fcc419"/><circle cy="-146" r="14" fill="#e63946" stroke="${OUT}" stroke-width="3"/>
+        <text y="-20" text-anchor="middle" font-family="Anton" font-size="66" fill="${OUT}">SUA IDEIA</text>
+        <text y="66" text-anchor="middle" font-family="Anton" font-size="66" fill="${OUT}">AQUI ✍</text>
+        <text y="130" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="30" fill="#495057">nos comentários</text></g>`);
+      const mundo = barDentro(t, E, { caixa: c.dados.caixa, conteudo: { recados: conteudo },
+        atras: [{ quem: 'cida', X: -0.3, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.05, d: BAR_FRENTE, pose: 'microfone', rosto }] });
+      let s = naCamera(cam, mundo) + focoQuadro(cam);
+      s += pop(t, tB, W / 2, 175, pilula(c.texto_tela[0] || '', { tam: 46, bg: '#2e8b57', rot: -3 }));
       return s;
     },
   },
   // ---- tabela escrita a giz no quadro-negro do bar
   tabela: {
     quadro(t, d, c, E) {
-      let s = entraNaParede(t, d, E, 'quadro');
-      const tab = c.dados.tabela || [], nome = NOME(E), t0 = 1.0;
-      if (t > t0) s += `<text x="540" y="235" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="40" fill="${CHALK}" opacity="${clamp((t - t0) / 0.4)}">${esc((c.texto_tela[0] || '').toUpperCase())}</text>
-        <path d="M150,258 H930" stroke="${CHALK}" stroke-width="3" opacity=".6"/>`;
+      // a câmera entra no quadro-negro e a tabela já está escrita a giz; o Poeira é circulado
+      const cam = camBar(t, d, 'tabela'), rosto = cam.z < 1.3, tab = (c.dados.tabela || []).slice(0, 10), nome = NOME(E), t0 = 1.2;
+      let conteudo = giz((c.texto_tela[0] || '').toUpperCase(), 500, 78, 50, { peso: 900, op: surge(t, t0 - 0.4) })
+        + `<path d="M50,104 H950" stroke="${CHALK}" stroke-width="4" opacity="${0.6 * surge(t, t0 - 0.4)}"/>`;
+      const passo = tab.length > 8 ? 60 : 70;
       tab.forEach((l, i) => {
-        const y = 315 + i * 63, p = clamp((t - t0 - 0.1 - i * 0.1) / 0.3), meu = l.time === nome;
-        if (p <= 0) return;
-        s += `<g opacity="${p}" transform="rotate(${(i % 2 ? 0.4 : -0.3)} 540 ${y})">
-          <text x="150" y="${y}" font-family="Nunito" font-weight="800" font-size="36" fill="${CHALK}">${l.pos}º</text>
-          <text x="225" y="${y}" font-family="Nunito" font-weight="800" font-size="36" fill="${meu ? '#ffe066' : CHALK}">${esc(l.time)}</text>
-          <text x="920" y="${y}" text-anchor="end" font-family="Nunito" font-weight="900" font-size="36" fill="${CHALK}">${l.pts ?? ''}</text></g>`;
-        if (meu) { const q = clamp((t - t0 - 1.0) / 0.6); s += `<ellipse cx="520" cy="${y - 12}" rx="${420 * q}" ry="32" fill="none" stroke="#ffe066" stroke-width="5" opacity=".9"/>`; }
+        const y = 168 + i * passo, op = surge(t, t0 - 0.2 + i * 0.07), meu = l.time === nome;
+        if (op <= 0) return;
+        conteudo += `<g transform="rotate(${(i % 2 ? 0.4 : -0.3)} 500 ${y})">${giz(`${l.pos}º`, 60, y, 42, { anchor: 'start', op })}${giz(l.time, 145, y, 42, { anchor: 'start', cor: meu ? '#ffe066' : CHALK, op })}${giz(String(l.pts ?? ''), 950, y, 42, { anchor: 'end', peso: 900, op })}</g>`;
+        if (meu) { const q = clamp((t - t0 - 0.8) / 0.6); if (q > 0) conteudo += `<ellipse cx="460" cy="${y - 14}" rx="${470 * q}" ry="34" fill="none" stroke="#ffe066" stroke-width="6" opacity=".9"/>`; }
       });
-      s += pop(t, 1.9, W / 2, 1420, tituloGrande(c.texto_tela[1] || '', { tam: 120, cor: CORES.laranja }));
+      const mundo = barDentro(t, E, { caixa: c.dados.hud?.caixa, conteudo: { tabela: conteudo },
+        atras: [{ quem: 'cida', X: -0.15, pose: 'normal', rosto }], frente: [{ quem: 'tiao', X: 1.05, d: BAR_FRENTE, pose: 'aponta', rosto }] });
+      let s = naCamera(cam, mundo) + focoQuadro(cam);
+      s += pop(t, Math.max(1.9, quando(c, 'lugar', 1.9) - 0.2), W / 2, 1420, tituloGrande(c.texto_tela[1] || '', { tam: 120, cor: CORES.laranja }));
       return s;
     },
   },
@@ -385,13 +330,17 @@ const VARIACOES = {
   // ---- evolução do dia no balcão do bar: a Dona Cida conta o dinheiro, o Tião confere a torcida
   evolucao: {
     balcao(t, d, c, E) {
-      // a câmera desliza pelo balcão: do Tião (torcida) para a Dona Cida contando o dinheiro (caixa)
-      const tC = quando(c, 'caixa', d * 0.6, true);
-      let mundo = barDentro(t, E, { atras: presidente(t, E, 760, ATRAS, 0.95, { pose: 'caixa', expr: 'feliz' }) + narrador(t, E, 300, ATRAS, 0.95, { pose: 'aponta' }) });
-      mundo += [0, 1, 2, 3].map(i => `<rect x="${640 + i * 34}" y="${1288 - i * 5}" width="96" height="40" rx="6" fill="#95d5b2" stroke="${OUT}" stroke-width="3" transform="rotate(${-8 + i * 6} ${690 + i * 34} 1308)"/>`).join('')
-        + [0, 1, 2].map(i => `<circle cx="${880 + i * 24}" cy="1302" r="12" fill="#ffd166" stroke="${OUT}" stroke-width="3"/>`).join('');
-      const cam = camChaves(t, [[0, 330, 1080, 1.45, 1250], [Math.max(0.5, tC - 0.6), 330, 1080, 1.5, 1250], [tC + 0.4, 760, 1080, 1.5, 1250], [Math.max(d, tC + 0.5), 760, 1080, 1.55, 1250]]);
-      let s = naCamera(cam, mundo) + `<rect width="${W}" height="${H}" fill="${CORES.marinho}" opacity=".12"/>`;
+      // no salão: o Tião confere a torcida; a câmera desliza pelo balcão até a Dona Cida contando o dinheiro
+      const tC = quando(c, 'caixa', d * 0.6, true), [xT] = bP(-1.0, 0, BAR_FRENTE), [xC] = bP(1.0, 0, BAR_ATRAS);
+      // o quadro do caixa mostra o valor de ontem até a narração chegar no caixa; aí a Dona Cida atualiza
+      const caixaQuadro = t < tC + 0.6 ? (c.dados.caixa_antes ?? c.dados.caixa) : c.dados.caixa;
+      let mundo = barDentro(t, E, { caixa: caixaQuadro, atras: [{ quem: 'cida', X: 1.0, pose: 'caixa' }], frente: [{ quem: 'tiao', X: -1.0, d: BAR_FRENTE, pose: 'aponta' }] });
+      // notas e moedas em cima do balcão, na frente da Dona Cida
+      { const k = BARP.f / 4.85; mundo += [0, 1, 2, 3].map(i => { const [x, y] = bP(0.72 + i * 0.07, 1.05, 4.85); return `<rect x="${x - 0.07 * k}" y="${y - 0.03 * k}" width="${0.14 * k}" height="${0.06 * k}" rx="3" fill="#95d5b2" stroke="${OUT}" stroke-width="2" transform="rotate(${-8 + i * 6} ${x} ${y})"/>`; }).join('')
+        + [0, 1, 2].map(i => { const [x, y] = bP(1.25 + i * 0.05, 1.05, 4.85); return `<ellipse cx="${x}" cy="${y - 4}" rx="${0.022 * k}" ry="${0.012 * k}" fill="#ffd166" stroke="${OUT}" stroke-width="1.5"/>`; }).join(''); }
+      // (os rostos ficam acima da faixa da legenda, y ≈ 1165)
+      const cam = camChaves(t, [[0, xT + 80, 1110, 1.16, 935], [Math.max(0.5, tC - 0.6), xT + 80, 1110, 1.19, 935], [tC + 0.4, xC - 40, 1110, 1.19, 935], [Math.max(d, tC + 0.5), xC - 40, 1110, 1.22, 935]]);
+      let s = naCamera(cam, mundo) + `<rect width="${W}" height="${H}" fill="${CORES.marinho}" opacity=".1"/>`;
       return s + TIPOS.evolucao.cartoes(t, c, E);
     },
   },
@@ -416,7 +365,7 @@ for (const [tipo, vs] of Object.entries(VARIACOES)) {
   TIPOS[tipo] = (t, d, c, E) => (vs[c.dados.variante] || original)(t, d, c, E);
   Object.assign(TIPOS[tipo], original);   // mantém os "pedaços" pendurados na original (ex.: TIPOS.capa.titulo)
 }
-Object.assign(window, { barDentro, bilhete, VARIACOES });
+Object.assign(window, { bilhete, VARIACOES, camBar });
 
 // ------------------------------------------------------------ transições entre cenas (como no detetive)
 // Mesmo lugar → corte seco (a câmera continua). Lugar diferente → chicote com desfoque de movimento;
