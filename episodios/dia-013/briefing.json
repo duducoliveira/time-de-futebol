@@ -1,0 +1,268 @@
+{
+  "dia": 13,
+  "seguidores_ontem": 436,
+  "seguidores_hoje": 457,
+  "post_anterior": {
+    "id": "18444942412182579",
+    "caption": "DIA 12 do Poeira FC ⚽\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam só 64 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 16,
+    "like_count": 136,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/Df1j2QiO6Ih/",
+    "timestamp": "2026-11-17T09:02:25+0000"
+  },
+  "curtidas": 136,
+  "receita_curtidas": 136,
+  "caixa_atual": 2492.0,
+  "caixa_com_curtidas": 2628.0,
+  "top_comentarios": [
+    {
+      "usuario": "dre_zin.fs",
+      "texto": "Coloca eu no gol pra garantir nossa vitória",
+      "curtidas": 7,
+      "id": "17969419125233802",
+      "timestamp": "2026-11-17T10:01:15+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Acho que com todo esse dinheiro da para a gente fazer uma arquibancada bem melhor e maior para nossa torcida.",
+      "curtidas": 6,
+      "id": "18133375384827001",
+      "timestamp": "2026-11-17T09:47:20+0000"
+    },
+    {
+      "usuario": "leonardo.moura.10",
+      "texto": "Hora de começar a categoria de base,",
+      "curtidas": 2,
+      "id": "18136432168755283",
+      "timestamp": "2026-11-17T09:42:08+0000"
+    },
+    {
+      "usuario": "antoniecharlles",
+      "texto": "Posso ser o diretor de futebol do time🔥",
+      "curtidas": 1,
+      "id": "18102861305083801",
+      "timestamp": "2026-11-17T10:06:40+0000"
+    },
+    {
+      "usuario": "caiozin_147",
+      "texto": "Investe apenas 200 reias para fotografia e gravações de jogos pra vcs ganharem mídia depois dos jogos",
+      "curtidas": 1,
+      "id": "18099442310454452",
+      "timestamp": "2026-11-17T10:19:49+0000"
+    },
+    {
+      "usuario": "pprodrigues987",
+      "texto": "Coloca o pai nesse meio de campo pra distribuir passe para o Benício fazer mais gol",
+      "curtidas": 0,
+      "id": "18020014145748712",
+      "timestamp": "2026-11-17T10:13:50+0000"
+    },
+    {
+      "usuario": "_guigs12",
+      "texto": "Está na hora de dar uma melhorada no campo, não precisa tirar a essência da várzea mais de 50% dos campos hoje da várzea são campos adequados para os jogadores desempenhar em um bom futebol",
+      "curtidas": 0,
+      "id": "18121763863970596",
+      "timestamp": "2026-11-17T12:43:05+0000"
+    },
+    {
+      "usuario": "nunorodrigues2004",
+      "texto": "Um campo maior e melhor",
+      "curtidas": 0,
+      "id": "18109003721202679",
+      "timestamp": "2026-11-17T14:03:00+0000"
+    },
+    {
+      "usuario": "johnvicente22",
+      "texto": "Contratar um preparador físico para melhorar a condição dos jogadores. 🔥🙌",
+      "curtidas": 0,
+      "id": "18155783740535648",
+      "timestamp": "2026-11-17T16:12:24+0000"
+    },
+    {
+      "usuario": "paulos.moreirados",
+      "texto": "Marcar um jogo amistoso , com o Corinthians da época do terão , para arrecadar dinheiro para construção da arquibancada",
+      "curtidas": 0,
+      "id": "17959611816272844",
+      "timestamp": "2026-11-17T16:23:04+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "dre_zin.fs",
+      "curtidas": 7,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 1,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 6,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+      "revisar": true
+    },
+    {
+      "indice": 2,
+      "usuario": "leonardo.moura.10",
+      "curtidas": 2,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "antoniecharlles",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 4,
+      "usuario": "caiozin_147",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "pprodrigues987",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 6,
+      "usuario": "_guigs12",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 7,
+      "usuario": "nunorodrigues2004",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 8,
+      "usuario": "johnvicente22",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 9,
+      "usuario": "paulos.moreirados",
+      "curtidas": 0,
+      "viavel": true,
+      "acoes": [
+        "arquibancada"
+      ],
+      "custo": 1200.0,
+      "motivo": null,
+      "revisar": false
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": null,
+    "acoes": [
+      "arquibancada_obra"
+    ],
+    "autor": "beniciocarmocarvalho",
+    "titulo": "Obra: arquibancada nova",
+    "interpretacao": "Começou a obra da arquibancada nova, na lateral esquerda do campo. Leva uns três jogos para ficar pronta (+1.500 lugares).",
+    "custo": 1200,
+    "efeitos": {
+      "estrutura.obra_arquibancada": {
+        "inicio": 13,
+        "jogos": 3,
+        "feitos": 0,
+        "lado": "esquerda",
+        "lugares": 1500
+      }
+    },
+    "narracao_obra": "A torcida está quase não cabendo, então começou a obra: arquibancada nova na lateral esquerda do campo, R$ 1.200. Vai levar uns três jogos pra ficar pronta. Quando ficar, cabem mais mil e quinhentos torcedores!"
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+    "opcoes": [
+      "Sua ideia aqui?"
+    ]
+  },
+  "tema": "ARQUIBANCADA NOVA!",
+  "tema_falado": "Arquibancada nova",
+  "historia": {
+    "comentarios": [
+      {
+        "narracao": "O Benício pediu uma arquibancada maior, e o estádio já está quase lotado: são 457 torcedores pra 500 lugares. E o Dre quer ser goleiro: na peneira dos 500, tem vaga pra goleiro!",
+        "comentarios": [
+          {
+            "usuario": "beniciocarmocarvalho",
+            "texto": "Com todo esse dinheiro da para a gente fazer uma arquibancada bem melhor e maior para nossa torcida.",
+            "curtidas": 6,
+            "chave": "benício",
+            "carimbo": "aprovado",
+            "chave_carimbo": "lotado",
+            "selo": "PEDIDO DO CAMISA 7"
+          },
+          {
+            "usuario": "dre_zin.fs",
+            "texto": "Coloca eu no gol pra garantir nossa vitória",
+            "curtidas": 7,
+            "chave": "dre",
+            "carimbo": "peneira",
+            "chave_carimbo": "vaga",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          }
+        ]
+      }
+    ]
+  },
+  "piada": {
+    "alvo": "nosso",
+    "numero": "15",
+    "nome": "Khauan",
+    "posicao": "atacante",
+    "apelido": "Quinta-Feira",
+    "piada": "não é o que a gente quer, mas é quase",
+    "narracao": "E o Khauan ganhou apelido novo: atacante Quinta-Feira. Não é o que a gente quer, mas é quase!",
+    "texto_tela": [
+      "#15 KHAUAN"
+    ]
+  },
+  "decisao_fala": "No caixa, {caixa} reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+  "encerramento": "E amanhã é clássico: Poeira contra o Estrela da Feira, valendo o pastel de novo! Faltam só quarenta e três torcedores pra peneira dos 500. Manda esse vídeo pros amigos. Segue, curte e comenta. Até amanhã!",
+  "legenda": "DIA 13 do Poeira FC ⚽🏗️\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam só 43 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}

@@ -640,6 +640,15 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                      barraca=e["estrutura"].get("lanchonete") or "", preco_camisa=e["regras"].get("preco_camisa", 25),
                      caixa=e["caixa"])
 
+        # obra da arquibancada nova: cada jogo depois do início avança uma etapa; na última, inaugura
+        obra = e["estrutura"].get("obra_arquibancada")
+        if obra and dia > obra.get("inicio", dia):
+            obra["feitos"] = obra.get("feitos", 0) + 1
+            if obra["feitos"] >= obra.get("jogos", 3):
+                e["estrutura"].pop("obra_arquibancada")
+                e["estrutura"]["capacidade"] += obra.get("lugares", 1500)
+                e["estrutura"]["arquibancada_lateral"] = obra.get("lado", "esquerda")
+                est.evento(e, "Inauguração da arquibancada nova")
         tab = tabela(times, liga["resultados"])
         liga["tabela"] = tab
         pos = next(l["pos"] for l in tab if l["time"] == nome)

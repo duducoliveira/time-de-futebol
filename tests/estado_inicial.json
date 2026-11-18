@@ -303,6 +303,18 @@
           "artilheiro": "Benício",
           "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Mais um jogo, mais um gol, aos {m}! Tudo igual na casa do líder: um a um!"
         }
+      },
+      "11": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "sequencia": "NAN",
+        "intervalo_minimo_gols": 12,
+        "ultimo_gol_a_partir_do_minuto": 70,
+        "motivo": "fora, na casa do Veteranos do Bairro: 2 a 1, Benício decide",
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Aos {m}, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!"
+        }
       }
     },
     "times": {

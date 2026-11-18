@@ -12,8 +12,8 @@
     "estadio": "Campo do Poeira",
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
-  "dia": 12,
-  "caixa": 2492.0,
+  "dia": 13,
+  "caixa": 1428.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -25,7 +25,7 @@
     "placas_por_jogo": 150
   },
   "torcida": {
-    "seguidores": 436,
+    "seguidores": 457,
     "historico": [
       {
         "dia": 1,
@@ -86,6 +86,11 @@
         "dia": 12,
         "seguidores": 436,
         "data": "2026-11-17T01:29:12+00:00"
+      },
+      {
+        "dia": 13,
+        "seguidores": 457,
+        "data": "2026-11-18T01:58:48+00:00"
       }
     ]
   },
@@ -114,7 +119,14 @@
     "organizada": "Poeira Levantada",
     "patrocinio": "MÚSCULO DE AÇO",
     "aquecimento": true,
-    "vestiario_predio": true
+    "vestiario_predio": true,
+    "obra_arquibancada": {
+      "inicio": 13,
+      "jogos": 3,
+      "feitos": 0,
+      "lado": "esquerda",
+      "lugares": 1500
+    }
   },
   "personagens": {
     "narrador": {
@@ -239,7 +251,8 @@
       "traco": "chegou pela peneira: 'bora subir esse time'",
       "instagram": "khauan.ribero",
       "chegou_no_dia": 4,
-      "chave": "khauan"
+      "chave": "khauan",
+      "apelido": "Quinta-Feira"
     },
     "16": {
       "nome": "Rodrigo Moura",
@@ -275,7 +288,7 @@
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 10,
+    "rodada": 11,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -469,6 +482,18 @@
         "gol_decisivo": {
           "artilheiro": "Benício",
           "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Mais um jogo, mais um gol, aos {m}! Tudo igual na casa do líder: um a um!"
+        }
+      },
+      "11": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "sequencia": "NAN",
+        "intervalo_minimo_gols": 12,
+        "ultimo_gol_a_partir_do_minuto": 70,
+        "motivo": "fora, na casa do Veteranos do Bairro: 2 a 1, Benício decide",
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Aos {m}, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!"
         }
       }
     },
@@ -1457,6 +1482,88 @@
           }
         ],
         "rodada": 10
+      },
+      {
+        "mandante": "Veteranos do Bairro",
+        "visitante": "Poeira FC",
+        "gols": [
+          {
+            "minuto": 26,
+            "time": "Poeira FC",
+            "autor": "Foguete"
+          },
+          {
+            "minuto": 39,
+            "time": "Veteranos do Bairro"
+          },
+          {
+            "minuto": 72,
+            "time": "Poeira FC",
+            "autor": "Benício"
+          }
+        ],
+        "gols_mandante": 1,
+        "gols_visitante": 2,
+        "rodada": 11
+      },
+      {
+        "mandante": "Grêmio Vila Barro",
+        "visitante": "Estrela da Feira",
+        "gols_mandante": 0,
+        "gols_visitante": 0,
+        "gols": [],
+        "rodada": 11
+      },
+      {
+        "mandante": "Leões do Brejo",
+        "visitante": "Real Laje",
+        "gols_mandante": 1,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 77,
+            "time": "Real Laje"
+          },
+          {
+            "minuto": 85,
+            "time": "Leões do Brejo"
+          }
+        ],
+        "rodada": 11
+      },
+      {
+        "mandante": "Atlético Padaria",
+        "visitante": "Juventude do Asfalto",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 15,
+            "time": "Atlético Padaria"
+          }
+        ],
+        "rodada": 11
+      },
+      {
+        "mandante": "Ferro-Velho EC",
+        "visitante": "Amigos do Churrasco FC",
+        "gols_mandante": 2,
+        "gols_visitante": 1,
+        "gols": [
+          {
+            "minuto": 22,
+            "time": "Ferro-Velho EC"
+          },
+          {
+            "minuto": 47,
+            "time": "Ferro-Velho EC"
+          },
+          {
+            "minuto": 60,
+            "time": "Amigos do Churrasco FC"
+          }
+        ],
+        "rodada": 11
       }
     ],
     "rival": {
@@ -1467,123 +1574,123 @@
     "tabela": [
       {
         "time": "Atlético Padaria",
-        "j": 10,
-        "v": 6,
+        "j": 11,
+        "v": 7,
         "e": 2,
         "d": 2,
-        "gp": 16,
+        "gp": 17,
         "gc": 9,
-        "pts": 20,
+        "pts": 23,
         "pos": 1,
-        "sg": 7
+        "sg": 8
       },
       {
         "time": "Juventude do Asfalto",
-        "j": 10,
+        "j": 11,
         "v": 6,
         "e": 2,
-        "d": 2,
+        "d": 3,
         "gp": 13,
-        "gc": 8,
+        "gc": 9,
         "pts": 20,
         "pos": 2,
-        "sg": 5
+        "sg": 4
       },
       {
         "time": "Grêmio Vila Barro",
-        "j": 10,
+        "j": 11,
         "v": 5,
-        "e": 3,
+        "e": 4,
         "d": 2,
         "gp": 15,
         "gc": 10,
-        "pts": 18,
+        "pts": 19,
         "pos": 3,
         "sg": 5
       },
       {
         "time": "Poeira FC",
-        "j": 10,
-        "v": 4,
+        "j": 11,
+        "v": 5,
         "e": 4,
         "d": 2,
-        "gp": 16,
-        "gc": 13,
-        "pts": 16,
+        "gp": 18,
+        "gc": 14,
+        "pts": 19,
         "pos": 4,
-        "sg": 3
+        "sg": 4
       },
       {
         "time": "Estrela da Feira",
-        "j": 10,
+        "j": 11,
         "v": 5,
-        "e": 1,
+        "e": 2,
         "d": 4,
         "gp": 12,
         "gc": 11,
-        "pts": 16,
+        "pts": 17,
         "pos": 5,
         "sg": 1
       },
       {
         "time": "Ferro-Velho EC",
-        "j": 10,
-        "v": 4,
+        "j": 11,
+        "v": 5,
         "e": 2,
         "d": 4,
-        "gp": 13,
-        "gc": 18,
-        "pts": 14,
+        "gp": 15,
+        "gc": 19,
+        "pts": 17,
         "pos": 6,
-        "sg": -5
+        "sg": -4
       },
       {
         "time": "Veteranos do Bairro",
-        "j": 10,
+        "j": 11,
         "v": 3,
         "e": 2,
-        "d": 5,
-        "gp": 15,
-        "gc": 17,
+        "d": 6,
+        "gp": 16,
+        "gc": 19,
         "pts": 11,
         "pos": 7,
-        "sg": -2
+        "sg": -3
       },
       {
         "time": "Leões do Brejo",
-        "j": 10,
+        "j": 11,
         "v": 2,
-        "e": 4,
+        "e": 5,
         "d": 4,
-        "gp": 11,
-        "gc": 17,
-        "pts": 10,
+        "gp": 12,
+        "gc": 18,
+        "pts": 11,
         "pos": 8,
         "sg": -6
       },
       {
         "time": "Real Laje",
-        "j": 10,
+        "j": 11,
         "v": 2,
-        "e": 2,
+        "e": 3,
         "d": 6,
-        "gp": 9,
-        "gc": 12,
-        "pts": 8,
+        "gp": 10,
+        "gc": 13,
+        "pts": 9,
         "pos": 9,
         "sg": -3
       },
       {
         "time": "Amigos do Churrasco FC",
-        "j": 10,
+        "j": 11,
         "v": 2,
         "e": 0,
-        "d": 8,
-        "gp": 8,
-        "gc": 13,
+        "d": 9,
+        "gp": 9,
+        "gc": 15,
         "pts": 6,
         "pos": 10,
-        "sg": -5
+        "sg": -6
       }
     ]
   },
@@ -1796,8 +1903,21 @@
         "buffer_id": "6afbbc29f83aaca8f3a2ebc6",
         "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-012.mp4",
         "agendado_para": "2026-11-17T06:00-03:00",
-        "status": "scheduled"
+        "status": "scheduled",
+        "id": "18444942412182579",
+        "permalink": "https://www.instagram.com/reel/Df1j2QiO6Ih/"
       }
+    },
+    {
+      "dia": 13,
+      "data": "2026-11-18T01:58:48+00:00",
+      "proxima_decisao": {
+        "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+        "opcoes": [
+          "Sua ideia aqui?"
+        ]
+      },
+      "post": null
     }
   ],
   "decisoes": [
@@ -1905,6 +2025,13 @@
       "autor": "antoniecharlles",
       "curtidas": 0,
       "texto": "Vestiário + aquecimento"
+    },
+    {
+      "dia": 13,
+      "acao": "arquibancada_obra",
+      "autor": "beniciocarmocarvalho",
+      "curtidas": 0,
+      "texto": "Obra: arquibancada nova"
     }
   ],
   "enquetes": [],
@@ -2112,6 +2239,18 @@
       "valor": -1700.0,
       "descricao": "Vestiário + aquecimento",
       "saldo": 2492.0
+    },
+    {
+      "dia": 13,
+      "valor": 136,
+      "descricao": "curtidas do dia 12",
+      "saldo": 2628.0
+    },
+    {
+      "dia": 13,
+      "valor": -1200.0,
+      "descricao": "Obra: arquibancada nova",
+      "saldo": 1428.0
     }
   ],
   "linha_do_tempo": [
@@ -2231,9 +2370,22 @@
     {
       "dia": 12,
       "evento": "Rodada 10: Grêmio Vila Barro 1 x 1 Poeira FC (empate)"
+    },
+    {
+      "dia": 13,
+      "evento": "Começou a obra da arquibancada nova, na lateral esquerda do campo. Leva uns três jogos para ficar pronta (+1.500 lugares).",
+      "autor": "beniciocarmocarvalho"
+    },
+    {
+      "dia": 13,
+      "evento": "Khauan ganhou o apelido Quinta-Feira"
+    },
+    {
+      "dia": 13,
+      "evento": "Rodada 11: Veteranos do Bairro 1 x 2 Poeira FC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-17T01:29:12+00:00",
+  "atualizado_em": "2026-11-18T01:58:48+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
@@ -2244,7 +2396,8 @@
     "Ex-Namorada",
     "Muro de Arrimo",
     "Pedágio",
-    "Cometa"
+    "Cometa",
+    "Quinta-Feira"
   ],
   "piadas_gol_usadas": [
     "A zaga parou pra ver. Literalmente parou.",

@@ -629,8 +629,12 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
     <ellipse cx="${W / 2}" cy="1260" rx="240" ry="70" fill="none" stroke="${linha}" stroke-width="8"/>
     <path d="M330,950 L300,1060 H780 L750,950" fill="none" stroke="${linha}" stroke-width="7"/>`;
   s += trave(W / 2, 955, 0.8, !grama, !!estrutura.rede);
+  if (estrutura.obra_arquibancada && !window._local) {
+    const o = estrutura.obra_arquibancada;
+    s += obraArquibancadaCampo(t, Math.min(1, ((o.feitos || 0) + 1) / ((o.jogos || 3) + 1)));
+  }
   // pomponetes do Poeira dançando na beira do campo, ao lado da arquibancada (viajam com o time)
-  if (estrutura.pomponetes) [[50, 0], [125, 1], [955, 2], [1030, 3]].forEach(([x, i]) => {
+  if (estrutura.pomponetes) [[50, 0], [125, 1], [955, 2], [1030, 3]].filter(([x]) => !(x < 540 && estrutura.obra_arquibancada && !window._local)).forEach(([x, i]) => {
     s += pessoa({ pele: PELES[(i * 2 + 1) % PELES.length], cabelo: 'coque', corCabelo: i % 2 ? '#7a4b2a' : '#1b1b1b', camisa: CORES.amarelo, listra: CORES.vinho,
       calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: Math.sin(t * 4 + i) > 0 ? 'comemora' : 'acena', expr: 'feliz' }, t, { x, y: 1075, s: 0.36, fase: i });
   });
@@ -642,6 +646,56 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
 
 // Caramelo, o mascote: vira-lata caramelo com coleira vinho e plaquinha do escudo. Origem: chão (patas).
 // Proporção: ~45% da altura de uma pessoa (cachorro médio).
+// Obra da arquibancada nova na lateral esquerda (vista do campo): estrutura de madeira subindo em degraus,
+// andaime, faixa zebrada e material no chão. `prog` (0..1) = quanto já foi construído.
+function obraArquibancadaCampo(t = 0, prog = 0.3) {
+  const base = 1330, x0 = -40, x1 = 300, alt = 400, nDeg = 4, feitos = Math.max(1, Math.round(nDeg * prog));
+  let s = `<path d="M${x0 - 20},${base + 22} L${x1 + 40},${base + 22} L${x1 + 10},${base - 40} L${x0 - 20},${base - 40}Z" fill="#c4935f" opacity=".85"/>
+    <ellipse cx="${(x0 + x1) / 2 + 30}" cy="${base + 18}" rx="${(x1 - x0) / 2 + 30}" ry="14" fill="#000" opacity=".2"/>`;
+  // pilares (os de trás mais altos)
+  const pil = [x0 + 10, x0 + 115, x0 + 225, x1];
+  pil.forEach((x, i) => { const h = alt - i * 80;
+    s += `<path d="M${x},${base} V${base - h}" stroke="${OUT}" stroke-width="14" stroke-linecap="round"/><path d="M${x},${base} V${base - h}" stroke="#9c6644" stroke-width="8" stroke-linecap="round"/>`; });
+  // degraus prontos (de baixo para cima, da frente para trás) e os que faltam (só a marcação)
+  for (let d = 0; d < nDeg; d++) {
+    const y = base - 70 - d * 80, xa = x0 - 10, xb = x1 + 10 - d * 85, pronto = d < feitos;
+    s += pronto ? `<rect x="${xa}" y="${y}" width="${xb - xa}" height="22" rx="3" fill="#c79a6b" stroke="${OUT}" stroke-width="4"/>`
+      : `<rect x="${xa + 6}" y="${y + 6}" width="${xb - xa - 12}" height="8" fill="#7f5539" stroke="${OUT}" stroke-width="3"/>`;   // só a viga, sem tábua
+  }
+  // travamento em X entre os pilares
+  for (let i = 0; i < pil.length - 1; i++) { const xa = pil[i], xb = pil[i + 1], ya = base - 20, yb = base - (alt - (i + 1) * 80) + 20;
+    s += `<path d="M${xa},${ya} L${xb},${yb} M${xa},${yb + 40} L${xb},${ya}" stroke="#7f5539" stroke-width="6" opacity=".9"/>`; }
+  // andaime com tábua e balde
+  s += `<path d="M${x1 + 30},${base} V${base - 200} M${x1 + 90},${base} V${base - 200} M${x1 + 30},${base - 100} H${x1 + 90} M${x1 + 30},${base - 200} H${x1 + 90} M${x1 + 30},${base} L${x1 + 90},${base - 100} M${x1 + 90},${base - 100} L${x1 + 30},${base - 200}" stroke="#6c757d" stroke-width="6" fill="none"/>
+    <rect x="${x1 + 20}" y="${base - 210}" width="80" height="12" fill="#b08968" stroke="${OUT}" stroke-width="3"/>
+    <path d="M${x1 + 66},${base - 210} l4,-22 h18 l4,22z" fill="#adb5bd" stroke="${OUT}" stroke-width="3"/>`;
+  // material: pilha de tábuas e sacos de cimento
+  s += `${[0, 1, 2].map(i => `<rect x="${x0 + 30 + i * 6}" y="${base + 2 - i * 9}" width="110" height="9" fill="#b08968" stroke="${OUT}" stroke-width="2.5"/>`).join('')}
+    ${[0, 1, 2].map(i => `<rect x="${x1 - 70 + (i % 2) * 22}" y="${base - 20 - Math.floor(i / 2) * 20}" width="44" height="22" rx="5" fill="#e9ecef" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
+  // pedreiros trabalhando (capacete amarelo), na escala do campo nessa distância
+  s += pessoa({ pele: '#a0673e', cabelo: 'curto', corCabelo: '#1b1b1b', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40', pose: 'caixa', expr: 'serio' }, t, { x: x1 - 120, y: base + 4, s: 0.62 });
+  s += pessoa({ pele: '#e0ac69', cabelo: 'curto', corCabelo: '#4a3426', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40', pose: 'aponta', expr: 'feliz', bigode: true }, t, { x: x1 + 60, y: base + 4, s: 0.62, fase: 1 });
+  // faixa zebrada na frente
+  s += `<path d="M${x0 - 20},${base - 30} L${x1 + 110},${base - 30}" stroke="${OUT}" stroke-width="12"/>
+    <path d="M${x0 - 20},${base - 30} L${x1 + 110},${base - 30}" stroke="#ffd60a" stroke-width="8" stroke-dasharray="16 16"/>
+    <path d="M${x0 - 4},${base - 30} L${x1 + 110},${base - 30}" stroke="${OUT}" stroke-width="8" stroke-dasharray="16 16" opacity=".85"/>`;
+  return s;
+}
+
+// vista aérea: a obra ocupa a faixa à esquerda do campo, entre a linha e a cerca
+function obraArquibancadaAerea(prog = 0.3) {
+  const y0 = 860, y1 = 1560, dx = y => xBorda(y, -1);
+  const ext = (y, k) => dx(y) - 26 - k * (y - 640) * 0.13;
+  let s = `<path d="M${ext(y0, 0)},${y0} L${ext(y1, 0)},${y1} L${ext(y1, 1)},${y1} L${ext(y0, 1)},${y0}Z" fill="#c4935f" stroke="${OUT}" stroke-width="4"/>`;
+  const yf = y0 + (y1 - y0) * prog;   // parte pronta (degraus)
+  for (let k = 0; k < 4; k++) { const kk = 0.15 + k * 0.23;
+    s += `<path d="M${ext(y0, kk)},${y0} L${ext(yf, kk)},${yf}" stroke="#c79a6b" stroke-width="${9 - k}" stroke-linecap="round"/>
+      <path d="M${ext(yf, kk)},${yf} L${ext(y1, kk)},${y1}" stroke="#fff" stroke-width="2" stroke-dasharray="8 7" opacity=".8"/>`; }
+  for (let y = y0; y <= y1; y += 70) s += `<circle cx="${ext(y, 1)}" cy="${y}" r="5" fill="#9c6644" stroke="${OUT}" stroke-width="2"/>`;
+  s += `<path d="M${ext(y0, -0.05)},${y0} L${ext(y1, -0.05)},${y1}" stroke="#ffd60a" stroke-width="5" stroke-dasharray="12 10"/>`;
+  return s;
+}
+
 function cone(x, y, k = 1) {
   return `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cy="2" rx="30" ry="7" fill="#000" opacity=".2"/><path d="M-28,0 h56 l-6,-8 h-44z" fill="#f77f00" stroke="${OUT}" stroke-width="4"/>
     <path d="M-20,-8 L-5,-64 h10 L20,-8Z" fill="#f77f00" stroke="${OUT}" stroke-width="4" stroke-linejoin="round"/><path d="M-14,-28 h28 l-3,-12 h-22z" fill="#fff"/></g>`;
@@ -900,7 +954,7 @@ function fundoEscuro() {
 
 Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
-  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, caramelo, cone, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, caramelo, cone, obraArquibancadaCampo, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).
@@ -997,7 +1051,7 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
     <path d="M490,${yTopo} V${yTopo - 40} H590 V${yTopo}" fill="none" stroke="#fff" stroke-width="7"/>`;
   if (estrutura.rede) s += Array.from({ length: 6 }, (_, i) => `<path d="M${492 + i * 19},${yTopo - 38} V${yTopo}" stroke="#fff" stroke-width="2" opacity=".8"/>`).join('');
   if (estrutura.banco_reservas) s += `<g transform="translate(${xBorda(1050, 1) + 26} 1050) rotate(66) scale(.5)">${bancoReservas(0, 0)}</g>`;
-  s += entornoAereo();
+  s += entornoAereo(estrutura);
   // torcida desenhada: assentos primeiro, depois as faixas de "não cabe mais"
   const seats = assentos(cap), lugares = seats.length;
   // até lotar: proporcional aos lugares (a arquibancada enche de verdade); depois, as faixas de "não cabe mais"
@@ -1043,9 +1097,11 @@ function chaoEstadio(estrutura) {
   return s;
 }
 // profundidade na vista aérea: cerca de madeira e árvores dos dois lados, crescendo conforme chegam perto da câmera
-function entornoAereo() {
+function entornoAereo(estrutura = {}) {
   let s = '';
-  for (const lado of [-1, 1]) {
+  const obra = estrutura.obra_arquibancada;
+  if (obra) s += obraArquibancadaAerea(Math.min(1, ((obra.feitos || 0) + 1) / ((obra.jogos || 3) + 1)));
+  for (const lado of obra ? [1] : [-1, 1]) {
     const xf = y => xBorda(y, lado) + lado * (58 + (y - 760) * 0.085);
     const ys = []; for (let y = 700, passo = 46; y < 1760; y += passo, passo *= 1.13) ys.push(y);
     // travessas (duas) e mourões
@@ -1055,7 +1111,8 @@ function entornoAereo() {
       <path d="M${x},${y} v${-58 * k}" stroke="${OUT}" stroke-width="${11 * k}" stroke-linecap="round"/><path d="M${x},${y} v${-58 * k}" stroke="#9c6644" stroke-width="${6 * k}" stroke-linecap="round"/>`; }
   }
   // árvores fora da cerca: pequenas lá no fundo, grandes aqui perto
-  for (const [x, y, R, k] of [[118, 838, 34, 0], [972, 846, 36, 1], [64, 1010, 48, 2], [1030, 1040, 50, 0], [18, 1300, 70, 1], [1068, 1340, 72, 2]]) s += arvore(x, y, R, 'lado' + x, k);
+  for (const [x, y, R, k] of [[118, 838, 34, 0], [972, 846, 36, 1], [64, 1010, 48, 2], [1030, 1040, 50, 0], [18, 1300, 70, 1], [1068, 1340, 72, 2]])
+    if (!(obra && x < 540)) s += arvore(x, y, R, 'lado' + x, k);
   return s;
 }
 function alambrado(y = 1780) {

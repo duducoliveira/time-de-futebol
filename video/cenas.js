@@ -120,7 +120,7 @@ const TIPOS = {
     const virada = Math.min(1.6, d * 0.35);
     const est = t < virada ? c.dados.antes : c.dados.depois;
     const acoes = c.dados.acoes || [];
-    const noCampo = acoes.some(a => ['grama', 'arquibancada', 'refletores', 'rede', 'banco_reservas'].includes(a));
+    const noCampo = acoes.some(a => ['grama', 'arquibancada', 'arquibancada_obra', 'refletores', 'rede', 'banco_reservas'].includes(a));
     // banco de reservas: depois de mostrar a obra no campo, corta para a imagem da lateral
     const tBanco = acoes.includes('banco_reservas') ? Math.max(virada + 0.8, quando(c, 'banquinho', quando(c, 'banco', d * 0.6)) - 0.2) : Infinity;
     const fundo = t >= tBanco ? lateral(est, { t, nome: NOME(E) })
