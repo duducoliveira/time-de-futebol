@@ -74,7 +74,7 @@ const VARIACOES = {
         }
       });
       const mundo = barDentro(t, E, { caixa: c.dados.hud?.caixa, conteudo: { recados: conteudo },
-        atras: [{ quem: 'cida', X: -0.3, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.05, d: BAR_FRENTE, pose: 'microfone', rosto }] });
+        atras: [{ quem: 'cida', X: -0.3, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.15, d: BAR_FRENTE, pose: 'microfone', rosto }] });
       return naCamera(cam, mundo) + focoQuadro(cam);
     },
     // ---- comentários no celular da Dona Cida (lista do Instagram, o comentário da vez acende)
@@ -132,7 +132,7 @@ const VARIACOES = {
       conteudo += pincel('SUA IDEIA NOS COMENTÁRIOS', 500, yI, 54, { cor: '#1d3557', op: surge(t, tI) });
       conteudo += pincel('O MAIS CURTIDO DECIDE!', 500, yI + 82, 62, { cor: '#e03131', op: surge(t, tD) });
       const mundo = barDentro(t, E, { caixa: c.dados.caixa, conteudo: { caixa: conteudo },
-        atras: [{ quem: 'cida', X: 1.05, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.05, d: BAR_FRENTE, pose: 'microfone', rosto }] });
+        atras: [{ quem: 'cida', X: 1.05, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.15, d: BAR_FRENTE, pose: 'microfone', rosto }] });
       return naCamera(cam, mundo) + focoQuadro(cam);
     },
     mural(t, d, c, E) {
@@ -149,7 +149,7 @@ const VARIACOES = {
         <text y="66" text-anchor="middle" font-family="Anton" font-size="66" fill="${OUT}">AQUI ✍</text>
         <text y="130" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="30" fill="#495057">nos comentários</text></g>`);
       const mundo = barDentro(t, E, { caixa: c.dados.caixa, conteudo: { recados: conteudo },
-        atras: [{ quem: 'cida', X: -0.3, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.05, d: BAR_FRENTE, pose: 'microfone', rosto }] });
+        atras: [{ quem: 'cida', X: -0.3, pose: 'aponta', rosto }], frente: [{ quem: 'tiao', X: -1.15, d: BAR_FRENTE, pose: 'microfone', rosto }] });
       let s = naCamera(cam, mundo) + focoQuadro(cam);
       s += pop(t, tB, W / 2, 175, pilula(c.texto_tela[0] || '', { tam: 46, bg: '#2e8b57', rot: -3 }));
       return s;
@@ -170,7 +170,7 @@ const VARIACOES = {
         if (meu) { const q = clamp((t - t0 - 0.8) / 0.6); if (q > 0) conteudo += `<ellipse cx="460" cy="${y - 14}" rx="${470 * q}" ry="34" fill="none" stroke="#ffe066" stroke-width="6" opacity=".9"/>`; }
       });
       const mundo = barDentro(t, E, { caixa: c.dados.hud?.caixa, conteudo: { tabela: conteudo },
-        atras: [{ quem: 'cida', X: -0.15, pose: 'normal', rosto }], frente: [{ quem: 'tiao', X: 1.05, d: BAR_FRENTE, pose: 'aponta', rosto }] });
+        atras: [{ quem: 'cida', X: -0.15, pose: 'normal', rosto }], frente: [{ quem: 'tiao', X: 1.15, d: BAR_FRENTE, pose: 'microfone', rosto }] });
       let s = naCamera(cam, mundo) + focoQuadro(cam);
       s += pop(t, Math.max(1.9, quando(c, 'lugar', 1.9) - 0.2), W / 2, 1420, tituloGrande(c.texto_tela[1] || '', { tam: 120, cor: CORES.laranja }));
       return s;
@@ -327,21 +327,38 @@ const VARIACOES = {
       return s + TIPOS.encerramento.fim(t, d, c, E);
     },
   },
-  // ---- evolução do dia no balcão do bar: a Dona Cida conta o dinheiro, o Tião confere a torcida
+  // ---- evolução do dia no bar: os números (torcida e caixa, ontem → hoje) escritos no quadro do caixa
   evolucao: {
     balcao(t, d, c, E) {
-      // no salão: o Tião confere a torcida; a câmera desliza pelo balcão até a Dona Cida contando o dinheiro
-      const tC = quando(c, 'caixa', d * 0.6, true), [xT] = bP(-1.0, 0, BAR_FRENTE), [xC] = bP(1.0, 0, BAR_ATRAS);
-      // o quadro do caixa mostra o valor de ontem até a narração chegar no caixa; aí a Dona Cida atualiza
-      const caixaQuadro = t < tC + 0.6 ? (c.dados.caixa_antes ?? c.dados.caixa) : c.dados.caixa;
-      let mundo = barDentro(t, E, { caixa: caixaQuadro, atras: [{ quem: 'cida', X: 1.0, pose: 'caixa' }], frente: [{ quem: 'tiao', X: -1.0, d: BAR_FRENTE, pose: 'aponta' }] });
+      // os números do dia no quadro branco do caixa: a câmera sai da vista geral do bar e entra no quadro, onde a
+      // Dona Cida escreve (pincel) a regra, a torcida de ontem → hoje e o caixa de ontem → hoje, no ritmo da narração
+      const dd = c.dados, cam = camBar(t, d, 'caixa', 1.7), rosto = cam.z < 1.3;
+      const R = v => `${E.moeda} ${Math.round(v).toLocaleString('pt-BR')}`;
+      const tS = Math.max(0.9, quando(c, 'seguidor', 1.0) - 0.1), tCu = Math.max(tS + 0.4, quando(c, 'curtida', tS + 1.2) - 0.1);
+      const tT0 = Math.max(tCu + 0.4, quando(c, 'ontem', tCu + 1.2) - 0.1), tT = Math.max(tT0 + 0.5, quando(c, 'hoje', tT0 + 1.2, true) - 0.1);
+      const tC0 = Math.max(tT + 0.5, quando(c, 'caixa', tT + 1.2, true) - 0.1), tC = Math.max(tC0 + 0.6, quando(c, 'pra', tC0 + 1.4, true) - 0.1);
+      const risca = (x0, x1, y, t0) => { const k = clamp((t - t0) / 0.3); return k > 0 ? `<path d="M${x0},${y} L${x0 + (x1 - x0) * k},${y - 6}" stroke="#e03131" stroke-width="9" stroke-linecap="round"/>` : ''; };
+      const seta = (y, t0, x = 575) => surge(t, t0) > 0 ? `<path d="M${x},${y} h58 m-20,-18 l20,18 l-20,18" stroke="#495057" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${surge(t, t0)}"/>` : '';
+      let q = pincel(c.texto_tela[0] || '', 500, 92, 78, { cor: CORES.vinho, op: surge(t, 0.6) });
+      q += pincel('1 SEGUIDOR = 1 TORCEDOR', 270, 165, 38, { cor: '#495057', op: surge(t, tS) }) + pincel('1 CURTIDA = R$ 1', 760, 165, 38, { cor: '#495057', op: surge(t, tCu) });
+      q += `<path d="M60,200 H940" stroke="#ced4da" stroke-width="5" opacity="${surge(t, tS)}"/>`;
+      // torcida
+      const nT = contador(dd.torcida, dd.antes, (t - tT) / 1.2), dT = dd.torcida - dd.antes;
+      q += pincel('TORCIDA', 50, 330, 54, { cor: '#1971c2', anchor: 'start', op: surge(t, tT0) }) + pincel(String(dd.antes), 470, 330, 72, { cor: '#868e96', op: surge(t, tT0) });
+      q += risca(420, 520, 312, tT) + seta(306, tT);
+      q += pincel(Math.round(nT).toLocaleString('pt-BR'), 805, 342, 116, { cor: '#1971c2', op: surge(t, tT) });
+      q += pincel(`${dT >= 0 ? '+' : ''}${dT.toLocaleString('pt-BR')} hoje`, 805, 392, 38, { cor: '#2b8a3e', op: surge(t, tT + 0.8) });
+      // caixa
+      const nC = contador(dd.caixa, dd.caixa_antes ?? dd.caixa, (t - tC) / 1.2), dC = dd.caixa - (dd.caixa_antes ?? dd.caixa);
+      q += pincel('CAIXA', 50, 520, 54, { cor: '#2b8a3e', anchor: 'start', op: surge(t, tC0) }) + pincel(R(dd.caixa_antes ?? dd.caixa), 400, 520, 50, { cor: '#868e96', op: surge(t, tC0) });
+      q += risca(300, 500, 504, tC) + seta(500, tC, 528);
+      q += pincel(R(nC), 790, 532, 84, { cor: '#2b8a3e', op: surge(t, tC) });
+      q += pincel(`${dC >= 0 ? '+' : '−'}${R(Math.abs(dC))} em curtidas ♥`, 790, 584, 34, { cor: '#e03131', op: surge(t, tC + 0.8) });
+      let mundo = barDentro(t, E, { conteudo: { caixa: q }, atras: [{ quem: 'cida', X: 1.0, pose: 'caixa', rosto }], frente: [{ quem: 'tiao', X: -1.15, d: BAR_FRENTE, pose: 'microfone', rosto }] });
       // notas e moedas em cima do balcão, na frente da Dona Cida
       { const k = BARP.f / 4.85; mundo += [0, 1, 2, 3].map(i => { const [x, y] = bP(0.72 + i * 0.07, 1.05, 4.85); return `<rect x="${x - 0.07 * k}" y="${y - 0.03 * k}" width="${0.14 * k}" height="${0.06 * k}" rx="3" fill="#95d5b2" stroke="${OUT}" stroke-width="2" transform="rotate(${-8 + i * 6} ${x} ${y})"/>`; }).join('')
         + [0, 1, 2].map(i => { const [x, y] = bP(1.25 + i * 0.05, 1.05, 4.85); return `<ellipse cx="${x}" cy="${y - 4}" rx="${0.022 * k}" ry="${0.012 * k}" fill="#ffd166" stroke="${OUT}" stroke-width="1.5"/>`; }).join(''); }
-      // (os rostos ficam acima da faixa da legenda, y ≈ 1165)
-      const cam = camChaves(t, [[0, xT + 80, 1110, 1.16, 935], [Math.max(0.5, tC - 0.6), xT + 80, 1110, 1.19, 935], [tC + 0.4, xC - 40, 1110, 1.19, 935], [Math.max(d, tC + 0.5), xC - 40, 1110, 1.22, 935]]);
-      let s = naCamera(cam, mundo) + `<rect width="${W}" height="${H}" fill="${CORES.marinho}" opacity=".1"/>`;
-      return s + TIPOS.evolucao.cartoes(t, c, E);
+      return naCamera(cam, mundo) + focoQuadro(cam);
     },
   },
   // ---- capa: o mesmo "DIA N + tema", com fundos diferentes

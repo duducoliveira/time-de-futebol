@@ -42,7 +42,7 @@ function lousaGiz(q, conteudo) {
 }
 function lousaBranca(q, conteudo) {
   return `<rect x="-26" y="-26" width="${q.cw + 52}" height="${q.ch + 52}" rx="12" fill="#adb5bd" stroke="${OUT}" stroke-width="12"/>
-    <rect width="${q.cw}" height="${q.ch}" fill="#f8f9fa"/><path d="M40,${q.ch - 40} L${q.cw - 300},40" stroke="#dee2e6" stroke-width="30" opacity=".5"/>
+    <rect width="${q.cw}" height="${q.ch}" fill="#f8f9fa"/><path d="M${q.cw - 170},18 L${q.cw - 18},170 M${q.cw - 110},18 L${q.cw - 18},110" stroke="#e9ecef" stroke-width="22" opacity=".8"/>
     <rect x="${q.cw * 0.3}" y="${q.ch + 26}" width="${q.cw * 0.4}" height="22" fill="#868e96" stroke="${OUT}" stroke-width="5"/>
     <rect x="${q.cw * 0.36}" y="${q.ch + 10}" width="90" height="20" rx="6" fill="#1971c2"/><rect x="${q.cw * 0.52}" y="${q.ch + 10}" width="90" height="20" rx="6" fill="#e03131"/>${conteudo}`;
 }
