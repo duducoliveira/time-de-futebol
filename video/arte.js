@@ -673,8 +673,8 @@ function obraArquibancadaCampo(t = 0, prog = 0.3) {
   s += `${[0, 1, 2].map(i => `<rect x="${x0 + 30 + i * 6}" y="${base + 2 - i * 9}" width="110" height="9" fill="#b08968" stroke="${OUT}" stroke-width="2.5"/>`).join('')}
     ${[0, 1, 2].map(i => `<rect x="${x1 - 70 + (i % 2) * 22}" y="${base - 20 - Math.floor(i / 2) * 20}" width="44" height="22" rx="5" fill="#e9ecef" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
   // pedreiros trabalhando (capacete amarelo), na escala do campo nessa distância
-  s += pessoa({ pele: '#a0673e', cabelo: 'curto', corCabelo: '#1b1b1b', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40', pose: 'caixa', expr: 'serio' }, t, { x: x1 - 120, y: base + 4, s: 0.62 });
-  s += pessoa({ pele: '#e0ac69', cabelo: 'curto', corCabelo: '#4a3426', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40', pose: 'aponta', expr: 'feliz', bigode: true }, t, { x: x1 + 60, y: base + 4, s: 0.62, fase: 1 });
+  s += pessoa({ pele: '#a0673e', cabelo: 'curto', corCabelo: '#1b1b1b', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40', pose: 'caixa', expr: 'serio' }, t, { x: x1 - 110, y: base + 110, s: 0.68 });
+  s += pessoa({ pele: '#e0ac69', cabelo: 'curto', corCabelo: '#4a3426', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40', pose: 'aponta', expr: 'feliz', bigode: true }, t, { x: x1 + 80, y: base + 110, s: 0.68, fase: 1 });
   // faixa zebrada na frente
   s += `<path d="M${x0 - 20},${base - 30} L${x1 + 110},${base - 30}" stroke="${OUT}" stroke-width="12"/>
     <path d="M${x0 - 20},${base - 30} L${x1 + 110},${base - 30}" stroke="#ffd60a" stroke-width="8" stroke-dasharray="16 16"/>
