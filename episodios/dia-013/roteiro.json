@@ -11,7 +11,7 @@
       {
         "minuto": 26,
         "time": "Poeira FC",
-        "autor": "Foguete"
+        "autor": "gol contra"
       },
       {
         "minuto": 39,
@@ -463,19 +463,21 @@
     {
       "id": "08-gol",
       "tipo": "gol",
-      "narracao": "[excited] Lá vai o Benício pela direita... toca pro Foguete... bateu! [shouting] GOOOOOOOOOL! [excited] Chora, goleiro! FOGUETE manda pra rede aos 26! É DO POEIRA!",
+      "narracao": "[excited] Cruzamento do Benício... o zagueiro deles tenta cortar... e manda contra a própria rede! [shouting] GOOOOOL DO POEIRA! [excited] Gol contra, aos 26! Quem manda a bola na área sempre leva vantagem! 1 a 0 pro Poeira!",
       "texto_tela": [
         "26'",
         "GOOOOL!"
       ],
       "dados": {
         "culpado": null,
+        "lance_tipo": "contra",
+        "comemoracao": "monte",
         "autor_numero": "77",
         "passador_numero": "7",
         "minuto": 26,
         "nosso": true,
         "estilo_voz": "grito",
-        "autor": "Foguete",
+        "autor": "gol contra",
         "placar": [
           0,
           1
@@ -525,20 +527,21 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        },
-        "variante": "replay"
+        }
       }
     },
     {
       "id": "09-gol",
       "tipo": "gol",
-      "narracao": "Lá vem o Veteranos do Bairro pelo meio... tocou... bateu! Gol do Veteranos do Bairro, aos 39.",
+      "narracao": "Cruzamento do Veteranos do Bairro... subiu o atacante deles... de cabeça! Gol do Veteranos do Bairro, aos 39.",
       "texto_tela": [
         "39'",
         "GOL DO VETERANOS DO BAIRRO"
       ],
       "dados": {
         "culpado": null,
+        "lance_tipo": "cabeca",
+        "comemoracao": "aviao",
         "minuto": 39,
         "nosso": false,
         "estilo_voz": "normal",
@@ -592,22 +595,23 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        },
-        "variante": "abraco"
+        }
       }
     },
     {
       "id": "10-gol",
       "tipo": "gol",
-      "narracao": "[excited] Lá vai o Nenê pela direita... toca pro Benício... bateu! [shouting] GOOOOOL DO BENÍCIO! [excited] Aos 72, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!",
+      "narracao": "[excited] Falta pro Poeira na entrada da área. O Benício ajeita a bola... bateu por cima da barreira! [shouting] GOOOOOL DO BENÍCIO! [excited] Aos 72, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!",
       "texto_tela": [
         "72'",
         "GOOOOL!"
       ],
       "dados": {
         "culpado": null,
+        "lance_tipo": "falta",
+        "comemoracao": "carrinho",
         "autor_numero": "7",
-        "passador_numero": "8",
+        "passador_numero": "77",
         "minuto": 72,
         "nosso": true,
         "estilo_voz": "grito",
@@ -661,8 +665,7 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        },
-        "variante": "replay"
+        }
       }
     },
     {

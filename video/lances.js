@@ -69,7 +69,7 @@ function coreografia(E, dd, T) {
     corre([[0, at(14), tvD(-24)], [T.a, at(4), tvD(-25)], [ent + 2, at(3.5), tvD(-25)]], pas);
     const ponto = tp === 'cabeca' ? [at(8), tvD(-0.5)] : [at(4.5), tvD(-1.5)], hc = m(1.75 + 0.35);
     if (tp === 'cabeca') corre([[0, at(16), tvD(6)], [T.a, at(11), tvD(3)], [T.chute, ponto[0], ponto[1] + 4], fim(5)], autor, { autor: true, pulo: [T.chute - 0.25, T.chute + 0.25] });
-    else corre([[0, at(15), tvD(6)], [T.chute, at(6.5), tvD(2)]], autor);
+    else corre([[0, at(15), tvD(6)], [T.chute, at(6.5), tvD(2)], [ent + 0.6, at(7.5), tvD(4)], [ent + 2.8, at(10), tvD(13)]], autor, { festeiro: true });   // no gol contra, quem comemora é o nosso atacante
     corre([[0, at(6), tvD(-6)], [T.chute, tp === 'contra' ? ponto[0] : at(7), (tp === 'contra' ? ponto[1] : tvD(-1.5)) - 2]], vDf(3),
       tp === 'contra' ? { autor: true, contra: true, pulo: [T.chute - 0.2, T.chute + 0.2] } : { pulo: [T.chute - 0.2, T.chute + 0.2] });
     const c0 = conduz(A[0], 0);
@@ -136,10 +136,22 @@ function coreografia(E, dd, T) {
   const goleiro = { vis: nosso ? visAdv(adv, 1, { luvas: true, camisa: '#495057', listra: null }) : jogador('1', E), x: at(0.5), y: yG, dir, salta: T.chute + (tp === 'penalti' ? 0 : tp === 'contra' ? 0.25 : 0.12), lado: ladoErrado };
   // no close da comemoração ninguém fica colado no autor: quem terminaria a menos de 2,6 m dele se afasta para o lado
   { const autorA = A.find(a => a.autor) || A[0], fx = autorA.pts[autorA.pts.length - 1][1], folga = tvM(2.6);
-    A.forEach(a => { if (a === autorA) return; const ult = a.pts[a.pts.length - 1];
+    A.forEach(a => { if (a === autorA || a.festeiro) return; const ult = a.pts[a.pts.length - 1];
       if (Math.abs(ult[1] - fx) >= folga) return;
       const nx = fx + (Math.sign(ult[1] - fx) || 1) * folga;
       if (ult[0] > ent) ult[1] = nx; else a.pts.push([ent + 1.6, nx, ult[2]]); }); }
+  // figurante nunca fica "em cima" de outro: se dois terminam (ou começam) quase no mesmo x e perto na profundidade,
+  // o figurante anda para o lado (1,3 m, alternando os lados) até ficar livre
+  for (const qual of [0, -1]) A.forEach((a, i) => {
+    if (!a.figurante) return;
+    const u = qual === 0 ? a.pts[0] : a.pts[a.pts.length - 1], x0 = u[1];
+    for (const passo of [0, 1, -1, 2, -2, 3, -3]) {
+      u[1] = x0 + passo * tvM(1.3);
+      const choca = A.some((b, j) => { if (j === i) return false; const v = qual === 0 ? b.pts[0] : b.pts[b.pts.length - 1];
+        return Math.abs(v[1] - u[1]) < tvM(1.0) && Math.abs(v[2] - u[2]) < 9 * TV.P; });
+      if (!choca) break;
+    }
+  });
   return { A, bola, goleiro, golX, dir, at, alvo, nosso, adv };
 }
 
@@ -162,18 +174,33 @@ function lanceGolV2(t, E, c) {
   const tipoCom = dd.comemoracao || 'canto';
   const fimAut = aut.pts[aut.pts.length - 1];
   const pc = clamp((t - ent) / 1.2);
+  const fest = aut.contra ? C.A.find(a => a.festeiro) : null;      // gol contra: a câmera vai do zagueiro para quem comemora
+  const eio = k => k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+  // companheiros: os dois figurantes do time que marcou mais perto do herói (gente que já estava em campo, sem
+  // número repetido). No "monte" chegam logo e abraçam; nas outras comemorações chegam depois e festejam ao lado.
+  const heroi = fest || (aut.contra ? null : aut), monte = (dd.comemoracao || 'canto') === 'monte';
+  const fimH = heroi ? heroi.pts[heroi.pts.length - 1] : null;
+  const comp = heroi ? C.A.filter(a => a.festa).sort((a, b) => Math.abs(a.pts.at(-1)[1] - fimH[1]) - Math.abs(b.pts.at(-1)[1] - fimH[1])).slice(0, 2) : [];
+  const tHeroi = ent + (fest ? 2.2 : 0) + (monte ? 0.4 : 2.2), perto = monte ? tvM(0.5) : tvM(1.1);
+  // cada companheiro fica do lado de onde vem (ninguém atravessa na frente do herói); dois do mesmo lado → um mais longe
+  const vaga = comp.map((a, i) => { const lado = Math.sign(trajeto(a.pts, tHeroi + i * 0.3)[0] - trajeto(heroi.pts, tHeroi)[0]) || (i ? -1 : 1); return lado; });
+  if (vaga.length === 2 && vaga[0] === vaga[1]) { const d0 = Math.abs(trajeto(comp[0].pts, tHeroi)[0] - fimH[1]), d1 = Math.abs(trajeto(comp[1].pts, tHeroi)[0] - fimH[1]); vaga[d0 < d1 ? 1 : 0] *= 2; }
   // câmera: acompanha a jogada e o voo da bola (média de quatro instantes = movimento liso, como uma câmera
   // operada); depois do gol aproxima no autor (zoom em escala log).
   const foco = tt => { const b = C.bola(tt)[0]; if (tt >= T.chute) return b; const a = trajeto(aut.pts, tt)[0] - C.dir * tvM(1.2); return C.dir > 0 ? Math.min(b, a) : Math.max(b, a); };
   const segue = tt => { const q = [0, 0.12, 0.24, 0.36].map(dt => quadroTV(foco(Math.max(0, tt - dt)), C)); return [q.reduce((a, v) => a + v[0], 0) / 4, mixLog(Math.min(...q.map(v => v[1])), Math.max(...q.map(v => v[1])), 0.5)]; };
   let [cam, z] = segue(t), yW = TV.yMeio - 3 * TV.P, yS = 1440;
   if (t > ent + 0.2) {
-    const [c0, z0] = segue(ent), k = easeOut(clamp((t - ent - 0.2) / 1.4)), [ax, ay] = trajeto(aut.pts, t);
-    const zA = aut.contra ? 1.9 : 2.2;
-    cam = c0 + (ax - c0) * k; z = mixLog(z0, zA, k);
+    const [c0, z0] = segue(ent), k = easeOut(clamp((t - ent - 0.2) / 1.4));
+    let [ax, ay] = trajeto(aut.pts, t);
+    if (fest) { const k2 = eio(clamp((t - ent - 1.9) / 1.1)), [fx, fy] = trajeto(fest.pts, t); ax += (fx - ax) * k2; ay += (fy - ay) * k2; }
+    cam = c0 + (ax - c0) * k; z = mixLog(z0, 2.2, k);
     const yW0 = TV.yMeio - 3 * TV.P;
-    yW = yW0 + (ay - m(0.85) * tvK(ay) - yW0) * k;   // centro do corpo do autor
+    yW = yW0 + (ay - m(0.85) * tvK(ay) - yW0) * k;   // centro do corpo de quem a câmera segue
     yS = 1440 + (1490 - 1440) * k;
+    // close longo (a narração ainda continua): os companheiros chegam e a câmera abre um pouco para pegar todo mundo
+    const tOut = ent + (fest ? 4.2 : 3.0);
+    if (c.duracao - tOut > 2.0) { const k3 = eio(clamp((t - tOut) / 2.4)); z = mixLog(z, 1.45, k3) * (1 + 0.02 * Math.max(0, t - tOut - 2.4)); yS += (1530 - yS) * k3; }
   }
   // fundo (céu + bairro) na tela, alinhado ao topo do muro
   let s = tvFundo(t, cam, z, yS + (792 - yW) * z);
@@ -185,13 +212,19 @@ function lanceGolV2(t, E, c) {
   camadas.push([gy, () => { const [sx, sy] = tvP(gx, gy, cam, Math.sin(kg * Math.PI) * m(0.4)); return `<g transform="translate(${sx} ${sy}) rotate(${-g.dir * g.lado * 75 * kg})">${pessoa({ ...g.vis, pose: 'comemora', expr: 'surpreso' }, t, { s: tvK(gy) }).replace(/class="rosto" /g, '')}</g>`; }]);
   // atores
   C.A.forEach((a, i) => {
-    const [x, y] = trajeto(a.pts, t);
+    let [x, y] = trajeto(a.pts, t);
+    const ic = comp.indexOf(a);
+    if (ic >= 0 && t > tHeroi + ic * 0.3) {
+      // primeiro alinham na profundidade do herói, depois chegam de lado (não passam por trás da cabeça dele)
+      const r = clamp((t - tHeroi - ic * 0.3) / 1.4), qy = easeOut(clamp(r * 2)), qx = easeOut(clamp(r * 1.4 - 0.3)), [hx, hy] = trajeto(heroi.pts, t);
+      x += (hx + vaga[ic] * perto - x) * qx; y += (hy + (monte ? (ic ? 6 : -4) : 0) - y) * qy;
+    }
     const pulo = a.pulo && t > a.pulo[0] && t < a.pulo[1] ? Math.sin((t - a.pulo[0]) / (a.pulo[1] - a.pulo[0]) * Math.PI) * m(0.4) : 0;
     const caiu = a.cai && t > a.cai;
     let pose = null, rot = 0;
-    if (a === aut && t > ent) {
-      if (a.contra) pose = 'normal';
-      else if (tipoCom === 'aviao') pose = 'aviao';
+    if (a === aut && a.contra && t > ent) pose = 'normal';
+    else if ((a === aut || a === fest) && t > ent + (a === fest ? 0.3 : 0)) {
+      if (tipoCom === 'aviao') pose = 'aviao';
       else if (tipoCom === 'carrinho' && pc > 0.6) { pose = 'comemora'; rot = -C.dir * 18; }
       else pose = 'comemora';
     } else if (pulo || (a.festa && t > ent + 0.3)) pose = 'comemora';
@@ -202,21 +235,13 @@ function lanceGolV2(t, E, c) {
     const correndo = !pose && anda && !a.barreira && !(a.figurante && a.devagar);
     const vis = a.contra && t > ent ? { ...a.vis, expr: 'triste' } : a.vis;
     camadas.push([y, () => {
-      const [sx, sy] = tvP(x, y, cam, pulo + (tipoCom === 'carrinho' && a === aut && t > ent ? -10 : 0));
+      const [sx, sy] = tvP(x, y, cam, pulo + (tipoCom === 'carrinho' && (a === aut || a === fest) && t > ent ? -10 : 0));
       if (sx < TV_X0 || sx > TV_X1) return '';
       const passo = correndo ? (Math.floor(t * (a.figurante ? 4 : 7) + i) % 2 ? 'chute' : 'normal') : pose;
       return `<g transform="translate(${sx} ${sy}) rotate(${rot})">${pessoa({ ...vis, pose: passo }, t, { s: tvK(y), fase: i, espelho: C.dir < 0 }).replace(/class="rosto" /g, '')}</g>`;
     }]);
   });
   // monte: depois do gol, dois companheiros correm e abraçam o autor
-  if (t > ent && tipoCom === 'monte' && !aut.contra) [0, 1].forEach(k => {
-    const q = clamp((t - ent - 0.5 - k * 0.3) / 1.2);
-    if (q <= 0) return;
-    const [ax, ay] = trajeto(aut.pts, t), x0 = C.at(14 + k * 4), y0 = tvD(8 - k * 10);
-    const x = x0 + (ax + C.dir * (k ? -tvM(0.5) : tvM(0.5)) - x0) * easeOut(q), y = y0 + (ay - 4 + k * 8 - y0) * easeOut(q);
-    const vis = C.nosso ? jogador(['5', '8', '10', '11'][(dd.minuto + k) % 4], E) : visAdv(C.adv, 7 + k);
-    camadas.push([y, () => { const [sx, sy] = tvP(x, y, cam); return pessoa({ ...vis, pose: 'comemora', expr: 'feliz' }, t, { x: sx, y: sy, s: tvK(y), fase: k + 3 }).replace(/class="rosto" /g, ''); }]);
-  });
   camadas.push([by, () => tvBola(bx, by, cam, bh)]);
   camadas.sort((a, b) => a[0] - b[0]);
   // a trave entra na ordem de profundidade: poste de lá atrás de quem está na frente dele

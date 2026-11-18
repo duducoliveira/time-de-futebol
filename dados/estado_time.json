@@ -90,7 +90,7 @@
       {
         "dia": 13,
         "seguidores": 457,
-        "data": "2026-11-18T02:19:04+00:00"
+        "data": "2026-11-18T02:38:28+00:00"
       }
     ]
   },
@@ -1490,7 +1490,7 @@
           {
             "minuto": 26,
             "time": "Poeira FC",
-            "autor": "Foguete"
+            "autor": "gol contra"
           },
           {
             "minuto": 39,
@@ -1908,14 +1908,19 @@
     },
     {
       "dia": 13,
-      "data": "2026-11-18T02:19:04+00:00",
+      "data": "2026-11-18T02:38:28+00:00",
       "proxima_decisao": {
         "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
         "opcoes": [
           "Sua ideia aqui?"
         ]
       },
-      "post": null
+      "post": {
+        "buffer_id": "6afd1a1039777dd13e112dd5",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-013.mp4",
+        "agendado_para": "2026-11-18T06:00-03:00",
+        "status": "scheduled"
+      }
     }
   ],
   "decisoes": [
@@ -2383,7 +2388,7 @@
       "evento": "Rodada 11: Veteranos do Bairro 1 x 2 Poeira FC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-18T02:19:04+00:00",
+  "atualizado_em": "2026-11-18T02:38:28+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
@@ -2403,6 +2408,16 @@
     "O Professor disse que estava se posicionando.",
     "O Baixinho pulou. Pulou bonito. Mas pulou pro lado errado."
   ],
+  "lances_recentes": [
+    "contra",
+    "cabeca",
+    "falta"
+  ],
+  "comemoracoes_recentes": [
+    "monte",
+    "aviao",
+    "carrinho"
+  ],
   "cameras": {
     "capa": "aereo",
     "evolucao": "balcao",
@@ -2410,7 +2425,6 @@
     "comentarios": "mural",
     "pre_jogo": "chegada",
     "apelido": "figurinha",
-    "gol": "replay",
     "fim_de_jogo": "placar",
     "tabela": "quadro",
     "decisao": "mural",
