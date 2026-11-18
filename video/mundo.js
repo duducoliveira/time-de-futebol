@@ -7,49 +7,75 @@
 //  - rua do adversário (chegada de Kombi), saída do vestiário, pôr do sol.
 // Tudo na escala do resto: uma pessoa em s = 1 tem ~300 px.
 
-// ------------------------------------------------------------ TV (vista lateral)
-const TV = { L: 2200, yLonge: 960, yPerto: 1730, gol: [1210, 1450] };   // campo: x 0..L; profundidade (y na tela) longe..perto
-const tvK = y => 0.42 + (y - TV.yLonge) / (TV.yPerto - TV.yLonge) * 0.5;   // escala de pessoa na profundidade
-// posição na tela de um ponto do mundo (x ao longo do campo, y = profundidade na tela, h = altura acima do chão)
+// ------------------------------------------------------------ TV (vista lateral), em METROS
+// Câmera na lateral leste olhando um campo de 90 × 60 m. x = ao longo do campo (px de mundo, ortográfico);
+// y = profundidade na tela (encurtada pela perspectiva). Uma pessoa na profundidade y tem escala tvK(y).
+// câmera elevada ~15° (como numa transmissão): 1 m de profundidade = 0,24 m ao longo do campo, na tela
+const TV = { yLonge: 960 };
+TV.M = PX_M * 0.67;                                // px por metro ao longo do campo (pessoa no meio da profundidade: s = 0,67)
+TV.P = TV.M * 0.24;                                // px por metro na profundidade
+TV.yPerto = TV.yLonge + 60 * TV.P;                 // lateral de cá
+TV.yMeio = (TV.yLonge + TV.yPerto) / 2;
+TV.L = 90 * TV.M;                                  // comprimento do campo
+const tvK = y => 0.42 + (y - TV.yLonge) / (TV.yPerto - TV.yLonge) * 0.5;
+TV.gol = [TV.yMeio - 3.66 * TV.P, TV.yMeio + 3.66 * TV.P];   // postes: 7,32 m
+const tvM = v => v * TV.M;
+const tvD = v => TV.yMeio + v * TV.P;              // profundidade a partir do meio (metros; − = lado de lá)
+// posição na tela (antes do zoom) de um ponto do mundo (x ao longo do campo, y = profundidade, h = altura em px de s = 1)
 const tvP = (x, y, cam, h = 0) => [x - cam + W / 2, y - h * tvK(y)];
+const TV_X0 = -2700, TV_X1 = W + 2700;             // largura desenhada: cobre a câmera aberta (zoom até 0,3)
 
-function tvCenario(estrutura, cam, t = 0, { torcida = 0, nome = '' } = {}) {
+// fundo em camadas (como no detetive), desenhado na TELA: céu + morro com casas, com paralaxe e escala próprias,
+// para a câmera poder abrir (zoom < 1) sem buraco. yMuro = onde o topo do muro do fundo cai na tela.
+function tvFundo(t, cam, z, yMuro) {
+  let s = ceu(t);
+  const sz = 0.55 + 0.45 * Math.min(1, z), desl = -cam * 0.06 * sz, larg = 1180 * sz;
+  const i0 = Math.floor((-desl - 200) / larg) - 1, i1 = Math.ceil((W - desl + 200) / larg) + 1;
+  for (let i = i0; i <= i1; i++) {
+    s += `<g transform="translate(${(desl + i * larg).toFixed(1)} ${(yMuro + 30).toFixed(1)}) scale(${sz.toFixed(3)}) translate(0 -800)">${bairro(800, { xMin: -60, xMax: 1240 }).replace(/data-v="[^"]*" /g, '')}</g>`;
+  }
+  return s;
+}
+
+function tvCenario(estrutura, cam, t = 0, { torcida = 0, nome = '', fundo = true } = {}) {
   const fora = !!window._local, grama = estrutura.gramado === 'grama';
   const px = (x, f = 1) => (x - cam) * f + W / 2;                       // paralaxe: f < 1 = longe
-  let s = ceu(t);
-  // morro e casas bem ao fundo (andam devagar)
-  s += `<g transform="translate(${(-(cam - TV.L / 2) * 0.25).toFixed(1)} 0)">${bairro(780, { xMin: -700, xMax: 1800 })}</g>`;
-  // muro do fundo (lado oeste), com o nome do dono do campo
+  const dentro = (x, folga = 300) => x > TV_X0 - folga && x < TV_X1 + folga;
+  let s = '';
+  // morro e casas bem ao fundo (andam devagar) — só quando o fundo vem junto (câmera com zoom ≥ 1)
+  if (fundo) s += ceu(t) + `<g transform="translate(${(-(cam - TV.L / 2) * 0.25).toFixed(1)} 0)">${bairro(780, { xMin: -700, xMax: 1800 })}</g>`;
+  // muro do fundo (lado oeste), com o nome do dono do campo (2,5 m de altura)
   const corMuro = fora ? coresTime(window._local.nome)[0] : CORES.vinho, nomeMuro = fora ? window._local.nome : nome;
-  s += `<rect x="-10" y="800" width="${W + 20}" height="${TV.yLonge - 800}" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
-    <rect x="-10" y="792" width="${W + 20}" height="10" fill="#cfc6ba" stroke="${OUT}" stroke-width="3"/>`;
-  for (let i = -2; i < 4; i++) { const x = px(i * 800 + 400, 0.92); if (x > -300 && x < W + 300)
-    s += `<text x="${x}" y="868" text-anchor="middle" font-family="Anton" font-size="44" fill="${corMuro}" opacity=".85" letter-spacing="4">${esc((nomeMuro || '').toUpperCase())}</text>`; }
-  // lateral oeste (fundo): obra ou arquibancada nova, ao longo do meio do campo
+  s += `<rect x="${TV_X0}" y="800" width="${TV_X1 - TV_X0}" height="${TV.yLonge - 800}" fill="#e9e1d1" stroke="${OUT}" stroke-width="5"/>
+    <rect x="${TV_X0}" y="792" width="${TV_X1 - TV_X0}" height="10" fill="#cfc6ba" stroke="${OUT}" stroke-width="3"/>`;
+  for (let i = Math.floor((cam - 3600) / 900); i <= Math.ceil((cam + 3600) / 900); i++) { const x = px(i * 900 + 450, 0.92); if (dentro(x))
+    s += `<text x="${x.toFixed(0)}" y="868" text-anchor="middle" font-family="Anton" font-size="44" fill="${corMuro}" opacity=".85" letter-spacing="4">${esc((nomeMuro || '').toUpperCase())}</text>`; }
+  // lateral oeste (fundo): obra ou arquibancada nova, ao longo do meio do campo; senão, árvores atrás do alambrado
   if (!fora && (estrutura.obra_arquibancada || estrutura.arquibancada_lateral)) s += tvLateralOeste(estrutura, cam, t, torcida);
-  else for (const x of [300, 900, 1500, 2000]) { const sx = px(x, 0.97); if (sx > -150 && sx < W + 150) s += arvore(sx, TV.yLonge - 4, 46, 'tv' + x, x % 3); }
-  // chão de fora (faixas antes/depois do campo) e o campo
-  s += `<rect x="-10" y="${TV.yLonge - 8}" width="${W + 20}" height="${H - TV.yLonge + 8}" fill="#b98b57"/>`;
+  else for (let x = 300; x < TV.L; x += 640) { const sx = px(x, 0.97); if (dentro(sx, 100)) s += arvore(sx, TV.yLonge - 4, 46, 'tv' + x, x % 3); }
+  // chão de fora e o campo (90 m)
+  s += `<rect x="${TV_X0}" y="${TV.yLonge - 8}" width="${TV_X1 - TV_X0}" height="${H + 3000 - TV.yLonge}" fill="#b98b57"/>`;
   const x0 = px(0), x1 = px(TV.L);
-  s += `<path d="M${x0 - 40},${TV.yLonge} H${x1 + 40} L${x1 + 80},${TV.yPerto} H${x0 - 80}Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}"/>`;
-  if (grama) for (let i = 0; i < 11; i++) { const a = px(i * 200); s += `<path d="M${a},${TV.yLonge} h100 l4,${TV.yPerto - TV.yLonge} h-100z" fill="${CORES.grama2}" opacity=".7"/>`; }
-  else { const r = rng('tv-pedras'); for (let i = 0; i < 40; i++) { const x = px(r() * TV.L), y = TV.yLonge + 20 + r() * (TV.yPerto - TV.yLonge - 40);
-    if (x > -60 && x < W + 60) s += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(8 + r() * 26).toFixed(0)}" ry="${(3 + r() * 6).toFixed(0)}" fill="#8b4a22" opacity=".4"/>`; } }
+  s += `<path d="M${x0},${TV.yLonge} H${x1} V${TV.yPerto} H${x0}Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}"/>`;
+  if (grama) for (let i = 0; i < 18; i++) { const a = px(i * TV.L / 18); if (dentro(a)) s += `<path d="M${a},${TV.yLonge} h${TV.L / 36} v${TV.yPerto - TV.yLonge} h${-TV.L / 36}z" fill="${CORES.grama2}" opacity=".7"/>`; }
+  else { const r = rng('tv-pedras'); for (let i = 0; i < 260; i++) { const x = px(r() * TV.L), y = TV.yLonge + 20 + r() * (TV.yPerto - TV.yLonge - 40), rx = 8 + r() * 26, ry = 3 + r() * 6;
+    if (dentro(x, 60)) s += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${rx.toFixed(0)}" ry="${ry.toFixed(0)}" fill="#8b4a22" opacity=".4"/>`; } }
+  // linhas oficiais: laterais, fundo, meio, círculo (9,15 m), grande área (16,5 × 40,3 m), pequena área (5,5 × 18,3 m), marca do pênalti (11 m)
   const lc = grama ? '#ffffffdd' : '#ffffff88', xm = px(TV.L / 2);
-  s += `<path d="M${x0 - 40},${TV.yLonge} H${x1 + 40} M${x0 - 80},${TV.yPerto} H${x1 + 80} M${x0 - 40},${TV.yLonge} L${x0 - 80},${TV.yPerto} M${x1 + 40},${TV.yLonge} L${x1 + 80},${TV.yPerto}" stroke="${lc}" stroke-width="7" fill="none"/>
-    <path d="M${xm},${TV.yLonge} V${TV.yPerto}" stroke="${lc}" stroke-width="7"/>
-    <ellipse cx="${xm}" cy="${(TV.yLonge + TV.yPerto) / 2}" rx="120" ry="160" fill="none" stroke="${lc}" stroke-width="6"/>
-    ${[[0, 1], [TV.L, -1]].map(([gx, d]) => `<path d="M${px(gx) + d * -38},${1120} H${px(gx + d * 330)} V${1560} H${px(gx) + d * -60}" fill="none" stroke="${lc}" stroke-width="6"/>`).join('')}`;
+  s += `<path d="M${x0},${TV.yLonge} H${x1} M${x0},${TV.yPerto} H${x1} M${x0},${TV.yLonge} V${TV.yPerto} M${x1},${TV.yLonge} V${TV.yPerto} M${xm},${TV.yLonge} V${TV.yPerto}" stroke="${lc}" stroke-width="7" fill="none"/>
+    <ellipse cx="${xm}" cy="${TV.yMeio}" rx="${tvM(9.15)}" ry="${9.15 * TV.P}" fill="none" stroke="${lc}" stroke-width="6"/>
+    ${[[0, 1], [TV.L, -1]].map(([gx, d]) => `<path d="M${px(gx)},${tvD(-20.16)} H${px(gx + d * tvM(16.5))} V${tvD(20.16)} H${px(gx)} M${px(gx)},${tvD(-9.16)} H${px(gx + d * tvM(5.5))} V${tvD(9.16)} H${px(gx)}" fill="none" stroke="${lc}" stroke-width="6"/>
+      <ellipse cx="${px(gx + d * tvM(11))}" cy="${TV.yMeio}" rx="9" ry="4" fill="${lc}"/>`).join('')}`;
   return s;
 }
 
 // trave vista de lado: dois postes (um mais longe) ligados pelo travessão, rede para fora do campo
 function tvTrave(gx, cam, dir, t = 0, { balanco = 0 } = {}) {
   // dir = +1: gol na ponta direita (rede para a direita); -1: ponta esquerda
-  const [ya, yb] = TV.gol, k = y => tvK(y), h = 2.44 * 120;   // altura do gol ~1,45 pessoa
+  const [ya, yb] = TV.gol, k = y => tvK(y), h = m(2.44);   // travessão a 2,44 m
   const [xa, ta] = tvP(gx, ya, cam, h), [xb, tb] = tvP(gx, yb, cam, h);
   const fa = tvP(gx, ya, cam), fb = tvP(gx, yb, cam);
-  const fundo = 70 * dir;
+  const fundo = m(1.2) * dir;   // a rede vai 1,2 m para trás
   const b = balanco * dir * 18;
   return `<path d="M${fa[0]},${fa[1]} L${fa[0] + fundo * k(ya) + b},${fa[1]} L${xa + fundo * k(ya) * 0.6 + b},${ta + 20} L${xa},${ta}
       M${fb[0]},${fb[1]} L${fb[0] + fundo * k(yb) + b},${fb[1]} L${xb + fundo * k(yb) * 0.6 + b},${tb + 20} L${xb},${tb}
@@ -61,46 +87,53 @@ function tvTrave(gx, cam, dir, t = 0, { balanco = 0 } = {}) {
     <path d="M${fa[0]},${fa[1]} L${xa},${ta} L${xb},${tb} L${fb[0]},${fb[1]}" fill="none" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>`;
 }
 
-// lateral oeste na vista de TV: estrutura de degraus ao longo do campo (obra) ou pronta, com torcida
+// lateral oeste na vista de TV (do outro lado do campo, perto do muro): a arquibancada nova, em medidas reais —
+// 60 m ao longo do meio do campo, 12 degraus de 45 cm (5,4 m de altura), ~1.500 lugares. Na obra, a parte pronta
+// avança da esquerda para a direita, com andaime e pedreiros na frente de trabalho.
+const TV_ARQ = { meia: 30, nDeg: 12 };
 function tvLateralOeste(estrutura, cam, t = 0, torcida = 0) {
   const obra = estrutura.obra_arquibancada, prog = obra ? Math.min(1, ((obra.feitos || 0) + 1) / ((obra.jogos || 3) + 1)) : 1;
-  const xa = 500, xb = 1700, base = TV.yLonge - 6, nDeg = 4, passoH = 46, passoP = 20;
+  const k = tvK(TV.yLonge), nDeg = TV_ARQ.nDeg, passoH = m(0.45) * k, passoP = m(0.8) * k * 0.3;
+  const xa = TV.L / 2 - tvM(TV_ARQ.meia), xb = TV.L / 2 + tvM(TV_ARQ.meia), base = TV.yLonge - 6;
   const px = x => (x - cam) * 0.97 + W / 2;
-  const xPronto = obra ? xa + (xb - xa) * prog : xb;   // a obra avança da esquerda para a direita
+  if (px(xb) < TV_X0 - 200 || px(xa) > TV_X1 + 200) return '';
+  const xPronto = obra ? xa + (xb - xa) * prog : xb;
   let s = `<rect x="${px(xa) - 10}" y="${base - nDeg * passoH - 8}" width="${px(xb) - px(xa) + 20}" height="${nDeg * passoH + 14}" fill="#000" opacity=".1"/>`;
   for (let d = nDeg - 1; d >= 0; d--) {
     const y = base - (d + 1) * passoH, recuo = d * passoP;
-    s += `<rect x="${px(xa) + recuo}" y="${y}" width="${Math.max(0, px(xPronto) - px(xa) - recuo)}" height="${passoH}" fill="${obra ? '#c79a6b' : '#b08968'}" stroke="${OUT}" stroke-width="3"/>`;
-    if (obra) s += `<path d="M${px(xPronto)},${y + passoH / 2} H${px(xb) - recuo}" stroke="#7f5539" stroke-width="5"/>`;
+    s += `<rect x="${px(xa) + recuo}" y="${y}" width="${Math.max(0, px(xPronto) - px(xa) - recuo)}" height="${passoH}" fill="${obra ? '#c79a6b' : '#b08968'}" stroke="${OUT}" stroke-width="2.5"/>`;
+    if (obra) s += `<path d="M${px(xPronto)},${y + passoH / 2} H${px(xb) - recuo}" stroke="#7f5539" stroke-width="3"/>`;
   }
-  for (let x = xa; x <= xb; x += 100) { const h = (nDeg + 0.3) * passoH;
-    s += `<path d="M${px(x)},${base} V${base - h}" stroke="${OUT}" stroke-width="9" stroke-linecap="round"/><path d="M${px(x)},${base} V${base - h}" stroke="#9c6644" stroke-width="5" stroke-linecap="round"/>`; }
+  const hP = (nDeg + 0.3) * passoH;
+  for (let x = xa; x <= xb + 1; x += tvM(5)) { const sx = px(x); if (sx < TV_X0 - 50 || sx > TV_X1 + 50) continue;
+    s += `<path d="M${sx},${base} V${base - hP}" stroke="${OUT}" stroke-width="8" stroke-linecap="round"/><path d="M${sx},${base} V${base - hP}" stroke="#9c6644" stroke-width="4.5" stroke-linecap="round"/>`; }
   if (obra) {
-    // andaime, faixa zebrada e pedreiros (na escala da distância) trabalhando na ponta da obra
-    const xo = px(xPronto);
-    s += `<path d="M${xo + 10},${base} V${base - 170} M${xo + 70},${base} V${base - 170} M${xo + 10},${base - 85} H${xo + 70} M${xo + 10},${base - 170} H${xo + 70} M${xo + 10},${base} L${xo + 70},${base - 85} L${xo + 10},${base - 170}" stroke="#6c757d" stroke-width="5" fill="none"/>
-      <path d="M${px(xa) - 30},${base + 4} H${px(xb) + 30}" stroke="${OUT}" stroke-width="9"/><path d="M${px(xa) - 30},${base + 4} H${px(xb) + 30}" stroke="#ffd60a" stroke-width="6" stroke-dasharray="16 14"/>`;
-    s += [0, 1].map(i => pessoa({ pele: i ? '#e0ac69' : '#a0673e', cabelo: 'curto', corCabelo: '#2b1d14', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40',
-      pose: i ? 'aponta' : 'caixa', expr: 'serio' }, t, { x: xo - 40 + i * 130, y: base, s: 0.4, fase: i }).replace(/class="rosto" /g, '')).join('');
+    // andaime (3 m), faixa zebrada e pedreiros (na escala da distância) na frente de trabalho
+    const xo = px(xPronto), ha = m(3) * k, la = m(1.2) * k;
+    s += `<path d="M${xo + 8},${base} V${base - ha} M${xo + 8 + la},${base} V${base - ha} M${xo + 8},${base - ha / 2} H${xo + 8 + la} M${xo + 8},${base - ha} H${xo + 8 + la} M${xo + 8},${base} L${xo + 8 + la},${base - ha / 2} L${xo + 8},${base - ha}" stroke="#6c757d" stroke-width="4" fill="none"/>
+      <path d="M${px(xa) - 30},${base + 4} H${px(xb) + 30}" stroke="${OUT}" stroke-width="8"/><path d="M${px(xa) - 30},${base + 4} H${px(xb) + 30}" stroke="#ffd60a" stroke-width="5" stroke-dasharray="14 12"/>`;
+    s += [[-1.2, 0, 'caixa'], [2.6, 1, 'aponta'], [4.4, 2, 'normal']].map(([dx, i, pose]) => pessoa({ pele: ['#a0673e', '#e0ac69', '#8d5524'][i], cabelo: 'curto', corCabelo: '#2b1d14', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40',
+      pose, expr: 'serio', bigode: i === 1 }, t, { x: xo + tvM(dx), y: base, s: k, fase: i }).replace(/class="rosto" /g, '')).join('');
   } else if (torcida > 0) {
-    const r = rng('tv-oeste'); let n = Math.min(90, Math.round(torcida / 20));
-    for (let i = 0; n > 0 && i < 400; i++) { const d = i % nDeg, x = xa + 30 + r() * (xb - xa - 60), y = base - (d + 0.4) * passoH; n--;
-      const pulo = Math.abs(Math.sin(t * 6 + i)) * 3;
-      s += `<rect x="${px(x) - 9}" y="${y - 22 - pulo}" width="18" height="22" rx="6" fill="${r() > 0.3 ? CORES.vinho : CORES.amarelo}" stroke="${OUT}" stroke-width="2"/><circle cx="${px(x)}" cy="${y - 30 - pulo}" r="8" fill="${PELES[Math.floor(r() * PELES.length)]}" stroke="${OUT}" stroke-width="2"/>`; }
+    const r = rng('tv-oeste'); let n = Math.min(320, Math.round(torcida / 5));
+    for (let i = 0; n > 0 && i < 1200; i++) { const d = Math.floor(r() * nDeg), x = xa + tvM(0.5) + r() * (xb - xa - tvM(1)), cor = r() > 0.3 ? CORES.vinho : CORES.amarelo, pele = PELES[Math.floor(r() * PELES.length)]; n--;
+      const sx = px(x) + d * passoP; if (sx < TV_X0 || sx > TV_X1) continue;
+      const y = base - (d + 0.15) * passoH, pulo = Math.abs(Math.sin(t * 6 + i)) * 2, bw = m(0.44) * k, bh = m(0.55) * k;
+      s += `<rect x="${(sx - bw / 2).toFixed(1)}" y="${(y - bh - pulo).toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" rx="${(bw / 3).toFixed(1)}" fill="${cor}" stroke="${OUT}" stroke-width="1.5"/><circle cx="${sx.toFixed(1)}" cy="${(y - bh - m(0.15) * k - pulo).toFixed(1)}" r="${(m(0.13) * k).toFixed(1)}" fill="${pele}" stroke="${OUT}" stroke-width="1.5"/>`; }
   }
   return s;
 }
 
-// lateral leste (perto da câmera, embaixo da tela): banco, pomponetes e o Caramelo
+// lateral leste (perto da câmera, embaixo da tela): banco, pomponetes e o Caramelo, em tamanho real nessa profundidade
 function tvLateralLeste(estrutura, cam, t = 0) {
-  const px = x => (x - cam) * 1.08 + W / 2, fora = !!window._local;
+  const yb = TV.yPerto + 3 * TV.P, k = tvK(yb), px = x => (x - cam) + W / 2, fora = !!window._local;
   let s = '';
-  if (estrutura.banco_reservas && !fora) s += `<g transform="translate(${px(TV.L / 2 + 260)} 1905) scale(1.25)">${bancoReservasFrente()}</g>`;
-  if (estrutura.pomponetes) [TV.L / 2 - 260, TV.L / 2 - 120].forEach((x, i) => {
+  if (estrutura.banco_reservas && !fora) s += `<g transform="translate(${px(TV.L / 2 + tvM(4))} ${yb}) scale(${k})">${bancoReservasFrente()}</g>`;
+  if (estrutura.pomponetes) [TV.L / 2 - tvM(3), TV.L / 2 - tvM(1.6)].forEach((x, i) => {
     s += pessoa({ pele: PELES[(i * 2 + 1) % PELES.length], cabelo: 'coque', corCabelo: i ? '#7a4b2a' : '#1b1b1b', camisa: CORES.amarelo, listra: CORES.vinho,
-      calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: Math.sin(t * 4 + i) > 0 ? 'comemora' : 'acena', expr: 'feliz' }, t, { x: px(x), y: 1925, s: 0.95, fase: i }).replace(/class="rosto" /g, '');
+      calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: Math.sin(t * 4 + i) > 0 ? 'comemora' : 'acena', expr: 'feliz' }, t, { x: px(x), y: yb + 15, s: k, fase: i }).replace(/class="rosto" /g, '');
   });
-  if (estrutura.mascote && !fora) s += `<g transform="translate(${px(TV.L / 2 + 40)} 1915) scale(.95)">${caramelo(t)}</g>`;
+  if (estrutura.mascote && !fora) s += `<g transform="translate(${px(TV.L / 2 + tvM(0.6))} ${yb + 8}) scale(${k})">${caramelo(t)}</g>`;
   return s;
 }
 
@@ -124,44 +157,6 @@ const visAdv = (adv, n, extra = {}) => { const [c1, c2] = coresTime(adv), r = rn
   return { pele: PELES[Math.floor(r() * PELES.length)], cabelo: ['curto', 'raspado', 'cacheado', 'careca'][Math.floor(r() * 4)], corCabelo: '#2b1d14',
     camisa: c1, listra: c2, calcao: c2, meiao: c1, numero: String(n), bigode: r() > 0.6, idade: adv.includes('Veteranos'), ...extra }; };
 
-// Um gol contado como lance: o time que ataca sai do meio, toca, o autor finaliza e o goleiro pula do lado errado.
-// tempos: tPasse (o passe), tChute (a finalização); a bola entra ~0,45 s depois do chute.
-function lanceGol(t, E, dd, { tPasse = 1.0, tChute = 2.0 } = {}) {
-  const nosso = dd.nosso, adv = dd.mandante === E.clube.nome ? dd.visitante : dd.mandante;
-  const dir = nosso ? 1 : -1, golX = dir > 0 ? TV.L : 0;            // nós atacamos para a direita; eles, para a esquerda
-  const at = x => golX - dir * x;                                   // distância até o gol
-  const autorN = dd.autor_numero || '9', passN = dd.passador_numero || '10';
-  const vAut = nosso ? vis(autorN, E) : visAdv(adv, 9), vPas = nosso ? vis(passN, E) : visAdv(adv, 10);
-  const vDef = nosso ? visAdv(adv, 4) : vis('3', E), vGol = nosso ? visAdv(adv, 1, { luvas: true, camisa: '#495057', listra: null }) : vis('1', E);
-  const yP = 1520, yA = 1300, yG = (TV.gol[0] + TV.gol[1]) / 2;
-  // posições ao longo do tempo
-  const tEntra = tChute + 0.45;
-  const pP = clamp(t / Math.max(0.3, tPasse)), pA = clamp((t - tPasse) / Math.max(0.3, tChute - tPasse));
-  const pasX = at(lerp(900, 640, pP)), autX = at(lerp(760, 300, clamp(t / tChute)));
-  let bx, by, bh = 0;
-  if (t < tPasse) { bx = pasX + dir * 30; by = yP; }
-  else if (t < tPasse + 0.45) { const q = (t - tPasse) / 0.45; bx = lerp(at(640) + dir * 30, at(lerp(760, 300, clamp(tPasse / tChute + 0.45 / tChute))), q); by = lerp(yP, yA, q); bh = Math.sin(q * Math.PI) * 60; }
-  else if (t < tChute) { bx = autX + dir * 28; by = yA; }
-  else if (t < tEntra) { const q = (t - tChute) / 0.45; bx = lerp(at(300) + dir * 28, at(-50), q); by = lerp(yA, yG + 40, q); bh = Math.sin(q * Math.PI * 0.8) * 120 + q * 60; }
-  else { bx = at(-55); by = yG + 40; bh = 40; }
-  const cam = clamp(bx, W / 2 - 120, TV.L - W / 2 + 120);
-  let s = tvCenario(E.estrutura, cam, t, { torcida: E._torcida, nome: E.clube.nome });
-  // goleiro: espera no meio do gol e pula para o lado errado na hora do chute
-  const mg = easeOut(clamp((t - tChute) / 0.35));
-  const kgY = lerp(yG, yG + (dir > 0 ? -150 : 150), mg);
-  const gol = [];   // camadas ordenadas pela profundidade (y): quem está mais perto fica na frente
-  gol.push([kgY, () => { const [gx, gy] = tvP(at(25), kgY, cam); return `<g transform="translate(${gx} ${gy}) rotate(${dir * 70 * mg})">${pessoa({ ...vGol, pose: 'comemora', expr: 'surpreso' }, t, { s: tvK(kgY) }).replace(/class="rosto" /g, '')}</g>`; }]);
-  gol.push([yP + 10, () => tvJogador(vPas, pasX, yP + 10, cam, t, { correndo: t < tPasse + 0.3, pose: t > tEntra ? 'comemora' : null })]);
-  gol.push([yA, () => tvJogador(vAut, t > tEntra ? lerp(autX, at(150), clamp((t - tEntra) / 1.2)) : autX, yA, cam, t, { correndo: t < tChute || t > tEntra, fase: 1, pose: t > tEntra ? 'comemora' : (Math.abs(t - tChute) < 0.2 ? 'chute' : null) })]);
-  gol.push([yA + 90, () => tvJogador(vDef, lerp(at(520), at(330), clamp(t / tChute)) , yA + 90, cam, t, { correndo: t < tChute, fase: 2, pose: t > tEntra ? 'normal' : null })]);
-  gol.push([by, () => tvBola(bx, by, cam, bh)]);
-  gol.sort((a, b) => a[0] - b[0]);
-  s += tvTrave(golX, cam, dir, t, { balanco: t > tEntra ? Math.max(0, 1 - (t - tEntra) * 2) * Math.sin((t - tEntra) * 30) : 0 });
-  s += gol.map(g => g[1]()).join('');
-  s += tvLateralLeste(E.estrutura, cam, t);
-  return s;
-}
-
 // câmera da obra: onde a frente de trabalho está agora
-const tvObraCam = est => { const o = est.obra_arquibancada; const p = o ? Math.min(1, ((o.feitos || 0) + 1) / ((o.jogos || 3) + 1)) : 0.5; return 500 + 1200 * p; };
-Object.assign(window, { tvObraCam, TV, tvK, tvP, tvCenario, tvTrave, tvLateralOeste, tvLateralLeste, tvJogador, tvBola, lanceGol, visAdv });
+const tvObraCam = est => { const o = est.obra_arquibancada; const p = o ? Math.min(1, ((o.feitos || 0) + 1) / ((o.jogos || 3) + 1)) : 0.5; return TV.L / 2 + tvM(TV_ARQ.meia) * (2 * p - 1); };
+Object.assign(window, { tvObraCam, TV, tvK, tvP, tvCenario, tvTrave, tvLateralOeste, tvLateralLeste, tvJogador, tvBola, tvFundo, tvM, tvD, visAdv });

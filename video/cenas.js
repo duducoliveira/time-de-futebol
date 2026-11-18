@@ -17,6 +17,9 @@ let CAM_SEDE = CAM_SEDE_PADRAO;
 const camSede = est => (est && est.vestiario_predio) ? { z0: 0.72, z1: 0.73, cy: 1750 } : CAM_SEDE_PADRAO;
 const zoomSede = (est, svg) => { const k = camSede(est).z0; return k === 1 ? svg : `<g transform="translate(${W / 2} 1750) scale(${k}) translate(${-W / 2} -1750)">${svg}</g>`; };
 
+// primeiro plano: quem está perto da câmera numa vista larga fica com os pés fora do quadro (cortado no joelho),
+// em vez de 'em pé' no campo com tamanho de gigante (escala real: ver PX_M em arte.js)
+const FRENTE = s => H + 100 * s;
 function narrador(t, E, x = 300, y = 1720, s = 1.45, extra = {}) { return pessoa({ ...PERSONAGENS.narrador, ...extra }, t, { x, y, s }); }
 function presidente(t, E, x = 780, y = 1720, s = 1.45, extra = {}) { return pessoa({ ...PERSONAGENS.presidente, ...extra }, t, { x, y, s, fase: 1.3 }); }
 
@@ -24,7 +27,8 @@ function elencoLinha(t, E, y = 1500, s = 0.9, numeros = null) {
   const nums = numeros || Object.keys(E.elenco).sort((a, b) => a - b).slice(0, 11);
   const tras = nums.filter((_, i) => i % 2 === 0), frente = nums.filter((_, i) => i % 2 === 1);
   let out = '';
-  [[tras, y, 0.92], [frente, y + 150, 1.05]].forEach(([fila, yy, k], f) => {
+  // a foto do time fica em primeiro plano (perto da câmera), não em pé no meio do campo
+  [[tras, FRENTE(1.05), 0.92], [frente, FRENTE(1.25), 1.05]].forEach(([fila, yy, k], f) => { s = Math.max(s, 1.15);
     fila.forEach((n, i) => {
       const x = W / 2 + (i - (fila.length - 1) / 2) * (f ? 205 : 180);
       out += popPessoa(t, 0.15 + (i * 2 + f) * 0.07, x, yy, pessoa(jogador(n, E), t, { s: s * k, fase: i + f }));
@@ -37,7 +41,7 @@ const TIPOS = {
   abertura(t, d, c, E) {
     const dia = (c.texto_tela[0] || '').replace('DIA ', '');
     let s = camera(t, d, campo(E.estrutura, { t, torcida: c.dados.antes ?? 0, nome: NOME(E) }));
-    s += narrador(t, E, 540, 1870, 1.8, { pose: 'acena' });
+    s += narrador(t, E, 540, FRENTE(1.8), 1.8, { pose: 'acena' });
     s += pop(t, 0.1, W / 2, 470, tituloGrande(`DIA ${dia}`, { tam: 230 }));
     if (c.texto_tela[1]) s += pop(t, 0.5, W / 2, 640, pilula(c.texto_tela[1], { tam: 54, rot: 2 }));
     return s;
@@ -136,7 +140,7 @@ const TIPOS = {
     const s0 = s.length;  // daqui até os letreiros: gente e objetos na cena (entram no mesmo zoom da sede)
     if (acoes.includes('kombi') && t >= virada) {  // a Kombi chega andando e estaciona na frente do bar
       const p = easeOut(prog(t, virada, 1.2));
-      s += `<g transform="translate(${-400 + p * 940} 1908) scale(1.1)">${kombi({ t, andando: p < 1 })}</g>`;
+      s += `<g transform="translate(${-400 + p * 940} 1908)">${kombi({ t, andando: p < 1 })}</g>`;   // na rua, na escala das pessoas (s = 1)
     }
     if (acoes.includes('uniforme') && t >= virada) {  // a costureira entrega o uniforme (com remendos) pro time
       s += popPessoa(t, virada + 0.2, 380, SEDE.pe, pessoa(jogador('17', E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1 }));
@@ -220,33 +224,25 @@ const TIPOS = {
   gol(t, d, c, E) {
     const dd = c.dados;
     if (dd.nosso === null || dd.nosso === undefined) return TIPOS.golAtras(t, d, c, E);
-    const tPasse = quando(c, 'toc', 1.2), tChute = Math.max(tPasse + 0.7, quando(c, 'bateu', tPasse + 1.2));
-    const tEntra = tChute + 0.45, tB = tEntra + 1.1, v = dd.variante || 'replay';
+    const { svg, T } = lanceGolV2(t, E, c);
+    let s = svg;
     const sg = n => n === NOME(E) ? E.clube.sigla : sigla(n);
     const placarAntes = dd.nosso ? (dd.mandante === NOME(E) ? [dd.placar[0] - 1, dd.placar[1]] : [dd.placar[0], dd.placar[1] - 1])
       : (dd.mandante === NOME(E) ? [dd.placar[0], dd.placar[1] - 1] : [dd.placar[0] - 1, dd.placar[1]]);
-    const pl = t < tEntra ? placarAntes : dd.placar;
-    let s;
-    if (t < tB || v === 'abraco') {
-      s = camera(t, d, lanceGol(t, E, dd, { tPasse, tChute }), { z0: 1.55, z1: 1.6, cy: 1390 });  // câmera de TV fechada no lance
-      if (dd.nosso) s += pop(t, tEntra, W / 2, 700, tituloGrande('GOOOOL!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
-      else {
-        s += pop(t, tEntra + 0.1, W / 2, 700, pilula(c.texto_tela[1] || 'GOL DELES', { tam: 56, bg: '#6c757d', rot: 3 }));
-        if (dd.culpado && t > tB) {
-          const q = dd.culpado;
-          s += pop(t, tB, W / 2, 360, pilula(`#${q.numero} ${q.nome.toUpperCase()}`, { tam: 40, bg: CORES.marinho, rot: -3 }));
-          s += pop(t, tB + 0.3, W / 2, 470, pilula(q.apelido.toUpperCase(), { tam: 54, bg: CORES.laranja, cor: OUT, rot: 2 }));
-        }
-      }
-    } else if (v === 'torcida' && dd.nosso) {
-      // a torcida explode na arquibancada (vista de frente, câmera fechada nos degraus)
-      const t2 = t - tB;
-      s = camera(t2, d - tB, campo(E.estrutura, { t, nome: NOME(E), torcida: Math.max(E._torcida, 400) }), { z0: 1.9, z1: 2.05, cy: 760 });
-      s += pop(t2, 0.1, W / 2, 1450, tituloGrande('GOOOOL!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
-      s += pop(t2, 0.4, W / 2, 1640, pilula((dd.autor || '').toUpperCase(), { tam: 60, bg: CORES.vinho, rot: 2 }));
+    const pl = t < T.entra ? placarAntes : dd.placar;
+    if (dd.nosso) {
+      s += pop(t, T.entra, W / 2, 640, tituloGrande(dd.lance_tipo === 'contra' ? 'GOL CONTRA!' : 'GOOOOL!', { tam: dd.lance_tipo === 'contra' ? 130 : 170, cor: CORES.amarelo, rot: -5 }));
+      if (dd.autor && dd.lance_tipo !== 'contra') s += pop(t, T.entra + 0.9, W / 2, 800, pilula(dd.autor.toUpperCase(), { tam: 54, bg: CORES.vinho, rot: 2 }));
     } else {
-      s = TIPOS.golAtras(t - tB + 0.1, d - tB, c, E, { replay: true });
+      s += pop(t, T.entra + 0.1, W / 2, 640, pilula(c.texto_tela[1] || 'GOL DELES', { tam: 56, bg: '#6c757d', rot: 3 }));
+      if (dd.culpado) {
+        const q = dd.culpado;
+        s += pop(t, T.entra + 1.2, W / 2, 360, pilula(`#${q.numero} ${q.nome.toUpperCase()}`, { tam: 40, bg: CORES.marinho, rot: -3 }));
+        s += pop(t, T.entra + 1.5, W / 2, 470, pilula(q.apelido.toUpperCase(), { tam: 54, bg: CORES.laranja, cor: OUT, rot: 2 }));
+      }
     }
+    const nomes = { falta: 'FALTA', penalti: 'PÊNALTI', cabeca: 'DE CABEÇA', longe: 'DE LONGE', drible: 'NO DRIBLE', contra: 'GOL CONTRA' };
+    if (nomes[dd.lance_tipo] && t < T.entra) s += pop(t, 0.2, W - 190, 420, pilula(nomes[dd.lance_tipo], { tam: 34, bg: '#e63946', py: 10 }));
     s += placarCanto(sg(dd.mandante), sg(dd.visitante), pl[0], pl[1], dd.minuto);
     return s;
   },
@@ -277,18 +273,18 @@ const TIPOS = {
     window._closeGol = false;
     if (nosso) {
       const num = Object.keys(E.elenco).find(k => E.elenco[k].nome === dd.autor) || '9';
-      s += popPessoa(t, 0.75, 540, 1905, pessoa(jogador(num, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.35 }));
+      s += popPessoa(t, 0.75, 540, FRENTE(1.35), pessoa(jogador(num, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.35 }));
       s += pop(t, 0.6, W / 2, 660, tituloGrande('GOOOOL!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
     } else if (nosso === false) {
       s += pop(t, 0.6, W / 2, 660, pilula(c.texto_tela[1] || 'GOL DELES', { tam: 56, bg: '#6c757d', rot: 3 }));
       if (dd.culpado) {  // o culpado do gol, com o apelido novo
         const q = dd.culpado;
-        s += popPessoa(t, 0.9, 760, 1905, pessoa(jogador(q.numero, E, { expr: 'surpreso', pose: 'acena' }), t, { s: 1.35 }));
+        s += popPessoa(t, 0.9, 760, FRENTE(1.35), pessoa(jogador(q.numero, E, { expr: 'surpreso', pose: 'acena' }), t, { s: 1.35 }));
         s += pop(t, 1.0, 330, 1420, pilula(`#${q.numero} ${q.nome.toUpperCase()}`, { tam: 40, bg: CORES.marinho, rot: -3 }));
         s += pop(t, 1.3, 330, 1530, pilula(q.apelido.toUpperCase(), { tam: 54, bg: CORES.laranja, cor: OUT, rot: 2 }));
       } else {
-        s += popPessoa(t, 0.9, 380, 1905, pessoa(jogador('3', E, { expr: 'triste' }), t, { s: 1.3 }));
-        s += popPessoa(t, 1.0, 700, 1905, pessoa(jogador('4', E, { expr: 'triste' }), t, { s: 1.3, fase: 1 }));
+        s += popPessoa(t, 0.9, 380, FRENTE(1.35), pessoa(jogador('3', E, { expr: 'triste' }), t, { s: 1.3 }));
+        s += popPessoa(t, 1.0, 700, FRENTE(1.35), pessoa(jogador('4', E, { expr: 'triste' }), t, { s: 1.3, fase: 1 }));
       }
     }
     if (replay) { s += pop(t, 0.05, W - 170, 420, pilula('▶ REPLAY', { tam: 34, bg: '#e63946', rot: 0, py: 10 })); return s; }
@@ -300,7 +296,7 @@ const TIPOS = {
     const dd = c.dados;
     let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }));
     const exp = dd.resultado === 'vitória' ? 'feliz' : dd.resultado === 'empate' ? 'serio' : 'triste';
-    s += narrador(t, E, 540, 1760, 1.6, { expr: exp, pose: dd.resultado === 'vitória' ? 'comemora' : 'microfone' });
+    s += narrador(t, E, 540, FRENTE(1.7), 1.7, { expr: exp, pose: dd.resultado === 'vitória' ? 'comemora' : 'microfone' });
     s += pop(t, 0.1, W / 2, 250, pilula('FIM DE JOGO', { tam: 52, bg: CORES.marinho, rot: -2 }));
     s += pop(t, 0.4, W / 2, 545, tituloGrande(`${dd.placar[0]} x ${dd.placar[1]}`, { tam: 180, cor: '#fff', rot: 0 }));
     s += pop(t, 0.6, W / 2, 668, pilula(`${dd.mandante}  ·  ${dd.visitante}`, { tam: 32, bg: CORES.marinho, py: 12 }));
@@ -460,7 +456,7 @@ Object.assign(TIPOS, {
   // capa (como a do Dia 1): o Tião abre o vídeo falando "Dia N: tema"; é dela que sai a capa do post
   capa(t, d, c, E) {
     let s = campo(E.estrutura, { t, nome: NOME(E), torcida: c.dados.antes || 0 });
-    s += narrador(t, E, 540, 1870, 1.8, { pose: 'acena' });
+    s += narrador(t, E, 540, FRENTE(1.9), 1.9, { pose: 'acena' });
     return s + TIPOS.capa.titulo(t, c);
   },
   _capa_titulo(t, c) {
@@ -553,7 +549,7 @@ Object.assign(TIPOS, {
     s += pop(t, 0.1, W / 2, 420, tituloGrande('VITÓRIA!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
     if (c.texto_tela[0]) s += pop(t, 0.8, W / 2, 640, pilula(c.texto_tela[0], { tam: 46, bg: CORES.vinho, rot: 2 }));
     ['9', '8', '1', '10', '12'].forEach((n, i) => {
-      if (E.elenco[n]) s += popPessoa(t, 0.3 + i * 0.15, 140 + i * 200, 1910, pessoa(jogador(n, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.0, fase: i }));
+      if (E.elenco[n]) s += popPessoa(t, 0.3 + i * 0.15, 140 + i * 200, FRENTE(1.1), pessoa(jogador(n, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.1, fase: i }));
     });
     return s;
   },
@@ -608,12 +604,12 @@ Object.assign(TIPOS, {
         <path d="M60,-120 h70 l50,50 v60 h-120z" fill="#3a86ff" stroke="${OUT}" stroke-width="7" stroke-linejoin="round"/><path d="M80,-110 h40 l30,32 h-70z" fill="#8ecae6" stroke="${OUT}" stroke-width="4"/>
         ${[-110, 120].map(x => `<circle cx="${x}" cy="-8" r="30" fill="#222" stroke="${OUT}" stroke-width="6"/>`).join('')}
         <text x="-55" y="-62" text-anchor="middle" font-family="Anton" font-size="34" fill="${OUT}">GÁS</text></g>`;
-      ['15', '18', '9'].forEach((n, i) => s += pessoa(jogador(n, E, { pose: 'chute', expr: 'surpreso' }), t, { x: cx - 330 - i * 120, y: 1440, s: 0.55, fase: i }));
+      ['15', '18', '9'].forEach((n, i) => s += pessoa(jogador(n, E, { pose: 'chute', expr: 'surpreso' }), t, { x: cx - 330 - i * 120, y: 1440, s: cfK(1440), fase: i }));
     }
     // zagueiros e volantes fazendo a "aula" na frente
     const tz = quando(c, 'zagueiros', 1);
-    ['3', '4'].forEach((n, i) => s += popPessoa(t, tz + i * 0.15, 150 + i * 170, 1900, pessoa(jogador(n, E, { pose: 'caixa', expr: 'serio' }), t, { s: 0.95, fase: i })));
-    s += popPessoa(t, 0.3, 830, 1905, pessoa({ ...PERSONAGENS.tecnico, pose: 'aponta', expr: 'bravo' }, t, { s: 1.2, espelho: true }));
+    ['3', '4'].forEach((n, i) => s += popPessoa(t, tz + i * 0.15, 150 + i * 170, FRENTE(1.0), pessoa(jogador(n, E, { pose: 'caixa', expr: 'serio' }), t, { s: 0.95, fase: i })));
+    s += popPessoa(t, 0.3, 830, FRENTE(1.3), pessoa({ ...PERSONAGENS.tecnico, pose: 'aponta', expr: 'bravo' }, t, { s: 1.3, espelho: true }));
     if (Math.floor(t * 2.5) % 2 === 0 && t > 0.6) s += pop(t, 0.6, 640, 1610, `<text font-size="64">📢</text>`, 0.2, false);
     return s;
   },
@@ -624,7 +620,7 @@ Object.assign(TIPOS, {
     s += `<rect width="${W}" height="${H}" fill="${CORES.marinho}" opacity=".35"/>`;
     s += pop(t, 0.1, W / 2, 250, pilula(c.texto_tela[0] || 'A TÁTICA', { tam: 54, bg: CORES.vinho, rot: -2 }));
     s += pop(t, 0.25, W / 2, 700, prancheta(t, c, dd.formacao || [4, 4, 2], { balanco: !!dd.balanco }), 0.35, false);
-    s += popPessoa(t, 0.3, 830, 1905, pessoa({ ...PERSONAGENS.tecnico, pose: dd.balanco ? 'comemora' : 'aponta', expr: dd.balanco ? 'feliz' : 'serio' }, t, { s: 1.35, espelho: !dd.balanco }));
+    s += popPessoa(t, 0.3, 830, FRENTE(1.35), pessoa({ ...PERSONAGENS.tecnico, pose: dd.balanco ? 'comemora' : 'aponta', expr: dd.balanco ? 'feliz' : 'serio' }, t, { s: 1.35, espelho: !dd.balanco }));
     s += pop(t, 0.7, 330, 1560, pilula('PROF. GILBERTO TELES', { tam: 36, bg: CORES.marinho, rot: -3 }));
     if (dd.instagram) s += pop(t, 0.9, 330, 1640, pilula('@' + dd.instagram, { tam: 28, bg: CORES.creme, cor: OUT, py: 8 }));
     return s;
@@ -674,7 +670,7 @@ Object.assign(TIPOS, {
         const p = { pele: PELES[Math.floor(r() * PELES.length)], cabelo: ['curto', 'raspado', 'cacheado', 'black', 'careca'][Math.floor(r() * 5)],
           corCabelo: '#2b1d14', camisa: CAMISAS_SORTIDAS[Math.floor(r() * CAMISAS_SORTIDAS.length)], numero: String(Math.floor(r() * 30) + 1),
           expr: ['feliz', 'surpreso', 'serio'][Math.floor(r() * 3)], pose: i % 3 === 0 ? 'acena' : 'normal' };
-        s += popPessoa(t, 0.8 + i * 0.18, 100 + i * 147, 1880 + (i % 2) * 40, pessoa(p, t, { s: 0.95, fase: i }));
+        s += popPessoa(t, 0.8 + i * 0.18, 100 + i * 147, FRENTE(0.95) + (i % 2) * 40, pessoa(p, t, { s: 0.95, fase: i }));
       }
       return s;
     }

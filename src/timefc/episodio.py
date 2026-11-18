@@ -571,16 +571,52 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                            f"{_n(ds)} a {_n(ns)}. {'A torcida ficou em silêncio.' if casa else 'A casa deles veio abaixo.'}")
                 elif ultimo and ns == ds:
                     txt = f"Ah, não... Gol do {adv}, aos {g['minuto']}. Empatou: {_n(ds)} a {_n(ns)}."
-            # o lance antes do grito: quem toca, pra quem, e o chute ("toca" e "bateu" marcam a animação)
+            # o lance antes do grito (video/lances.js anima no ritmo destas palavras): tipo de jogada variado,
+            # sem repetir os últimos; e a comemoração também varia
             lado_lance = rng.choice(["pela direita", "pela esquerda", "pelo meio"])
-            lance = {}
+            recentes = e.setdefault("lances_recentes", [])
+            fixo_autor = bool(fixo) or (decisivo and i == ultimo_nosso) or bool(regra_jogo.get("artilheiro"))
+            pool = ["toque", "drible", "cabeca", "longe", "falta", "penalti"] + (["contra"] if nosso and not fixo_autor else [])
+            pesos = {"toque": 3, "drible": 3, "cabeca": 3, "longe": 2, "falta": 1.5, "penalti": 1, "contra": 0.7}
+            cand = [x for x in pool if x not in recentes[-3:]] or pool
+            tipo_lance = rng.choices(cand, weights=[pesos[x] for x in cand])[0]
+            recentes.append(tipo_lance)
+            del recentes[:-6]
+            comem = [x for x in ["canto", "carrinho", "aviao", "monte"] if x not in e.get("comemoracoes_recentes", [])[-2:]]
+            comemoracao = rng.choice(comem or ["canto"])
+            e.setdefault("comemoracoes_recentes", []).append(comemoracao)
+            del e["comemoracoes_recentes"][:-4]
+            lance = {"lance_tipo": tipo_lance, "comemoracao": comemoracao}
             if nosso:
                 opcoes = [n for n, j in e["elenco"].items() if n not in ("1", art["numero"]) and j["posicao"] in ("MEI", "PD", "PE", "CA", "VOL")]
                 pas = rng.choice(opcoes) if opcoes else "10"
-                lance = {"autor_numero": art["numero"], "passador_numero": pas}
-                txt = f"[excited] Lá vai o {e['elenco'][pas]['nome']} {lado_lance}... toca pro {art['nome']}... bateu! " + txt
+                P, A = e["elenco"][pas]["nome"], art["nome"]
+                lance.update(autor_numero=art["numero"], passador_numero=pas)
+                if tipo_lance == "contra":   # gol contra do zagueiro deles: ninguém do Poeira leva o gol
+                    g["autor"] = "gol contra"
+                    placar_txt = (f"Tudo igual: {_n(ns)} a {_n(ds)}!" if ns == ds else f"{_n(ns)} a {_n(ds)} pro Poeira!" if ns > ds
+                                  else f"Diminuiu: {_n(ns)} a {_n(ds)}!")
+                    txt = f"[shouting] GOOOOOL DO POEIRA! [excited] Gol contra, aos {g['minuto']}! Quem manda a bola na área sempre leva vantagem! {placar_txt}"
+                prefixo = {
+                    "toque": f"Lá vai o {P} {lado_lance}... toca pro {A}... bateu! ",
+                    "drible": f"O {A} pega a bola {lado_lance}... passou por um... passou por dois... bateu! ",
+                    "cabeca": f"Cruzamento do {P}... subiu o {A}... de cabeça! ",
+                    "longe": f"O {A} arrisca de muito longe... bateu! ",
+                    "falta": f"Falta pro Poeira na entrada da área. O {A} ajeita a bola... bateu por cima da barreira! ",
+                    "penalti": f"Pênalti pro Poeira! O {A} vai pra bola... correu... bateu! ",
+                    "contra": f"Cruzamento do {P}... o zagueiro deles tenta cortar... e manda contra a própria rede! ",
+                }[tipo_lance]
+                txt = "[excited] " + prefixo + txt
             else:
-                txt = f"Lá vem o {adv} {lado_lance}... tocou... bateu! " + txt
+                prefixo = {
+                    "toque": f"Lá vem o {adv} {lado_lance}... tocou... bateu! ",
+                    "drible": f"O atacante do {adv} pega a bola... passou por um... passou por dois... bateu! ",
+                    "cabeca": f"Cruzamento do {adv}... subiu o atacante deles... de cabeça! ",
+                    "longe": f"O {adv} arrisca de longe... bateu! ",
+                    "falta": f"Falta pro {adv}... ajeitou a bola... bateu por cima da barreira! ",
+                    "penalti": f"Pênalti pro {adv}... correu... bateu! ",
+                }[tipo_lance]
+                txt = prefixo + txt
             culpado = None
             ap = regra_jogo.get("apelido_no_gol")  # ex: o gol sofrido é culpa do lateral "Salário do Mês"
             if ap and str(i + 1) == str(ap.get("gol")) and ap["numero"] in e["elenco"]:
@@ -730,7 +766,6 @@ VARIANTES = {
     "comentarios": ["rua", "mural", "celular"],
     "decisao": ["rua", "mural", "quadro"],
     "apelido": ["close", "figurinha"],
-    "gol": ["replay", "abraco", "torcida"],
     "fim_de_jogo": ["tiao", "placar"],
     "bilheteria": ["campo", "caderno"],
     "tabela": ["card", "quadro"],

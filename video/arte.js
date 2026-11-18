@@ -219,6 +219,7 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
     microfone: [[-ox - 22, topo + tronco - 16], [ox - 6, topo - 4]],
     chute: [[-ox - 60, topo + 10], [ox + 50, topo + 30]],
     caixa: [[-ox + 4, topo + 66], [ox - 4, topo + 66]],
+    aviao: [[-ox - 95, topo + 20], [ox + 95, topo + 20]],
   }[pose] || [[-ox - 22, topo + tronco - 16], [ox + 22, topo + tronco - 16]];
   s1 += braco(-1, ...maos[0]);
   s1 += braco(1, ...maos[1]);
@@ -344,7 +345,9 @@ function pessoa(p, t = 0, { x = 0, y = 0, s = 1, espelho = false, fase = 0 } = {
   const sombra = window.ESTILO3D
     ? `<ellipse cx="${tw * 0.25}" cy="4" rx="${tw * 1.25}" ry="26" fill="url(#g3dSombra)"/>`
     : `<ellipse cx="0" cy="0" rx="${tw * 0.85}" ry="16" fill="#000" opacity=".22"/>`;
-  return `<g transform="translate(${x} ${y}) scale(${espelho ? -s : s} ${s})">${sombra}<g transform="translate(0 ${bob})">${s1}${c}</g></g>`;
+  // espelhado: os textos (número, patrocínio, boné) são desvirados para continuarem legíveis
+  const corpo = espelho ? (s1 + c).replace(/<text /g, '<text transform="scale(-1 1)" ') : s1 + c;
+  return `<g transform="translate(${x} ${y}) scale(${espelho ? -s : s} ${s})">${sombra}<g transform="translate(0 ${bob})">${corpo}</g></g>`;
 }
 
 // ---- elenco e personagens fixos
@@ -576,20 +579,25 @@ function arquibancada(estrutura, torcida, y = 850, t = 0) {
   return s;
 }
 
+// trave em tamanho real (7,32 × 2,44 m) em s = 1; na cena, use a escala de uma pessoa na mesma profundidade
 function trave(x, y, s = 1, torta = true, rede = false) {
-  const malha = rede ? Array.from({ length: 13 }, (_, i) => `<path d="M${-150 + i * 25},-110 V0" stroke="#fff" stroke-width="2" opacity=".75"/>`).join('')
-    + Array.from({ length: 5 }, (_, i) => `<path d="M-150,${-110 + i * 22} H150" stroke="#fff" stroke-width="2" opacity=".75"/>`).join('') : '';
-  return `<g transform="translate(${x} ${y}) scale(${s}) rotate(${torta ? -3 : 0})">
-    <rect x="-150" y="-110" width="300" height="110" fill="#ffffff22"/>${malha}
-    <path d="M-150,0 V-110 H150 V0" fill="none" stroke="#fff" stroke-width="12" stroke-linejoin="round"/>
-    <path d="M-150,0 V-110 H150 V0" fill="none" stroke="${OUT}" stroke-width="3"/></g>`;
+  const a = m(7.32) / 2, h = m(2.44), e = Math.max(14, 0.12 * PX_M);   // poste de 12 cm
+  const malha = rede ? Array.from({ length: 25 }, (_, i) => `<path d="M${-a + i * a / 12},${-h} V0" stroke="#fff" stroke-width="5" opacity=".7"/>`).join('')
+    + Array.from({ length: 8 }, (_, i) => `<path d="M${-a},${-h + i * h / 8} H${a}" stroke="#fff" stroke-width="5" opacity=".7"/>`).join('') : '';
+  return `<g transform="translate(${x} ${y}) scale(${s}) rotate(${torta ? -1.5 : 0})">
+    <rect x="${-a}" y="${-h}" width="${2 * a}" height="${h}" fill="#ffffff22"/>${malha}
+    <path d="M${-a},0 V${-h} H${a} V0" fill="none" stroke="${OUT}" stroke-width="${e + 10}" stroke-linejoin="round"/>
+    <path d="M${-a},0 V${-h} H${a} V0" fill="none" stroke="#fff" stroke-width="${e}" stroke-linejoin="round"/></g>`;
 }
 
+// banco de reservas real: 3 m de comprimento, assento a 45 cm, encosto até 85 cm
 function bancoReservas(x, y, s = 1) {
+  const a = m(3) / 2, as = m(0.45), en = m(0.85);
   return `<g transform="translate(${x} ${y}) scale(${s})">
-    <rect x="-80" y="-34" width="160" height="16" rx="4" fill="#b08968" stroke="${OUT}" stroke-width="5"/>
-    <rect x="-80" y="-62" width="160" height="12" rx="4" fill="#9c6644" stroke="${OUT}" stroke-width="4"/>
-    <path d="M-66,-18 v26 M66,-18 v26 M-70,-50 v32 M70,-50 v32" stroke="${OUT}" stroke-width="7"/></g>`;
+    <path d="M${-a + 20},${-as + 10} V0 M${a - 20},${-as + 10} V0 M0,${-as + 10} V0 M${-a + 26},${-en} V${-as} M${a - 26},${-en} V${-as}" stroke="${OUT}" stroke-width="12"/>
+    <rect x="${-a}" y="${-as - 6}" width="${2 * a}" height="22" rx="5" fill="#b08968" stroke="${OUT}" stroke-width="6"/>
+    <rect x="${-a}" y="${-en}" width="${2 * a}" height="20" rx="5" fill="#9c6644" stroke="${OUT}" stroke-width="5"/>
+    <rect x="${-a}" y="${-en + 34}" width="${2 * a}" height="16" rx="5" fill="#9c6644" stroke="${OUT}" stroke-width="5"/></g>`;
 }
 
 // Vista da linha lateral: o campo à direita da linha branca, a área de fora à esquerda,
@@ -608,22 +616,31 @@ function lateral(estrutura, { t = 0, nome = '', torcida = 0 } = {}) {
   return s;
 }
 
+// banco de reservas visto de frente, em tamanho real (3 m, assento a 45 cm, encosto a 85 cm); pé no y = 0
 function bancoReservasFrente() {
-  return `<rect x="-120" y="-40" width="240" height="22" rx="6" fill="#b08968" stroke="${OUT}" stroke-width="5"/>
-    <rect x="-120" y="-84" width="240" height="18" rx="6" fill="#9c6644" stroke="${OUT}" stroke-width="5"/>
-    <path d="M-100,-18 v40 M100,-18 v40 M-106,-66 v48 M106,-66 v48" stroke="${OUT}" stroke-width="9" stroke-linecap="round"/>`;
+  const a = m(3) / 2, as = m(0.45), en = m(0.85);
+  return `<ellipse cy="4" rx="${a + 20}" ry="14" fill="#000" opacity=".18"/>
+    <path d="M${-a + 34},${-as} V0 M${a - 34},${-as} V0 M0,${-as} V0 M${-a + 40},${-en} V${-as} M${a - 40},${-en} V${-as}" stroke="${OUT}" stroke-width="14" stroke-linecap="round"/>
+    <rect x="${-a}" y="${-en}" width="${2 * a}" height="22" rx="6" fill="#9c6644" stroke="${OUT}" stroke-width="6"/>
+    <rect x="${-a}" y="${-en + 36}" width="${2 * a}" height="18" rx="6" fill="#9c6644" stroke="${OUT}" stroke-width="5"/>
+    <rect x="${-a}" y="${-as - 10}" width="${2 * a}" height="26" rx="6" fill="#b08968" stroke="${OUT}" stroke-width="6"/>`;
 }
 
 // ------------------------------------------------------------ campo (vista de frente, atrás do meio-campo)
 // Geometria única: o campo é um trapézio em perspectiva com as linhas laterais visíveis. Fora delas:
 // lateral ESQUERDA = obra / arquibancada nova; lateral DIREITA = banco de reservas, pomponetes e o Caramelo.
-const CF = { y0: 950, y1: 1920, xl0: 250, xr0: 830, xl1: -80, xr1: 1160 };
+// a câmera fica atrás do gol, um pouco à esquerda do centro: a lateral esquerda (obra / arquibancada nova) entra no quadro
+const CF = { y0: 950, y1: 1920, xl0: 330, xr0: 900, xl1: 60, xr1: 1300 };
 const cfX = (y, lado) => { const k = (y - CF.y0) / (CF.y1 - CF.y0); return lado < 0 ? CF.xl0 + (CF.xl1 - CF.xl0) * k : CF.xr0 + (CF.xr1 - CF.xr0) * k; };
-const cfK = y => 0.34 + (y - CF.y0) / (CF.y1 - CF.y0) * 0.96;   // escala de uma pessoa nessa profundidade (1 = 300 px)
+const cfC = y => (cfX(y, -1) + cfX(y, 1)) / 2;   // meio do campo nessa profundidade
+const cfF = (y, f) => cfX(y, -1) + (cfX(y, 1) - cfX(y, -1)) * f;   // fração f da largura (0 = lateral esquerda)
+const CAMPO_LARG = 60;   // largura real do campo (m)
+const cfK = y => (cfX(y, 1) - cfX(y, -1)) / m(CAMPO_LARG);   // escala de uma pessoa nessa profundidade (s = 1 → 1,75 m = 300 px)
 
 function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   const grama = estrutura.gramado === 'grama', fora = !!window._local;
-  let s = ceu(t) + bairro(760) + (window._local?.tema === 'feira' ? feira(760, t) : '') + (window._local?.tema === 'churrasco' ? churrasco(760, t) : '') + (window._local?.tema === 'padaria' ? padaria(760, t) : '') + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
+  const dx = cfC(CF.y0) - W / 2;   // a arquibancada atrás do gol acompanha o gol
+  let s = ceu(t) + bairro(760, { xMin: -200, xMax: 1280 }) + (window._local?.tema === 'feira' ? feira(760, t) : '') + (window._local?.tema === 'churrasco' ? churrasco(760, t) : '') + (window._local?.tema === 'padaria' ? padaria(760, t) : '') + `<g transform="translate(${dx} 0)">${arquibancada(estrutura, torcida, 860, t)}</g>` + muro(860, nome);
   // chão de fora do campo (terra batida com capim) e o campo por cima, com as linhas laterais
   s += `<rect x="-10" y="${CF.y0 - 2}" width="${W + 20}" height="${H - CF.y0 + 4}" fill="#b98b57"/>`;
   { const r = rng('fora-campo'); for (let i = 0; i < 40; i++) { const y = CF.y0 + 10 + r() * (H - CF.y0), lado = r() > 0.5 ? 1 : -1, x = lado < 0 ? r() * (cfX(y, -1) - 10) : cfX(y, 1) + 10 + r() * (W - cfX(y, 1));
@@ -633,15 +650,16 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   else {
     const r = rng('pedras');
     for (let i = 0; i < 26; i++) { const y = 980 + r() * 900, x = cfX(y, -1) + 30 + r() * (cfX(y, 1) - cfX(y, -1) - 60); s += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(10 + r() * 30).toFixed(0)}" ry="${(4 + r() * 8).toFixed(0)}" fill="#8b4a22" opacity=".45"/>`; }
-    s += `<ellipse cx="300" cy="1500" rx="90" ry="22" fill="#7a9cc6" opacity=".5"/><ellipse cx="760" cy="1180" rx="60" ry="14" fill="#7a9cc6" opacity=".45"/>`;
+    s += `<ellipse cx="${cfF(1500, 0.18)}" cy="1500" rx="90" ry="22" fill="#7a9cc6" opacity=".5"/><ellipse cx="${cfF(1180, 0.75)}" cy="1180" rx="60" ry="14" fill="#7a9cc6" opacity=".45"/>`;
   }
   const linha = grama ? '#ffffffdd' : '#ffffff88', ym = 1260;
   s += `<path d="M${CF.xl0},${CF.y0} L${CF.xl1},${CF.y1} M${CF.xr0},${CF.y0} L${CF.xr1},${CF.y1} M${CF.xl0},${CF.y0} H${CF.xr0}" stroke="${linha}" stroke-width="7" fill="none"/>
     <path d="M${cfX(ym, -1)},${ym} H${cfX(ym, 1)}" stroke="${linha}" stroke-width="7"/>
-    <ellipse cx="${W / 2}" cy="${ym}" rx="175" ry="54" fill="none" stroke="${linha}" stroke-width="7"/>
-    <path d="M375,${CF.y0} L362,1040 H718 L705,${CF.y0}" fill="none" stroke="${linha}" stroke-width="6"/>
-    <path d="M465,${CF.y0} L461,985 H619 L615,${CF.y0}" fill="none" stroke="${linha}" stroke-width="5"/>`;
-  s += trave(W / 2, CF.y0 + 3, 0.62, !grama, !!estrutura.rede);
+    <ellipse cx="${cfC(ym)}" cy="${ym}" rx="${(cfX(ym, 1) - cfX(ym, -1)) * 9.15 / CAMPO_LARG}" ry="56" fill="none" stroke="${linha}" stroke-width="7"/>
+    <path d="M${cfF(CF.y0, 0.164)},${CF.y0} L${cfF(1040, 0.164)},1040 H${cfF(1040, 0.836)} L${cfF(CF.y0, 0.836)},${CF.y0}" fill="none" stroke="${linha}" stroke-width="6"/>
+    <path d="M${cfF(CF.y0, 0.3475)},${CF.y0} L${cfF(985, 0.3475)},985 H${cfF(985, 0.6525)} L${cfF(CF.y0, 0.6525)},${CF.y0}" fill="none" stroke="${linha}" stroke-width="5"/>
+    <ellipse cx="${cfC(1012)}" cy="1012" rx="4" ry="2" fill="${linha}"/>`;   // grande área 40,3 × 16,5 m, pequena 18,3 × 5,5 m, pênalti a 11 m
+  s += trave(cfC(CF.y0), CF.y0 + 3, cfK(CF.y0), !grama, !!estrutura.rede);
   // ---- lateral esquerda: obra (ou arquibancada nova pronta), só no nosso campo
   if (!fora && (estrutura.obra_arquibancada || estrutura.arquibancada_lateral)) s += lateralEsquerdaFrente(estrutura, t, torcida);
   // ---- lateral direita: banco de reservas, pomponetes e o Caramelo (as pomponetes viajam com o time)
@@ -654,11 +672,12 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
 // Obra / arquibancada nova ao longo da lateral esquerda, em perspectiva (degraus sobem para fora do campo).
 function lateralEsquerdaFrente(estrutura, t = 0, torcida = 0) {
   const obra = estrutura.obra_arquibancada, prog = obra ? Math.min(1, ((obra.feitos || 0) + 1) / ((obra.jogos || 3) + 1)) : 1;
-  const ys = [968, 1010, 1065, 1135, 1225, 1340, 1490, 1690];          // mourões, do fundo para a frente
-  const pe = y => cfX(y, -1) - 26 * cfK(y);                            // pé da estrutura, logo fora da linha
-  const larg = y => 230 * cfK(y), alt = y => 300 * cfK(y);             // profundidade e altura do último degrau
+  const ys = [1040, 1080, 1130, 1190, 1260, 1350, 1470, 1640, 1900];   // mourões, do fundo para a frente (60 m centrados no meio-campo, y = 1260)
+  // medidas reais: começa 1,5 m fora da linha; 10 degraus de 45 cm (4,5 m de altura) em 8 m de profundidade
+  const pe = y => cfX(y, -1) - m(1.5) * cfK(y);
+  const larg = y => m(8) * cfK(y), alt = y => m(4.5) * cfK(y);
   let s = `<path d="M${pe(ys[0])},${ys[0]} L${pe(1920)},1920 L${pe(1920) - larg(1920)},1920 L${pe(ys[0]) - larg(ys[0])},${ys[0]}Z" fill="#000" opacity=".12"/>`;
-  const nDeg = 4, prontos = obra ? Math.max(1, Math.round(nDeg * prog)) : nDeg;
+  const nDeg = 10, prontos = obra ? Math.max(1, Math.round(nDeg * prog)) : nDeg;
   // degraus: faixas paralelas à linha, cada uma mais alta e mais para fora
   for (let d = nDeg - 1; d >= 0; d--) {
     const f = (d + 1) / nDeg, pronto = d < prontos;
@@ -669,22 +688,22 @@ function lateralEsquerdaFrente(estrutura, t = 0, torcida = 0) {
   }
   // mourões (pilares) de madeira e travessas em X
   ys.forEach((y, i) => { const x = pe(y), k = cfK(y);
-    s += `<path d="M${x - larg(y)},${y} V${y - alt(y)} M${x},${y} V${y - alt(y) * 0.25}" stroke="${OUT}" stroke-width="${10 * k}" stroke-linecap="round"/>
-      <path d="M${x - larg(y)},${y} V${y - alt(y)} M${x},${y} V${y - alt(y) * 0.25}" stroke="#9c6644" stroke-width="${5.5 * k}" stroke-linecap="round"/>`;
-    if (obra && i < ys.length - 1) { const y2 = ys[i + 1]; s += `<path d="M${x - larg(y)},${y - alt(y)} L${pe(y2) - larg(y2)},${y2} M${x - larg(y)},${y} L${pe(y2) - larg(y2)},${y2 - alt(y2)}" stroke="#7f5539" stroke-width="${3.5 * k}" opacity=".85"/>`; }
+    s += `<path d="M${x - larg(y)},${y} V${y - alt(y)} M${x},${y} V${y - alt(y) * 0.25}" stroke="${OUT}" stroke-width="${m(0.3) * k + 3}" stroke-linecap="round"/>
+      <path d="M${x - larg(y)},${y} V${y - alt(y)} M${x},${y} V${y - alt(y) * 0.25}" stroke="#9c6644" stroke-width="${m(0.3) * k}" stroke-linecap="round"/>`;
+    if (obra && i < ys.length - 1) { const y2 = ys[i + 1]; s += `<path d="M${x - larg(y)},${y - alt(y)} L${pe(y2) - larg(y2)},${y2} M${x - larg(y)},${y} L${pe(y2) - larg(y2)},${y2 - alt(y2)}" stroke="#7f5539" stroke-width="${m(0.12) * k + 1}" opacity=".85"/>`; }
   });
   if (obra) {
     // faixa zebrada na linha lateral, material no chão e dois pedreiros na escala certa
-    s += `<path d="M${pe(980) + 14},980 L${pe(1920) + 30},1920" stroke="${OUT}" stroke-width="9"/><path d="M${pe(980) + 14},980 L${pe(1920) + 30},1920" stroke="#ffd60a" stroke-width="6" stroke-dasharray="14 12"/>`;
-    s += [[1180, 0], [1400, 1]].map(([y, i]) => pessoa({ pele: i ? '#e0ac69' : '#a0673e', cabelo: 'curto', corCabelo: '#2b1d14', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40',
-      pose: i ? 'aponta' : 'caixa', expr: i ? 'feliz' : 'serio', bigode: !!i }, t, { x: pe(y) - larg(y) * 0.55, y: y + 4, s: cfK(y), fase: i }).replace(/class="rosto" /g, '')).join('');
-    const yb = 1600; s += [0, 1, 2].map(i => `<rect x="${pe(yb) - larg(yb) * 0.9 + i * 6}" y="${yb + 6 - i * 10}" width="${larg(yb) * 0.6}" height="10" fill="#b08968" stroke="${OUT}" stroke-width="2.5"/>`).join('');
+    s += `<path d="M${pe(980) + m(0.7) * cfK(980)},980 L${pe(1920) + m(0.7) * cfK(1920)},1920" stroke="${OUT}" stroke-width="7"/><path d="M${pe(980) + m(0.7) * cfK(980)},980 L${pe(1920) + m(0.7) * cfK(1920)},1920" stroke="#ffd60a" stroke-width="4" stroke-dasharray="10 9"/>`;
+    s += [[1180, 0], [1400, 1], [1560, 0]].map(([y, i]) => pessoa({ pele: i ? '#e0ac69' : '#a0673e', cabelo: 'curto', corCabelo: '#2b1d14', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40',
+      pose: i ? 'aponta' : 'caixa', expr: i ? 'feliz' : 'serio', bigode: !!i }, t, { x: pe(y) - larg(y) * (i ? 0.25 : 0.12), y: y + 4, s: cfK(y), fase: i }).replace(/class="rosto" /g, '')).join('');
+    const yb = 1600; s += [0, 1, 2].map(i => `<rect x="${pe(yb) - larg(yb) * 0.9 + i * 6}" y="${yb + 6 - i * 10}" width="${larg(yb) * 0.3}" height="${m(0.2) * cfK(yb)}" fill="#b08968" stroke="${OUT}" stroke-width="2.5"/>`).join('');
   } else if (torcida > 0) {
     // arquibancada pronta: torcedores sentados nos degraus
-    const r = rng('lat-esq'); let n = Math.min(70, Math.round(torcida / 25));
+    const r = rng('lat-esq'); let n = Math.min(160, Math.round(torcida / 10));
     for (let d = 0; d < nDeg && n > 0; d++) for (let i = 1; i < ys.length && n > 0; i++, n--) {
-      const y = ys[i], f = (d + 0.6) / nDeg, k = cfK(y) * 0.9;
-      s += `<g transform="translate(${(pe(y) - larg(y) * f).toFixed(1)} ${(y - alt(y) * f).toFixed(1)})"><rect x="${-12 * k}" y="${-30 * k}" width="${24 * k}" height="${30 * k}" rx="${8 * k}" fill="${r() > 0.3 ? CORES.vinho : CORES.amarelo}" stroke="${OUT}" stroke-width="2"/><circle cy="${-40 * k}" r="${11 * k}" fill="${PELES[Math.floor(r() * PELES.length)]}" stroke="${OUT}" stroke-width="2"/></g>`;
+      const y = ys[i] + (ys[i - 1] - ys[i]) * r(), f = (d + 0.6) / nDeg, k = cfK(y);   // torcedor sentado: ~0,9 m de altura
+      s += `<g transform="translate(${(pe(y) - larg(y) * f).toFixed(1)} ${(y - alt(y) * f).toFixed(1)})"><rect x="${-m(0.22) * k}" y="${-m(0.55) * k}" width="${m(0.44) * k}" height="${m(0.55) * k}" rx="${m(0.12) * k}" fill="${r() > 0.3 ? CORES.vinho : CORES.amarelo}" stroke="${OUT}" stroke-width="1.5"/><circle cy="${-m(0.7) * k}" r="${m(0.13) * k}" fill="${PELES[Math.floor(r() * PELES.length)]}" stroke="${OUT}" stroke-width="1.5"/></g>`;
     }
   }
   return s;
@@ -695,12 +714,12 @@ function lateralDireitaFrente(estrutura, t = 0, fora = false) {
   let s = '';
   const fx = (y, d) => cfX(y, 1) + d * cfK(y);
   if (estrutura.banco_reservas && !fora) { const y = 1120, k = cfK(y);
-    s += `<g transform="translate(${fx(y, 120)} ${y}) scale(${k * 0.9})">${bancoReservasFrente()}</g>`; }
-  if (estrutura.pomponetes) [[1215, 70], [1265, 150]].forEach(([y, d], i) => {
+    s += `<g transform="translate(${fx(y, m(2.5))} ${y}) scale(${k})">${bancoReservasFrente()}</g>`; }
+  if (estrutura.pomponetes) [[1150, 160], [1185, 260]].forEach(([y, d], i) => {
     s += pessoa({ pele: PELES[(i * 2 + 1) % PELES.length], cabelo: 'coque', corCabelo: i % 2 ? '#7a4b2a' : '#1b1b1b', camisa: CORES.amarelo, listra: CORES.vinho,
       calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: Math.sin(t * 4 + i) > 0 ? 'comemora' : 'acena', expr: 'feliz' }, t, { x: fx(y, d), y, s: cfK(y), fase: i }).replace(/class="rosto" /g, '');
   });
-  if (estrutura.mascote && !fora) { const y = 1420; s += `<g transform="translate(${fx(y, 90)} ${y}) scale(${cfK(y) * 0.9})">${caramelo(t, { espelho: true })}</g>`; }
+  if (estrutura.mascote && !fora) { const y = 1225; s += `<g transform="translate(${fx(y, 150)} ${y}) scale(${cfK(y)})">${caramelo(t, { espelho: true })}</g>`; }
   return s;
 }
 
@@ -726,7 +745,7 @@ function cone(x, y, k = 1) {
 }
 function caramelo(t = 0, { espelho = false } = {}) {
   const rabo = Math.sin(t * 14) * 18;
-  return `<g transform="scale(${espelho ? -1 : 1} 1)"><ellipse cx="0" cy="0" rx="78" ry="10" fill="#000" opacity=".2"/>
+  return `<g transform="scale(${espelho ? -0.72 : 0.72} 0.72)"><ellipse cx="0" cy="0" rx="78" ry="10" fill="#000" opacity=".2"/>
     <path d="M-62,-62 q-30,${-20 + rabo * 0.3} -34,${-56 + rabo}" fill="none" stroke="${OUT}" stroke-width="18" stroke-linecap="round"/>
     <path d="M-62,-62 q-30,${-20 + rabo * 0.3} -34,${-56 + rabo}" fill="none" stroke="#d4893f" stroke-width="10" stroke-linecap="round"/>
     ${[-46, -22, 30, 52].map((x, i) => `<path d="M${x},-40 v38" stroke="${OUT}" stroke-width="20" stroke-linecap="round"/><path d="M${x},-40 v38" stroke="${i % 2 ? '#d4893f' : '#c47a33'}" stroke-width="12" stroke-linecap="round"/>`).join('')}
@@ -806,7 +825,7 @@ function kombi({ t = 0, andando = false } = {}) {
   const roda = x => `<g transform="translate(${x} -46) rotate(${andando ? t * 720 : 0})"><circle r="46" fill="#222" stroke="${OUT}" stroke-width="6"/>
     <circle r="22" fill="#e9ecef" stroke="${OUT}" stroke-width="4"/><path d="M-14,0 H14 M0,-14 V14" stroke="${OUT}" stroke-width="4"/></g>`;
   const pula = andando ? Math.abs(Math.sin(t * 9)) * 6 : 0;
-  return `<ellipse cx="0" cy="0" rx="300" ry="22" fill="#00000033"/>
+  return `<g transform="scale(1.15)"><ellipse cx="0" cy="0" rx="300" ry="22" fill="#00000033"/>
     <g transform="translate(0 ${-pula})">
     <path d="M-290,-60 V-250 Q-290,-300 -240,-300 H210 Q262,-300 280,-250 L300,-150 V-60 Q300,-40 280,-40 H-270 Q-290,-40 -290,-60Z" fill="${CORES.vinho}" stroke="${OUT}" stroke-width="8"/>
     <path d="M-290,-150 V-250 Q-290,-300 -240,-300 H210 Q262,-300 280,-250 L300,-150Z" fill="#fff4dc" stroke="${OUT}" stroke-width="8"/>
@@ -820,7 +839,7 @@ function kombi({ t = 0, andando = false } = {}) {
     <rect x="-220" y="-372" width="110" height="44" rx="10" fill="#3a86ff" stroke="${OUT}" stroke-width="5"/>
     <circle cx="-40" cy="-354" r="26" fill="#fff" stroke="${OUT}" stroke-width="5"/><path d="M-50,-362 l10,-7 l10,7 l-4,12 h-12z" fill="${OUT}"/>
     <rect x="20" y="-366" width="120" height="36" rx="8" fill="#ffbe0b" stroke="${OUT}" stroke-width="5"/>
-    ${roda(-170)}${roda(180)}</g>`;
+    ${roda(-170)}${roda(180)}</g></g>`;
 }
 
 // ------------------------------------------------------------ sede (Bar da Cida)
@@ -952,6 +971,7 @@ function varalCamisas(t = 0, x0 = 34) {
 // barraca de lanche: do tamanho de uma barraca de verdade (um pouco mais alta que uma pessoa).
 // (x, yChao) = canto de baixo à esquerda; k = escala.
 function lanchonete(nome, x = 836, yChao = SEDE.base + 40, k = 1) {
+  k *= 1.4;   // barraca de 2,4 m de frente
   const txt = nome.length > 22 ? nome.replace('Lanchonete', 'Lanch.') : nome;
   const w = 226, tam = Math.min(30, 196 / Math.max(1, medir(txt, 1)));   // cabe sempre na placa
   return `<g transform="translate(${x} ${yChao}) scale(${k})">
@@ -978,7 +998,7 @@ function fundoEscuro() {
 
 Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
-  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, cfX, cfK, kombi, feira, caramelo, cone, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, cfX, cfK, cfC, cfF, kombi, feira, caramelo, cone, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).
@@ -1074,7 +1094,8 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
     <path d="M300,${yBase} L346,${yBase - 215} H734 L780,${yBase}" fill="none" stroke="${lc}" stroke-width="6"/>
     <path d="M490,${yTopo} V${yTopo - 40} H590 V${yTopo}" fill="none" stroke="#fff" stroke-width="7"/>`;
   if (estrutura.rede) s += Array.from({ length: 6 }, (_, i) => `<path d="M${492 + i * 19},${yTopo - 38} V${yTopo}" stroke="#fff" stroke-width="2" opacity=".8"/>`).join('');
-  if (estrutura.banco_reservas) s += `<g transform="translate(${xBorda(1050, 1) + 26} 1050) rotate(66) scale(.5)">${bancoReservas(0, 0)}</g>`;
+  if (estrutura.banco_reservas) { const k = (xBorda(1050, 1) - xBorda(1050, -1)) / m(CAMPO_LARG);   // 3 m na escala do campo (60 m de largura)
+    s += `<g transform="translate(${xBorda(1050, 1) + 26} 1050) rotate(66) scale(${k.toFixed(3)})">${bancoReservas(0, 0)}</g>`; }
   s += entornoAereo(estrutura);
   // torcida desenhada: assentos primeiro, depois as faixas de "não cabe mais"
   const seats = assentos(cap), lugares = seats.length;
@@ -1218,3 +1239,26 @@ function carimbo(txt, cor = '#e63946', rot = -10, tam = 54) {
     <text y="${tam * 0.32}" text-anchor="middle" font-family="Anton" font-size="${tam}" fill="${cor}" letter-spacing="2">${esc(txt)}</text></g>`;
 }
 Object.assign(window, { escudoPoeira, bola, bancoReservas, cabare, zzz, carimbo, lateral });
+
+// ------------------------------------------------------------ escala real (como no detetive: tudo em metros)
+// 1 pessoa (1,75 m) = 300 px em s = 1 → PX_M ≈ 171 px por metro. Todo objeto é desenhado em s = 1 nessa
+// escala e, na cena, recebe o MESMO fator de escala de uma pessoa na mesma profundidade.
+const PX_M = 300 / 1.75;
+const m = v => v * PX_M;
+// [nome, medida real (m), eixo ('h' altura / 'w' largura), desenho em s = 1] — conferido por video/regua.mjs
+function MEDIDAS_REAIS(E) {
+  return [
+    ['pessoa (jogador)', 1.75, 'h', pessoa({ camisa: '#fff' }, 0, {}).replace(/<text[^>]*>[^<]*<\/text>/g, '')],
+    ['trave: largura', 7.32, 'w', trave(0, 0, 1, false)],
+    ['trave: altura', 2.44, 'h', trave(0, 0, 1, false)],
+    ['banco de reservas: comprimento', 3.0, 'w', bancoReservas(0, 0, 1)],
+    ['banco (de frente): comprimento', 3.0, 'w', bancoReservasFrente().replace(/<ellipse[^>]*\/>/, '')],
+    ['banco (de frente): encosto', 0.85, 'h', bancoReservasFrente().replace(/<ellipse[^>]*\/>/, '')],
+    ['Kombi: comprimento', 4.3, 'w', kombi({}).replace(/<ellipse[^>]*\/>/, '')],
+    ['Kombi: altura com bagageiro', 2.45, 'h', kombi({}).replace(/<ellipse[^>]*\/>/, '')],
+    ['Caramelo (vira-lata): altura', 0.7, 'h', caramelo(0).replace(/<ellipse[^>]*\/>/, '')],
+    ['cone de treino', 0.38, 'h', cone(0, 0, 1)],
+    ['barraca: largura', 2.4, 'w', lanchonete('Barraca', 0, 0, 1)],
+  ];
+}
+Object.assign(window, { PX_M, m, MEDIDAS_REAIS });
