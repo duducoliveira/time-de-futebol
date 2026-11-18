@@ -614,74 +614,98 @@ function bancoReservasFrente() {
     <path d="M-100,-18 v40 M100,-18 v40 M-106,-66 v48 M106,-66 v48" stroke="${OUT}" stroke-width="9" stroke-linecap="round"/>`;
 }
 
+// ------------------------------------------------------------ campo (vista de frente, atrás do meio-campo)
+// Geometria única: o campo é um trapézio em perspectiva com as linhas laterais visíveis. Fora delas:
+// lateral ESQUERDA = obra / arquibancada nova; lateral DIREITA = banco de reservas, pomponetes e o Caramelo.
+const CF = { y0: 950, y1: 1920, xl0: 250, xr0: 830, xl1: -80, xr1: 1160 };
+const cfX = (y, lado) => { const k = (y - CF.y0) / (CF.y1 - CF.y0); return lado < 0 ? CF.xl0 + (CF.xl1 - CF.xl0) * k : CF.xr0 + (CF.xr1 - CF.xr0) * k; };
+const cfK = y => 0.34 + (y - CF.y0) / (CF.y1 - CF.y0) * 0.96;   // escala de uma pessoa nessa profundidade (1 = 300 px)
+
 function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
-  const grama = estrutura.gramado === 'grama';
+  const grama = estrutura.gramado === 'grama', fora = !!window._local;
   let s = ceu(t) + bairro(760) + (window._local?.tema === 'feira' ? feira(760, t) : '') + (window._local?.tema === 'churrasco' ? churrasco(760, t) : '') + (window._local?.tema === 'padaria' ? padaria(760, t) : '') + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
-  s += `<path d="M-200,950 H1280 L1500,${H} H-420Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}" stroke="${OUT}" stroke-width="5"/>`;
-  if (grama) for (let i = 0; i < 8; i++) s += `<path d="M${-200 + i * 185},950 h92 l${120 + i * 4},${H - 950} h-150z" fill="${CORES.grama2}" opacity=".8"/>`;
+  // chão de fora do campo (terra batida com capim) e o campo por cima, com as linhas laterais
+  s += `<rect x="-10" y="${CF.y0 - 2}" width="${W + 20}" height="${H - CF.y0 + 4}" fill="#b98b57"/>`;
+  { const r = rng('fora-campo'); for (let i = 0; i < 40; i++) { const y = CF.y0 + 10 + r() * (H - CF.y0), lado = r() > 0.5 ? 1 : -1, x = lado < 0 ? r() * (cfX(y, -1) - 10) : cfX(y, 1) + 10 + r() * (W - cfX(y, 1));
+    s += `<path d="M${x.toFixed(0)},${y.toFixed(0)} l-5,-12 M${x.toFixed(0)},${y.toFixed(0)} l1,-15 M${x.toFixed(0)},${y.toFixed(0)} l6,-11" stroke="#6f8c45" stroke-width="3" stroke-linecap="round"/>`; } }
+  s += `<path d="M${CF.xl0},${CF.y0} H${CF.xr0} L${CF.xr1},${CF.y1} H${CF.xl1}Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}"/>`;
+  if (grama) for (let i = 0; i < 6; i++) { const a = CF.y0 + i * 170, b = a + 85; s += `<path d="M${cfX(a, -1)},${a} H${cfX(a, 1)} L${cfX(b, 1)},${b} H${cfX(b, -1)}Z" fill="${CORES.grama2}" opacity=".8"/>`; }
   else {
     const r = rng('pedras');
-    for (let i = 0; i < 26; i++) s += `<ellipse cx="${r() * W}" cy="${980 + r() * 900}" rx="${10 + r() * 30}" ry="${4 + r() * 8}" fill="#8b4a22" opacity=".45"/>`;
-    s += `<ellipse cx="260" cy="1500" rx="110" ry="26" fill="#7a9cc6" opacity=".55"/><ellipse cx="820" cy="1180" rx="70" ry="16" fill="#7a9cc6" opacity=".5"/>`;
+    for (let i = 0; i < 26; i++) { const y = 980 + r() * 900, x = cfX(y, -1) + 30 + r() * (cfX(y, 1) - cfX(y, -1) - 60); s += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(10 + r() * 30).toFixed(0)}" ry="${(4 + r() * 8).toFixed(0)}" fill="#8b4a22" opacity=".45"/>`; }
+    s += `<ellipse cx="300" cy="1500" rx="90" ry="22" fill="#7a9cc6" opacity=".5"/><ellipse cx="760" cy="1180" rx="60" ry="14" fill="#7a9cc6" opacity=".45"/>`;
   }
-  const linha = grama ? '#ffffffcc' : '#ffffff66';
-  s += `<path d="M-100,1260 H1180" stroke="${linha}" stroke-width="8"/>
-    <ellipse cx="${W / 2}" cy="1260" rx="240" ry="70" fill="none" stroke="${linha}" stroke-width="8"/>
-    <path d="M330,950 L300,1060 H780 L750,950" fill="none" stroke="${linha}" stroke-width="7"/>`;
-  s += trave(W / 2, 955, 0.8, !grama, !!estrutura.rede);
-  if (estrutura.obra_arquibancada && !window._local) {
-    const o = estrutura.obra_arquibancada;
-    s += obraArquibancadaCampo(t, Math.min(1, ((o.feitos || 0) + 1) / ((o.jogos || 3) + 1)));
-  }
-  // pomponetes do Poeira dançando na beira do campo, ao lado da arquibancada (viajam com o time)
-  if (estrutura.pomponetes) [[50, 0], [125, 1], [955, 2], [1030, 3]].filter(([x]) => !(x < 540 && estrutura.obra_arquibancada && !window._local)).forEach(([x, i]) => {
-    s += pessoa({ pele: PELES[(i * 2 + 1) % PELES.length], cabelo: 'coque', corCabelo: i % 2 ? '#7a4b2a' : '#1b1b1b', camisa: CORES.amarelo, listra: CORES.vinho,
-      calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: Math.sin(t * 4 + i) > 0 ? 'comemora' : 'acena', expr: 'feliz' }, t, { x, y: 1075, s: 0.36, fase: i });
-  });
-  // o banco de reservas aparece na imagem própria da lateral (lateral()), não aqui
+  const linha = grama ? '#ffffffdd' : '#ffffff88', ym = 1260;
+  s += `<path d="M${CF.xl0},${CF.y0} L${CF.xl1},${CF.y1} M${CF.xr0},${CF.y0} L${CF.xr1},${CF.y1} M${CF.xl0},${CF.y0} H${CF.xr0}" stroke="${linha}" stroke-width="7" fill="none"/>
+    <path d="M${cfX(ym, -1)},${ym} H${cfX(ym, 1)}" stroke="${linha}" stroke-width="7"/>
+    <ellipse cx="${W / 2}" cy="${ym}" rx="175" ry="54" fill="none" stroke="${linha}" stroke-width="7"/>
+    <path d="M375,${CF.y0} L362,1040 H718 L705,${CF.y0}" fill="none" stroke="${linha}" stroke-width="6"/>
+    <path d="M465,${CF.y0} L461,985 H619 L615,${CF.y0}" fill="none" stroke="${linha}" stroke-width="5"/>`;
+  s += trave(W / 2, CF.y0 + 3, 0.62, !grama, !!estrutura.rede);
+  // ---- lateral esquerda: obra (ou arquibancada nova pronta), só no nosso campo
+  if (!fora && (estrutura.obra_arquibancada || estrutura.arquibancada_lateral)) s += lateralEsquerdaFrente(estrutura, t, torcida);
+  // ---- lateral direita: banco de reservas, pomponetes e o Caramelo (as pomponetes viajam com o time)
+  s += lateralDireitaFrente(estrutura, t, fora);
   if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
     <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
   return s;
 }
 
-// Caramelo, o mascote: vira-lata caramelo com coleira vinho e plaquinha do escudo. Origem: chão (patas).
-// Proporção: ~45% da altura de uma pessoa (cachorro médio).
-// Obra da arquibancada nova na lateral esquerda (vista do campo): estrutura de madeira subindo em degraus,
-// andaime, faixa zebrada e material no chão. `prog` (0..1) = quanto já foi construído.
-function obraArquibancadaCampo(t = 0, prog = 0.3) {
-  const base = 1330, x0 = -40, x1 = 300, alt = 400, nDeg = 4, feitos = Math.max(1, Math.round(nDeg * prog));
-  let s = `<path d="M${x0 - 20},${base + 22} L${x1 + 40},${base + 22} L${x1 + 10},${base - 40} L${x0 - 20},${base - 40}Z" fill="#c4935f" opacity=".85"/>
-    <ellipse cx="${(x0 + x1) / 2 + 30}" cy="${base + 18}" rx="${(x1 - x0) / 2 + 30}" ry="14" fill="#000" opacity=".2"/>`;
-  // pilares (os de trás mais altos)
-  const pil = [x0 + 10, x0 + 115, x0 + 225, x1];
-  pil.forEach((x, i) => { const h = alt - i * 80;
-    s += `<path d="M${x},${base} V${base - h}" stroke="${OUT}" stroke-width="14" stroke-linecap="round"/><path d="M${x},${base} V${base - h}" stroke="#9c6644" stroke-width="8" stroke-linecap="round"/>`; });
-  // degraus prontos (de baixo para cima, da frente para trás) e os que faltam (só a marcação)
-  for (let d = 0; d < nDeg; d++) {
-    const y = base - 70 - d * 80, xa = x0 - 10, xb = x1 + 10 - d * 85, pronto = d < feitos;
-    s += pronto ? `<rect x="${xa}" y="${y}" width="${xb - xa}" height="22" rx="3" fill="#c79a6b" stroke="${OUT}" stroke-width="4"/>`
-      : `<rect x="${xa + 6}" y="${y + 6}" width="${xb - xa - 12}" height="8" fill="#7f5539" stroke="${OUT}" stroke-width="3"/>`;   // só a viga, sem tábua
+// Obra / arquibancada nova ao longo da lateral esquerda, em perspectiva (degraus sobem para fora do campo).
+function lateralEsquerdaFrente(estrutura, t = 0, torcida = 0) {
+  const obra = estrutura.obra_arquibancada, prog = obra ? Math.min(1, ((obra.feitos || 0) + 1) / ((obra.jogos || 3) + 1)) : 1;
+  const ys = [968, 1010, 1065, 1135, 1225, 1340, 1490, 1690];          // mourões, do fundo para a frente
+  const pe = y => cfX(y, -1) - 26 * cfK(y);                            // pé da estrutura, logo fora da linha
+  const larg = y => 230 * cfK(y), alt = y => 300 * cfK(y);             // profundidade e altura do último degrau
+  let s = `<path d="M${pe(ys[0])},${ys[0]} L${pe(1920)},1920 L${pe(1920) - larg(1920)},1920 L${pe(ys[0]) - larg(ys[0])},${ys[0]}Z" fill="#000" opacity=".12"/>`;
+  const nDeg = 4, prontos = obra ? Math.max(1, Math.round(nDeg * prog)) : nDeg;
+  // degraus: faixas paralelas à linha, cada uma mais alta e mais para fora
+  for (let d = nDeg - 1; d >= 0; d--) {
+    const f = (d + 1) / nDeg, pronto = d < prontos;
+    const pts = ys.map(y => [pe(y) - larg(y) * f, y - alt(y) * f]);
+    const frente = ys.map(y => [pe(y) - larg(y) * (d / nDeg), y - alt(y) * f]).reverse();
+    if (pronto) s += `<path d="M${[...pts, ...frente].map(p => p.map(v => v.toFixed(1)).join(',')).join(' L')}Z" fill="${obra ? '#c79a6b' : '#b08968'}" stroke="${OUT}" stroke-width="3"/>`;
+    else s += `<path d="M${pts.map(p => p.map(v => v.toFixed(1)).join(',')).join(' L')}" fill="none" stroke="#7f5539" stroke-width="${3 + d}"/>`;
   }
-  // travamento em X entre os pilares
-  for (let i = 0; i < pil.length - 1; i++) { const xa = pil[i], xb = pil[i + 1], ya = base - 20, yb = base - (alt - (i + 1) * 80) + 20;
-    s += `<path d="M${xa},${ya} L${xb},${yb} M${xa},${yb + 40} L${xb},${ya}" stroke="#7f5539" stroke-width="6" opacity=".9"/>`; }
-  // andaime com tábua e balde
-  s += `<path d="M${x1 + 30},${base} V${base - 200} M${x1 + 90},${base} V${base - 200} M${x1 + 30},${base - 100} H${x1 + 90} M${x1 + 30},${base - 200} H${x1 + 90} M${x1 + 30},${base} L${x1 + 90},${base - 100} M${x1 + 90},${base - 100} L${x1 + 30},${base - 200}" stroke="#6c757d" stroke-width="6" fill="none"/>
-    <rect x="${x1 + 20}" y="${base - 210}" width="80" height="12" fill="#b08968" stroke="${OUT}" stroke-width="3"/>
-    <path d="M${x1 + 66},${base - 210} l4,-22 h18 l4,22z" fill="#adb5bd" stroke="${OUT}" stroke-width="3"/>`;
-  // material: pilha de tábuas e sacos de cimento
-  s += `${[0, 1, 2].map(i => `<rect x="${x0 + 30 + i * 6}" y="${base + 2 - i * 9}" width="110" height="9" fill="#b08968" stroke="${OUT}" stroke-width="2.5"/>`).join('')}
-    ${[0, 1, 2].map(i => `<rect x="${x1 - 70 + (i % 2) * 22}" y="${base - 20 - Math.floor(i / 2) * 20}" width="44" height="22" rx="5" fill="#e9ecef" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
-  // pedreiros trabalhando (capacete amarelo), na escala do campo nessa distância
-  s += pessoa({ pele: '#a0673e', cabelo: 'curto', corCabelo: '#1b1b1b', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40', pose: 'caixa', expr: 'serio' }, t, { x: x1 - 110, y: base + 110, s: 0.68 });
-  s += pessoa({ pele: '#e0ac69', cabelo: 'curto', corCabelo: '#4a3426', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40', pose: 'aponta', expr: 'feliz', bigode: true }, t, { x: x1 + 80, y: base + 110, s: 0.68, fase: 1 });
-  // faixa zebrada na frente
-  s += `<path d="M${x0 - 20},${base - 30} L${x1 + 110},${base - 30}" stroke="${OUT}" stroke-width="12"/>
-    <path d="M${x0 - 20},${base - 30} L${x1 + 110},${base - 30}" stroke="#ffd60a" stroke-width="8" stroke-dasharray="16 16"/>
-    <path d="M${x0 - 4},${base - 30} L${x1 + 110},${base - 30}" stroke="${OUT}" stroke-width="8" stroke-dasharray="16 16" opacity=".85"/>`;
+  // mourões (pilares) de madeira e travessas em X
+  ys.forEach((y, i) => { const x = pe(y), k = cfK(y);
+    s += `<path d="M${x - larg(y)},${y} V${y - alt(y)} M${x},${y} V${y - alt(y) * 0.25}" stroke="${OUT}" stroke-width="${10 * k}" stroke-linecap="round"/>
+      <path d="M${x - larg(y)},${y} V${y - alt(y)} M${x},${y} V${y - alt(y) * 0.25}" stroke="#9c6644" stroke-width="${5.5 * k}" stroke-linecap="round"/>`;
+    if (obra && i < ys.length - 1) { const y2 = ys[i + 1]; s += `<path d="M${x - larg(y)},${y - alt(y)} L${pe(y2) - larg(y2)},${y2} M${x - larg(y)},${y} L${pe(y2) - larg(y2)},${y2 - alt(y2)}" stroke="#7f5539" stroke-width="${3.5 * k}" opacity=".85"/>`; }
+  });
+  if (obra) {
+    // faixa zebrada na linha lateral, material no chão e dois pedreiros na escala certa
+    s += `<path d="M${pe(980) + 14},980 L${pe(1920) + 30},1920" stroke="${OUT}" stroke-width="9"/><path d="M${pe(980) + 14},980 L${pe(1920) + 30},1920" stroke="#ffd60a" stroke-width="6" stroke-dasharray="14 12"/>`;
+    s += [[1180, 0], [1400, 1]].map(([y, i]) => pessoa({ pele: i ? '#e0ac69' : '#a0673e', cabelo: 'curto', corCabelo: '#2b1d14', bone: '#ffd60a', camisa: '#f77f00', calcao: '#495057', meiao: '#343a40',
+      pose: i ? 'aponta' : 'caixa', expr: i ? 'feliz' : 'serio', bigode: !!i }, t, { x: pe(y) - larg(y) * 0.55, y: y + 4, s: cfK(y), fase: i }).replace(/class="rosto" /g, '')).join('');
+    const yb = 1600; s += [0, 1, 2].map(i => `<rect x="${pe(yb) - larg(yb) * 0.9 + i * 6}" y="${yb + 6 - i * 10}" width="${larg(yb) * 0.6}" height="10" fill="#b08968" stroke="${OUT}" stroke-width="2.5"/>`).join('');
+  } else if (torcida > 0) {
+    // arquibancada pronta: torcedores sentados nos degraus
+    const r = rng('lat-esq'); let n = Math.min(70, Math.round(torcida / 25));
+    for (let d = 0; d < nDeg && n > 0; d++) for (let i = 1; i < ys.length && n > 0; i++, n--) {
+      const y = ys[i], f = (d + 0.6) / nDeg, k = cfK(y) * 0.9;
+      s += `<g transform="translate(${(pe(y) - larg(y) * f).toFixed(1)} ${(y - alt(y) * f).toFixed(1)})"><rect x="${-12 * k}" y="${-30 * k}" width="${24 * k}" height="${30 * k}" rx="${8 * k}" fill="${r() > 0.3 ? CORES.vinho : CORES.amarelo}" stroke="${OUT}" stroke-width="2"/><circle cy="${-40 * k}" r="${11 * k}" fill="${PELES[Math.floor(r() * PELES.length)]}" stroke="${OUT}" stroke-width="2"/></g>`;
+    }
+  }
   return s;
 }
 
+// Lateral direita: banco de reservas, pomponetes e o Caramelo, todos fora da linha e na escala da profundidade.
+function lateralDireitaFrente(estrutura, t = 0, fora = false) {
+  let s = '';
+  const fx = (y, d) => cfX(y, 1) + d * cfK(y);
+  if (estrutura.banco_reservas && !fora) { const y = 1120, k = cfK(y);
+    s += `<g transform="translate(${fx(y, 120)} ${y}) scale(${k * 0.9})">${bancoReservasFrente()}</g>`; }
+  if (estrutura.pomponetes) [[1215, 70], [1265, 150]].forEach(([y, d], i) => {
+    s += pessoa({ pele: PELES[(i * 2 + 1) % PELES.length], cabelo: 'coque', corCabelo: i % 2 ? '#7a4b2a' : '#1b1b1b', camisa: CORES.amarelo, listra: CORES.vinho,
+      calcao: CORES.vinho, meiao: '#fff', pompons: CORES.vinho, pose: Math.sin(t * 4 + i) > 0 ? 'comemora' : 'acena', expr: 'feliz' }, t, { x: fx(y, d), y, s: cfK(y), fase: i }).replace(/class="rosto" /g, '');
+  });
+  if (estrutura.mascote && !fora) { const y = 1420; s += `<g transform="translate(${fx(y, 90)} ${y}) scale(${cfK(y) * 0.9})">${caramelo(t, { espelho: true })}</g>`; }
+  return s;
+}
+
+// Caramelo, o mascote: vira-lata caramelo com coleira vinho e plaquinha do escudo. Origem: chão (patas).
+// Proporção: ~45% da altura de uma pessoa (cachorro médio).
 // vista aérea: a obra ocupa a faixa à esquerda do campo, entre a linha e a cerca
 function obraArquibancadaAerea(prog = 0.3) {
   const y0 = 860, y1 = 1560, dx = y => xBorda(y, -1);
@@ -954,7 +978,7 @@ function fundoEscuro() {
 
 Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
-  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, kombi, feira, caramelo, cone, obraArquibancadaCampo, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, cfX, cfK, kombi, feira, caramelo, cone, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).

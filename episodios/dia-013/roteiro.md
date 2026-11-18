@@ -40,17 +40,17 @@ Torcida: 457 · Caixa: R$ 1.428 · Posição: 4º
 ## 08-gol
 **Na tela:** 26' | GOOOOL!
 
-> [shouting] GOOOOOOOOOL! [excited] Chora, goleiro! FOGUETE manda pra rede aos 26! É DO POEIRA!
+> [excited] Lá vai o Benício pela direita... toca pro Foguete... bateu! [shouting] GOOOOOOOOOL! [excited] Chora, goleiro! FOGUETE manda pra rede aos 26! É DO POEIRA!
 
 ## 09-gol
 **Na tela:** 39' | GOL DO VETERANOS DO BAIRRO
 
-> Gol do Veteranos do Bairro, aos 39.
+> Lá vem o Veteranos do Bairro pelo meio... tocou... bateu! Gol do Veteranos do Bairro, aos 39.
 
 ## 10-gol
 **Na tela:** 72' | GOOOOL!
 
-> [shouting] GOOOOOL DO BENÍCIO! [excited] Aos 72, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!
+> [excited] Lá vai o Nenê pela direita... toca pro Benício... bateu! [shouting] GOOOOOL DO BENÍCIO! [excited] Aos 72, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!
 
 ## 11-fim_de_jogo
 **Na tela:** FIM DE JOGO | Veteranos do Bairro 1 x 2 Poeira FC

@@ -123,10 +123,12 @@ const TIPOS = {
     const noCampo = acoes.some(a => ['grama', 'arquibancada', 'arquibancada_obra', 'refletores', 'rede', 'banco_reservas'].includes(a));
     // banco de reservas: depois de mostrar a obra no campo, corta para a imagem da lateral
     const tBanco = acoes.includes('banco_reservas') ? Math.max(virada + 0.8, quando(c, 'banquinho', quando(c, 'banco', d * 0.6)) - 0.2) : Infinity;
-    const fundo = t >= tBanco ? lateral(est, { t, nome: NOME(E) })
+    const tvObra = acoes.includes('arquibancada_obra');   // a obra fica na lateral: mostra pela câmera de TV, de frente para ela
+    const fundo = tvObra ? camera(t, d, tvCenario(est, tvObraCam(c.dados.depois), t, { torcida: 0, nome: NOME(E) }), { z0: 1.8, z1: 2.0, cy: 870 })
+      : t >= tBanco ? lateral(est, { t, nome: NOME(E) })
       : noCampo ? campo(est, { t, nome: NOME(E), torcida: 0 }) : sede(est, { t });
-    const naSede = !noCampo && t < tBanco;
-    let s = camera(t, d, naSede ? zoomSede(c.dados.depois, fundo) : fundo, naSede ? { z1: 1 } : {});  // na sede a câmera fica parada (as pessoas pisam no chão)
+    const naSede = !noCampo && !tvObra && t < tBanco;
+    let s = tvObra ? fundo : camera(t, d, naSede ? zoomSede(c.dados.depois, fundo) : fundo, naSede ? { z1: 1 } : {});  // na sede a câmera fica parada (as pessoas pisam no chão)
     if (t >= virada && t < virada + 0.5) {
       const p = (t - virada) / 0.5;
       for (let i = 0; i < 10; i++) s += `<circle cx="${100 + i * 95}" cy="${1000 + Math.sin(i) * 180}" r="${60 + p * 120}" fill="#fff" opacity="${0.8 * (1 - p)}"/>`;
@@ -195,6 +197,12 @@ const TIPOS = {
   },
   pre_jogo(t, d, c, E) {
     let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }));
+    s += TIPOS.pre_jogo.placa(t, c, E);
+    s += elencoLinha(t, E, 1560, 0.7, ['1', '3', '4', '5', '8', '9', '10']);
+    return s;
+  },
+  _pre_jogo_antigo(t, d, c, E) {
+    let s = '';
     s += pop(t, 0.1, W / 2, 330, pilula(c.texto_tela[0], { tam: 66, bg: CORES.marinho, rot: -2 }));
     s += pop(t, 0.4, W / 2, 440, pilula(c.texto_tela[1] || '', { tam: 40, bg: CORES.amarelo, cor: OUT, rot: 2 }));
     const m = c.dados.mandante, v = c.dados.visitante;
@@ -202,18 +210,49 @@ const TIPOS = {
     s += pop(t, 0.9, 830, 650, `<g transform="scale(.85)">${v === NOME(E) ? nossoEscudo(E) : escudo(v)}</g>`);
     s += pop(t, 1.1, W / 2, 690, texto('X', { tam: 130 }));
     s += pop(t, 1.0, 250, 845, texto(m, { tam: 38, bw: 10 })) + pop(t, 1.0, 830, 845, texto(v, { tam: 38, bw: 10 }));
-    s += elencoLinha(t, E, 1560, 0.7, ['1', '3', '4', '5', '8', '9', '10']);
-    if (c.dados.local && E.estrutura.kombi) {  // o Poeira chega de Kombi na casa do adversário (o time atrás dela)
-      const p = easeOut(prog(t, 0.1, 1.5));
-      s += `<g transform="translate(${-420 + p * 960} 1935) scale(.85)">${kombi({ t, andando: p < 1 })}</g>`;
-    }
     return s;
   },
   // Gol: a câmera fecha na trave. O goleiro fica DENTRO do gol (pula pro lado errado) e a bola estufa a rede.
   // Depois: gol nosso = o autor comemora em primeiro plano; gol deles = a zaga lamenta (ou o culpado, com apelido).
+  // Gol em duas partes: (1) o LANCE na câmera de TV (passe, chute, goleiro pulando, bola na rede), no ritmo da
+  // narração ("toca" = passe, "bateu" = chute); (2) a comemoração, que varia: replay atrás do gol, abraço
+  // no lance, ou a torcida na arquibancada.
   gol(t, d, c, E) {
+    const dd = c.dados;
+    if (dd.nosso === null || dd.nosso === undefined) return TIPOS.golAtras(t, d, c, E);
+    const tPasse = quando(c, 'toc', 1.2), tChute = Math.max(tPasse + 0.7, quando(c, 'bateu', tPasse + 1.2));
+    const tEntra = tChute + 0.45, tB = tEntra + 1.1, v = dd.variante || 'replay';
+    const sg = n => n === NOME(E) ? E.clube.sigla : sigla(n);
+    const placarAntes = dd.nosso ? (dd.mandante === NOME(E) ? [dd.placar[0] - 1, dd.placar[1]] : [dd.placar[0], dd.placar[1] - 1])
+      : (dd.mandante === NOME(E) ? [dd.placar[0], dd.placar[1] - 1] : [dd.placar[0] - 1, dd.placar[1]]);
+    const pl = t < tEntra ? placarAntes : dd.placar;
+    let s;
+    if (t < tB || v === 'abraco') {
+      s = camera(t, d, lanceGol(t, E, dd, { tPasse, tChute }), { z0: 1.55, z1: 1.6, cy: 1390 });  // câmera de TV fechada no lance
+      if (dd.nosso) s += pop(t, tEntra, W / 2, 700, tituloGrande('GOOOOL!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
+      else {
+        s += pop(t, tEntra + 0.1, W / 2, 700, pilula(c.texto_tela[1] || 'GOL DELES', { tam: 56, bg: '#6c757d', rot: 3 }));
+        if (dd.culpado && t > tB) {
+          const q = dd.culpado;
+          s += pop(t, tB, W / 2, 360, pilula(`#${q.numero} ${q.nome.toUpperCase()}`, { tam: 40, bg: CORES.marinho, rot: -3 }));
+          s += pop(t, tB + 0.3, W / 2, 470, pilula(q.apelido.toUpperCase(), { tam: 54, bg: CORES.laranja, cor: OUT, rot: 2 }));
+        }
+      }
+    } else if (v === 'torcida' && dd.nosso) {
+      // a torcida explode na arquibancada (vista de frente, câmera fechada nos degraus)
+      const t2 = t - tB;
+      s = camera(t2, d - tB, campo(E.estrutura, { t, nome: NOME(E), torcida: Math.max(E._torcida, 400) }), { z0: 1.9, z1: 2.05, cy: 760 });
+      s += pop(t2, 0.1, W / 2, 1450, tituloGrande('GOOOOL!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
+      s += pop(t2, 0.4, W / 2, 1640, pilula((dd.autor || '').toUpperCase(), { tam: 60, bg: CORES.vinho, rot: 2 }));
+    } else {
+      s = TIPOS.golAtras(t - tB + 0.1, d - tB, c, E, { replay: true });
+    }
+    s += placarCanto(sg(dd.mandante), sg(dd.visitante), pl[0], pl[1], dd.minuto);
+    return s;
+  },
+  golAtras(t, d, c, E, { replay = false } = {}) {
     const nosso = c.dados.nosso, dd = c.dados;
-    const GX = W / 2, GY = 955;                       // trave no campo (antes do zoom)
+    const GX = W / 2, GY = 953;                       // trave no campo (antes do zoom)
     const lado = dd.minuto % 2 ? 1 : -1;              // canto da bola
     const p = easeOut(prog(t, 0.15, 0.5));            // chute até a rede
     const mergulho = easeOut(prog(t, 0.25, 0.35));
@@ -222,26 +261,26 @@ const TIPOS = {
     const [c1, c2] = coresTime(adv);
     const goleiro = nosso ? { pele: '#c68642', cabelo: 'curto', corCabelo: '#1b1b1b', luvas: true, camisa: c1, listra: c2, calcao: OUT, meiao: c1, expr: 'surpreso' }
       : jogador('1', E, { expr: 'surpreso' });
-    const kx = GX - lado * 44 * mergulho, ky = GY - 3 - Math.sin(mergulho * Math.PI) * 20;
+    const kx = GX - lado * 34 * mergulho, ky = GY - 2 - Math.sin(mergulho * Math.PI) * 15;
     window._closeGol = true;  // com o zoom, os letreiros do muro saem do quadro (não entram na checagem)
     let cena = campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida });
     if (nosso !== null) {
-      cena += sombraChao(GX - lado * 34 * mergulho, GY + 2, 24, 5, 0.25);
-      cena += `<g transform="translate(${kx} ${ky}) rotate(${-lado * 78 * mergulho})">${pessoa({ ...goleiro, pose: 'comemora' }, t, { s: 0.24 })}</g>`;
-      const bx = GX + lado * (10 + 72 * p), by = 1230 - p * (1230 - (GY - 42)) - Math.sin(p * Math.PI) * 60;
-      if (p >= 1) cena += `<ellipse cx="${GX + lado * 82}" cy="${GY - 42}" rx="${28 + Math.sin(t * 20) * 3}" ry="22" fill="none" stroke="#fff" stroke-width="2.5" opacity=".9"/>
-        <ellipse cx="${GX + lado * 82}" cy="${GY - 42}" rx="16" ry="12" fill="none" stroke="#fff" stroke-width="2" opacity=".8"/>`;  // rede estufando
-      const br = 10 - p * 3.5;
+      cena += sombraChao(GX - lado * 26 * mergulho, GY + 2, 19, 4, 0.25);
+      cena += `<g transform="translate(${kx} ${ky}) rotate(${-lado * 78 * mergulho})">${pessoa({ ...goleiro, pose: 'comemora' }, t, { s: 0.19 })}</g>`;
+      const bx = GX + lado * (8 + 54 * p), by = 1230 - p * (1230 - (GY - 33)) - Math.sin(p * Math.PI) * 50;
+      if (p >= 1) cena += `<ellipse cx="${GX + lado * 62}" cy="${GY - 33}" rx="${22 + Math.sin(t * 20) * 3}" ry="17" fill="none" stroke="#fff" stroke-width="2.5" opacity=".9"/>
+        <ellipse cx="${GX + lado * 62}" cy="${GY - 33}" rx="12" ry="9" fill="none" stroke="#fff" stroke-width="2" opacity=".8"/>`;  // rede estufando
+      const br = 8 - p * 2.8;
       cena += `<circle cx="${bx}" cy="${by}" r="${br}" fill="#fff" stroke="${OUT}" stroke-width="2.5"/><path d="M${bx - br * 0.4},${by - br * 0.3} l${br * 0.4},${-br * 0.3} l${br * 0.4},${br * 0.3} l${-br * 0.15},${br * 0.45} h${-br * 0.5}z" fill="${OUT}"/>`;
     }
-    let s = camera(t, d, cena, { z0: 2.6, z1: 2.8, cx: GX, cy: 905 });
+    let s = camera(t, d, cena, { z0: 3.3, z1: 3.5, cx: GX, cy: 918 });
     window._closeGol = false;
     if (nosso) {
       const num = Object.keys(E.elenco).find(k => E.elenco[k].nome === dd.autor) || '9';
       s += popPessoa(t, 0.75, 540, 1905, pessoa(jogador(num, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.35 }));
-      s += pop(t, 0.6, W / 2, 600, tituloGrande('GOOOOL!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
+      s += pop(t, 0.6, W / 2, 660, tituloGrande('GOOOOL!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
     } else if (nosso === false) {
-      s += pop(t, 0.6, W / 2, 600, pilula(c.texto_tela[1] || 'GOL DELES', { tam: 56, bg: '#6c757d', rot: 3 }));
+      s += pop(t, 0.6, W / 2, 660, pilula(c.texto_tela[1] || 'GOL DELES', { tam: 56, bg: '#6c757d', rot: 3 }));
       if (dd.culpado) {  // o culpado do gol, com o apelido novo
         const q = dd.culpado;
         s += popPessoa(t, 0.9, 760, 1905, pessoa(jogador(q.numero, E, { expr: 'surpreso', pose: 'acena' }), t, { s: 1.35 }));
@@ -252,6 +291,7 @@ const TIPOS = {
         s += popPessoa(t, 1.0, 700, 1905, pessoa(jogador('4', E, { expr: 'triste' }), t, { s: 1.3, fase: 1 }));
       }
     }
+    if (replay) { s += pop(t, 0.05, W - 170, 420, pilula('▶ REPLAY', { tam: 34, bg: '#e63946', rot: 0, py: 10 })); return s; }
     const sg = n => n === NOME(E) ? E.clube.sigla : sigla(n);
     s += placarCanto(sg(dd.mandante), sg(dd.visitante), dd.placar[0], dd.placar[1], dd.minuto);
     return s;
@@ -311,6 +351,10 @@ const TIPOS = {
   },
   encerramento(t, d, c, E) {
     let s = camera(t, d, sede(E.estrutura, { t }) + narrador(t, E, 345, SEDE.pe, 1, { pose: 'acena' }) + presidente(t, E, 742, SEDE.pe, 1, { expr: 'feliz' }), CAM_SEDE);
+    return s + TIPOS.encerramento.fim(t, d, c, E);
+  },
+  _encerramento_fim(t, d, c, E) {
+    let s = '';
     if (c.dados.proximo) {
       const [m, v] = c.dados.proximo;
       s += pop(t, 0.2, W / 2, 330, pilula('PRÓXIMO JOGO', { tam: 54, bg: '#2e8b57' }));
@@ -386,7 +430,12 @@ Object.assign(TIPOS, {
     const tT = quando(c, 'hoje', 1.2, true), tC = quando(c, 'caixa', 3, true);
     let s = camera(t, d, estadioAereo(E.estrutura, dd.torcida, { t, revelar: easeOut(prog(t, tT, 1.6)), torcidaAntes: dd.antes, nome: NOME(E) }), { z0: 1.0, z1: 1.04 });
     s += `<rect width="${W}" height="${H}" fill="${CORES.marinho}" opacity=".35"/>`;
-    s += pop(t, 0.05, W / 2, 230, tituloGrande(c.texto_tela[0] || '', { tam: 170 }));
+    return s + TIPOS._evolucao_cartoes(t, c, E);
+  },
+  _evolucao_cartoes(t, c, E) {
+    const dd = c.dados;
+    const tT = quando(c, 'hoje', 1.2, true), tC = quando(c, 'caixa', 3, true);
+    let s = pop(t, 0.05, W / 2, 230, tituloGrande(c.texto_tela[0] || '', { tam: 170 }));
     const pT = prog(t, tT, 1.6), pC = prog(t, tC, 1.6);
     const dT = dd.torcida - dd.antes, dC = dd.caixa - dd.caixa_antes;
     s += pop(t, 0.4, 290, 600, cartaoNumero('TORCIDA', contador(dd.torcida, dd.antes, pT),
@@ -412,6 +461,10 @@ Object.assign(TIPOS, {
   capa(t, d, c, E) {
     let s = campo(E.estrutura, { t, nome: NOME(E), torcida: c.dados.antes || 0 });
     s += narrador(t, E, 540, 1870, 1.8, { pose: 'acena' });
+    return s + TIPOS.capa.titulo(t, c);
+  },
+  _capa_titulo(t, c) {
+    let s = '';
     s += `<g transform="translate(${W / 2} 470)">${tituloGrande(c.texto_tela[0] || '', { tam: 230 })}</g>`;
     if (c.dados.tema) {
       const tam = Math.min(128, 900 / Math.max(1, medir(c.dados.tema, 1)));  // tema grande, sem passar da tela
@@ -696,6 +749,12 @@ function marcaDagua(E) {
   return `<g class="ui" transform="translate(${W - 50} 110)" opacity=".85">
     <text text-anchor="end" font-family="Anton" font-size="30" fill="#fff" stroke="${OUT}" stroke-width="6" paint-order="stroke">${esc(E.clube.instagram)}</text></g>`;
 }
+
+// pedaços reaproveitados pelas variações (cenas2.js)
+TIPOS.pre_jogo.placa = (t, c, E) => TIPOS._pre_jogo_antigo(t, 0, c, E);   // rodada, mando, escudos e nomes (sem fundo nem elenco)
+TIPOS.encerramento.fim = (t, d, c, E) => TIPOS._encerramento_fim(t, d, c, E);
+TIPOS.capa.titulo = (t, c) => TIPOS._capa_titulo(t, c);
+TIPOS.evolucao.cartoes = (t, c, E) => TIPOS._evolucao_cartoes(t, c, E);
 
 // ------------------------------------------------------------ API para o render.mjs
 let DADOS = null;

@@ -68,7 +68,8 @@
           "patrocinio": "MÚSCULO DE AÇO",
           "aquecimento": true,
           "vestiario_predio": true
-        }
+        },
+        "variante": "aereo"
       }
     },
     {
@@ -114,7 +115,8 @@
           "patrocinio": "MÚSCULO DE AÇO",
           "aquecimento": true,
           "vestiario_predio": true
-        }
+        },
+        "variante": "balcao"
       }
     },
     {
@@ -158,7 +160,8 @@
           "patrocinio": "MÚSCULO DE AÇO",
           "aquecimento": true,
           "vestiario_predio": true
-        }
+        },
+        "variante": "arquibancada"
       }
     },
     {
@@ -217,7 +220,8 @@
           "patrocinio": "MÚSCULO DE AÇO",
           "aquecimento": true,
           "vestiario_predio": true
-        }
+        },
+        "variante": "mural"
       }
     },
     {
@@ -391,7 +395,8 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        }
+        },
+        "variante": "chegada"
       }
     },
     {
@@ -451,19 +456,22 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        }
+        },
+        "variante": "figurinha"
       }
     },
     {
       "id": "08-gol",
       "tipo": "gol",
-      "narracao": "[shouting] GOOOOOOOOOL! [excited] Chora, goleiro! FOGUETE manda pra rede aos 26! É DO POEIRA!",
+      "narracao": "[excited] Lá vai o Benício pela direita... toca pro Foguete... bateu! [shouting] GOOOOOOOOOL! [excited] Chora, goleiro! FOGUETE manda pra rede aos 26! É DO POEIRA!",
       "texto_tela": [
         "26'",
         "GOOOOL!"
       ],
       "dados": {
         "culpado": null,
+        "autor_numero": "77",
+        "passador_numero": "7",
         "minuto": 26,
         "nosso": true,
         "estilo_voz": "grito",
@@ -517,13 +525,14 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        }
+        },
+        "variante": "replay"
       }
     },
     {
       "id": "09-gol",
       "tipo": "gol",
-      "narracao": "Gol do Veteranos do Bairro, aos 39.",
+      "narracao": "Lá vem o Veteranos do Bairro pelo meio... tocou... bateu! Gol do Veteranos do Bairro, aos 39.",
       "texto_tela": [
         "39'",
         "GOL DO VETERANOS DO BAIRRO"
@@ -583,19 +592,22 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        }
+        },
+        "variante": "abraco"
       }
     },
     {
       "id": "10-gol",
       "tipo": "gol",
-      "narracao": "[shouting] GOOOOOL DO BENÍCIO! [excited] Aos 72, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!",
+      "narracao": "[excited] Lá vai o Nenê pela direita... toca pro Benício... bateu! [shouting] GOOOOOL DO BENÍCIO! [excited] Aos 72, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!",
       "texto_tela": [
         "72'",
         "GOOOOL!"
       ],
       "dados": {
         "culpado": null,
+        "autor_numero": "7",
+        "passador_numero": "8",
         "minuto": 72,
         "nosso": true,
         "estilo_voz": "grito",
@@ -649,7 +661,8 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        }
+        },
+        "variante": "replay"
       }
     },
     {
@@ -711,7 +724,8 @@
           "sigla": "VBA",
           "torcida": 320,
           "tema": ""
-        }
+        },
+        "variante": "placar"
       }
     },
     {
@@ -883,7 +897,8 @@
             "lado": "esquerda",
             "lugares": 1500
           }
-        }
+        },
+        "variante": "quadro"
       }
     },
     {
@@ -936,7 +951,8 @@
             "lado": "esquerda",
             "lugares": 1500
           }
-        }
+        },
+        "variante": "mural"
       }
     },
     {
@@ -988,7 +1004,8 @@
             "lado": "esquerda",
             "lugares": 1500
           }
-        }
+        },
+        "variante": "por_do_sol"
       }
     }
   ],

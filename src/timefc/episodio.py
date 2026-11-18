@@ -571,6 +571,16 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                            f"{_n(ds)} a {_n(ns)}. {'A torcida ficou em silêncio.' if casa else 'A casa deles veio abaixo.'}")
                 elif ultimo and ns == ds:
                     txt = f"Ah, não... Gol do {adv}, aos {g['minuto']}. Empatou: {_n(ds)} a {_n(ns)}."
+            # o lance antes do grito: quem toca, pra quem, e o chute ("toca" e "bateu" marcam a animação)
+            lado_lance = rng.choice(["pela direita", "pela esquerda", "pelo meio"])
+            lance = {}
+            if nosso:
+                opcoes = [n for n, j in e["elenco"].items() if n not in ("1", art["numero"]) and j["posicao"] in ("MEI", "PD", "PE", "CA", "VOL")]
+                pas = rng.choice(opcoes) if opcoes else "10"
+                lance = {"autor_numero": art["numero"], "passador_numero": pas}
+                txt = f"[excited] Lá vai o {e['elenco'][pas]['nome']} {lado_lance}... toca pro {art['nome']}... bateu! " + txt
+            else:
+                txt = f"Lá vem o {adv} {lado_lance}... tocou... bateu! " + txt
             culpado = None
             ap = regra_jogo.get("apelido_no_gol")  # ex: o gol sofrido é culpa do lateral "Salário do Mês"
             if ap and str(i + 1) == str(ap.get("gol")) and ap["numero"] in e["elenco"]:
@@ -579,7 +589,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 e.setdefault("piadas_usadas", []).append(ap["apelido"])
                 culpado = {"numero": ap["numero"], "nome": j["nome"], "apelido": ap["apelido"], "posicao": ap.get("posicao", "")}
                 est.evento(e, f"{j['nome']} ganhou o apelido {ap['apelido']}")
-            cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"], culpado=culpado,
+            cena("gol", txt, [f"{g['minuto']}'", "GOOOOL!" if nosso else f"GOL DO {adv.upper()}"], culpado=culpado, **lance,
                  minuto=g["minuto"], nosso=nosso, estilo_voz="grito" if nosso else "normal", autor=g.get("autor"), placar=[gm, gv],
                  mandante=partida["mandante"], visitante=partida["visitante"])
         if not gols:
@@ -700,12 +710,72 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     cena("encerramento", fala, [e["clube"]["instagram"]],
          proximo=list(prox_jogo) if prox_jogo and dia > 1 else None)
 
+    _dirigir(e, cenas, dia)
     roteiro = {"dia": dia, "clube": nome, "caixa": e["caixa"], "torcida": hoje, "posicao": pos,
                "partida": partida, "cenas": cenas, "estado": _resumo_visual(e),
                "legenda": briefing.get("legenda") or legenda(e, prox),
                "primeiro_comentario": prox["pergunta"] + " 👇"}
     e["episodios"].append({"dia": dia, "data": est.agora(), "proxima_decisao": prox, "post": None})
     return e, roteiro
+
+
+# ------------------------------------------------------------ diretor de cena
+# Cada parte do vídeo tem várias formas de ser mostrada (video/cenas2.js). O diretor escolhe uma por cena,
+# sem repetir a do episódio anterior nem repetir dentro do mesmo episódio. A primeira de cada lista é a cena
+# "clássica" (sem variante).
+VARIANTES = {
+    "capa": ["campo", "rua", "aereo"],
+    "evolucao": ["aereo", "balcao"],
+    "estadio": ["aereo", "arquibancada"],
+    "comentarios": ["rua", "mural", "celular"],
+    "decisao": ["rua", "mural", "quadro"],
+    "apelido": ["close", "figurinha"],
+    "gol": ["replay", "abraco", "torcida"],
+    "fim_de_jogo": ["tiao", "placar"],
+    "bilheteria": ["campo", "caderno"],
+    "tabela": ["card", "quadro"],
+    "encerramento": ["rua", "por_do_sol"],
+    "pre_jogo": ["campo", "vestiario", "chegada"],
+}
+
+
+def _variantes_possiveis(e: dict, c: dict) -> list[str]:
+    tipo, d = c["tipo"], c["dados"]
+    vs = list(VARIANTES.get(tipo, []))
+    fora = bool(d.get("local"))
+    if tipo == "pre_jogo":
+        vs = [v for v in vs if v == "campo" or (v == "vestiario" and not fora and e["estrutura"].get("vestiario_predio"))
+              or (v == "chegada" and fora and e["estrutura"].get("kombi"))]
+    if tipo == "gol":
+        vs = [v for v in vs if v != "torcida" or (d.get("nosso") and not fora)]
+    return vs
+
+
+def _dirigir(e: dict, cenas: list[dict], dia: int) -> None:
+    """Escolhe a variante de cada cena. Penalidades: repetir a do episódio anterior (3; sem histórico, a
+    anterior é a clássica), repetir a do mesmo tipo neste episódio (2), repetir o lugar usado em outra parte
+    deste episódio (1). Empate: rodízio pelo dia."""
+    ultimas = e.setdefault("cameras", {})
+    usadas: dict[str, list[str]] = {}
+    lugares: set[str] = set()
+    for i, c in enumerate(cenas):
+        vs = _variantes_possiveis(e, c)
+        if len(vs) < 2 or c["dados"].get("variante"):
+            continue
+        tipo = c["tipo"]
+        anterior = (usadas.get(tipo) or [None])[-1] if tipo == "gol" else ultimas.get(tipo, VARIANTES[tipo][0])
+        vizinha = next((x["dados"].get("variante") for x in reversed(cenas[:i]) if x["dados"].get("variante")), None)
+        def pena(v: str) -> int:
+            return (3 * (v == anterior) + 2 * (v in usadas.get(tipo, []) and tipo != "gol")
+                    + 1 * (v in lugares and v != VARIANTES[tipo][0]) + 1 * (v == vizinha))
+        menor = min(pena(v) for v in vs)
+        livres = [v for v in vs if pena(v) == menor]
+        v = livres[(dia + i) % len(livres)]
+        c["dados"]["variante"] = v
+        usadas.setdefault(tipo, []).append(v)
+        lugares.add(v)
+    for tipo, vs in usadas.items():
+        ultimas[tipo] = vs[-1]
 
 
 def _resumo_visual(e: dict) -> dict:
