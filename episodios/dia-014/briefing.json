@@ -1,0 +1,257 @@
+{
+ "dia": 14,
+ "seguidores_ontem": 457,
+ "seguidores_hoje": 474,
+ "post_anterior": {
+  "id": "17980224798154587",
+  "caption": "DIA 13 do Poeira FC ⚽🏗️\n\nO que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam só 43 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "comments_count": 20,
+  "like_count": 137,
+  "media_product_type": "REELS",
+  "media_type": "VIDEO",
+  "permalink": "https://www.instagram.com/reel/Df4IpJghsTK/",
+  "timestamp": "2026-11-18T09:02:06+0000"
+ },
+ "curtidas": 137,
+ "receita_curtidas": 137,
+ "caixa_atual": 1428.0,
+ "caixa_com_curtidas": 1565.0,
+ "top_comentarios": [
+  {
+   "usuario": "_guigs12",
+   "texto": "Ainda acho que tem que melhorar o campo para poder alugar e fazer dinheiro além de ter alguém que faça lives dos jogos do poeira ao vivo",
+   "curtidas": 9,
+   "id": "17871808833663471",
+   "timestamp": "2026-11-18T09:35:35+0000"
+  },
+  {
+   "usuario": "paulos.moreirados",
+   "texto": "Campo tem que manter o terrão ,  é do terrão que saiu os melhores jogadores .",
+   "curtidas": 2,
+   "id": "18135326716842881",
+   "timestamp": "2026-11-18T11:58:15+0000"
+  },
+  {
+   "usuario": "teus__a",
+   "texto": "Contrata fotógrafos para fazer a mídias do time",
+   "curtidas": 1,
+   "id": "18099749660399055",
+   "timestamp": "2026-11-18T09:50:24+0000"
+  },
+  {
+   "usuario": "nkziinzx_",
+   "texto": "Cria uma base, para revelar novos craques",
+   "curtidas": 1,
+   "id": "18018437474978690",
+   "timestamp": "2026-11-18T11:07:47+0000"
+  },
+  {
+   "usuario": "talles_silva",
+   "texto": "Na peneira nova quero a zaga, sou o zagueiro antigo, o jogador ou a bola, xerife",
+   "curtidas": 0,
+   "id": "18050418836819942",
+   "timestamp": "2026-11-18T09:06:39+0000"
+  },
+  {
+   "usuario": "oliveira_vitinho04",
+   "texto": "Deixa eu de meia armador",
+   "curtidas": 0,
+   "id": "18122424524056303",
+   "timestamp": "2026-11-18T09:15:40+0000"
+  },
+  {
+   "usuario": "flavinhorodriques",
+   "texto": "A Arma Secreta dos 35 do 2º Tempo: É o reserva de luxo que entra no fim do jogo para \"incendiar\" a partida. ele entra dando passe de letra, chapéu e tentando resolver o jogo sozinho, mesmo quando o time só precisa segurar o resultado.  Com o nome \"Talismã do Banco\" Para quem nunca é titular, mas entra sempre salvando o time.",
+   "curtidas": 0,
+   "id": "18139414462635037",
+   "timestamp": "2026-11-18T09:21:08+0000"
+  },
+  {
+   "usuario": "beniciocarmocarvalho",
+   "texto": "Venho agradecer a todos os jogadores por essa vitória, e eu acho q na nova peneira só pode entrar jogadores novos de outras posições para n sair quem está ajudando o time que nem eu e o Gilberto Teles nosso técnico, tirando o goleiro e já foi liberado outra vaga",
+   "curtidas": 0,
+   "id": "18077277083729565",
+   "timestamp": "2026-11-18T09:35:07+0000"
+  },
+  {
+   "usuario": "ronaldfreitas001",
+   "texto": "Aumenta o CT de treino",
+   "curtidas": 0,
+   "id": "18452175649134938",
+   "timestamp": "2026-11-18T09:35:20+0000"
+  },
+  {
+   "usuario": "dede_todeschini",
+   "texto": "Vaamooo Poeira! Todesca organizou a Charanga, agora quer jogar também! Todesca na peneira dos 500! Pode ser pra centroavante pivozão!",
+   "curtidas": 0,
+   "id": "18118087541044949",
+   "timestamp": "2026-11-18T10:38:42+0000"
+  }
+ ],
+ "avaliacao_comentarios": [
+  {
+   "indice": 0,
+   "usuario": "_guigs12",
+   "curtidas": 9,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 1,
+   "usuario": "paulos.moreirados",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 2,
+   "usuario": "teus__a",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 3,
+   "usuario": "nkziinzx_",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 4,
+   "usuario": "talles_silva",
+   "curtidas": 0,
+   "viavel": true,
+   "acoes": [
+    "bolas"
+   ],
+   "custo": 80.0,
+   "motivo": null,
+   "revisar": false
+  },
+  {
+   "indice": 5,
+   "usuario": "oliveira_vitinho04",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  },
+  {
+   "indice": 6,
+   "usuario": "flavinhorodriques",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 7,
+   "usuario": "beniciocarmocarvalho",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+   "revisar": true
+  },
+  {
+   "indice": 8,
+   "usuario": "ronaldfreitas001",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 9,
+   "usuario": "dede_todeschini",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  }
+ ],
+ "enquetes": [],
+ "decisao": {
+  "comentario": null,
+  "acoes": [
+   "live"
+  ],
+  "autor": "_guigs12",
+  "titulo": "Poeira ao vivo",
+  "interpretacao": "Tripé com o celular da Dona Cida na arquibancada: os jogos do Poeira agora passam ao vivo, com o Tião narrando.",
+  "custo": 150,
+  "efeitos": {
+   "estrutura.live": true
+  },
+  "narracao_obra": "Pedido do Guigs: o Poeira agora tem transmissão ao vivo! Tripé na arquibancada, celular da Dona Cida, e o Tião narrando. Custou 150 reais."
+ },
+ "encerrar_enquetes": [],
+ "nova_enquete": null,
+ "proxima_decisao": {
+  "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+  "opcoes": [
+   "Sua ideia aqui?"
+  ]
+ },
+ "historia": {
+  "comentarios": [
+   {
+    "narracao": "O Guigs quer o Poeira ao vivo e o campo rendendo dinheiro. Mas o Paulo avisa: o terrão fica, porque é do terrão que saem os craques. E tem fila pra peneira: zagueiro Xerife, goleiro artilheiro e até o Todesca da charanga!",
+    "comentarios": [
+     {
+      "usuario": "_guigs12",
+      "texto": "Ainda acho que tem que melhorar o campo para poder alugar e fazer dinheiro além de ter alguém que faça lives dos jogos do poeira ao vivo",
+      "curtidas": 9,
+      "chave": "guigs",
+      "carimbo": "aprovado",
+      "chave_carimbo": "vivo",
+      "selo": "COMENTÁRIO MAIS CURTIDO"
+     },
+     {
+      "usuario": "paulos.moreirados",
+      "texto": "Campo tem que manter o terrão, é do terrão que saiu os melhores jogadores.",
+      "curtidas": 2,
+      "chave": "paulo",
+      "carimbo": "terrao",
+      "chave_carimbo": "terrão"
+     },
+     {
+      "usuario": "dede_todeschini",
+      "texto": "Todesca organizou a Charanga, agora quer jogar também! Todesca na peneira dos 500! Pode ser pra centroavante pivozão!",
+      "curtidas": 0,
+      "chave": "fila",
+      "carimbo": "peneira",
+      "chave_carimbo": "todesca"
+     }
+    ]
+   }
+  ]
+ },
+ "tema": "CLÁSSICO AO VIVO!",
+ "tema_falado": "Clássico ao vivo",
+ "decisao_fala": "No caixa, {caixa} reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+ "encerramento": "O pastel é por conta do Estrela da Feira! Amanhã tem Poeira contra o Real Laje. Faltam só vinte e seis torcedores pra peneira dos 500. Manda esse vídeo pros amigos. Segue, curte e comenta. Até amanhã!",
+ "legenda": "DIA 14 do Poeira FC ⚽📱\n\nClássico ao vivo! O que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam só 26 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}
