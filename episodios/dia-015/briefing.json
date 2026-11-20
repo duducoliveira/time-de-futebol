@@ -213,11 +213,9 @@
  "encerrar_enquetes": [],
  "nova_enquete": null,
  "proxima_decisao": {
-  "pergunta": "O que a gente faz agora?",
+  "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
   "opcoes": [
-   "Grama no campo?",
-   "Bolas novas?",
-   "Outra ideia?"
+   "Sua ideia aqui?"
   ]
  },
  "historia": {

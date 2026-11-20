@@ -864,9 +864,7 @@
       ],
       "dados": {
         "opcoes": [
-          "Grama no campo?",
-          "Bolas novas?",
-          "Outra ideia?"
+          "Sua ideia aqui?"
         ],
         "caixa": 2924.0,
         "hud": {
