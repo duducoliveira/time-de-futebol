@@ -124,6 +124,9 @@ const TIPOS = {
     const virada = Math.min(1.6, d * 0.35);
     const est = t < virada ? c.dados.antes : c.dados.depois;
     const acoes = c.dados.acoes || [];
+    // refletores: a câmera fecha numa torre e, quando a narração chega na "noite", as luzes acendem
+    const refl = acoes.includes('refletores'), tNoite = refl ? quando(c, 'noite', d * 0.65) : Infinity;
+    if (refl) window._noite = t >= tNoite;
     const noCampo = acoes.some(a => ['grama', 'arquibancada', 'arquibancada_obra', 'refletores', 'rede', 'banco_reservas'].includes(a));
     // banco de reservas: depois de mostrar a obra no campo, corta para a imagem da lateral
     const tBanco = acoes.includes('banco_reservas') ? Math.max(virada + 0.8, quando(c, 'banquinho', quando(c, 'banco', d * 0.6)) - 0.2) : Infinity;
@@ -132,7 +135,8 @@ const TIPOS = {
       : t >= tBanco ? lateral(est, { t, nome: NOME(E) })
       : noCampo ? campo(est, { t, nome: NOME(E), torcida: 0 }) : sede(est, { t });
     const naSede = !noCampo && !tvObra && t < tBanco;
-    let s = tvObra ? fundo : camera(t, d, naSede ? zoomSede(c.dados.depois, fundo) : fundo, naSede ? { z1: 1 } : {});  // na sede a câmera fica parada (as pessoas pisam no chão)
+    let s = tvObra ? fundo : refl && noCampo && t < tBanco ? naCamera(camChaves(t, [[0, 540, 1000, 1, 960], [virada + 0.2, 540, 1000, 1, 960], [virada + 1.6, 990, 980, 2.3, 940], [d, 1000, 980, 2.4, 940]]), fundo)
+      : camera(t, d, naSede ? zoomSede(c.dados.depois, fundo) : fundo, naSede ? { z1: 1 } : {});  // na sede a câmera fica parada (as pessoas pisam no chão)
     if (t >= virada && t < virada + 0.5) {
       const p = (t - virada) / 0.5;
       for (let i = 0; i < 10; i++) s += `<circle cx="${100 + i * 95}" cy="${1000 + Math.sin(i) * 180}" r="${60 + p * 120}" fill="#fff" opacity="${0.8 * (1 - p)}"/>`;
@@ -772,6 +776,7 @@ window.quadro = tGlobal => {
   let E = c.dados.estrutura ? { ...DADOS.estado, estrutura: c.dados.estrutura } : DADOS.estado;
   // jogo fora: campo, muro e torcida do dono da casa (a nossa estrutura fica no Campo do Poeira)
   window._local = c.dados.local || null;
+  window._noite = !!c.dados.noite;
   window._placas = !!(E.estrutura && E.estrutura.placas);
   window._tQuadro = tGlobal;
   CAM_SEDE = camSede(E.estrutura);

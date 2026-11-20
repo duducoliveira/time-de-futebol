@@ -216,9 +216,10 @@ const VARIACOES = {
     figurinha(t, d, c, E) {
       const dd = c.dados;
       let s = `<rect width="${W}" height="${H}" fill="#f8f0dc"/>${Array.from({ length: 18 }, (_, i) => `<rect x="${60 + (i % 3) * 330}" y="${80 + Math.floor(i / 3) * 300}" width="290" height="260" rx="10" fill="none" stroke="#e0cfa9" stroke-width="4" stroke-dasharray="12 10"/>`).join('')}`;
-      const nosso = dd.alvo === 'nosso', [c1, c2] = nosso ? [CORES.vinho, CORES.amarelo] : coresTime(dd.time || '');
+      const nosso = dd.alvo === 'nosso', seg = dd.alvo === 'seguidor', [c1, c2] = nosso || seg ? [CORES.vinho, CORES.amarelo] : coresTime(dd.time || '');
       let visual;
       if (nosso) visual = jogador(dd.numero, E, { expr: 'feliz' });
+      else if (seg) { const r = rng('seg' + (dd.instagram || dd.nome)); visual = { pele: PELES[Math.floor(r() * PELES.length)], cabelo: ['curto', 'cacheado', 'black'][Math.floor(r() * 3)], corCabelo: '#2b1d14', camisa: '#f8f9fa', listra: CORES.vinho, calcao: '#495057', expr: 'feliz' }; }
       else { const r = rng('adv' + dd.apelido); visual = { pele: PELES[Math.floor(r() * PELES.length)], cabelo: ['curto', 'raspado', 'cacheado', 'careca'][Math.floor(r() * 4)], corCabelo: '#2b1d14', camisa: c1, listra: c2, calcao: c2, meiao: c1, numero: dd.numero, bigode: r() > 0.5, expr: 'bravo' }; }
       const ent = easeOutBack(prog(t, 0.1, 0.5)), rot = -4 + Math.sin(t * 1.5) * 1;
       s += `<g transform="translate(540 760) scale(${ent}) rotate(${rot})">
@@ -229,13 +230,14 @@ const VARIACOES = {
         <rect x="-330" y="200" width="660" height="260" rx="0" fill="${c1}"/>
         <rect x="-330" y="200" width="660" height="12" fill="${OUT}"/>
         <text x="0" y="285" text-anchor="middle" font-family="Anton" font-size="62" fill="#fff" stroke="${OUT}" stroke-width="10" paint-order="stroke">${esc((dd.nome || dd.time || '').toUpperCase())}</text>
-        <text x="0" y="345" text-anchor="middle" font-family="Anton" font-size="36" fill="${c2}">${esc((dd.posicao || '').toUpperCase())} · Nº ${esc(String(dd.numero || ''))}</text>
-        <rect x="-300" y="-500" width="140" height="54" rx="10" fill="${OUT}"/><text x="-230" y="-462" text-anchor="middle" font-family="Anton" font-size="32" fill="#fff">${nosso ? 'PFC' : esc(sigla(dd.time || ''))}</text></g>`;
+        <text x="0" y="345" text-anchor="middle" font-family="Anton" font-size="36" fill="${c2}">${esc((dd.posicao || '').toUpperCase())}${seg ? ` · @${esc(dd.instagram || '')}` : ` · Nº ${esc(String(dd.numero || ''))}`}</text>
+        <rect x="-300" y="-500" width="140" height="54" rx="10" fill="${OUT}"/><text x="-230" y="-462" text-anchor="middle" font-family="Anton" font-size="32" fill="#fff">${nosso ? 'PFC' : seg ? '500' : esc(sigla(dd.time || ''))}</text></g>`;
       const tA = quando(c, (dd.apelido || '').split(' ')[0].toLowerCase(), 1.0);
       const titulo = (dd.apelido || '').toUpperCase(), tam = Math.min(110, 900 / Math.max(1, medir(titulo, 1)));
       s += pop(t, tA - 0.1, W / 2, 1360, tituloGrande(titulo, { tam, cor: CORES.amarelo, rot: -3 }));
       s += pop(t, tA + 0.6, W / 2, 1520, pilula(`"${(dd.piada || '').toUpperCase()}"`, { tam: 38, bg: CORES.creme, cor: OUT, rot: 2 }));
-      if (!nosso) s += pop(t, 0.2, W / 2, 140, pilula(`DE OLHO NO ${(dd.time || '').toUpperCase()}`, { tam: 40, bg: '#495057', rot: -2 }));
+      if (seg) s += pop(t, 0.2, W / 2, 140, pilula('CANDIDATO À PENEIRA DOS 500', { tam: 40, bg: CORES.vinho, rot: -2 }));
+      else if (!nosso) s += pop(t, 0.2, W / 2, 140, pilula(`DE OLHO NO ${(dd.time || '').toUpperCase()}`, { tam: 40, bg: '#495057', rot: -2 }));
       return s;
     },
   },
@@ -410,6 +412,7 @@ function desenharCena(i, t) {
   const c = DADOS.cenas[i];
   let E = c.dados.estrutura ? { ...DADOS.estado, estrutura: c.dados.estrutura } : DADOS.estado;
   window._local = c.dados.local || null;
+  window._noite = !!c.dados.noite;   // jogo à noite (com refletores, em casa)
   window._placas = !!(E.estrutura && E.estrutura.placas);
   CAM_SEDE = camSede(E.estrutura);
   if (window._local) E = { ...E, _torcida: window._local.torcida ?? 300,

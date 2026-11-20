@@ -747,6 +747,12 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
          proximo=list(prox_jogo) if prox_jogo and dia > 1 else None)
 
     _dirigir(e, cenas, dia)
+    # jogo à noite: com refletores no nosso campo, o jogo em casa é à noite (do pré-jogo até a renda)
+    for c in cenas:
+        est_c = c["dados"].get("estrutura") or e["estrutura"]
+        if c["tipo"] in ("pre_jogo", "apelido", "gol", "fim_de_jogo", "bilheteria", "banco", "festa") \
+                and est_c.get("iluminacao") and not c["dados"].get("local"):
+            c["dados"]["noite"] = True
     roteiro = {"dia": dia, "clube": nome, "caixa": e["caixa"], "torcida": hoje, "posicao": pos,
                "partida": partida, "cenas": cenas, "estado": _resumo_visual(e),
                "legenda": briefing.get("legenda") or legenda(e, prox),

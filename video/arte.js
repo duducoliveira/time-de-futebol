@@ -403,6 +403,15 @@ function jogador(numero, estado, extra = {}) {
 
 // ------------------------------------------------------------ cenários
 function ceu(t) {
+  if (window._noite) {   // jogo à noite: céu escuro, lua e estrelas (sem nuvens)
+    const r = rng('estrelas');
+    return `<defs><linearGradient id="gceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b132b"/><stop offset="1" stop-color="#25324f"/></linearGradient>
+      <linearGradient id="gterra" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${CORES.terra2}"/><stop offset="1" stop-color="${CORES.terra1}"/></linearGradient>
+      <radialGradient id="gluz"><stop offset="0" stop-color="#fff8dc" stop-opacity=".9"/><stop offset=".35" stop-color="#ffe9a8" stop-opacity=".35"/><stop offset="1" stop-color="#ffe9a8" stop-opacity="0"/></radialGradient></defs>
+      <rect x="-700" y="-900" width="${W + 1400}" height="${H + 1800}" fill="url(#gceu)"/>
+      ${Array.from({ length: 70 }, () => `<circle cx="${(r() * (W + 400) - 200).toFixed(0)}" cy="${(r() * 700 - 100).toFixed(0)}" r="${(1 + r() * 2.2).toFixed(1)}" fill="#fff" opacity="${(0.35 + r() * 0.5 + Math.sin(t * 3 + r() * 9) * 0.15).toFixed(2)}"/>`).join('')}
+      <circle cx="850" cy="150" r="46" fill="#fff4cc"/><circle cx="872" cy="136" r="40" fill="#101a33"/><circle cx="850" cy="150" r="90" fill="#fff4cc" opacity=".08"/>`;
+  }
   const nuvens = [[180, 150, 1], [700, 90, 0.8], [980, 230, 1.1]].map(([x, y, s], i) =>
     `<g transform="translate(${(x + t * 8 * (i + 1)) % 1300 - 110} ${y}) scale(${s})" opacity=".95">
       <ellipse cx="0" cy="0" rx="90" ry="38" fill="#fff"/><ellipse cx="-50" cy="12" rx="60" ry="30" fill="#fff"/><ellipse cx="55" cy="10" rx="65" ry="30" fill="#fff"/></g>`).join('');
@@ -456,12 +465,14 @@ function bairro(yBase = 780, { xMin = -50, xMax = 1130 } = {}) {
   }
   casas.sort((a, b) => a[1] - b[1]);
   window._lajes = casas.map(([x, y, w, h]) => [x, y - h, w]);
+  const noite = !!window._noite;
   for (const [x, y, w, h, cor, caixa, q] of casas) {
+    const jan = k => noite && ((q * 10 + k) % 1) > 0.45 ? '#ffd166' : '#264653';
     if (window.ESTILO3D) s += `<path d="M${x + w},${y - h} l12,-9 v${h} l-12,9z" fill="${cor}"/><path d="M${x + w},${y - h} l12,-9 v${h} l-12,9z" fill="#000" opacity=".38"/>
       <path d="M${x},${y - h} l12,-9 h${w} l-12,9z" fill="${cor}"/><path d="M${x},${y - h} l12,-9 h${w} l-12,9z" fill="#fff" opacity=".35"/>`;
     s += `<rect data-v="Casa" x="${x}" y="${y - h}" width="${w}" height="${h}" fill="${cor}" stroke="${OUT}" stroke-width="4"/>
-      <rect x="${x + w * 0.2}" y="${y - h * 0.7}" width="${w * 0.22}" height="${h * 0.28}" fill="#264653" stroke="${OUT}" stroke-width="3"/>
-      ${w > 80 ? `<rect x="${x + w * 0.58}" y="${y - h * 0.7}" width="${w * 0.22}" height="${h * 0.28}" fill="#264653" stroke="${OUT}" stroke-width="3"/>` : ''}
+      <rect x="${x + w * 0.2}" y="${y - h * 0.7}" width="${w * 0.22}" height="${h * 0.28}" fill="${jan(0.1)}" stroke="${OUT}" stroke-width="3"/>
+      ${w > 80 ? `<rect x="${x + w * 0.58}" y="${y - h * 0.7}" width="${w * 0.22}" height="${h * 0.28}" fill="${jan(0.6)}" stroke="${OUT}" stroke-width="3"/>` : ''}
       ${q > 0.6 ? `<rect x="${x - 2}" y="${y - h - 8}" width="${w + 4}" height="8" fill="#bcb8b1" stroke="${OUT}" stroke-width="3"/>` : ''}
       ${caixa ? `<rect x="${x + w * 0.6}" y="${y - h - 26}" width="26" height="22" fill="#3a86ff" stroke="${OUT}" stroke-width="3"/>` : ''}`;
   }
@@ -664,8 +675,29 @@ function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
   if (!fora && (estrutura.obra_arquibancada || estrutura.arquibancada_lateral)) s += lateralEsquerdaFrente(estrutura, t, torcida);
   // ---- lateral direita: banco de reservas, pomponetes e o Caramelo (as pomponetes viajam com o time)
   s += lateralDireitaFrente(estrutura, t, fora);
-  if (estrutura.iluminacao) for (const x of [70, 1010]) s += `<rect x="${x - 8}" y="430" width="16" height="430" fill="#6c757d" stroke="${OUT}" stroke-width="4"/>
-    <rect x="${x - 60}" y="400" width="120" height="60" rx="8" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>`;
+  // noite: tudo em volta escurece; o campo (iluminado pelos refletores) fica claro
+  if (window._noite) s += `<path d="M-2000,-2000 H${W + 2000} V${H + 2000} H-2000Z M${CF.xl0},${CF.y0} L${CF.xl1},${CF.y1} H${CF.xr1} L${CF.xr0},${CF.y0}Z" fill="#0b132b" fill-rule="evenodd" opacity=".5"/>
+    <path d="M${CF.xl0},${CF.y0} H${CF.xr0} L${CF.xr1},${CF.y1} H${CF.xl1}Z" fill="#fff3c4" opacity=".08"/>`;
+  // refletores: quatro torres de 15 m, fora das laterais (à esquerda, atrás da obra / arquibancada nova)
+  if (estrutura.iluminacao && !fora) {
+    const temLateral = estrutura.obra_arquibancada || estrutura.arquibancada_lateral;
+    for (const y of [1060, 1430]) for (const lado of [-1, 1]) {
+      const k = cfK(y), x = lado < 0 ? cfX(y, -1) - m(temLateral ? 11 : 4) * k : cfX(y, 1) + m(6) * k;
+      s += refletorTorre(x, y, k, -lado);
+    }
+  }
+  return s;
+}
+
+// torre de refletor (15 m) com o painel de 6 lâmpadas virado para o campo; à noite as lâmpadas acendem
+function refletorTorre(x, yChao, k, vira = 1) {
+  const h = m(15) * k, pw = m(2.6) * k, ph = m(1.3) * k, noite = !!window._noite, e = Math.max(2, m(0.35) * k);
+  let s = `<path d="M${x},${yChao} V${yChao - h}" stroke="${OUT}" stroke-width="${e + 3}"/><path d="M${x},${yChao} V${yChao - h}" stroke="#868e96" stroke-width="${e}"/>
+    <g transform="translate(${x} ${yChao - h}) skewY(${vira * 6})"><rect x="${-pw / 2}" y="${-ph}" width="${pw}" height="${ph}" fill="#495057" stroke="${OUT}" stroke-width="${Math.max(1.5, e / 2)}"/>`;
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++)
+    s += `<circle cx="${(-pw / 2 + pw * (i + 0.5) / 3).toFixed(1)}" cy="${(-ph + ph * (j + 0.5) / 2).toFixed(1)}" r="${(ph * 0.2).toFixed(1)}" fill="${noite ? '#fffbe6' : '#dee2e6'}"/>`;
+  s += '</g>';
+  if (noite) s += `<ellipse cx="${x}" cy="${yChao - h - ph / 2}" rx="${pw * 2.2}" ry="${pw * 1.6}" fill="url(#gluz)"/>`;
   return s;
 }
 
@@ -920,7 +952,8 @@ function sede(estrutura, { t = 0 } = {}) {
   s += sombraChao(ex + 58, ey + 72, 80, 10) + `<rect x="${ex}" y="${ey}" width="116" height="70" rx="4" fill="#e63946" stroke="${OUT}" stroke-width="5"/>
     <path d="M${ex},${ey + 24} h116 M${ex + 39},${ey + 24} v46 M${ex + 78},${ey + 24} v46" stroke="${OUT}" stroke-width="3"/>
     ${[0, 1, 2].map(i => `<rect x="${ex + 12 + i * 36}" y="${ey - 22}" width="18" height="38" rx="6" fill="#6a994e" stroke="${OUT}" stroke-width="3"/>`).join('')}`;
-  return ceu(t) + s;
+  // à noite a rua escurece (quem está na rua continua visível: tem poste de luz)
+  return ceu(t) + s + (window._noite ? `<rect x="-2000" y="-2000" width="${W + 4000}" height="${H + 4000}" fill="#0b132b" opacity=".38"/>` : '');
 }
 
 // Prédio do vestiário (à esquerda do bar, na calçada): térreo, porta da altura de uma pessoa, basculante
@@ -998,7 +1031,7 @@ function fundoEscuro() {
 
 Object.assign(window, { popPessoa, W, H, OUT, CORES, rng, clamp, easeOut, easeOutBack, prog, esc, medir, quebrar, pop, texto, pilula,
   tituloGrande, cartao, painelCaixa, cartaoPerfil, cartaoComentario, cartaoOpcao, iconeOpcao, tabelaCard, placarCanto,
-  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, cfX, cfK, cfC, cfF, kombi, feira, caramelo, cone, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
+  escudo, sigla, pessoa, PERSONAGENS, jogador, campo, cfX, cfK, cfC, cfF, refletorTorre, kombi, feira, caramelo, cone, varalCamisas, sombraChao, sede, arquibancada, trave, fundoEscuro, lanchonete, torcedores });
 
 // ------------------------------------------------------------ estádio visto de cima (torcida crescendo)
 // Mesmas faixas de src/timefc/episodio.py (FAIXAS / bonecos).

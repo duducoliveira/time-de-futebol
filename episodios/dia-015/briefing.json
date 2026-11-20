@@ -1,0 +1,275 @@
+{
+ "dia": 15,
+ "seguidores_ontem": 474,
+ "seguidores_hoje": 486,
+ "post_anterior": {
+  "id": "18499796539110693",
+  "caption": "DIA 14 do Poeira FC ⚽📱\n\nClássico ao vivo! O que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam só 26 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "comments_count": 15,
+  "like_count": 118,
+  "media_product_type": "REELS",
+  "media_type": "VIDEO",
+  "permalink": "https://www.instagram.com/reel/Df6tZbIAAIS/",
+  "timestamp": "2026-11-19T09:01:34+0000"
+ },
+ "curtidas": 118,
+ "receita_curtidas": 118,
+ "caixa_atual": 3337.0,
+ "caixa_com_curtidas": 3455.0,
+ "top_comentarios": [
+  {
+   "usuario": "filipe.nicoli",
+   "texto": "Faz um Estacionamento, R$10,00 . A torcida está crescendo e as ruas do bairro estão muito cheias.",
+   "curtidas": 10,
+   "id": "18638322763015703",
+   "timestamp": "2026-11-19T09:43:49+0000"
+  },
+  {
+   "usuario": "antoniecharlles",
+   "texto": "Temos q trazer novos patrocinadores. Tá muito baixo a nossa renda de publicidade por jogo. Temos q aproveitar nossa boa fase na tabela",
+   "curtidas": 3,
+   "id": "18119708495008972",
+   "timestamp": "2026-11-19T10:44:20+0000"
+  },
+  {
+   "usuario": "beniciocarmocarvalho",
+   "texto": "Quero agradecer a todos por essa vitória de hoje e venho aqui falar para os nossos torcedores que seremos campeões comigo sendo artilheiro e  o nosso técnico Gilberto Teles sendo o melhor técnico do campeonato",
+   "curtidas": 2,
+   "id": "18129827521905553",
+   "timestamp": "2026-11-19T09:45:35+0000"
+  },
+  {
+   "usuario": "rod_ro81",
+   "texto": "Refletor para os jogos a noite. 🌙",
+   "curtidas": 2,
+   "id": "17994406209059353",
+   "timestamp": "2026-11-19T10:09:52+0000"
+  },
+  {
+   "usuario": "flavinhorodriques",
+   "texto": "A Arma Secreta dos 35 do 2º Tempo: É o reserva de luxo que entra no fim do jogo para \"incendiar\" a partida. ele entra dando passe de letra, chapéu e tentando resolver o jogo sozinho, mesmo quando o time só precisa segurar o resultado. Com o nome \"Talismã do Banco\" Para quem nunca é titular, mas entra sempre salvando o time.",
+   "curtidas": 0,
+   "id": "18012634485005188",
+   "timestamp": "2026-11-19T09:07:30+0000"
+  },
+  {
+   "usuario": "lernerbruninho",
+   "texto": "Bruno Lerner volante, da cabeça pra baixo é canela, ótimo em fazer gol de cabeça",
+   "curtidas": 0,
+   "id": "18092137619514710",
+   "timestamp": "2026-11-19T09:07:31+0000"
+  },
+  {
+   "usuario": "kelvinzy29",
+   "texto": "Mto bom está fazendo parte dessa história!! Bora pra mais uma vitória. 👏👏",
+   "curtidas": 0,
+   "id": "18115097846464591",
+   "timestamp": "2026-11-19T10:17:58+0000"
+  },
+  {
+   "usuario": "fernandogontijo13",
+   "texto": "Gente do céu, cadê as pomponetes",
+   "curtidas": 0,
+   "id": "18120866282088073",
+   "timestamp": "2026-11-19T10:44:38+0000"
+  },
+  {
+   "usuario": "zehdejesus",
+   "texto": "Arquibancada maior porq a torcida está aumentando muito rapido, um estacionamento custando 10 reis por carro para os torcedores de longe",
+   "curtidas": 0,
+   "id": "18114389063180466",
+   "timestamp": "2026-11-19T13:27:51+0000"
+  },
+  {
+   "usuario": "johnvicente22",
+   "texto": "Preciso de uma vaga nesse time. LD de origem, estilo Léo Moura, magro, veloz e habilidoso. Pode me chamar de balão 🎈",
+   "curtidas": 0,
+   "id": "18120071918003959",
+   "timestamp": "2026-11-19T13:43:30+0000"
+  }
+ ],
+ "avaliacao_comentarios": [
+  {
+   "indice": 0,
+   "usuario": "filipe.nicoli",
+   "curtidas": 10,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 1,
+   "usuario": "antoniecharlles",
+   "curtidas": 3,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 2,
+   "usuario": "beniciocarmocarvalho",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+   "revisar": true
+  },
+  {
+   "indice": 3,
+   "usuario": "rod_ro81",
+   "curtidas": 2,
+   "viavel": true,
+   "acoes": [
+    "refletores"
+   ],
+   "custo": 3000.0,
+   "motivo": null,
+   "revisar": false
+  },
+  {
+   "indice": 4,
+   "usuario": "flavinhorodriques",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 5,
+   "usuario": "lernerbruninho",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 6,
+   "usuario": "kelvinzy29",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+   "revisar": true
+  },
+  {
+   "indice": 7,
+   "usuario": "fernandogontijo13",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 8,
+   "usuario": "zehdejesus",
+   "curtidas": 0,
+   "viavel": true,
+   "acoes": [
+    "arquibancada"
+   ],
+   "custo": 1200.0,
+   "motivo": null,
+   "revisar": false
+  },
+  {
+   "indice": 9,
+   "usuario": "johnvicente22",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  }
+ ],
+ "enquetes": [],
+ "decisao": {
+  "comentario": null,
+  "acoes": [
+   "refletores"
+  ],
+  "autor": "rod_ro81",
+  "titulo": "Refletores",
+  "interpretacao": "Quatro torres de refletor no Campo do Poeira: agora tem jogo à noite, e o ingresso sobe um real.",
+  "custo": 3000,
+  "efeitos": {
+   "estrutura.iluminacao": true,
+   "regras.ingresso": "+1"
+  },
+  "narracao_obra": "Pedido do Rod: refletores! Quatro torres de luz no Campo do Poeira, por 3 mil reais. Agora tem jogo à noite, e o ingresso sobe um real."
+ },
+ "encerrar_enquetes": [],
+ "nova_enquete": null,
+ "proxima_decisao": {
+  "pergunta": "O que a gente faz agora?",
+  "opcoes": [
+   "Grama no campo?",
+   "Bolas novas?",
+   "Outra ideia?"
+  ]
+ },
+ "historia": {
+  "comentarios": [
+   {
+    "narracao": "O Filipe quer estacionamento, porque a rua do bairro já não cabe tanto carro. O Benício cobra a arquibancada nova, que está quase pronta. Mas quem levou foi o Rod: refletor pra jogo de noite!",
+    "comentarios": [
+     {
+      "usuario": "filipe.nicoli",
+      "texto": "Faz um Estacionamento, R$10,00. A torcida está crescendo e as ruas do bairro estão muito cheias.",
+      "curtidas": 10,
+      "chave": "filipe",
+      "carimbo": "anotado",
+      "chave_carimbo": "carro",
+      "selo": "COMENTÁRIO MAIS CURTIDO"
+     },
+     {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Cadê a arquibancada maior que vc fez",
+      "curtidas": 0,
+      "chave": "benício",
+      "carimbo": "lotar",
+      "chave_carimbo": "pronta",
+      "selo": "PEDIDO DO CAMISA 7"
+     },
+     {
+      "usuario": "rod_ro81",
+      "texto": "Refletor para os jogos a noite. 🌙",
+      "curtidas": 2,
+      "chave": "rod",
+      "carimbo": "aprovado",
+      "chave_carimbo": "noite"
+     }
+    ]
+   }
+  ]
+ },
+ "piada": {
+  "alvo": "seguidor",
+  "instagram": "lernerbruninho",
+  "nome": "Bruno Lerner",
+  "posicao": "volante",
+  "apelido": "Canela",
+  "piada": "da cabeça pra baixo é tudo canela",
+  "narracao": "E o seguidor Bruno Lerner já se apresentou pra peneira: volante Canela. Da cabeça pra baixo é tudo canela, mas de cabeça ele garante que faz gol!",
+  "texto_tela": [
+   "@LERNERBRUNINHO"
+  ]
+ },
+ "tema": "JOGO À NOITE!",
+ "tema_falado": "Jogo à noite",
+ "decisao_fala": "No caixa, {caixa} reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+ "encerramento": "Amanhã tem Poeira contra o Juventude do Asfalto, o líder! Faltam só quatorze torcedores pra peneira dos 500. Manda esse vídeo pros amigos. Segue, curte e comenta. Até amanhã!",
+ "legenda": "DIA 15 do Poeira FC ⚽💡\n\nJogo à noite no Campo do Poeira! O que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\nFaltam só 14 torcedores pra peneira dos 500: manda pros amigos!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}

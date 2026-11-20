@@ -34,6 +34,7 @@ function tvFundo(t, cam, z, yMuro) {
   for (let i = i0; i <= i1; i++) {
     s += `<g transform="translate(${(desl + i * larg).toFixed(1)} ${(yMuro + 30).toFixed(1)}) scale(${sz.toFixed(3)}) translate(0 -800)">${bairro(800, { xMin: -60, xMax: 1240 }).replace(/data-v="[^"]*" /g, '')}</g>`;
   }
+  if (window._noite) s += `<rect x="-50" y="${(yMuro - 900).toFixed(0)}" width="${W + 100}" height="${(900 + 60).toFixed(0)}" fill="#0b132b" opacity=".38"/>`;
   return s;
 }
 
@@ -53,6 +54,11 @@ function tvCenario(estrutura, cam, t = 0, { torcida = 0, nome = '', fundo = true
   // lateral oeste (fundo): obra ou arquibancada nova, ao longo do meio do campo; senão, árvores atrás do alambrado
   if (!fora && (estrutura.obra_arquibancada || estrutura.arquibancada_lateral)) s += tvLateralOeste(estrutura, cam, t, torcida);
   else for (let x = 300; x < TV.L; x += 640) { const sx = px(x, 0.97); if (dentro(sx, 100)) s += arvore(sx, TV.yLonge - 4, 46, 'tv' + x, x % 3); }
+  // refletores do lado de lá (torres de 15 m a cada 30 m) e a noite em volta do campo
+  if (window._noite) s += `<rect x="${TV_X0}" y="-3000" width="${TV_X1 - TV_X0}" height="${3000 + TV.yLonge}" fill="#0b132b" opacity=".42"/>`;
+  if (estrutura.iluminacao && !fora) for (const xm of [TV.L / 2 - tvM(30), TV.L / 2, TV.L / 2 + tvM(30)]) {
+    const sx = px(xm, 0.97); if (dentro(sx)) s += refletorTorre(sx, TV.yLonge - 10, tvK(TV.yLonge) * 0.97, 1);
+  }
   // chão de fora e o campo (90 m)
   s += `<rect x="${TV_X0}" y="${TV.yLonge - 8}" width="${TV_X1 - TV_X0}" height="${H + 3000 - TV.yLonge}" fill="#b98b57"/>`;
   const x0 = px(0), x1 = px(TV.L);
