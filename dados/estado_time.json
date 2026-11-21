@@ -2273,7 +2273,13 @@
         "pergunta": "Comenta seu nome e sua posição!",
         "opcoes": []
       },
-      "post": null
+      "post": {
+        "buffer_id": "6b014233d9cbb430a1279da1",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-016.mp4",
+        "agendado_para": "2026-11-21T06:00-03:00",
+        "status": "scheduled",
+        "sem_aprovacao_do_video": true
+      }
     }
   ],
   "decisoes": [
