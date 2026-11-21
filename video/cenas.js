@@ -680,9 +680,10 @@ Object.assign(TIPOS, {
     }
     // regras: fundo escuro (sem letreiros); cada cartão entra quando a narração chega nele
     s = fundoEscuro() + `<g transform="translate(${W / 2} 1500) scale(.9)">${escudoPoeira()}</g>`;
-    s += pop(t, 0.05, W / 2, 200, pilula('COMO ENTRAR NO TIME', { tam: 56, bg: CORES.laranja, cor: OUT, rot: -2 }));
-    const regras = [['coment', '💬', 'COMENTE SEU NOME', 'E SUA POSIÇÃO (OU TÉCNICO)', '#3a86ff'],
-      ['cinco', '❤️', '5 JOGADORES + 1 TÉCNICO', 'OS MAIS CURTIDOS ENTRAM NO POEIRA', '#e63946'],
+    s += pop(t, 0.05, W / 2, 200, pilula(dd.titulo || 'COMO ENTRAR NO TIME', { tam: 56, bg: CORES.laranja, cor: OUT, rot: -2 }));
+    // vagas configuráveis (peneira dos 500: 3 vagas, sem técnico)
+    const regras = [['coment', '💬', 'COMENTE SEU NOME', dd.sub || 'E SUA POSIÇÃO (OU TÉCNICO)', '#3a86ff'],
+      [dd.chave_vagas || 'cinco', '❤️', dd.vagas || '5 JOGADORES + 1 TÉCNICO', dd.vagas_sub || 'OS MAIS CURTIDOS ENTRAM NO POEIRA', '#e63946'],
       ['amigos', '📲', 'MANDA PROS AMIGOS', 'PEDE PRA ELES CURTIREM', '#2e8b57']];
     regras.forEach(([chave, ic, a, b, cor], i) => {
       const t0 = quando(c, chave, 0.6 + i * 2);
@@ -691,7 +692,7 @@ Object.assign(TIPOS, {
         <text x="-270" y="-6" font-family="Anton" font-size="56" fill="${OUT}">${esc(a)}</text>
         <text x="-270" y="48" font-family="Anton" font-size="36" fill="${cor}">${esc(b)}</text>`, { bg: CORES.creme }));
     });
-    s += pop(t, quando(c, 'comenta', 1) + 1.2, W / 2, 900, cartaoComentario('voce', 'Zé da Silva, lateral esquerdo', 0, { selo: 'EXEMPLO DE COMENTÁRIO', w: 760 }));
+    s += pop(t, quando(c, 'comenta', 1) + 1.2, W / 2, 900, cartaoComentario('voce', dd.exemplo || 'Zé da Silva, lateral esquerdo', 0, { selo: 'EXEMPLO DE COMENTÁRIO', w: 760 }));
     return s;
   },
 });

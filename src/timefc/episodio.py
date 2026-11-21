@@ -695,6 +695,12 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
                 e["estrutura"]["capacidade"] += obra.get("lugares", 1500)
                 e["estrutura"]["arquibancada_lateral"] = obra.get("lado", "esquerda")
                 est.evento(e, "Inauguração da arquibancada nova")
+        # sócio-torcedor (Dia 16): a cada 7 dias, ~5% da torcida paga a mensalidade (R$ 10)
+        socio = e["estrutura"].get("socio_torcedor")
+        if socio and dia > socio.get("inicio", dia) and (dia - socio["inicio"]) % 7 == 0:
+            n_socios = round(hoje * socio.get("pct", 0.05))
+            e["caixa"] += n_socios * socio.get("mensalidade", 10)
+            est.evento(e, f"Mensalidade do sócio-torcedor: {n_socios} sócios")
         tab = tabela(times, liga["resultados"])
         liga["tabela"] = tab
         pos = next(l["pos"] for l in tab if l["time"] == nome)
