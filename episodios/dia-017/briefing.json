@@ -1,0 +1,244 @@
+{
+ "dia": 17,
+ "seguidores_ontem": 501,
+ "seguidores_hoje": 514,
+ "post_anterior": {
+  "id": "18072691865507294",
+  "caption": "DIA 16 do Poeira FC ⚽🎉\n\nCHEGAMOS AOS 500! A peneira está aberta: comenta seu nome e sua posição. São 3 vagas: goleiro, zagueiro e meia. Os mais curtidos entram no time!\n\nE a arquibancada nova ficou pronta: 2.000 lugares!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "comments_count": 22,
+  "like_count": 128,
+  "media_product_type": "REELS",
+  "media_type": "VIDEO",
+  "permalink": "https://www.instagram.com/reel/Df_3GXZxsyX/",
+  "timestamp": "2026-11-21T09:03:51+0000"
+ },
+ "curtidas": 128,
+ "receita_curtidas": 128,
+ "caixa_atual": 2953.0,
+ "caixa_com_curtidas": 3081.0,
+ "top_comentarios": [
+  {
+   "usuario": "eudes_andre03",
+   "texto": "Eudes zagueiro",
+   "curtidas": 14,
+   "id": "18158798923457377",
+   "timestamp": "2026-11-21T13:44:21+0000"
+  },
+  {
+   "usuario": "teus__a",
+   "texto": "BUGALU, zagueiro brabo, aprendiz de Sérgio Ramos e Paolo Maldini 💪🏻",
+   "curtidas": 3,
+   "id": "18136714672665190",
+   "timestamp": "2026-11-21T09:37:01+0000"
+  },
+  {
+   "usuario": "a_matheus7l",
+   "texto": "Matheus7k  goleiro 🥅🧤",
+   "curtidas": 2,
+   "id": "18376729648210104",
+   "timestamp": "2026-11-21T09:52:55+0000"
+  },
+  {
+   "usuario": "lernerbruninho",
+   "texto": "Bruno Lerner volante, da cabeça pra baixo é canela, ótimo em fazer gol de cabeça.",
+   "curtidas": 2,
+   "id": "18177275983454841",
+   "timestamp": "2026-11-21T10:30:58+0000"
+  },
+  {
+   "usuario": "_guigs12",
+   "texto": "Guigs12 da barraca pro campo 🤞🏻🔥",
+   "curtidas": 2,
+   "id": "18582744352077119",
+   "timestamp": "2026-11-21T10:55:20+0000"
+  },
+  {
+   "usuario": "rcacau",
+   "texto": "Já chama o goleiro artilheiro aqui.... Bora prazer história no poeira",
+   "curtidas": 2,
+   "id": "18132510703699251",
+   "timestamp": "2026-11-21T12:07:58+0000"
+  },
+  {
+   "usuario": "rd__arantes",
+   "texto": "Arantes, meia 10 clássico",
+   "curtidas": 1,
+   "id": "18641952739012248",
+   "timestamp": "2026-11-21T09:44:38+0000"
+  },
+  {
+   "usuario": "rod_ro81",
+   "texto": "Hora de melhorar o sistema de som, e transmitir os jogos pela rádio com narração do Tião🎙️📻",
+   "curtidas": 1,
+   "id": "18106752689017033",
+   "timestamp": "2026-11-21T09:46:21+0000"
+  },
+  {
+   "usuario": "filipe.nicoli",
+   "texto": "Me coloca como meia, sei servi bem.🦶⚽🥅 \"Garçom\" kkkk",
+   "curtidas": 1,
+   "id": "17958781467312107",
+   "timestamp": "2026-11-21T11:19:51+0000"
+  },
+  {
+   "usuario": "serginho_sementinha",
+   "texto": "Serginho do Sementinha , Apelido Meia Esquerda , Posição Meia , Camisa 10 é difícil  não ser bom , E o centroavante  comigo não passa fome",
+   "curtidas": 1,
+   "id": "18134906434744270",
+   "timestamp": "2026-11-21T18:13:08+0000"
+  }
+ ],
+ "avaliacao_comentarios": [
+  {
+   "indice": 0,
+   "usuario": "eudes_andre03",
+   "curtidas": 14,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  },
+  {
+   "indice": 1,
+   "usuario": "teus__a",
+   "curtidas": 3,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  },
+  {
+   "indice": 2,
+   "usuario": "a_matheus7l",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  },
+  {
+   "indice": 3,
+   "usuario": "lernerbruninho",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 4,
+   "usuario": "_guigs12",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "Lanchonete do {autor} já foi feito",
+   "revisar": false
+  },
+  {
+   "indice": 5,
+   "usuario": "rcacau",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  },
+  {
+   "indice": 6,
+   "usuario": "rd__arantes",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  },
+  {
+   "indice": 7,
+   "usuario": "rod_ro81",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 8,
+   "usuario": "filipe.nicoli",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  },
+  {
+   "indice": 9,
+   "usuario": "serginho_sementinha",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  }
+ ],
+ "enquetes": [],
+ "decisao": null,
+ "encerrar_enquetes": [],
+ "nova_enquete": null,
+ "proxima_decisao": {
+  "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+  "opcoes": [
+   "Sua ideia aqui?"
+  ]
+ },
+ "tema": "ESCALAÇÃO DA PENEIRA!",
+ "tema_falado": "Escalação da peneira",
+ "historia": {
+  "reforcos": {
+   "narracao": "A peneira dos 500 acabou! No gol, deu empate, e entra o Cacau, o goleiro artilheiro, que pede vaga desde o Dia 14. Na zaga, o Eudes, com quatorze curtidas: o mais votado da peneira. E no meio, o volante Canela, o Bruno Lerner: da cabeça pra baixo é tudo canela. Bem-vindos ao Poeira! E teve até inscrição pra gandula, e o Guigs quer sair da barraca pro campo.",
+   "texto_tela": [
+    "RESULTADO DA PENEIRA DOS 500"
+   ],
+   "jogadores": {
+    "20": {
+     "nome": "Cacau",
+     "posicao": "GOL",
+     "apelido": "Goleiro Artilheiro",
+     "traco": "além de defender, faz gol",
+     "instagram": "rcacau",
+     "chegou_no_dia": 17,
+     "chave": "cacau"
+    },
+    "21": {
+     "nome": "Eudes",
+     "posicao": "ZAG",
+     "traco": "o mais curtido da peneira dos 500",
+     "instagram": "eudes_andre03",
+     "chegou_no_dia": 17,
+     "chave": "eudes"
+    },
+    "22": {
+     "nome": "Bruno Lerner",
+     "posicao": "VOL",
+     "apelido": "Canela",
+     "traco": "da cabeça pra baixo é tudo canela; ótimo de cabeça",
+     "instagram": "lernerbruninho",
+     "chegou_no_dia": 17,
+     "chave": "bruno"
+    }
+   }
+  }
+ },
+ "decisao_fala": "No caixa, {caixa} reais. É o maior caixa da história do Poeira! E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+ "encerramento": "Amanhã tem Poeira contra o Ferro-Velho EC, já com os reforços da peneira. Segue, curte e comenta. Até amanhã!",
+ "legenda": "DIA 17 do Poeira FC ⚽🧤\n\nSaiu a escalação da peneira dos 500: o goleiro artilheiro Cacau, o zagueiro Eudes e o volante Canela! Arquibancada nova inaugurada e o maior caixa da história. O que a gente faz com esse dinheiro? Deixa a sua ideia: o comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}

@@ -580,6 +580,8 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             pesos = {"toque": 3, "drible": 3, "cabeca": 3, "longe": 2, "falta": 1.5, "penalti": 1, "contra": 0.7}
             cand = [x for x in pool if x not in recentes[-3:]] or pool
             tipo_lance = rng.choices(cand, weights=[pesos[x] for x in cand])[0]
+            if decisivo.get("lance") and i == ultimo_nosso:   # ex.: o pênalti do goleiro artilheiro
+                tipo_lance = decisivo["lance"]
             recentes.append(tipo_lance)
             del recentes[:-6]
             comem = [x for x in ["canto", "carrinho", "aviao", "monte"] if x not in e.get("comemoracoes_recentes", [])[-2:]]
