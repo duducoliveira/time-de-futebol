@@ -1,35 +1,42 @@
 {
  "dia": 17,
  "seguidores_ontem": 501,
- "seguidores_hoje": 514,
+ "seguidores_hoje": 512,
  "post_anterior": {
   "id": "18072691865507294",
   "caption": "DIA 16 do Poeira FC ⚽🎉\n\nCHEGAMOS AOS 500! A peneira está aberta: comenta seu nome e sua posição. São 3 vagas: goleiro, zagueiro e meia. Os mais curtidos entram no time!\n\nE a arquibancada nova ficou pronta: 2.000 lugares!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
   "comments_count": 22,
-  "like_count": 128,
+  "like_count": 132,
   "media_product_type": "REELS",
   "media_type": "VIDEO",
   "permalink": "https://www.instagram.com/reel/Df_3GXZxsyX/",
   "timestamp": "2026-11-21T09:03:51+0000"
  },
- "curtidas": 128,
- "receita_curtidas": 128,
+ "curtidas": 132,
+ "receita_curtidas": 132,
  "caixa_atual": 2953.0,
- "caixa_com_curtidas": 3081.0,
+ "caixa_com_curtidas": 3085.0,
  "top_comentarios": [
   {
    "usuario": "eudes_andre03",
    "texto": "Eudes zagueiro",
-   "curtidas": 14,
+   "curtidas": 16,
    "id": "18158798923457377",
    "timestamp": "2026-11-21T13:44:21+0000"
   },
   {
    "usuario": "teus__a",
    "texto": "BUGALU, zagueiro brabo, aprendiz de Sérgio Ramos e Paolo Maldini 💪🏻",
-   "curtidas": 3,
+   "curtidas": 4,
    "id": "18136714672665190",
    "timestamp": "2026-11-21T09:37:01+0000"
+  },
+  {
+   "usuario": "lernerbruninho",
+   "texto": "Bruno Lerner volante, da cabeça pra baixo é canela, ótimo em fazer gol de cabeça.",
+   "curtidas": 3,
+   "id": "18177275983454841",
+   "timestamp": "2026-11-21T10:30:58+0000"
   },
   {
    "usuario": "a_matheus7l",
@@ -37,13 +44,6 @@
    "curtidas": 2,
    "id": "18376729648210104",
    "timestamp": "2026-11-21T09:52:55+0000"
-  },
-  {
-   "usuario": "lernerbruninho",
-   "texto": "Bruno Lerner volante, da cabeça pra baixo é canela, ótimo em fazer gol de cabeça.",
-   "curtidas": 2,
-   "id": "18177275983454841",
-   "timestamp": "2026-11-21T10:30:58+0000"
   },
   {
    "usuario": "_guigs12",
@@ -92,7 +92,7 @@
   {
    "indice": 0,
    "usuario": "eudes_andre03",
-   "curtidas": 14,
+   "curtidas": 16,
    "viavel": false,
    "acoes": [],
    "custo": 0.0,
@@ -102,7 +102,7 @@
   {
    "indice": 1,
    "usuario": "teus__a",
-   "curtidas": 3,
+   "curtidas": 4,
    "viavel": false,
    "acoes": [],
    "custo": 0.0,
@@ -111,6 +111,16 @@
   },
   {
    "indice": 2,
+   "usuario": "lernerbruninho",
+   "curtidas": 3,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 3,
    "usuario": "a_matheus7l",
    "curtidas": 2,
    "viavel": false,
@@ -118,16 +128,6 @@
    "custo": 0.0,
    "motivo": "jogador novo só pela peneira",
    "revisar": false
-  },
-  {
-   "indice": 3,
-   "usuario": "lernerbruninho",
-   "curtidas": 2,
-   "viavel": false,
-   "acoes": [],
-   "custo": 0.0,
-   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
-   "revisar": true
   },
   {
    "indice": 4,
@@ -204,7 +204,7 @@
  "tema_falado": "Escalação da peneira",
  "historia": {
   "reforcos": {
-   "narracao": "A peneira dos 500 acabou! No gol, deu empate, e entra o Cacau, o goleiro artilheiro, que pede vaga desde o Dia 14. Na zaga, o Eudes, com quatorze curtidas: o mais votado da peneira. E no meio, o volante Canela, o Bruno Lerner: da cabeça pra baixo é tudo canela. Bem-vindos ao Poeira! E teve até inscrição pra gandula, e o Guigs quer sair da barraca pro campo.",
+   "narracao": "A peneira dos 500 acabou! No gol, deu empate, e entra o Cacau, o goleiro artilheiro, que pede vaga desde o Dia 14. Na zaga, o Eudes, com dezesseis curtidas: o mais votado da peneira. E no meio, o volante Canela, o Bruno Lerner: da cabeça pra baixo é tudo canela. Bem-vindos ao Poeira! E teve até inscrição pra gandula, e o Guigs quer sair da barraca pro campo.",
    "texto_tela": [
     "RESULTADO DA PENEIRA DOS 500"
    ],

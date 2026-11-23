@@ -1,8 +1,8 @@
 {
   "dia": 17,
   "clube": "Poeira FC",
-  "caixa": 5662.0,
-  "torcida": 514,
+  "caixa": 5658.0,
+  "torcida": 512,
   "posicao": 2,
   "partida": {
     "mandante": "Poeira FC",
@@ -43,8 +43,8 @@
         "tema": "ESCALAÇÃO DA PENEIRA!",
         "antes": 501,
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -87,19 +87,19 @@
     {
       "id": "02-evolucao",
       "tipo": "evolucao",
-      "narracao": "Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. Ontem, 501 torcedores. Hoje: 514! E o caixa saiu de R$ 2.953 pra 3.081!",
+      "narracao": "Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. Ontem, 501 torcedores. Hoje: 512! E o caixa saiu de R$ 2.953 pra 3.085!",
       "texto_tela": [
         "DIA 17"
       ],
       "dados": {
         "antes": 501,
-        "torcida": 514,
+        "torcida": 512,
         "caixa_antes": 2953.0,
-        "caixa": 3081.0,
-        "curtidas": 128,
+        "caixa": 3085.0,
+        "curtidas": 132,
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -144,15 +144,15 @@
       "tipo": "estadio",
       "narracao": "Arquibancada nova inaugurada! Agora são dois mil lugares no Campo do Poeira, e hoje tem jogo à noite!",
       "texto_tela": [
-        "514 TORCEDORES"
+        "512 TORCEDORES"
       ],
       "dados": {
         "antes": 501,
-        "torcida": 514,
+        "torcida": 512,
         "nivel": "enchendo",
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -195,7 +195,7 @@
     {
       "id": "04-reforcos",
       "tipo": "reforcos",
-      "narracao": "A peneira dos 500 acabou! No gol, deu empate, e entra o Cacau, o goleiro artilheiro, que pede vaga desde o Dia 14. Na zaga, o Eudes, com quatorze curtidas: o mais votado da peneira. E no meio, o volante Canela, o Bruno Lerner: da cabeça pra baixo é tudo canela. Bem-vindos ao Poeira! E teve até inscrição pra gandula, e o Guigs quer sair da barraca pro campo.",
+      "narracao": "A peneira dos 500 acabou! No gol, deu empate, e entra o Cacau, o goleiro artilheiro, que pede vaga desde o Dia 14. Na zaga, o Eudes, com dezesseis curtidas: o mais votado da peneira. E no meio, o volante Canela, o Bruno Lerner: da cabeça pra baixo é tudo canela. Bem-vindos ao Poeira! E teve até inscrição pra gandula, e o Guigs quer sair da barraca pro campo.",
       "texto_tela": [
         "RESULTADO DA PENEIRA DOS 500"
       ],
@@ -230,8 +230,8 @@
         },
         "personagens": {},
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -282,8 +282,8 @@
         "mandante": "Poeira FC",
         "visitante": "Amigos do Churrasco FC",
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -339,8 +339,8 @@
         "apelido": "Feriado Prolongado",
         "piada": "some por três dias",
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -406,8 +406,8 @@
         "mandante": "Poeira FC",
         "visitante": "Amigos do Churrasco FC",
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -472,8 +472,8 @@
         "mandante": "Poeira FC",
         "visitante": "Amigos do Churrasco FC",
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -530,8 +530,8 @@
         "mandante": "Poeira FC",
         "visitante": "Amigos do Churrasco FC",
         "hud": {
-          "torcida": 514,
-          "caixa": 3081.0
+          "torcida": 512,
+          "caixa": 3085.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -575,25 +575,25 @@
     {
       "id": "10-bilheteria",
       "tipo": "bilheteria",
-      "narracao": "Na bilheteria: 514 pagantes, a 3 reais cada. 1.542 reais pro clube! Mais 514 da Barraca do Guigs. E no varal, 15 camisas vendidas: mais 375. E as placas de publicidade: mais 150. Somando tudo: 2.581 reais, e o caixa foi pra 5.662!",
+      "narracao": "Na bilheteria: 512 pagantes, a 3 reais cada. 1.536 reais pro clube! Mais 512 da Barraca do Guigs. E no varal, 15 camisas vendidas: mais 375. E as placas de publicidade: mais 150. Somando tudo: 2.573 reais, e o caixa foi pra 5.658!",
       "texto_tela": [
-        "514 × R$ 3 = R$ 1.542"
+        "512 × R$ 3 = R$ 1.536"
       ],
       "dados": {
-        "publico": 514,
+        "publico": 512,
         "ingresso": 3,
-        "receita": 2581,
+        "receita": 2573,
         "camisas": 15,
         "placas": 150,
-        "bilheteria": 1542,
-        "lanche": 514,
+        "bilheteria": 1536,
+        "lanche": 512,
         "venda": 375,
         "barraca": "Barraca do Guigs",
         "preco_camisa": 25,
-        "caixa": 5662.0,
+        "caixa": 5658.0,
         "hud": {
-          "torcida": 514,
-          "caixa": 5662.0
+          "torcida": 512,
+          "caixa": 5658.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -767,8 +767,8 @@
         ],
         "posicao": 2,
         "hud": {
-          "torcida": 514,
-          "caixa": 5662.0
+          "torcida": 512,
+          "caixa": 5658.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -811,7 +811,7 @@
     {
       "id": "12-decisao",
       "tipo": "decisao",
-      "narracao": "No caixa, 5.662 reais. É o maior caixa da história do Poeira! E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+      "narracao": "No caixa, 5.658 reais. É o maior caixa da história do Poeira! E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
       "texto_tela": [
         "DECISÃO #17",
         "COMENTÁRIO MAIS CURTIDO DECIDE"
@@ -820,10 +820,10 @@
         "opcoes": [
           "Sua ideia aqui?"
         ],
-        "caixa": 5662.0,
+        "caixa": 5658.0,
         "hud": {
-          "torcida": 514,
-          "caixa": 5662.0
+          "torcida": 512,
+          "caixa": 5658.0
         },
         "estrutura": {
           "gramado": "terrão",
@@ -876,8 +876,8 @@
           "Poeira FC"
         ],
         "hud": {
-          "torcida": 514,
-          "caixa": 5662.0
+          "torcida": 512,
+          "caixa": 5658.0
         },
         "estrutura": {
           "gramado": "terrão",

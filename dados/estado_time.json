@@ -13,7 +13,7 @@
     "piada_estadio": "E quando venta, você entende o nome do time."
   },
   "dia": 17,
-  "caixa": 5662.0,
+  "caixa": 5658.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -25,7 +25,7 @@
     "placas_por_jogo": 150
   },
   "torcida": {
-    "seguidores": 514,
+    "seguidores": 512,
     "historico": [
       {
         "dia": 1,
@@ -109,8 +109,8 @@
       },
       {
         "dia": 17,
-        "seguidores": 514,
-        "data": "2026-11-22T07:03:53+00:00"
+        "seguidores": 512,
+        "data": "2026-11-23T01:30:31+00:00"
       }
     ]
   },
@@ -2449,14 +2449,19 @@
     },
     {
       "dia": 17,
-      "data": "2026-11-22T07:03:53+00:00",
+      "data": "2026-11-23T01:30:31+00:00",
       "proxima_decisao": {
         "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
         "opcoes": [
           "Sua ideia aqui?"
         ]
       },
-      "post": null
+      "post": {
+        "buffer_id": "6b03991bc72676f5e977786f",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-017.mp4",
+        "agendado_para": "2026-11-23T06:00-03:00",
+        "status": "scheduled"
+      }
     }
   ],
   "decisoes": [
@@ -2898,33 +2903,33 @@
     },
     {
       "dia": 17,
-      "valor": 128,
+      "valor": 132,
       "descricao": "curtidas do dia 16",
-      "saldo": 3081.0
+      "saldo": 3085.0
     },
     {
       "dia": 17,
-      "valor": 1542,
-      "descricao": "bilheteria rodada 15 (514 pagantes)",
-      "saldo": 4623.0
+      "valor": 1536,
+      "descricao": "bilheteria rodada 15 (512 pagantes)",
+      "saldo": 4621.0
     },
     {
       "dia": 17,
-      "valor": 514,
+      "valor": 512,
       "descricao": "lanchonete rodada 15",
-      "saldo": 5137.0
+      "saldo": 5133.0
     },
     {
       "dia": 17,
       "valor": 375,
       "descricao": "varal de camisas rodada 15 (15 camisas)",
-      "saldo": 5512.0
+      "saldo": 5508.0
     },
     {
       "dia": 17,
       "valor": 150,
       "descricao": "placas de publicidade rodada 15",
-      "saldo": 5662.0
+      "saldo": 5658.0
     }
   ],
   "linha_do_tempo": [
@@ -3102,7 +3107,7 @@
       "evento": "Rodada 15: Poeira FC 3 x 1 Amigos do Churrasco FC (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-22T07:03:53+00:00",
+  "atualizado_em": "2026-11-23T01:30:31+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
