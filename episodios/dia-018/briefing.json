@@ -1,0 +1,204 @@
+{
+ "dia": 18,
+ "seguidores_ontem": 512,
+ "seguidores_hoje": 519,
+ "post_anterior": {
+  "id": "17980147583929555",
+  "caption": "DIA 17 do Poeira FC ⚽🧤\n\nSaiu a escalação da peneira dos 500: o goleiro artilheiro Cacau, o zagueiro Eudes e o volante Canela! Arquibancada nova inaugurada e o maior caixa da história. O que a gente faz com esse dinheiro? Deixa a sua ideia: o comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "comments_count": 13,
+  "like_count": 101,
+  "media_product_type": "REELS",
+  "media_type": "VIDEO",
+  "permalink": "https://www.instagram.com/reel/DgFAwsDQHgD/",
+  "timestamp": "2026-11-23T09:03:22+0000"
+ },
+ "curtidas": 101,
+ "receita_curtidas": 101,
+ "caixa_atual": 5658.0,
+ "caixa_com_curtidas": 5759.0,
+ "top_comentarios": [
+  {
+   "usuario": "zehdejesus",
+   "texto": "Abrir uma ala de torcedores visitantes 5 reais de cada",
+   "curtidas": 7,
+   "id": "18181349815449866",
+   "timestamp": "2026-11-23T09:47:11+0000"
+  },
+  {
+   "usuario": "fernandogontijo13",
+   "texto": "Telão de led para revisão do var",
+   "curtidas": 2,
+   "id": "18650666827015148",
+   "timestamp": "2026-11-23T11:26:32+0000"
+  },
+  {
+   "usuario": "beniciocarmocarvalho",
+   "texto": "Quero agradecer a todos os jogadores por essa partida e venho aqui falar para a torcida que seremos campeões comigo sendo artilheiro 👏👏🔥🔥",
+   "curtidas": 1,
+   "id": "18225572047344874",
+   "timestamp": "2026-11-23T10:06:56+0000"
+  },
+  {
+   "usuario": "lernerbruninho",
+   "texto": "Falta patrocínio na camisa",
+   "curtidas": 1,
+   "id": "18124490617946390",
+   "timestamp": "2026-11-23T13:37:16+0000"
+  },
+  {
+   "usuario": "rod_ro81",
+   "texto": "Cabine de transmissão pro Tião não ficar na chuva.",
+   "curtidas": 0,
+   "id": "18221912173352947",
+   "timestamp": "2026-11-23T10:14:55+0000"
+  },
+  {
+   "usuario": "rcacau",
+   "texto": "Bora.... Fazer história nesse time...",
+   "curtidas": 0,
+   "id": "17926162119451272",
+   "timestamp": "2026-11-23T12:26:18+0000"
+  }
+ ],
+ "avaliacao_comentarios": [
+  {
+   "indice": 0,
+   "usuario": "zehdejesus",
+   "curtidas": 7,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 1,
+   "usuario": "fernandogontijo13",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 2,
+   "usuario": "beniciocarmocarvalho",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+   "revisar": true
+  },
+  {
+   "indice": 3,
+   "usuario": "lernerbruninho",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+   "revisar": true
+  },
+  {
+   "indice": 4,
+   "usuario": "rod_ro81",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 5,
+   "usuario": "rcacau",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+   "revisar": true
+  }
+ ],
+ "enquetes": [],
+ "decisao": {
+  "comentario": null,
+  "acoes": [
+   "ala_visitante"
+  ],
+  "autor": "zehdejesus",
+  "titulo": "Ala visitante",
+  "interpretacao": "Grade e portão separados na arquibancada nova para a torcida de fora, a 5 reais por cabeça.",
+  "custo": 200,
+  "efeitos": {
+   "estrutura.ala_visitante": {
+    "inicio": 18,
+    "preco": 5
+   }
+  },
+  "narracao_obra": "Pedido do Zé de Jesus: a arquibancada nova ganhou a ala visitante! Grade, portão separado, e torcedor de fora paga cinco reais. Custou duzentos reais."
+ },
+ "encerrar_enquetes": [],
+ "nova_enquete": null,
+ "proxima_decisao": {
+  "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+  "opcoes": [
+   "Sua ideia aqui?"
+  ]
+ },
+ "historia": {
+  "comentarios": [
+   {
+    "narracao": "O Zé de Jesus quer uma ala pra torcida visitante, e ainda lembrou do estacionamento. O Fernando quer telão com VAR na várzea. Calma, Fernando! E o Benício pediu a braçadeira: a partir de hoje, ele é o capitão do Poeira!",
+    "comentarios": [
+     {
+      "usuario": "zehdejesus",
+      "texto": "Abrir uma ala de torcedores visitantes 5 reais de cada",
+      "curtidas": 7,
+      "chave": "zé",
+      "carimbo": "aprovado",
+      "chave_carimbo": "visitante",
+      "selo": "COMENTÁRIO MAIS CURTIDO"
+     },
+     {
+      "usuario": "fernandogontijo13",
+      "texto": "Telão de led para revisão do var",
+      "curtidas": 2,
+      "chave": "fernando",
+      "carimbo": "inviavel",
+      "chave_carimbo": "calma"
+     },
+     {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Quero ser capitão",
+      "curtidas": 0,
+      "chave": "benício",
+      "carimbo": "aprovado",
+      "chave_carimbo": "capitão",
+      "selo": "PEDIDO DO CAMISA 7"
+     }
+    ]
+   }
+  ]
+ },
+ "piada": {
+  "alvo": "adversario",
+  "time": "Ferro-Velho EC",
+  "numero": "4",
+  "nome": "Ferrugem",
+  "posicao": "zagueiro",
+  "apelido": "Ferrugem",
+  "piada": "parado é bonito, mas quando chove trava",
+  "narracao": "Fica de olho no zagueiro do Ferro-Velho, o Ferrugem: parado é bonito, mas quando chove, trava!",
+  "texto_tela": [
+   "DE OLHO NO FERRO-VELHO EC"
+  ]
+ },
+ "tema": "O CAPITÃO BENÍCIO!",
+ "tema_falado": "O capitão Benício",
+ "decisao_fala": "No caixa, {caixa} reais. E agora, o que a gente faz com esse dinheiro? Deixa a sua ideia nos comentários: o mais curtido decide!",
+ "encerramento": "Amanhã tem Poeira contra o Atlético Padaria, o líder! Segue, curte e comenta. Até amanhã!",
+ "legenda": "DIA 18 do Poeira FC ⚽©️\n\nO Benício agora é o capitão! E a arquibancada nova ganhou a ala visitante. O que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}
