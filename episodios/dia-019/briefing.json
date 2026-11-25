@@ -1,0 +1,203 @@
+{
+  "dia": 19,
+  "seguidores_ontem": 519,
+  "seguidores_hoje": 526,
+  "post_anterior": {
+    "id": "18178119529458011",
+    "caption": "DIA 18 do Poeira FC ⚽©️\n\nO Benício agora é o capitão! E a arquibancada nova ganhou a ala visitante. O que a gente faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+    "comments_count": 14,
+    "like_count": 104,
+    "media_product_type": "REELS",
+    "media_type": "VIDEO",
+    "permalink": "https://www.instagram.com/reel/DgHlYTUPElx/",
+    "timestamp": "2026-11-24T09:01:22+0000"
+  },
+  "curtidas": 104,
+  "receita_curtidas": 104,
+  "caixa_atual": 5559.0,
+  "caixa_com_curtidas": 5663.0,
+  "top_comentarios": [
+    {
+      "usuario": "talles_silva",
+      "texto": "Uma academia para manter os jogadores em forma",
+      "curtidas": 3,
+      "id": "18095506055200835",
+      "timestamp": "2026-11-24T09:20:37+0000"
+    },
+    {
+      "usuario": "zehdejesus",
+      "texto": "Um estacionamento para os torcedores de longe",
+      "curtidas": 3,
+      "id": "18105356495185325",
+      "timestamp": "2026-11-24T09:34:15+0000"
+    },
+    {
+      "usuario": "rod_ro81",
+      "texto": "Podiam contratar um ex jogador profissional para ser mais um atrativo.",
+      "curtidas": 3,
+      "id": "18342564583273606",
+      "timestamp": "2026-11-24T09:56:24+0000"
+    },
+    {
+      "usuario": "fernandogontijo13",
+      "texto": "Área coberta na arquibancada para vender mais caro",
+      "curtidas": 1,
+      "id": "18104819813548645",
+      "timestamp": "2026-11-24T09:43:34+0000"
+    },
+    {
+      "usuario": "beniciocarmocarvalho",
+      "texto": "Cadê meu um gol por partida?",
+      "curtidas": 1,
+      "id": "17980980258153400",
+      "timestamp": "2026-11-24T09:48:15+0000"
+    },
+    {
+      "usuario": "ruanbignoze",
+      "texto": "Precisa de lateral esquerdo to disponivel experiencia chute forte lider dentro de campo pra organizar a mulekada que esta chegando",
+      "curtidas": 0,
+      "id": "18236449243325946",
+      "timestamp": "2026-11-24T10:26:55+0000"
+    },
+    {
+      "usuario": "rcacau",
+      "texto": "Bom jogo rapaziada .. no próximo vamos ganhar em busca da liderança.. e do título.. seguindo forte no treinamento... Primeiro a começar as treinos e o último a parar.... Aguardem que o goleiro artilheiro aqui tá afiado nas bolas paradas.... Se o professor permitir, tô pronto para cobrar faltas... Bora time!!!!",
+      "curtidas": 0,
+      "id": "17960767635273140",
+      "timestamp": "2026-11-24T10:41:22+0000"
+    },
+    {
+      "usuario": "kelvinzy29",
+      "texto": "Bora trabalhar pra chegar no primeiro lugar!!",
+      "curtidas": 0,
+      "id": "18004132590033916",
+      "timestamp": "2026-11-24T19:27:56+0000"
+    },
+    {
+      "usuario": "johnvicente22",
+      "texto": "Cria a torcida organizada do Poeira FC, os EMPOEIRADOS. Me indiquem como presidente e no próximo jogo já contem com a gente. 🔥🔥 Vamos por mais 💪🏆🏆",
+      "curtidas": 0,
+      "id": "18113216546526910",
+      "timestamp": "2026-11-24T22:45:02+0000"
+    }
+  ],
+  "avaliacao_comentarios": [
+    {
+      "indice": 0,
+      "usuario": "talles_silva",
+      "curtidas": 3,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 1,
+      "usuario": "zehdejesus",
+      "curtidas": 3,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 2,
+      "usuario": "rod_ro81",
+      "curtidas": 3,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 3,
+      "usuario": "fernandogontijo13",
+      "curtidas": 1,
+      "viavel": true,
+      "acoes": [
+        "arquibancada"
+      ],
+      "custo": 1200.0,
+      "motivo": null,
+      "revisar": false
+    },
+    {
+      "indice": 4,
+      "usuario": "beniciocarmocarvalho",
+      "curtidas": 1,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+      "revisar": true
+    },
+    {
+      "indice": 5,
+      "usuario": "ruanbignoze",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    },
+    {
+      "indice": 6,
+      "usuario": "rcacau",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+      "revisar": true
+    },
+    {
+      "indice": 7,
+      "usuario": "kelvinzy29",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+      "revisar": true
+    },
+    {
+      "indice": 8,
+      "usuario": "johnvicente22",
+      "curtidas": 0,
+      "viavel": false,
+      "acoes": [],
+      "custo": 0.0,
+      "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+      "revisar": true
+    }
+  ],
+  "enquetes": [],
+  "decisao": {
+    "comentario": 3,
+    "acoes": [
+      "arquibancada"
+    ],
+    "titulo": "Arquibancada nova",
+    "interpretacao": "Arquibancada nova: mais mil e quinhentos lugares pra torcida.",
+    "custo": 1200,
+    "efeitos": {
+      "estrutura.capacidade": "+1500",
+      "estrutura.arquibancada": "arquibancada de madeira"
+    },
+    "automatica": true
+  },
+  "encerrar_enquetes": [],
+  "nova_enquete": null,
+  "proxima_decisao": {
+    "pergunta": "O que a gente faz agora?",
+    "opcoes": [
+      "Técnico de verdade?",
+      "Grama no campo?",
+      "Outra ideia?"
+    ]
+  }
+}
