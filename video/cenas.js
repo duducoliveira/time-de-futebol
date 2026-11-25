@@ -316,13 +316,16 @@ const TIPOS = {
     if (dd.lanche) linhas.push([`🌭 ${(dd.barraca || 'LANCHONETE').toUpperCase()}`, dd.lanche, 'mais', '#f77f00']);
     if (dd.venda) linhas.push([`👕 ${dd.camisas} CAMISAS`, dd.venda, 'varal', CORES.vinho]);
     if (dd.placas) linhas.push(['📣 PLACAS', dd.placas, 'placas', '#3a86ff']);
+    if (dd.estacionamento) linhas.push(['🚗 ESTACIONAMENTO', dd.estacionamento, 'estacionamento', '#495057']);
+    // com muitas linhas, o espaçamento aperta (o total nunca desce até a faixa da legenda)
+    const passo = Math.min(128, 500 / Math.max(1, linhas.length)), tam = linhas.length > 4 ? 38 : 46;
     linhas.forEach(([rot, v, chave, cor], i) => {
       const t0 = i ? quando(c, chave, 1 + i * 1.5) : 0.5;
-      s += pop(t, t0, W / 2, 440 + i * 128, `<g transform="rotate(${i % 2 ? 1.5 : -1.5})">${pilula(`${rot}  +${R(v)}`, { tam: 46, bg: cor })}</g>`);
+      s += pop(t, t0, W / 2, 430 + i * passo, `<g transform="rotate(${i % 2 ? 1.5 : -1.5})">${pilula(`${rot}  +${R(v)}`, { tam, bg: cor })}</g>`);
     });
     if (linhas.length > 1) {
       const tT = quando(c, 'somando', d * 0.75);
-      s += pop(t, tT, W / 2, 440 + linhas.length * 128 + 12, pilula(`TOTAL  +${R(dd.receita)}`, { tam: 56, bg: CORES.amarelo, cor: OUT, rot: -2 }));
+      s += pop(t, tT, W / 2, 430 + linhas.length * passo + 8, pilula(`TOTAL  +${R(dd.receita)}`, { tam: 56, bg: CORES.amarelo, cor: OUT, rot: -2 }));
       s += pop(t, quando(c, 'caixa', tT + 1), W / 2, 1640, `<g transform="scale(.8)">${painelCaixa(dd.caixa, E.moeda, 'CAIXA')}</g>`);
     }
     return s;

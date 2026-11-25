@@ -13,8 +13,8 @@
     "piada_estadio": "E quando venta, você entende o nome do time.",
     "capitao": "7"
   },
-  "dia": 18,
-  "caixa": 5559.0,
+  "dia": 19,
+  "caixa": 8277.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -26,7 +26,7 @@
     "placas_por_jogo": 150
   },
   "torcida": {
-    "seguidores": 519,
+    "seguidores": 526,
     "historico": [
       {
         "dia": 1,
@@ -117,6 +117,11 @@
         "dia": 18,
         "seguidores": 519,
         "data": "2026-11-24T07:03:28+00:00"
+      },
+      {
+        "dia": 19,
+        "seguidores": 526,
+        "data": "2026-11-25T07:04:16+00:00"
       }
     ]
   },
@@ -157,6 +162,11 @@
     "ala_visitante": {
       "inicio": 18,
       "preco": 5
+    },
+    "estacionamento": {
+      "inicio": 19,
+      "preco": 10,
+      "pct": 0.05
     }
   },
   "personagens": {
@@ -332,7 +342,8 @@
       "traco": "o mais curtido da peneira dos 500",
       "instagram": "eudes_andre03",
       "chegou_no_dia": 17,
-      "chave": "eudes"
+      "chave": "eudes",
+      "apelido": "Segunda-Feira"
     },
     "22": {
       "nome": "Bruno Lerner",
@@ -346,7 +357,7 @@
   },
   "liga": {
     "nome": "Terceira Divisão da Várzea",
-    "rodada": 16,
+    "rodada": 17,
     "roteiro": {
       "1": {
         "resultado": "derrota",
@@ -607,6 +618,18 @@
           "artilheiro": "Bujão",
           "lance": "cabeca",
           "grito": "[shouting] GOOOOOL DO BUJÃO! [excited] Aos {m}, de cabeça, no ferro-velho deles! Primeiro jogo do capitão Benício, e vitória: um a zero!"
+        }
+      },
+      "17": {
+        "resultado": "vitória",
+        "marca_gol": true,
+        "sequencia": "NAN",
+        "intervalo_minimo_gols": 12,
+        "ultimo_gol_a_partir_do_minuto": 75,
+        "motivo": "em casa, à noite, contra o líder Atlético Padaria: 2 a 1, Benício decide e o Poeira empata em pontos com o líder",
+        "gol_decisivo": {
+          "artilheiro": "Benício",
+          "grito": "[shouting] GOOOOOL DO CAPITÃO! [excited] Aos {m}, o Benício respondeu: tá aqui o seu gol! Dois a um no líder, e o Poeira encostou lá em cima!"
         }
       }
     },
@@ -2137,6 +2160,92 @@
           }
         ],
         "rodada": 16
+      },
+      {
+        "mandante": "Poeira FC",
+        "visitante": "Atlético Padaria",
+        "gols": [
+          {
+            "minuto": 5,
+            "time": "Poeira FC",
+            "autor": "gol contra"
+          },
+          {
+            "minuto": 47,
+            "time": "Atlético Padaria"
+          },
+          {
+            "minuto": 89,
+            "time": "Poeira FC",
+            "autor": "Benício"
+          }
+        ],
+        "gols_mandante": 2,
+        "gols_visitante": 1,
+        "rodada": 17
+      },
+      {
+        "mandante": "Ferro-Velho EC",
+        "visitante": "Leões do Brejo",
+        "gols_mandante": 0,
+        "gols_visitante": 0,
+        "gols": [],
+        "rodada": 17
+      },
+      {
+        "mandante": "Amigos do Churrasco FC",
+        "visitante": "Grêmio Vila Barro",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 85,
+            "time": "Amigos do Churrasco FC"
+          }
+        ],
+        "rodada": 17
+      },
+      {
+        "mandante": "Juventude do Asfalto",
+        "visitante": "Veteranos do Bairro",
+        "gols_mandante": 3,
+        "gols_visitante": 2,
+        "gols": [
+          {
+            "minuto": 13,
+            "time": "Veteranos do Bairro"
+          },
+          {
+            "minuto": 21,
+            "time": "Veteranos do Bairro"
+          },
+          {
+            "minuto": 39,
+            "time": "Juventude do Asfalto"
+          },
+          {
+            "minuto": 55,
+            "time": "Juventude do Asfalto"
+          },
+          {
+            "minuto": 85,
+            "time": "Juventude do Asfalto"
+          }
+        ],
+        "rodada": 17
+      },
+      {
+        "mandante": "Real Laje",
+        "visitante": "Estrela da Feira",
+        "gols_mandante": 1,
+        "gols_visitante": 0,
+        "gols": [
+          {
+            "minuto": 42,
+            "time": "Real Laje"
+          }
+        ],
+        "rodada": 17
       }
     ],
     "rival": {
@@ -2147,123 +2256,123 @@
     "tabela": [
       {
         "time": "Atlético Padaria",
-        "j": 16,
+        "j": 17,
         "v": 10,
         "e": 4,
-        "d": 2,
-        "gp": 28,
-        "gc": 12,
+        "d": 3,
+        "gp": 29,
+        "gc": 14,
         "pts": 34,
         "pos": 1,
-        "sg": 16
+        "sg": 15
       },
       {
         "time": "Poeira FC",
-        "j": 16,
-        "v": 9,
+        "j": 17,
+        "v": 10,
         "e": 4,
         "d": 3,
-        "gp": 25,
-        "gc": 17,
-        "pts": 31,
+        "gp": 27,
+        "gc": 18,
+        "pts": 34,
         "pos": 2,
-        "sg": 8
+        "sg": 9
       },
       {
         "time": "Juventude do Asfalto",
-        "j": 16,
-        "v": 8,
+        "j": 17,
+        "v": 9,
         "e": 3,
         "d": 5,
-        "gp": 20,
-        "gc": 15,
-        "pts": 27,
+        "gp": 23,
+        "gc": 17,
+        "pts": 30,
         "pos": 3,
-        "sg": 5
-      },
-      {
-        "time": "Grêmio Vila Barro",
-        "j": 16,
-        "v": 6,
-        "e": 7,
-        "d": 3,
-        "gp": 17,
-        "gc": 13,
-        "pts": 25,
-        "pos": 4,
-        "sg": 4
+        "sg": 6
       },
       {
         "time": "Ferro-Velho EC",
-        "j": 16,
+        "j": 17,
         "v": 7,
-        "e": 4,
+        "e": 5,
         "d": 5,
         "gp": 20,
         "gc": 22,
+        "pts": 26,
+        "pos": 4,
+        "sg": -2
+      },
+      {
+        "time": "Grêmio Vila Barro",
+        "j": 17,
+        "v": 6,
+        "e": 7,
+        "d": 4,
+        "gp": 17,
+        "gc": 14,
         "pts": 25,
         "pos": 5,
-        "sg": -2
+        "sg": 3
       },
       {
         "time": "Estrela da Feira",
-        "j": 16,
+        "j": 17,
         "v": 7,
         "e": 2,
-        "d": 7,
+        "d": 8,
         "gp": 18,
-        "gc": 20,
+        "gc": 21,
         "pts": 23,
         "pos": 6,
-        "sg": -2
+        "sg": -3
       },
       {
         "time": "Amigos do Churrasco FC",
-        "j": 16,
-        "v": 5,
+        "j": 17,
+        "v": 6,
         "e": 0,
         "d": 11,
-        "gp": 16,
+        "gp": 17,
         "gc": 23,
-        "pts": 15,
+        "pts": 18,
         "pos": 7,
-        "sg": -7
-      },
-      {
-        "time": "Leões do Brejo",
-        "j": 16,
-        "v": 3,
-        "e": 6,
-        "d": 7,
-        "gp": 18,
-        "gc": 27,
-        "pts": 15,
-        "pos": 8,
-        "sg": -9
+        "sg": -6
       },
       {
         "time": "Real Laje",
-        "j": 16,
-        "v": 3,
+        "j": 17,
+        "v": 4,
         "e": 4,
         "d": 9,
-        "gp": 13,
+        "gp": 14,
         "gc": 18,
-        "pts": 13,
+        "pts": 16,
+        "pos": 8,
+        "sg": -4
+      },
+      {
+        "time": "Leões do Brejo",
+        "j": 17,
+        "v": 3,
+        "e": 7,
+        "d": 7,
+        "gp": 18,
+        "gc": 27,
+        "pts": 16,
         "pos": 9,
-        "sg": -5
+        "sg": -9
       },
       {
         "time": "Veteranos do Bairro",
-        "j": 16,
+        "j": 17,
         "v": 3,
         "e": 4,
-        "d": 9,
-        "gp": 20,
-        "gc": 28,
+        "d": 10,
+        "gp": 22,
+        "gc": 31,
         "pts": 13,
         "pos": 10,
-        "sg": -8
+        "sg": -9
       }
     ]
   },
@@ -2590,6 +2699,23 @@
         "id": "18178119529458011",
         "permalink": "https://www.instagram.com/reel/DgHlYTUPElx/"
       }
+    },
+    {
+      "dia": 19,
+      "data": "2026-11-25T07:04:16+00:00",
+      "proxima_decisao": {
+        "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+        "opcoes": [
+          "Sua ideia aqui?"
+        ]
+      },
+      "post": {
+        "buffer_id": "6b068aaa40e1d58d12092da9",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-019.mp4",
+        "agendado_para": "2026-11-25T06:00-03:00",
+        "status": "scheduled",
+        "sem_aprovacao": true
+      }
     }
   ],
   "decisoes": [
@@ -2732,6 +2858,13 @@
       "autor": "zehdejesus",
       "curtidas": 0,
       "texto": "Ala visitante"
+    },
+    {
+      "dia": 19,
+      "acao": "estacionamento",
+      "autor": "zehdejesus",
+      "curtidas": 0,
+      "texto": "Estacionamento"
     }
   ],
   "enquetes": [],
@@ -3077,6 +3210,48 @@
       "valor": -200.0,
       "descricao": "Ala visitante",
       "saldo": 5559.0
+    },
+    {
+      "dia": 19,
+      "valor": 104,
+      "descricao": "curtidas do dia 18",
+      "saldo": 5663.0
+    },
+    {
+      "dia": 19,
+      "valor": -300.0,
+      "descricao": "Estacionamento",
+      "saldo": 5363.0
+    },
+    {
+      "dia": 19,
+      "valor": 1578,
+      "descricao": "bilheteria rodada 17 (526 pagantes)",
+      "saldo": 6941.0
+    },
+    {
+      "dia": 19,
+      "valor": 526,
+      "descricao": "lanchonete rodada 17",
+      "saldo": 7467.0
+    },
+    {
+      "dia": 19,
+      "valor": 400,
+      "descricao": "varal de camisas rodada 17 (16 camisas)",
+      "saldo": 7867.0
+    },
+    {
+      "dia": 19,
+      "valor": 150,
+      "descricao": "placas de publicidade rodada 17",
+      "saldo": 8017.0
+    },
+    {
+      "dia": 19,
+      "valor": 260,
+      "descricao": "estacionamento rodada 17 (26 carros)",
+      "saldo": 8277.0
     }
   ],
   "linha_do_tempo": [
@@ -3261,9 +3436,22 @@
     {
       "dia": 18,
       "evento": "Rodada 16: Ferro-Velho EC 0 x 1 Poeira FC (vitória)"
+    },
+    {
+      "dia": 19,
+      "evento": "Estacionamento de terra no terreno ao lado do campo, a 10 reais por carro.",
+      "autor": "zehdejesus"
+    },
+    {
+      "dia": 19,
+      "evento": "Eudes ganhou o apelido Segunda-Feira"
+    },
+    {
+      "dia": 19,
+      "evento": "Rodada 17: Poeira FC 2 x 1 Atlético Padaria (vitória)"
     }
   ],
-  "atualizado_em": "2026-11-25T01:12:28+00:00",
+  "atualizado_em": "2026-11-25T07:04:16+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
@@ -3280,7 +3468,8 @@
     "Canela",
     "Caxumba",
     "Feriado Prolongado",
-    "Ferrugem"
+    "Ferrugem",
+    "Segunda-Feira"
   ],
   "piadas_gol_usadas": [
     "A zaga parou pra ver. Literalmente parou.",
@@ -3289,30 +3478,30 @@
     "O Baixinho pulou. Pulou bonito. Mas pulou pro lado errado."
   ],
   "lances_recentes": [
-    "drible",
-    "cabeca",
-    "falta",
     "toque",
     "penalti",
-    "cabeca"
+    "cabeca",
+    "contra",
+    "drible",
+    "falta"
   ],
   "comemoracoes_recentes": [
     "monte",
+    "aviao",
     "carrinho",
-    "canto",
-    "monte"
+    "canto"
   ],
   "cameras": {
-    "capa": "campo",
-    "evolucao": "aereo",
-    "estadio": "aereo",
-    "comentarios": "mural",
-    "pre_jogo": "chegada",
-    "apelido": "close",
-    "fim_de_jogo": "tiao",
-    "tabela": "card",
-    "decisao": "rua",
-    "encerramento": "rua",
-    "bilheteria": "caderno"
+    "capa": "aereo",
+    "evolucao": "balcao",
+    "estadio": "arquibancada",
+    "comentarios": "rua",
+    "pre_jogo": "campo",
+    "apelido": "figurinha",
+    "fim_de_jogo": "placar",
+    "tabela": "quadro",
+    "decisao": "mural",
+    "encerramento": "por_do_sol",
+    "bilheteria": "campo"
   }
 }

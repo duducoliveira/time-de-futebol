@@ -191,6 +191,7 @@ const VARIACOES = {
       if (dd.lanche) linhas.push([dd.barraca || 'Barraca', dd.lanche, 'mais']);
       if (dd.venda) linhas.push([`${dd.camisas} camisas`, dd.venda, 'varal']);
       if (dd.placas) linhas.push(['Placas', dd.placas, 'placas']);
+      if (dd.estacionamento) linhas.push(['Estacionamento', dd.estacionamento, 'estacionamento']);
       linhas.forEach(([rot, v, chave], i) => {
         const t0 = i ? quando(c, chave, 1 + i * 1.4) : 0.5, p = clamp((t - t0) / 0.5), y = 365 + i * 100;
         if (p > 0) s += `<g opacity="${p}"><text x="250" y="${y}" font-family="Nunito" font-weight="800" font-size="46" fill="#1d3557">${esc(rot)}</text>
