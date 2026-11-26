@@ -1,0 +1,31 @@
+{
+  "nome": "Segunda Divisão da Várzea",
+  "forca_poeira": 46,
+  "times": {
+    "Imperial do Morro Alto": 60,
+    "Unidos da Ladeira": 52,
+    "Sport Club Rodoviária": 55,
+    "Mecânica Bigode FC": 48,
+    "Cerâmica Paulistinha": 50,
+    "Fogareiro EC": 44,
+    "Ponte Velha FC": 47,
+    "Asa Delta da Pedreira": 53,
+    "Esporte Clube Fumaça": 42
+  },
+  "rival": {
+    "time": "Imperial do Morro Alto",
+    "apelido": "o clássico do morro",
+    "historia": "os ricos do morro de cima, que têm grama sintética e olham o Poeira de cima pra baixo"
+  },
+  "detalhes": {
+    "Imperial do Morro Alto": "têm grama sintética e chamam o Poeira de 'time de terrão'",
+    "Unidos da Ladeira": "o campo é tão inclinado que o segundo tempo é ladeira abaixo",
+    "Sport Club Rodoviária": "jogam do lado da rodoviária; o apito do juiz se confunde com a buzina dos ônibus",
+    "Mecânica Bigode FC": "o time inteiro é de mecânicos; o uniforme vem com graxa de fábrica",
+    "Cerâmica Paulistinha": "o troféu deles é um vaso",
+    "Fogareiro EC": "o churrasco começa antes do aquecimento",
+    "Ponte Velha FC": "pra chegar no campo tem que atravessar uma ponte que balança",
+    "Asa Delta da Pedreira": "o campo fica no alto da pedreira; a bola que sai não volta",
+    "Esporte Clube Fumaça": "ninguém sabe onde fica o campo: só segue a fumaça"
+  }
+}

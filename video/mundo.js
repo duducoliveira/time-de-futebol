@@ -39,7 +39,7 @@ function tvFundo(t, cam, z, yMuro) {
 }
 
 function tvCenario(estrutura, cam, t = 0, { torcida = 0, nome = '', fundo = true } = {}) {
-  const fora = !!window._local, grama = estrutura.gramado === 'grama';
+  const fora = !!window._local, grama = String(estrutura.gramado || '').startsWith('grama'), ruim = estrutura.gramado === 'grama_ruim' && !fora;
   const px = (x, f = 1) => (x - cam) * f + W / 2;                       // paralaxe: f < 1 = longe
   const dentro = (x, folga = 300) => x > TV_X0 - folga && x < TV_X1 + folga;
   let s = '';
@@ -62,8 +62,9 @@ function tvCenario(estrutura, cam, t = 0, { torcida = 0, nome = '', fundo = true
   // chão de fora e o campo (90 m)
   s += `<rect x="${TV_X0}" y="${TV.yLonge - 8}" width="${TV_X1 - TV_X0}" height="${H + 3000 - TV.yLonge}" fill="#b98b57"/>`;
   const x0 = px(0), x1 = px(TV.L);
-  s += `<path d="M${x0},${TV.yLonge} H${x1} V${TV.yPerto} H${x0}Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}"/>`;
+  s += `<path d="M${x0},${TV.yLonge} H${x1} V${TV.yPerto} H${x0}Z" fill="${ruim ? '#8fa94a' : grama ? CORES.grama1 : 'url(#gterra)'}"/>`;
   if (grama) for (let i = 0; i < 18; i++) { const a = px(i * TV.L / 18); if (dentro(a)) s += `<path d="M${a},${TV.yLonge} h${TV.L / 36} v${TV.yPerto - TV.yLonge} h${-TV.L / 36}z" fill="${CORES.grama2}" opacity=".7"/>`; }
+  if (ruim) { const r = rng('carecas-tv'); s += carecas(() => { const y = TV.yLonge + 15 + r() * (TV.yPerto - TV.yLonge - 30); return [px(r() * TV.L), y, tvK(y) * 0.9]; }, 110); }
   else { const r = rng('tv-pedras'); for (let i = 0; i < 260; i++) { const x = px(r() * TV.L), y = TV.yLonge + 20 + r() * (TV.yPerto - TV.yLonge - 40), rx = 8 + r() * 26, ry = 3 + r() * 6;
     if (dentro(x, 60)) s += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${rx.toFixed(0)}" ry="${ry.toFixed(0)}" fill="#8b4a22" opacity=".4"/>`; } }
   // linhas oficiais: laterais, fundo, meio, círculo (9,15 m), grande área (16,5 × 40,3 m), pequena área (5,5 × 18,3 m), marca do pênalti (11 m)

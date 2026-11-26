@@ -614,12 +614,13 @@ function bancoReservas(x, y, s = 1) {
 // Vista da linha lateral: o campo à direita da linha branca, a área de fora à esquerda,
 // com o banco de reservas (e um isopor) do lado de fora.
 function lateral(estrutura, { t = 0, nome = '', torcida = 0 } = {}) {
-  const grama = estrutura.gramado === 'grama';
+  const grama = String(estrutura.gramado || '').startsWith('grama'), ruim = estrutura.gramado === 'grama_ruim';
   let s = ceu(t) + bairro(760) + arquibancada(estrutura, torcida, 860, t) + muro(860, nome);
   s += `<rect x="-10" y="950" width="${W + 20}" height="${H - 950}" fill="#d9b382"/>`;            // área de fora
   const r = rng('lateral');
   for (let i = 0; i < 14; i++) s += `<ellipse cx="${r() * 520}" cy="${1000 + r() * 880}" rx="${8 + r() * 18}" ry="${3 + r() * 5}" fill="#a47148" opacity=".45"/>`;
-  s += `<path d="M560,950 L1090,950 L1090,1930 L860,1930Z" fill="${grama ? CORES.grama1 : CORES.terra1}" stroke="${OUT}" stroke-width="4"/>`; // campo
+  s += `<path d="M560,950 L1090,950 L1090,1930 L860,1930Z" fill="${ruim ? '#8fa94a' : grama ? CORES.grama1 : CORES.terra1}" stroke="${OUT}" stroke-width="4"/>`; // campo
+  if (ruim) s += carecas(i => { const r = rng('careca-lat' + i), y = 990 + r() * 900, f = (y - 950) / 980; return [560 + 300 * f + 40 + r() * (480 - 300 * f), y, 0.15 + f * 0.25]; }, 10);
   s += `<path d="M560,950 L860,1930" stroke="#fff" stroke-width="16" opacity=".9"/>`;                  // linha lateral
   s += `<g transform="translate(330 1560) scale(1.9)">${bancoReservasFrente()}</g>`;
   s += `<g transform="translate(110 1640)"><rect x="-55" y="-60" width="110" height="70" rx="10" fill="#3a86ff" stroke="${OUT}" stroke-width="6"/>
@@ -649,15 +650,16 @@ const CAMPO_LARG = 60;   // largura real do campo (m)
 const cfK = y => (cfX(y, 1) - cfX(y, -1)) / m(CAMPO_LARG);   // escala de uma pessoa nessa profundidade (s = 1 → 1,75 m = 300 px)
 
 function campo(estrutura, { t = 0, torcida = 0, nome = '', camera = 1 } = {}) {
-  const grama = estrutura.gramado === 'grama', fora = !!window._local;
+  const grama = String(estrutura.gramado || '').startsWith('grama'), ruim = estrutura.gramado === 'grama_ruim', fora = !!window._local;
   const dx = cfC(CF.y0) - W / 2;   // a arquibancada atrás do gol acompanha o gol
   let s = ceu(t) + bairro(760, { xMin: -200, xMax: 1280 }) + (window._local?.tema === 'feira' ? feira(760, t) : '') + (window._local?.tema === 'churrasco' ? churrasco(760, t) : '') + (window._local?.tema === 'padaria' ? padaria(760, t) : '') + `<g transform="translate(${dx} 0)">${arquibancada(estrutura, torcida, 860, t)}</g>` + muro(860, nome);
   // chão de fora do campo (terra batida com capim) e o campo por cima, com as linhas laterais
   s += `<rect x="-10" y="${CF.y0 - 2}" width="${W + 20}" height="${H - CF.y0 + 4}" fill="#b98b57"/>`;
   { const r = rng('fora-campo'); for (let i = 0; i < 40; i++) { const y = CF.y0 + 10 + r() * (H - CF.y0), lado = r() > 0.5 ? 1 : -1, x = lado < 0 ? r() * (cfX(y, -1) - 10) : cfX(y, 1) + 10 + r() * (W - cfX(y, 1));
     s += `<path d="M${x.toFixed(0)},${y.toFixed(0)} l-5,-12 M${x.toFixed(0)},${y.toFixed(0)} l1,-15 M${x.toFixed(0)},${y.toFixed(0)} l6,-11" stroke="#6f8c45" stroke-width="3" stroke-linecap="round"/>`; } }
-  s += `<path d="M${CF.xl0},${CF.y0} H${CF.xr0} L${CF.xr1},${CF.y1} H${CF.xl1}Z" fill="${grama ? CORES.grama1 : 'url(#gterra)'}"/>`;
+  s += `<path d="M${CF.xl0},${CF.y0} H${CF.xr0} L${CF.xr1},${CF.y1} H${CF.xl1}Z" fill="${ruim ? '#8fa94a' : grama ? CORES.grama1 : 'url(#gterra)'}"/>`;
   if (grama) for (let i = 0; i < 6; i++) { const a = CF.y0 + i * 170, b = a + 85; s += `<path d="M${cfX(a, -1)},${a} H${cfX(a, 1)} L${cfX(b, 1)},${b} H${cfX(b, -1)}Z" fill="${CORES.grama2}" opacity=".8"/>`; }
+  if (ruim) { const r = rng('carecas-campo'); s += carecas(() => { const y = 975 + r() * 900; return [cfF(y, 0.06 + r() * 0.88), y, cfK(y)]; }, 42); }
   else {
     const r = rng('pedras');
     for (let i = 0; i < 26; i++) { const y = 980 + r() * 900, x = cfX(y, -1) + 30 + r() * (cfX(y, 1) - cfX(y, -1) - 60); s += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(10 + r() * 30).toFixed(0)}" ry="${(4 + r() * 8).toFixed(0)}" fill="#8b4a22" opacity=".45"/>`; }
@@ -1089,7 +1091,7 @@ let LAJES = [];
 
 function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0, nome = '' } = {}) {
   const cap = estrutura.capacidade || 500;
-  const grama = estrutura.gramado === 'grama';
+  const grama = String(estrutura.gramado || '').startsWith('grama'), ruim = estrutura.gramado === 'grama_ruim';
   let s = ceu(t);
   // morro ao fundo (as lajes viram arquibancada quando lota)
   // o morro desce até o muro: a fileira de árvores do pé do morro fica logo atrás dele (sem faixa de chão no meio)
@@ -1116,8 +1118,9 @@ function estadioAereo(estrutura, torcida, { t = 0, revelar = 1, torcidaAntes = 0
   // campo (com sombra projetada nas bordas, para descolar do chão)
   const { yTopo, yBase, xTopo, xBase } = CAMPO;
   s += `<path d="M${xTopo[0] + 6},${yTopo + 10} H${xTopo[1] + 14} L${xBase[1] + 22},${yBase + 14} H${xBase[0] + 8}Z" fill="#000" opacity=".16"/>`;
-  s += `<path d="M${xTopo[0]},${yTopo} H${xTopo[1]} L${xBase[1]},${yBase} H${xBase[0]}Z" fill="${grama ? CORES.grama1 : CORES.terra1}" stroke="${OUT}" stroke-width="6"/>`;
+  s += `<path d="M${xTopo[0]},${yTopo} H${xTopo[1]} L${xBase[1]},${yBase} H${xBase[0]}Z" fill="${ruim ? '#8fa94a' : grama ? CORES.grama1 : CORES.terra1}" stroke="${OUT}" stroke-width="6"/>`;
   if (grama) for (let i = 0; i < 6; i++) { const y0 = yTopo + i * (yBase - yTopo) / 6, y1 = y0 + (yBase - yTopo) / 12; s += `<path d="M${xBorda(y0, -1)},${y0} H${xBorda(y0, 1)} L${xBorda(y1, 1)},${y1} H${xBorda(y1, -1)}Z" fill="${CORES.grama2}"/>`; }
+  if (ruim) { const r = rng('carecas-aereo'); s += carecas(() => { const y = yTopo + 20 + r() * (yBase - yTopo - 40); return [xBorda(y, -1) + 20 + r() * (xBorda(y, 1) - xBorda(y, -1) - 40), y, (xBorda(y, 1) - xBorda(y, -1)) / m(60)]; }, 26); }
   else { const r = rng('aereo'); for (let i = 0; i < 18; i++) s += `<ellipse cx="${200 + r() * 680}" cy="${800 + r() * 850}" rx="${12 + r() * 26}" ry="${4 + r() * 7}" fill="#8b4a22" opacity=".45"/>`; }
   const wT = xTopo[1] - xTopo[0], wB = xBase[1] - xBase[0];
   const lc = grama ? '#ffffffdd' : '#ffffff77', ym = yTopo + (yBase - yTopo) * wT / (wT + wB);  // meio do campo em perspectiva
@@ -1273,6 +1276,41 @@ function carimbo(txt, cor = '#e63946', rot = -10, tam = 54) {
 }
 Object.assign(window, { escudoPoeira, bola, bancoReservas, cabare, zzz, carimbo, lateral });
 
+// gramado ruim ("grama de segunda divisão"): falhas de terra no meio da grama, tufos e areia na pequena área.
+// pos(i) → [x, y, escala da profundidade]
+function carecas(pos, n = 24) {
+  let s = '';
+  for (let i = 0; i < n; i++) {
+    const [x, y, k] = pos(i), r = rng('careca-f' + i), rx = m(1.2 + r() * 2.8) * k, ry = rx * (0.22 + r() * 0.12);   // falha de 2,5 a 8 m
+    s += `<path d="M${(x - rx).toFixed(1)},${y.toFixed(1)} q${(rx * 0.3).toFixed(1)},${(-ry * 1.3).toFixed(1)} ${rx.toFixed(1)},${(-ry).toFixed(1)} q${(rx * 0.8).toFixed(1)},${(-ry * 0.2).toFixed(1)} ${rx.toFixed(1)},${(ry * 0.9).toFixed(1)} q${(-rx * 0.5).toFixed(1)},${(ry * 1.1).toFixed(1)} ${(-rx * 1.1).toFixed(1)},${(ry * 0.9).toFixed(1)} q${(-rx * 0.8).toFixed(1)},${(-ry * 0.1).toFixed(1)} ${(-rx * 0.9).toFixed(1)},${(-ry * 0.8).toFixed(1)}z" fill="#a9743f" opacity=".95"/>
+      <path d="M${(x - rx * 0.4).toFixed(1)},${(y - ry * 0.2).toFixed(1)} l${(-m(0.05) * k).toFixed(1)},${(-m(0.15) * k).toFixed(1)} M${(x + rx * 0.3).toFixed(1)},${y.toFixed(1)} l${(m(0.04) * k).toFixed(1)},${(-m(0.18) * k).toFixed(1)}" stroke="#4f6f2f" stroke-width="${Math.max(1, m(0.03) * k).toFixed(1)}" stroke-linecap="round"/>`;
+  }
+  return s;
+}
+
+// ônibus velho do Poeira (Segunda Divisão: viagens mais longas): 11 m × 3,2 m, vinho e amarelo, amassado e com
+// ferrugem; o letreiro diz "POEIRA FC" e o destino "2ª DIVISÃO". Pé no y = 0, frente à direita.
+function onibus({ t = 0, andando = false } = {}) {
+  const L = m(11), A = m(3.2), rr = m(0.5), pula = andando ? Math.abs(Math.sin(t * 8)) * 6 : 0;
+  const roda = x => `<g transform="translate(${x} ${-rr}) rotate(${andando ? t * 600 : 0})"><circle r="${rr}" fill="#222" stroke="${OUT}" stroke-width="8"/><circle r="${rr * 0.45}" fill="#adb5bd" stroke="${OUT}" stroke-width="5"/><path d="M${-rr * 0.3},0 H${rr * 0.3} M0,${-rr * 0.3} V${rr * 0.3}" stroke="${OUT}" stroke-width="5"/></g>`;
+  const x0 = -L / 2, x1 = L / 2, yT = -A, yJ = -A * 0.78, yJb = -A * 0.5;
+  let s = `<ellipse cx="0" cy="0" rx="${L * 0.55}" ry="26" fill="#000" opacity=".22"/><g transform="translate(0 ${-pula})">
+    <path d="M${x0},${-rr * 0.9} V${yT + 40} Q${x0},${yT} ${x0 + 40},${yT} H${x1 - 70} Q${x1 - 10},${yT} ${x1},${yT + 80} V${-rr * 0.9} Z" fill="${CORES.vinho}" stroke="${OUT}" stroke-width="10"/>
+    <rect x="${x0}" y="${yJb + 10}" width="${L}" height="${m(0.45)}" fill="${CORES.amarelo}" stroke="${OUT}" stroke-width="6"/>`;
+  for (let i = 0; i < 7; i++) { const wx = x0 + 60 + i * (L - 330) / 7; s += `<rect x="${wx}" y="${yJ}" width="${(L - 330) / 7 - 18}" height="${yJb - yJ - 20}" rx="10" fill="#8ecae6" stroke="${OUT}" stroke-width="7"/>`; }
+  s += `<path d="M${x1 - 230},${yJ} H${x1 - 60} Q${x1 - 20},${yJ} ${x1 - 14},${yJ + 50} V${yJb - 20} H${x1 - 230}Z" fill="#8ecae6" stroke="${OUT}" stroke-width="7"/>
+    <rect x="${x1 - 210}" y="${yJb + 10}" width="110" height="${-yJb - rr * 0.9 - 10}" fill="#6c757d" stroke="${OUT}" stroke-width="6"/>
+    <rect x="${x0 + 80}" y="${yT + 14}" width="${L * 0.46}" height="58" rx="8" fill="#111" stroke="${OUT}" stroke-width="6"/>
+    <text x="${x0 + 80 + L * 0.23}" y="${yT + 60}" text-anchor="middle" font-family="Anton" font-size="44" fill="#ffd166" letter-spacing="3">2ª DIVISÃO · VÁRZEA</text>
+    <text x="${(x0 + x1) / 2 - 80}" y="${yJb + m(0.42)}" text-anchor="middle" font-family="Anton" font-size="${m(0.38)}" fill="${CORES.vinho}">POEIRA FC</text>
+    <ellipse cx="${x0 + 300}" cy="${-rr * 1.6}" rx="70" ry="26" fill="#8b4a22" opacity=".55"/><ellipse cx="${x0 + 900}" cy="${yJb + 120}" rx="40" ry="16" fill="#8b4a22" opacity=".45"/>
+    <path d="M${x0 + 1300},${yJb + 60} q30,30 10,70" stroke="${OUT}" stroke-width="5" fill="none" opacity=".6"/>
+    <circle cx="${x1 - 12}" cy="${-rr * 1.6}" r="20" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>
+    ${roda(x0 + m(2.2))}${roda(x1 - m(2.4))}</g>`;
+  if (andando) for (let i = 0; i < 4; i++) { const f = (t * 1.5 + i / 4) % 1; s += `<circle cx="${x0 - 40 - f * 160}" cy="${-30 - f * 80}" r="${20 + f * 50}" fill="#adb5bd" opacity="${(0.5 * (1 - f)).toFixed(2)}"/>`; }
+  return s;
+}
+
 // ------------------------------------------------------------ escala real (como no detetive: tudo em metros)
 // 1 pessoa (1,75 m) = 300 px em s = 1 → PX_M ≈ 171 px por metro. Todo objeto é desenhado em s = 1 nessa
 // escala e, na cena, recebe o MESMO fator de escala de uma pessoa na mesma profundidade.
@@ -1287,6 +1325,8 @@ function MEDIDAS_REAIS(E) {
     ['banco de reservas: comprimento', 3.0, 'w', bancoReservas(0, 0, 1)],
     ['banco (de frente): comprimento', 3.0, 'w', bancoReservasFrente().replace(/<ellipse[^>]*\/>/, '')],
     ['banco (de frente): encosto', 0.85, 'h', bancoReservasFrente().replace(/<ellipse[^>]*\/>/, '')],
+    ['ônibus: comprimento', 11.0, 'w', onibus({}).replace(/<ellipse cx="0"[^>]*\/>/, '')],
+    ['ônibus: altura', 3.2, 'h', onibus({}).replace(/<ellipse cx="0"[^>]*\/>/, '')],
     ['Kombi: comprimento', 4.3, 'w', kombi({}).replace(/<ellipse[^>]*\/>/, '')],
     ['Kombi: altura com bagageiro', 2.45, 'h', kombi({}).replace(/<ellipse[^>]*\/>/, '')],
     ['Caramelo (vira-lata): altura', 0.7, 'h', caramelo(0).replace(/<ellipse[^>]*\/>/, '')],
@@ -1294,4 +1334,4 @@ function MEDIDAS_REAIS(E) {
     ['barraca: largura', 2.4, 'w', lanchonete('Barraca', 0, 0, 1)],
   ];
 }
-Object.assign(window, { PX_M, m, MEDIDAS_REAIS });
+Object.assign(window, { PX_M, m, MEDIDAS_REAIS, onibus, carecas });

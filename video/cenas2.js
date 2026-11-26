@@ -307,7 +307,8 @@ const VARIACOES = {
         <rect x="-10" y="1520" width="${W + 20}" height="${H - 1520}" fill="#6c757d"/>
         ${Array.from({ length: 8 }, (_, i) => `<rect x="${i * 150 + 30}" y="1700" width="80" height="12" fill="#f8f9fa" opacity=".7"/>`).join('')}`;
       const p = easeOut(clamp((t - 0.2) / 2.2));
-      s += `<g transform="translate(${-380 + p * 880} 1800) scale(.95)">${kombi({ t, andando: p < 1 })}</g>`;   // um pouco atrás de quem desce (s ≈ 0,95)
+      if (E.estrutura.onibus) s += `<g transform="translate(${-900 + p * 1400} 1690) scale(.55)">${onibus({ t, andando: p < 1 })}</g>`;   // o ônibus para do outro lado da rua (mais longe: s ≈ 0,55)
+      else s += `<g transform="translate(${-380 + p * 880} 1800) scale(.95)">${kombi({ t, andando: p < 1 })}</g>`;   // um pouco atrás de quem desce (s ≈ 0,95)
       // o time desce pela porta lateral e se espalha na calçada, um ao lado do outro (sem amontoar)
       if (p >= 1) ['7', '9', '18', '15'].forEach((n, i) => { const q = easeOut(clamp((t - 2.5 - i * 0.4) / 1.1)); if (q > 0 && E.elenco[n]) {
         const x = 470 + ([170, 400, 640, 870][i] - 470) * q, y = 1700 + (1905 - 1700) * q;

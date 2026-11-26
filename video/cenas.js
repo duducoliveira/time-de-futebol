@@ -142,6 +142,10 @@ const TIPOS = {
       for (let i = 0; i < 10; i++) s += `<circle cx="${100 + i * 95}" cy="${1000 + Math.sin(i) * 180}" r="${60 + p * 120}" fill="#fff" opacity="${0.8 * (1 - p)}"/>`;
     }
     const s0 = s.length;  // daqui até os letreiros: gente e objetos na cena (entram no mesmo zoom da sede)
+    if (acoes.includes('onibus') && t >= virada) {  // o ônibus chega na rua do bar (é grande: para com a traseira fora do quadro)
+      const p = easeOut(prog(t, virada, 1.6));
+      s += `<g transform="translate(${-800 + p * 1340} 1860) scale(.6)">${onibus({ t, andando: p < 1 })}</g>`;
+    }
     if (acoes.includes('kombi') && t >= virada) {  // a Kombi chega andando e estaciona na frente do bar
       const p = easeOut(prog(t, virada, 1.2));
       s += `<g transform="translate(${-400 + p * 940} 1908)">${kombi({ t, andando: p < 1 })}</g>`;   // na rua, na escala das pessoas (s = 1)

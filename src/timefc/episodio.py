@@ -343,6 +343,17 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     antes, hoje = briefing["seguidores_ontem"], briefing["seguidores_hoje"]
     e["torcida"]["seguidores"] = hoje  # (o HUD das cenas já mostra a torcida de hoje)
     e["torcida"]["historico"].append({"dia": dia, "seguidores": hoje, "data": est.agora()})
+    # nova temporada (ex.: acesso à Segunda Divisão): a liga anterior vai pro histórico e começa outra do zero
+    nova = briefing.get("nova_liga")
+    if nova:
+        anterior = e["liga"]
+        e.setdefault("temporadas", []).append({"nome": anterior.get("nome"), "tabela": anterior.get("tabela"),
+                                                "rodadas": anterior.get("rodada"), "encerrada_no_dia": dia})
+        times = dict(nova["times"])
+        times[e["clube"]["nome"]] = nova.get("forca_poeira", anterior["times"].get(e["clube"]["nome"], 40))
+        e["liga"] = {"nome": nova["nome"], "rodada": 0, "roteiro": nova.get("roteiro", {}), "times": times,
+                     "resultados": [], "rival": nova.get("rival") or anterior.get("rival"),
+                     "tabela": tabela(list(times), [])}
     cal = calendario_do_clube(e)
 
     caixa_ontem = e["caixa"]

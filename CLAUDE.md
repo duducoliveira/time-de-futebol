@@ -39,6 +39,14 @@ Veja `README.md` (comandos) e `docs/FORMATO.md` (formato e pipeline de vídeo).
 - Vídeos hospedados no repositório público **duducoliveira/poeirafc-videos** (`clube.repo_videos`, arquivo `dia-NNN.mp4`, link raw do GitHub) → Buffer.
 - Dados: o **Buffer** posta e traz curtidas e contagem de comentários (atualizados 1x/dia); a **API do Instagram** (login do Instagram, graph.instagram.com) traz o texto dos comentários e os seguidores.
 
+## Acesso à Segunda Divisão (pedido do usuário em 26/11)
+- Depois do título (Dia 20), **2 dias de vídeos preparatórios, sem jogo** (`briefing["sem_jogo"]`), e a estreia na Segunda Divisão no Dia 23.
+- Exigências da 2ª divisão, gastando quase todo o caixa (~R$ 8.300):
+  - **Dia 21 — gramado** (exigência da federação), e ele é **bem ruim**: `estrutura.gramado = "grama_ruim"` (grama amarelada com falhas de terra: `carecas()` em arte.js; aparece de frente, na TV e na vista aérea). Ex.: grama de rolo de segunda mão, R$ 3.500, cena `obra` com `acoes: ["grama"]`. O terrão vira lembrança (a torcida vetou a grama antes: usar isso na narração).
+  - **Dia 22 — ônibus** para as viagens mais longas: `estrutura.onibus = true`, ônibus velho de 11 m (`onibus()` em arte.js; cena `obra` com `acoes: ["onibus"]`; na variante `chegada` dos jogos fora, ele substitui a Kombi). Ex.: ônibus usado de linha intermunicipal, R$ 4.300. No mesmo dia, apresentar a nova liga: `briefing["nova_liga"]` = conteúdo de `dados/segunda_divisao.json` (o `fechar` guarda a liga antiga em `temporadas` e zera a tabela; rival novo: Imperial do Morro Alto, que tem grama sintética).
+  - **Dia 23 — estreia** na Segunda Divisão (rodada 1; roteirizar em `liga.roteiro`).
+- `liga.roteiro[N].outros` fixa o placar de outros jogos da rodada (`{"A x B": [g1, g2]}`).
+
 ## Credenciais (variáveis de ambiente, nunca no código nem no chat)
 - `BUFFER_API_KEY_POEIRA`, `INSTAGRAM_ACCESS_TOKEN_POEIRA` (sufixo `_POEIRA`: o ambiente é compartilhado com outros projetos; `env()` em `__main__.py` lê o sufixo primeiro).
 - `ELEVENLABS_API_KEY`.
