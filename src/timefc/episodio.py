@@ -473,6 +473,12 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
             roteiro_jogo = liga.get("roteiro", {}).get(str(liga["rodada"] + 1))
             if roteiro_jogo and nome in (m, v):
                 r = _simular_com_desfecho(m, v, liga["times"], f"{dia}-{m}-{v}", nome, roteiro_jogo)
+            # placar fixo de outro jogo da rodada (ex.: o tropeço do líder na última rodada)
+            fixo_outro = (roteiro_jogo or {}).get("outros", {}).get(f"{m} x {v}")
+            if fixo_outro and nome not in (m, v):
+                gm, gv = fixo_outro
+                r = {"mandante": m, "visitante": v, "gols_mandante": gm, "gols_visitante": gv,
+                     "gols": [{"minuto": 20 + 15 * i, "time": m} for i in range(gm)] + [{"minuto": 30 + 15 * i, "time": v} for i in range(gv)]}
             r["rodada"] = liga["rodada"] + 1
             rodada.append(r)
             if nome in (m, v):

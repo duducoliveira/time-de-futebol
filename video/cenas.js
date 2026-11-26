@@ -553,9 +553,18 @@ Object.assign(TIPOS, {
   // comemoração (ex: primeira vitória no clássico)
   festa(t, d, c, E) {
     let s = camera(t, d, campo(E.estrutura, { t, nome: NOME(E), torcida: E._torcida }), { z0: 1.05, z1: 1.12 });
-    s += pop(t, 0.1, W / 2, 420, tituloGrande('VITÓRIA!', { tam: 170, cor: CORES.amarelo, rot: -5 }));
-    if (c.texto_tela[0]) s += pop(t, 0.8, W / 2, 640, pilula(c.texto_tela[0], { tam: 46, bg: CORES.vinho, rot: 2 }));
-    ['9', '8', '1', '10', '12'].forEach((n, i) => {
+    const dd = c.dados, campeao = !!dd.campeao;
+    if (campeao) {   // confete e a taça
+      const r = rng('confete');
+      for (let i = 0; i < 70; i++) { const x = r() * W, y = ((r() * H + t * (180 + r() * 160)) % (H + 100)) - 50;
+        s += `<rect x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="14" height="22" fill="${[CORES.vinho, CORES.amarelo, '#fff'][i % 3]}" transform="rotate(${(t * 200 + i * 40) % 360} ${x.toFixed(0)} ${y.toFixed(0)})"/>`; }
+      s += pop(t, 1.0, W / 2, 870, `<g transform="scale(1.1)"><path d="M-90,-170 h180 q0,140 -70,170 v40 h40 v26 h-140 v-26 h40 v-40 q-70,-30 -70,-170z" fill="#ffd60a" stroke="${OUT}" stroke-width="8"/>
+        <path d="M-90,-150 q-70,0 -60,60 q10,40 60,40 M90,-150 q70,0 60,60 q-10,40 -60,40" fill="none" stroke="${OUT}" stroke-width="16"/><path d="M-90,-150 q-70,0 -60,60 q10,40 60,40 M90,-150 q70,0 60,60 q-10,40 -60,40" fill="none" stroke="#ffd60a" stroke-width="8"/>
+        <path d="M-50,-140 q0,90 30,120" fill="none" stroke="#fff" stroke-width="10" opacity=".5"/><text y="-80" text-anchor="middle" font-family="Anton" font-size="44" fill="${CORES.vinho}">PFC</text></g>`, 0.45, false);
+    }
+    s += pop(t, 0.1, W / 2, 420, tituloGrande(dd.titulo || 'VITÓRIA!', { tam: campeao ? 150 : 170, cor: CORES.amarelo, rot: -5 }));
+    if (c.texto_tela[0]) s += pop(t, 0.8, W / 2, 600, pilula(c.texto_tela[0], { tam: 46, bg: CORES.vinho, rot: 2 }));
+    (campeao ? ['9', '7', '20', '10', '21'] : ['9', '8', '1', '10', '12']).forEach((n, i) => {
       if (E.elenco[n]) s += popPessoa(t, 0.3 + i * 0.15, 140 + i * 200, FRENTE(1.1), pessoa(jogador(n, E, { pose: 'comemora', expr: 'feliz' }), t, { s: 1.1, fase: i }));
     });
     return s;

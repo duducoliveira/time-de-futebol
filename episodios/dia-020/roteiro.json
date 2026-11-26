@@ -1,0 +1,1533 @@
+{
+  "dia": 20,
+  "clube": "Poeira FC",
+  "caixa": 8091.0,
+  "torcida": 545,
+  "posicao": 1,
+  "partida": {
+    "mandante": "Leões do Brejo",
+    "visitante": "Poeira FC",
+    "gols": [
+      {
+        "minuto": 35,
+        "time": "Poeira FC",
+        "autor": "Zé Kaun"
+      },
+      {
+        "minuto": 62,
+        "time": "Leões do Brejo"
+      },
+      {
+        "minuto": 81,
+        "time": "Poeira FC",
+        "autor": "Benício"
+      }
+    ],
+    "gols_mandante": 1,
+    "gols_visitante": 2,
+    "rodada": 18
+  },
+  "cenas": [
+    {
+      "id": "01-capa",
+      "tipo": "capa",
+      "narracao": "Dia 20: A final!",
+      "texto_tela": [
+        "DIA 20"
+      ],
+      "dados": {
+        "tema": "A FINAL!",
+        "antes": 526,
+        "hud": {
+          "torcida": 545,
+          "caixa": 8391.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "variante": "campo"
+      }
+    },
+    {
+      "id": "02-evolucao",
+      "tipo": "evolucao",
+      "narracao": "Lembrando: cada seguidor é um torcedor, cada curtida é um real no caixa. Ontem, 526 torcedores. Hoje: 545! E o caixa saiu de R$ 8.277 pra 8.391!",
+      "texto_tela": [
+        "DIA 20"
+      ],
+      "dados": {
+        "antes": 526,
+        "torcida": 545,
+        "caixa_antes": 8277.0,
+        "caixa": 8391.0,
+        "curtidas": 114,
+        "hud": {
+          "torcida": 545,
+          "caixa": 8391.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "variante": "aereo"
+      }
+    },
+    {
+      "id": "03-estadio",
+      "tipo": "estadio",
+      "narracao": "Tem torcedor novo que nem sabe o nome dos jogadores. Mas já grita!",
+      "texto_tela": [
+        "545 TORCEDORES"
+      ],
+      "dados": {
+        "antes": 526,
+        "torcida": 545,
+        "nivel": "enchendo",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8391.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "variante": "aereo"
+      }
+    },
+    {
+      "id": "04-comentarios",
+      "tipo": "comentarios",
+      "narracao": "O Talles quer ajudar o técnico, e o Murilo quer bandeira pra torcida. O capitão Benício pediu a faixa, e o Eudes cobrou: cadê a faixa, capitão? E os Empoeirados preparam a recepção!",
+      "texto_tela": [],
+      "dados": {
+        "comentarios": [
+          {
+            "usuario": "talles_silva",
+            "texto": "Eu poderia ajudar o técnico sendo um auxiliar para manter tudo em ordem e buscar ser campeão do campeonato",
+            "curtidas": 8,
+            "chave": "talles",
+            "carimbo": "aprovado",
+            "chave_carimbo": "técnico",
+            "selo": "COMENTÁRIO MAIS CURTIDO"
+          },
+          {
+            "usuario": "murilo_siqueira1983",
+            "texto": "Bora comprar bandeiras sinalizadores, para todas as partidas do poeira, ter uma torcida organizada",
+            "curtidas": 3,
+            "chave": "murilo",
+            "carimbo": "aprovado",
+            "chave_carimbo": "bandeira"
+          },
+          {
+            "usuario": "eudes_andre03",
+            "texto": "Tá faltando a faixa em mim hein capitão😂",
+            "curtidas": 0,
+            "chave": "eudes"
+          }
+        ],
+        "hud": {
+          "torcida": 545,
+          "caixa": 8391.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "variante": "celular"
+      }
+    },
+    {
+      "id": "05-obra",
+      "tipo": "obra",
+      "narracao": "Pedido do Murilo: bandeirões novos pra final, trezentos reais! E o Talles, o mais curtido, entra na comissão: auxiliar técnico do Gilberto, voluntário.",
+      "texto_tela": [
+        "BANDEIRÕES PRA FINAL",
+        "-R$ 300"
+      ],
+      "dados": {
+        "acoes": [
+          "bandeiroes"
+        ],
+        "custo": 300.0,
+        "caixa": 8091.0,
+        "antes": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "depois": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "novos_jogadores": [],
+        "autor": "murilo_siqueira1983",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        }
+      }
+    },
+    {
+      "id": "06-pre_jogo",
+      "tipo": "pre_jogo",
+      "narracao": "Rodada 18, fora de casa, contra o Leões do Brejo. Detalhe: jogam no brejo. Literalmente.",
+      "texto_tela": [
+        "RODADA 18",
+        "FORA DE CASA"
+      ],
+      "dados": {
+        "mandante": "Leões do Brejo",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "local": {
+          "nome": "Leões do Brejo",
+          "sigla": "LBR",
+          "torcida": 320,
+          "tema": ""
+        },
+        "variante": "chegada"
+      }
+    },
+    {
+      "id": "07-apelido",
+      "tipo": "apelido",
+      "narracao": "Fica de olho no goleiro do Leões do Brejo, o Guarda-Chuva de Camelô: quebra no primeiro chute!",
+      "texto_tela": [
+        "DE OLHO NO LEÕES DO BREJO"
+      ],
+      "dados": {
+        "alvo": "adversario",
+        "time": "Leões do Brejo",
+        "posicao": "goleiro",
+        "apelido": "Guarda-Chuva de Camelô",
+        "piada": "quebra no primeiro chute",
+        "numero": "8",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "local": {
+          "nome": "Leões do Brejo",
+          "sigla": "LBR",
+          "torcida": 320,
+          "tema": ""
+        },
+        "variante": "close"
+      }
+    },
+    {
+      "id": "08-gol",
+      "tipo": "gol",
+      "narracao": "[excited] Cruzamento do Saci... subiu o Zé Kaun... de cabeça! [shouting] GOOOOOOOOOL! GOL! GOL! [excited] É DO POEIRA! ZÉ KAUN, aos 35 minutos! Que golaço!",
+      "texto_tela": [
+        "35'",
+        "GOOOOL!"
+      ],
+      "dados": {
+        "culpado": null,
+        "lance_tipo": "cabeca",
+        "comemoracao": "aviao",
+        "autor_numero": "14",
+        "passador_numero": "18",
+        "minuto": 35,
+        "nosso": true,
+        "estilo_voz": "grito",
+        "autor": "Zé Kaun",
+        "placar": [
+          0,
+          1
+        ],
+        "mandante": "Leões do Brejo",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "local": {
+          "nome": "Leões do Brejo",
+          "sigla": "LBR",
+          "torcida": 320,
+          "tema": ""
+        }
+      }
+    },
+    {
+      "id": "09-gol",
+      "tipo": "gol",
+      "narracao": "Lá vem o Leões do Brejo pela direita... tocou... bateu! Gol do Leões do Brejo, aos 62.",
+      "texto_tela": [
+        "62'",
+        "GOL DO LEÕES DO BREJO"
+      ],
+      "dados": {
+        "culpado": null,
+        "lance_tipo": "toque",
+        "comemoracao": "carrinho",
+        "minuto": 62,
+        "nosso": false,
+        "estilo_voz": "normal",
+        "autor": null,
+        "placar": [
+          1,
+          1
+        ],
+        "mandante": "Leões do Brejo",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "local": {
+          "nome": "Leões do Brejo",
+          "sigla": "LBR",
+          "torcida": 320,
+          "tema": ""
+        }
+      }
+    },
+    {
+      "id": "10-gol",
+      "tipo": "gol",
+      "narracao": "[excited] O Benício pega a bola pelo meio... passou por um... passou por dois... bateu! [shouting] GOOOOOL DO CAPITÃO! [excited] Aos 81, no brejo, o Benício faz o gol do título! Dois a um! Agora é rezar pelo outro jogo!",
+      "texto_tela": [
+        "81'",
+        "GOOOOL!"
+      ],
+      "dados": {
+        "culpado": null,
+        "lance_tipo": "drible",
+        "comemoracao": "canto",
+        "autor_numero": "7",
+        "passador_numero": "5",
+        "minuto": 81,
+        "nosso": true,
+        "estilo_voz": "grito",
+        "autor": "Benício",
+        "placar": [
+          1,
+          2
+        ],
+        "mandante": "Leões do Brejo",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "local": {
+          "nome": "Leões do Brejo",
+          "sigla": "LBR",
+          "torcida": 320,
+          "tema": ""
+        }
+      }
+    },
+    {
+      "id": "11-fim_de_jogo",
+      "tipo": "fim_de_jogo",
+      "narracao": "Apita o árbitro! Vitória do Poeira, 2 a 1!",
+      "texto_tela": [
+        "FIM DE JOGO",
+        "Leões do Brejo 1 x 2 Poeira FC"
+      ],
+      "dados": {
+        "resultado": "vitória",
+        "placar": [
+          1,
+          2
+        ],
+        "mandante": "Leões do Brejo",
+        "visitante": "Poeira FC",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "local": {
+          "nome": "Leões do Brejo",
+          "sigla": "LBR",
+          "torcida": 320,
+          "tema": ""
+        },
+        "variante": "tiao"
+      }
+    },
+    {
+      "id": "12-festa",
+      "tipo": "festa",
+      "narracao": "E no outro jogo... o Atlético Padaria empatou com o Grêmio Vila Barro! Um a um! Trinta e sete pontos pro Poeira, trinta e cinco pro Padaria. É CAMPEÃO! O POEIRA É CAMPEÃO DA TERCEIRA DIVISÃO DA VÁRZEA! O capitão Benício levanta a taça!",
+      "texto_tela": [
+        "CAMPEÃO DA 3ª DIVISÃO!"
+      ],
+      "dados": {
+        "campeao": true,
+        "titulo": "CAMPEÃO!",
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "local": {
+          "nome": "Leões do Brejo",
+          "sigla": "LBR",
+          "torcida": 320,
+          "tema": ""
+        }
+      }
+    },
+    {
+      "id": "13-tabela",
+      "tipo": "tabela",
+      "narracao": "Tabela final: o Poeira termina em primeiro lugar. Campeão!",
+      "texto_tela": [
+        "TERCEIRA DIVISÃO DA VÁRZEA",
+        "1º LUGAR"
+      ],
+      "dados": {
+        "tabela": [
+          {
+            "time": "Poeira FC",
+            "j": 18,
+            "v": 11,
+            "e": 4,
+            "d": 3,
+            "gp": 29,
+            "gc": 19,
+            "pts": 37,
+            "pos": 1,
+            "sg": 10
+          },
+          {
+            "time": "Atlético Padaria",
+            "j": 18,
+            "v": 10,
+            "e": 5,
+            "d": 3,
+            "gp": 30,
+            "gc": 15,
+            "pts": 35,
+            "pos": 2,
+            "sg": 15
+          },
+          {
+            "time": "Juventude do Asfalto",
+            "j": 18,
+            "v": 9,
+            "e": 4,
+            "d": 5,
+            "gp": 24,
+            "gc": 18,
+            "pts": 31,
+            "pos": 3,
+            "sg": 6
+          },
+          {
+            "time": "Grêmio Vila Barro",
+            "j": 18,
+            "v": 6,
+            "e": 8,
+            "d": 4,
+            "gp": 18,
+            "gc": 15,
+            "pts": 26,
+            "pos": 4,
+            "sg": 3
+          },
+          {
+            "time": "Ferro-Velho EC",
+            "j": 18,
+            "v": 7,
+            "e": 5,
+            "d": 6,
+            "gp": 20,
+            "gc": 23,
+            "pts": 26,
+            "pos": 5,
+            "sg": -3
+          },
+          {
+            "time": "Estrela da Feira",
+            "j": 18,
+            "v": 7,
+            "e": 2,
+            "d": 9,
+            "gp": 19,
+            "gc": 23,
+            "pts": 23,
+            "pos": 6,
+            "sg": -4
+          },
+          {
+            "time": "Amigos do Churrasco FC",
+            "j": 18,
+            "v": 7,
+            "e": 0,
+            "d": 11,
+            "gp": 19,
+            "gc": 24,
+            "pts": 21,
+            "pos": 7,
+            "sg": -5
+          },
+          {
+            "time": "Real Laje",
+            "j": 18,
+            "v": 4,
+            "e": 5,
+            "d": 9,
+            "gp": 15,
+            "gc": 19,
+            "pts": 17,
+            "pos": 8,
+            "sg": -4
+          },
+          {
+            "time": "Veteranos do Bairro",
+            "j": 18,
+            "v": 4,
+            "e": 4,
+            "d": 10,
+            "gp": 23,
+            "gc": 31,
+            "pts": 16,
+            "pos": 9,
+            "sg": -8
+          },
+          {
+            "time": "Leões do Brejo",
+            "j": 18,
+            "v": 3,
+            "e": 7,
+            "d": 8,
+            "gp": 19,
+            "gc": 29,
+            "pts": 16,
+            "pos": 10,
+            "sg": -10
+          }
+        ],
+        "posicao": 1,
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "variante": "card"
+      }
+    },
+    {
+      "id": "14-decisao",
+      "tipo": "decisao",
+      "narracao": "No caixa, 8.091 reais. E agora, o que o campeão faz com esse dinheiro? Gramado? Hino? Deixa a sua ideia nos comentários: o mais curtido decide!",
+      "texto_tela": [
+        "DECISÃO #20",
+        "COMENTÁRIO MAIS CURTIDO DECIDE"
+      ],
+      "dados": {
+        "opcoes": [
+          "Sua ideia aqui?"
+        ],
+        "caixa": 8091.0,
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "variante": "quadro"
+      }
+    },
+    {
+      "id": "15-encerramento",
+      "tipo": "encerramento",
+      "narracao": "O Poeira saiu do terrão e é campeão! Obrigado, torcida: foram vocês que fizeram esse time. Segue, curte e comenta. Até amanhã!",
+      "texto_tela": [
+        "@poeira.fc"
+      ],
+      "dados": {
+        "proximo": null,
+        "hud": {
+          "torcida": 545,
+          "caixa": 8091.0
+        },
+        "estrutura": {
+          "gramado": "terrão",
+          "capacidade": 2000,
+          "arquibancada": "dois bancos de madeira",
+          "telhado": true,
+          "vestiario": "vestiário com chuveiro quente",
+          "uniforme": "novo",
+          "rede": true,
+          "bolas": true,
+          "iluminacao": true,
+          "lanchonete": "Barraca do Guigs",
+          "tecnico": false,
+          "kombi": true,
+          "banco_reservas": true,
+          "cabare_proibido": true,
+          "uniforme_remendado": true,
+          "varal_camisas": true,
+          "charanga": true,
+          "pomponetes": true,
+          "terrao_por_escolha": true,
+          "placas": true,
+          "mascote": "Caramelo",
+          "organizada": "Poeira Levantada",
+          "patrocinio": "MÚSCULO DE AÇO",
+          "aquecimento": true,
+          "vestiario_predio": true,
+          "live": true,
+          "socio_torcedor": {
+            "inicio": 16,
+            "mensalidade": 10,
+            "pct": 0.05,
+            "desconto": 0.1
+          },
+          "arquibancada_lateral": "esquerda",
+          "ala_visitante": {
+            "inicio": 18,
+            "preco": 5
+          },
+          "estacionamento": {
+            "inicio": 19,
+            "preco": 10,
+            "pct": 0.05
+          }
+        },
+        "variante": "rua"
+      }
+    }
+  ],
+  "estado": {
+    "clube": {
+      "nome": "Poeira FC",
+      "nome_falado": "Poeira",
+      "sigla": "PFC",
+      "instagram": "@poeira.fc",
+      "instagram_id": "17841453282683112",
+      "buffer_canal_id": "6aed11bde29c69a171783476",
+      "repo_videos": "duducoliveira/poeirafc-videos",
+      "fundado_no_dia": 0,
+      "forca": 34,
+      "estadio": "Campo do Poeira",
+      "piada_estadio": "E quando venta, você entende o nome do time.",
+      "capitao": "7"
+    },
+    "estrutura": {
+      "gramado": "terrão",
+      "capacidade": 2000,
+      "arquibancada": "dois bancos de madeira",
+      "telhado": true,
+      "vestiario": "vestiário com chuveiro quente",
+      "uniforme": "novo",
+      "rede": true,
+      "bolas": true,
+      "iluminacao": true,
+      "lanchonete": "Barraca do Guigs",
+      "tecnico": false,
+      "kombi": true,
+      "banco_reservas": true,
+      "cabare_proibido": true,
+      "uniforme_remendado": true,
+      "varal_camisas": true,
+      "charanga": true,
+      "pomponetes": true,
+      "terrao_por_escolha": true,
+      "placas": true,
+      "mascote": "Caramelo",
+      "organizada": "Poeira Levantada",
+      "patrocinio": "MÚSCULO DE AÇO",
+      "aquecimento": true,
+      "vestiario_predio": true,
+      "live": true,
+      "socio_torcedor": {
+        "inicio": 16,
+        "mensalidade": 10,
+        "pct": 0.05,
+        "desconto": 0.1
+      },
+      "arquibancada_lateral": "esquerda",
+      "ala_visitante": {
+        "inicio": 18,
+        "preco": 5
+      },
+      "estacionamento": {
+        "inicio": 19,
+        "preco": 10,
+        "pct": 0.05
+      }
+    },
+    "elenco": {
+      "1": {
+        "nome": "Baixinho",
+        "posicao": "GOL",
+        "traco": "1,63 m; pula muito, alcança pouco"
+      },
+      "2": {
+        "nome": "Zé Marmita",
+        "posicao": "LD",
+        "traco": "entregador; sai no intervalo pra fazer entrega"
+      },
+      "3": {
+        "nome": "Tonhão",
+        "posicao": "ZAG",
+        "traco": "pedreiro; nunca perdeu uma dividida, nunca acertou um passe"
+      },
+      "4": {
+        "nome": "Professor",
+        "posicao": "ZAG",
+        "traco": "51 anos; não corre, se posiciona",
+        "apelido": "Feriado Prolongado"
+      },
+      "5": {
+        "nome": "Padeiro",
+        "posicao": "VOL",
+        "traco": "chega direto do forno, com pão pra todo mundo"
+      },
+      "6": {
+        "nome": "Chinelinho",
+        "posicao": "LE",
+        "traco": "joga com chuteira emprestada dois números maior",
+        "apelido": "Salário do Mês"
+      },
+      "7": {
+        "nome": "Benício",
+        "posicao": "MEI",
+        "traco": "o ex-Biquinho, meia camisa 7",
+        "instagram": "beniciocarmocarvalho",
+        "chegou_no_dia": 4,
+        "chave": "biquinho"
+      },
+      "8": {
+        "nome": "Nenê",
+        "posicao": "MEI",
+        "traco": "16 anos, filho da Dona Cida; o único que sabe jogar"
+      },
+      "9": {
+        "nome": "Bujão",
+        "posicao": "CA",
+        "traco": "118 kg; finaliza muito bem, parado"
+      },
+      "10": {
+        "nome": "Maestro",
+        "posicao": "MEI",
+        "traco": "44 anos; conta do teste que fez num time grande em 98",
+        "apelido": "Chave de Carro"
+      },
+      "11": {
+        "nome": "Sumido",
+        "posicao": "PE",
+        "traco": "ninguém sabe onde mora; aparece só no jogo",
+        "apelido": "Ex-Namorada"
+      },
+      "12": {
+        "nome": "Gabriel",
+        "posicao": "ZAG",
+        "traco": "se apresentou nos comentários: 'Gabriel, zagueiro'",
+        "instagram": "gabriel_rzt1221",
+        "chegou_no_dia": 2,
+        "chave": "gabriel",
+        "apelido": "Whisky do Paraguai"
+      },
+      "13": {
+        "nome": "Fé no Justo",
+        "posicao": "VOL",
+        "traco": "levantou a mão nos comentários",
+        "instagram": "_fe_no_justo_._777",
+        "chegou_no_dia": 2,
+        "chave": "fé",
+        "apelido": "Pedágio"
+      },
+      "14": {
+        "nome": "Zé Kaun",
+        "posicao": "PE",
+        "traco": "respondeu com três emojis e foi contratado",
+        "instagram": "j_o_s_e_k_a_u_n",
+        "chegou_no_dia": 2,
+        "chave": "zé",
+        "apelido": "Viagra em Idoso"
+      },
+      "15": {
+        "nome": "Khauan",
+        "posicao": "CA",
+        "traco": "chegou pela peneira: 'bora subir esse time'",
+        "instagram": "khauan.ribero",
+        "chegou_no_dia": 4,
+        "chave": "khauan",
+        "apelido": "Quinta-Feira"
+      },
+      "16": {
+        "nome": "Rodrigo Moura",
+        "posicao": "LD",
+        "apelido": "Soldado de Guerra",
+        "traco": "vai, mas ninguém sabe se volta",
+        "instagram": "rodrigo_smoura01",
+        "chegou_no_dia": 4,
+        "chave": "rodrigo"
+      },
+      "18": {
+        "nome": "Saci",
+        "posicao": "CA",
+        "apelido": "Uma Perna Só",
+        "traco": "só faz gol de bicicleta",
+        "instagram": "alisoonjesus",
+        "chegou_no_dia": 4,
+        "chave": "saci"
+      },
+      "19": {
+        "nome": "Kelvin",
+        "posicao": "PD",
+        "traco": "ponta direita da peneira",
+        "instagram": "kelvinzy29",
+        "chegou_no_dia": 4,
+        "chave": "kelvin"
+      },
+      "77": {
+        "nome": "Foguete",
+        "posicao": "PD",
+        "traco": "o mais rápido do bairro; não tem freio"
+      },
+      "20": {
+        "nome": "Cacau",
+        "posicao": "GOL",
+        "apelido": "Goleiro Artilheiro",
+        "traco": "além de defender, faz gol",
+        "instagram": "rcacau",
+        "chegou_no_dia": 17,
+        "chave": "cacau"
+      },
+      "21": {
+        "nome": "Eudes",
+        "posicao": "ZAG",
+        "traco": "o mais curtido da peneira dos 500",
+        "instagram": "eudes_andre03",
+        "chegou_no_dia": 17,
+        "chave": "eudes",
+        "apelido": "Segunda-Feira"
+      },
+      "22": {
+        "nome": "Bruno Lerner",
+        "posicao": "VOL",
+        "apelido": "Canela",
+        "traco": "da cabeça pra baixo é tudo canela; ótimo de cabeça",
+        "instagram": "lernerbruninho",
+        "chegou_no_dia": 17,
+        "chave": "bruno"
+      }
+    },
+    "personagens": {
+      "narrador": {
+        "nome": "Tião",
+        "papel": "locutor da rádio comunitária, narra tudo como se fosse final de Copa",
+        "voz": "rpNe0HOx7heUulPiOEaG"
+      },
+      "presidente": {
+        "nome": "Dona Cida",
+        "papel": "dona do bar da esquina; presidente, tesoureira e roupeira do clube"
+      },
+      "diretor": {
+        "nome": "Ragazzo",
+        "cargo": "diretor de futebol (estagiário)",
+        "instagram": "gabriel_ragazzo1",
+        "chave": "ragazzo"
+      },
+      "tecnico": {
+        "nome": "Gilberto Teles",
+        "cargo": "técnico",
+        "instagram": "gilbertoteles_",
+        "chave": "gilberto",
+        "esquema": "3-4-2-1"
+      },
+      "costureira": {
+        "nome": "Dona Neide",
+        "cargo": "costureira do bairro"
+      },
+      "auxiliar": {
+        "nome": "Talles",
+        "cargo": "auxiliar técnico (voluntário)",
+        "instagram": "talles_silva"
+      }
+    },
+    "liga": "Terceira Divisão da Várzea",
+    "moeda": "R$"
+  },
+  "legenda": "DIA 20 do Poeira FC 🏆\n\nÉ CAMPEÃO! O Poeira FC é campeão da Terceira Divisão da Várzea na última rodada! Obrigado, torcida.\n\nE agora, o que o campeão faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "primeiro_comentario": "O que o campeão faz com o dinheiro do caixa? 👇"
+}
