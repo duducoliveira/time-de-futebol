@@ -1,0 +1,261 @@
+{
+ "dia": 21,
+ "seguidores_ontem": 545,
+ "seguidores_hoje": 554,
+ "post_anterior": {
+  "id": "18379865767213344",
+  "caption": "DIA 20 do Poeira FC 🏆\n\nÉ CAMPEÃO! O Poeira FC é campeão da Terceira Divisão da Várzea na última rodada! Obrigado, torcida.\n\nE agora, o que o campeão faz com o dinheiro do caixa? Deixa a sua ideia: o comentário viável mais curtido decide.\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz",
+  "comments_count": 17,
+  "like_count": 79,
+  "media_product_type": "REELS",
+  "media_type": "VIDEO",
+  "permalink": "https://www.instagram.com/reel/DgMu8FHIQpd/",
+  "timestamp": "2026-11-26T09:01:34+0000"
+ },
+ "curtidas": 79,
+ "receita_curtidas": 79,
+ "caixa_atual": 8091.0,
+ "caixa_com_curtidas": 8170.0,
+ "top_comentarios": [
+  {
+   "usuario": "rod_ro81",
+   "texto": "Hora de criar a sede social, com uma quadra de futsal pra treinar a base. Uma churrasqueira e uma piscina TONE alegria da garotada.😂😂",
+   "curtidas": 6,
+   "id": "18102736466552259",
+   "timestamp": "2026-11-26T09:48:00+0000"
+  },
+  {
+   "usuario": "joao_paulo2360",
+   "texto": "Coloca a grama ao no campo e compra material de treinamento, como cones.",
+   "curtidas": 2,
+   "id": "17982854504914866",
+   "timestamp": "2026-11-26T09:18:44+0000"
+  },
+  {
+   "usuario": "murilo_siqueira1983",
+   "texto": "Aumentar o vestiário, para que os jogadores possa se sentir mais confortáveis na hora que se trocarem",
+   "curtidas": 2,
+   "id": "18107999489528699",
+   "timestamp": "2026-11-26T10:04:45+0000"
+  },
+  {
+   "usuario": "_guigs12",
+   "texto": "Tá na hora de reformar o campo, barraca, invés de uma Kombi podia ver um ônibus",
+   "curtidas": 2,
+   "id": "18106011614345777",
+   "timestamp": "2026-11-26T10:07:11+0000"
+  },
+  {
+   "usuario": "sambiagi01",
+   "texto": "Criador e  puxador da torcida organizada que o nome vai ser falange da poeira ou fúria marrom",
+   "curtidas": 1,
+   "id": "17941680801121213",
+   "timestamp": "2026-11-26T09:34:41+0000"
+  },
+  {
+   "usuario": "beniciocarmocarvalho",
+   "texto": "Ainda estou sem a faixa poeira",
+   "curtidas": 1,
+   "id": "17913497718557113",
+   "timestamp": "2026-11-26T09:48:29+0000"
+  },
+  {
+   "usuario": "antoniecharlles",
+   "texto": "Coloca um sintético e aluga o estádio do poeirão para shows quando a gente jogar fora de casa, pra ganhar um extra, pelo menos com a sintética não vai estragar o campo.",
+   "curtidas": 1,
+   "id": "17960796957279525",
+   "timestamp": "2026-11-26T10:00:09+0000"
+  },
+  {
+   "usuario": "rodriguess.41",
+   "texto": "Me contrata pra essa zaga aiii... Só quero um pastel e caldo de cana por jogo",
+   "curtidas": 1,
+   "id": "18374672764208662",
+   "timestamp": "2026-11-26T16:51:23+0000"
+  },
+  {
+   "usuario": "ruanbignoze",
+   "texto": "Ta na hora de ter a banheira de gelo para recuperar os atletas.... e trazer reforcos lateral esquerdo to aqui chute forte e experiencia para ajudar a mulekada....",
+   "curtidas": 0,
+   "id": "18084251258438629",
+   "timestamp": "2026-11-26T10:07:03+0000"
+  },
+  {
+   "usuario": "wellington__tkd",
+   "texto": "Tem que da um churrasco pros jogador so quer ganha e não paga um churraskin ta doido",
+   "curtidas": 0,
+   "id": "18339416164278527",
+   "timestamp": "2026-11-26T19:14:23+0000"
+  }
+ ],
+ "avaliacao_comentarios": [
+  {
+   "indice": 0,
+   "usuario": "rod_ro81",
+   "curtidas": 6,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 1,
+   "usuario": "joao_paulo2360",
+   "curtidas": 2,
+   "viavel": true,
+   "acoes": [
+    "grama"
+   ],
+   "custo": 700.0,
+   "motivo": null,
+   "revisar": false
+  },
+  {
+   "indice": 2,
+   "usuario": "murilo_siqueira1983",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "Vestiário reformado já foi feito",
+   "revisar": false
+  },
+  {
+   "indice": 3,
+   "usuario": "_guigs12",
+   "curtidas": 2,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "Lanchonete do {autor} já foi feito",
+   "revisar": false
+  },
+  {
+   "indice": 4,
+   "usuario": "sambiagi01",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 5,
+   "usuario": "beniciocarmocarvalho",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "é do elenco/comissão: promessa ou tática, não pedido",
+   "revisar": true
+  },
+  {
+   "indice": 6,
+   "usuario": "antoniecharlles",
+   "curtidas": 1,
+   "viavel": true,
+   "acoes": [
+    "arquibancada"
+   ],
+   "custo": 1200.0,
+   "motivo": null,
+   "revisar": false
+  },
+  {
+   "indice": 7,
+   "usuario": "rodriguess.41",
+   "curtidas": 1,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "jogador novo só pela peneira",
+   "revisar": false
+  },
+  {
+   "indice": 8,
+   "usuario": "ruanbignoze",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  },
+  {
+   "indice": 9,
+   "usuario": "wellington__tkd",
+   "curtidas": 0,
+   "viavel": false,
+   "acoes": [],
+   "custo": 0.0,
+   "motivo": "não pede nada do catálogo (revisar manualmente se for uma boa ideia)",
+   "revisar": true
+  }
+ ],
+ "enquetes": [],
+ "decisao": {
+  "comentario": null,
+  "acoes": [
+   "grama"
+  ],
+  "autor": "joao_paulo2360",
+  "titulo": "Gramado da Segunda Divisão",
+  "interpretacao": "A federação exige grama na Segunda Divisão. O que deu pra comprar: grama de rolo de segunda mão, que veio de um condomínio.",
+  "custo": 3500,
+  "efeitos": {
+   "estrutura.gramado": "grama_ruim"
+  },
+  "narracao_obra": "Pra subir de divisão, a federação exige gramado. O João Paulo e o Guigs pediram, e o terrão se despediu. Três mil e quinhentos reais numa grama de rolo de segunda mão, que veio de um condomínio. Ficou... digamos que ficou com personalidade: tem mais careca que o Professor."
+ },
+ "encerrar_enquetes": [],
+ "nova_enquete": null,
+ "proxima_decisao": {
+  "pergunta": "Que nome a gente dá pro ônibus do Poeira?",
+  "opcoes": [
+   "Sua ideia aqui?"
+  ]
+ },
+ "sem_jogo": true,
+ "historia": {
+  "comentarios": [
+   {
+    "narracao": "Campeões! E agora vem a Segunda Divisão. O João Paulo pediu grama, o Guigs também, e ainda lembrou do ônibus: segura aí, Guigs, que amanhã tem novidade. O Antônio perguntou se o campeão não ganhou nenhuma graninha. Ganhou uma taça e muita dívida pela frente! E o Benício quer saber se ganhou a chuteira de ouro.",
+    "comentarios": [
+     {
+      "usuario": "joao_paulo2360",
+      "texto": "Coloca a grama ao no campo e compra material de treinamento, como cones.",
+      "curtidas": 2,
+      "chave": "joão",
+      "carimbo": "aprovado",
+      "chave_carimbo": "grama",
+      "selo": "PEDIDO DO DIA"
+     },
+     {
+      "usuario": "_guigs12",
+      "texto": "Tá na hora de reformar o campo, barraca, invés de uma Kombi podia ver um ônibus",
+      "curtidas": 2,
+      "chave": "guigs",
+      "carimbo": "anotado",
+      "chave_carimbo": "amanhã"
+     },
+     {
+      "usuario": "antoniecharlles",
+      "texto": "Fomos campeões e não ganhamos nenhuma graninha?",
+      "curtidas": 0,
+      "chave": "antônio"
+     }
+    ]
+   }
+  ]
+ },
+ "piada": {
+  "pular": true
+ },
+ "tema": "SEGUNDA DIVISÃO!",
+ "tema_falado": "Segunda Divisão",
+ "decisao_fala": "No caixa, {caixa} reais. E amanhã tem a segunda exigência da federação: o ônibus, pras viagens mais longas. Já que é assim: que nome a gente dá pro ônibus do Poeira? O mais curtido decide!",
+ "encerramento": "Amanhã chega o ônibus, e você conhece os adversários da Segunda Divisão. Segue, curte e comenta. Até amanhã!",
+ "legenda": "DIA 21 do Poeira FC ⚽🌱\n\nCampeões e na Segunda Divisão! A federação exigiu gramado... e o gramado chegou. Mais ou menos.\n\nAmanhã chega o ônibus: que nome a gente dá pra ele? O comentário mais curtido decide!\n\n1 seguidor = 1 torcedor no estádio\n1 curtida = +R$ 1 no caixa\n\n#futebol #varzea #futebolamador #futebolraiz"
+}

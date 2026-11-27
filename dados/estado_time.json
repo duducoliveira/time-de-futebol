@@ -13,8 +13,8 @@
     "piada_estadio": "E quando venta, você entende o nome do time.",
     "capitao": "7"
   },
-  "dia": 20,
-  "caixa": 8091.0,
+  "dia": 21,
+  "caixa": 4670.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -26,7 +26,7 @@
     "placas_por_jogo": 150
   },
   "torcida": {
-    "seguidores": 545,
+    "seguidores": 554,
     "historico": [
       {
         "dia": 1,
@@ -127,11 +127,16 @@
         "dia": 20,
         "seguidores": 545,
         "data": "2026-11-26T07:03:59+00:00"
+      },
+      {
+        "dia": 21,
+        "seguidores": 554,
+        "data": "2026-11-27T00:27:36+00:00"
       }
     ]
   },
   "estrutura": {
-    "gramado": "terrão",
+    "gramado": "grama_ruim",
     "capacidade": 2000,
     "arquibancada": "dois bancos de madeira",
     "telhado": true,
@@ -2852,8 +2857,21 @@
         "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-020.mp4",
         "agendado_para": "2026-11-26T06:00-03:00",
         "status": "scheduled",
-        "sem_aprovacao": true
+        "sem_aprovacao": true,
+        "id": "18379865767213344",
+        "permalink": "https://www.instagram.com/reel/DgMu8FHIQpd/"
       }
+    },
+    {
+      "dia": 21,
+      "data": "2026-11-27T00:27:36+00:00",
+      "proxima_decisao": {
+        "pergunta": "Que nome a gente dá pro ônibus do Poeira?",
+        "opcoes": [
+          "Sua ideia aqui?"
+        ]
+      },
+      "post": null
     }
   ],
   "decisoes": [
@@ -3010,6 +3028,13 @@
       "autor": "murilo_siqueira1983",
       "curtidas": 0,
       "texto": "Bandeirões pra final"
+    },
+    {
+      "dia": 21,
+      "acao": "grama",
+      "autor": "joao_paulo2360",
+      "curtidas": 0,
+      "texto": "Gramado da Segunda Divisão"
     }
   ],
   "enquetes": [],
@@ -3409,6 +3434,18 @@
       "valor": -300.0,
       "descricao": "Bandeirões pra final",
       "saldo": 8091.0
+    },
+    {
+      "dia": 21,
+      "valor": 79,
+      "descricao": "curtidas do dia 20",
+      "saldo": 8170.0
+    },
+    {
+      "dia": 21,
+      "valor": -3500.0,
+      "descricao": "Gramado da Segunda Divisão",
+      "saldo": 4670.0
     }
   ],
   "linha_do_tempo": [
@@ -3615,9 +3652,14 @@
     {
       "dia": 20,
       "evento": "Rodada 18: Leões do Brejo 1 x 2 Poeira FC (vitória)"
+    },
+    {
+      "dia": 21,
+      "evento": "A federação exige grama na Segunda Divisão. O que deu pra comprar: grama de rolo de segunda mão, que veio de um condomínio.",
+      "autor": "joao_paulo2360"
     }
   ],
-  "atualizado_em": "2026-11-26T07:03:59+00:00",
+  "atualizado_em": "2026-11-27T00:27:36+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
@@ -3659,16 +3701,16 @@
     "canto"
   ],
   "cameras": {
-    "capa": "campo",
-    "evolucao": "aereo",
-    "estadio": "aereo",
-    "comentarios": "celular",
+    "capa": "aereo",
+    "evolucao": "balcao",
+    "estadio": "arquibancada",
+    "comentarios": "rua",
     "pre_jogo": "chegada",
     "apelido": "close",
     "fim_de_jogo": "tiao",
     "tabela": "card",
-    "decisao": "quadro",
-    "encerramento": "rua",
+    "decisao": "mural",
+    "encerramento": "por_do_sol",
     "bilheteria": "campo"
   }
 }

@@ -126,7 +126,7 @@ const VARIACOES = {
       let conteudo = pincel((c.texto_tela[0] || 'DECISÃO').toUpperCase(), 500, 92, 72, { cor: CORES.vinho, op: surge(t, tB - 0.3) })
         + pincel(R(c.dados.caixa), 500, ops.length ? 225 : 250, ops.length ? 120 : 150, { cor: '#2b8a3e', op: surge(t, tV) });
       if (surge(t, tV) > 0) conteudo += `<path d="M230,${ops.length ? 250 : 282} q270,${18} 540,0" stroke="#2b8a3e" stroke-width="9" fill="none" stroke-linecap="round" opacity="${surge(t, tV + 0.3)}"/>`;
-      conteudo += pincel('E AGORA, O QUE A GENTE FAZ?', 500, ops.length ? 320 : 370, 56, { cor: '#1971c2', op: surge(t, tA) });
+      conteudo += pincel((c.dados.pergunta || 'E agora, o que a gente faz?').toUpperCase().slice(0, 34), 500, ops.length ? 320 : 370, 56, { cor: '#1971c2', op: surge(t, tA) });
       ops.forEach((o, i) => { conteudo += pincel('• ' + o, 500, 385 + i * 52, 44, { cor: '#495057', op: surge(t, tA + 0.4 + i * 0.3) }); });
       const yI = ops.length ? 400 + ops.length * 52 : 465;
       conteudo += pincel('SUA IDEIA NOS COMENTÁRIOS', 500, yI, 54, { cor: '#1d3557', op: surge(t, tI) });
@@ -141,7 +141,7 @@ const VARIACOES = {
       const ops = (c.dados.opcoes || []).filter(o => !/sua ideia/i.test(o)).slice(0, 2), tB = 1.25;
       const nota = (x, y, t0, svg) => { const k = surge(t, t0); return k > 0 ? `<g transform="translate(${x} ${y}) scale(${(1.12 - 0.12 * k).toFixed(3)})" opacity="${k.toFixed(3)}">${svg}</g>` : ''; };
       let conteudo = nota(265, 190, tB, bilhete('dona.cida', `No caixa: ${R(c.dados.caixa)}`, 0, { w: 440, cor: '#d8f3dc', rot: -4, tam: 40 }));
-      if (!ops.length) conteudo += nota(270, 500, Math.max(tB + 0.4, quando(c, 'agora', tB + 1) - 0.1), bilhete('dona.cida', 'E agora, o que a gente faz com esse dinheiro?', 0, { w: 440, cor: '#ffffff', rot: 3, tam: 36 }));
+      if (!ops.length) conteudo += nota(270, 500, Math.max(tB + 0.4, quando(c, 'agora', tB + 1) - 0.1), bilhete('dona.cida', c.dados.pergunta || 'E agora, o que a gente faz com esse dinheiro?', 0, { w: 440, cor: '#ffffff', rot: 3, tam: 36 }));
       ops.forEach((o, i) => { conteudo += nota(265, 470 + i * 0, tB + 0.6 + i * 0.3, bilhete('torcida', o, 0, { w: 420, cor: PAPEL[(i + 1) % PAPEL.length], rot: [3, -3][i], tam: 34 })); });
       conteudo += nota(745, 380, Math.max(tB + 0.8, quando(c, 'ideia', tB + 1.5) - 0.1), `<g transform="rotate(5)"><rect x="-190" y="-170" width="380" height="340" fill="#ffe066" stroke="${OUT}" stroke-width="5"/>
         <rect x="-190" y="-170" width="380" height="52" fill="#fcc419"/><circle cy="-146" r="14" fill="#e63946" stroke="${OUT}" stroke-width="3"/>

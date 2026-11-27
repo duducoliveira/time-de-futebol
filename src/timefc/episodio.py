@@ -763,7 +763,7 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
         if briefing.get("decisao_fala"):
             txt = briefing["decisao_fala"].replace("{caixa}", _n(e["caixa"]))
         cena("decisao", txt, [f"DECISÃO #{dia}", "COMENTÁRIO MAIS CURTIDO DECIDE"],
-             opcoes=prox["opcoes"], caixa=e["caixa"])
+             opcoes=prox["opcoes"], caixa=e["caixa"], pergunta=prox.get("pergunta"))
 
     prox_jogo = None
     if liga["rodada"] < len(cal):
