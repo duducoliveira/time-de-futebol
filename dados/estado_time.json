@@ -13,8 +13,8 @@
     "piada_estadio": "E quando venta, você entende o nome do time.",
     "capitao": "7"
   },
-  "dia": 21,
-  "caixa": 4670.0,
+  "dia": 22,
+  "caixa": 462.0,
   "moeda": "R$",
   "regras": {
     "por_curtida": 1,
@@ -26,7 +26,7 @@
     "placas_por_jogo": 150
   },
   "torcida": {
-    "seguidores": 554,
+    "seguidores": 563,
     "historico": [
       {
         "dia": 1,
@@ -132,6 +132,11 @@
         "dia": 21,
         "seguidores": 554,
         "data": "2026-11-27T00:27:36+00:00"
+      },
+      {
+        "dia": 22,
+        "seguidores": 563,
+        "data": "2026-11-28T07:03:14+00:00"
       }
     ]
   },
@@ -177,6 +182,9 @@
       "inicio": 19,
       "preco": 10,
       "pct": 0.05
+    },
+    "onibus": {
+      "nome": "Cometa Empoeirado"
     }
   },
   "personagens": {
@@ -371,2132 +379,147 @@
     }
   },
   "liga": {
-    "nome": "Terceira Divisão da Várzea",
-    "rodada": 18,
-    "roteiro": {
-      "1": {
-        "resultado": "derrota",
-        "marca_gol": true,
-        "max_gols_sofridos": 3,
-        "motivo": "estreia sofrida: o Poeira começa perdendo e vai melhorando"
-      },
-      "2": {
-        "resultado": "empate",
-        "marca_gol": true,
-        "max_gols_sofridos": 1,
-        "motivo": "em casa; os reforços da peneira (Saci e Kelvin) saem do banco descansados e o Saci empata de bicicleta",
-        "cena_depois": {
-          "tipo": "banco",
-          "narracao": "E o segredo do empate? Os reforços da peneira! O Saci e o Kelvin passaram o primeiro tempo sentadinhos no banco novo e entraram descansados. Estreia com o pé direito... no caso do Saci, o único que ele tem.",
-          "texto_tela": [
-            "O BANCO FUNCIONOU"
-          ],
-          "dados": {
-            "jogadores": [
-              "18",
-              "19"
-            ]
-          }
-        },
-        "mando": "casa",
-        "gols_nossos_a_partir_do_minuto": 46,
-        "artilheiro": "Saci",
-        "grito_gol": "[shouting] GOOOOOOOL DE BICICLETAAA! [excited] É DO SACI, aos {m}! O centroavante de uma perna só empatou o jogo: um a um!"
-      },
-      "3": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "max_gols_sofridos": 1,
-        "motivo": "clássico na casa do Estrela da Feira: sai atrás e vira no fim com gol do Benício (o ex-Biquinho, que prometeu o gol)",
-        "cena_depois": {
-          "tipo": "festa",
-          "narracao": "E logo no clássico, na casa deles! Quem perde paga o pastel... e hoje o pastel é por conta do Estrela da Feira!",
-          "texto_tela": [
-            "O PASTEL É POR CONTA DELES"
-          ],
-          "dados": {}
-        },
-        "mando": "fora",
-        "virada": true,
-        "max_gols_nossos": 2,
-        "gol_decisivo": {
-          "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] O Benício, que era o Biquinho, pediu pra mudar de nome e prometeu o gol da vitória. Prometeu e cumpriu, aos {m}! VIROU: {ns} a {ds}!"
-        },
-        "intervalo_minimo_gols": 12
-      },
-      "4": {
-        "resultado": "empate",
-        "marca_gol": true,
-        "max_gols_sofridos": 1,
-        "max_gols_nossos": 1,
-        "motivo": "fora, contra o Real Laje: o Poeira sai na frente e toma o empate no fim, culpa do lateral Salário do Mês",
-        "sequencia": "NA",
-        "ultimo_gol_a_partir_do_minuto": 80,
-        "intervalo_minimo_gols": 10,
-        "narrar_gols": [
-          1,
-          2
-        ],
-        "textos_gol": {
-          "1": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! Um a zero pro Poeira, na casa deles!",
-          "2": "Gol do {adv}, aos {m}. Culpa do nosso lateral esquerdo, o Chinelinho... ou melhor, o lateral Salário do Mês: quando vai, nunca mais volta. Empatou: um a um."
-        },
-        "apelido_no_gol": {
-          "gol": 2,
-          "numero": "6",
-          "apelido": "Salário do Mês",
-          "posicao": "lateral"
-        }
-      },
-      "5": {
-        "resultado": "empate",
-        "mando": "casa",
-        "marca_gol": true,
-        "motivo": "em casa contra o líder, na Tática do Pombo Atômico (2-3-5): toma 3, faz 3; o Benício empata no fim",
-        "sequencia": "AANNAN",
-        "ultimo_gol_a_partir_do_minuto": 85,
-        "intervalo_minimo_gols": 6,
-        "narrar_gols": [
-          3,
-          6
-        ],
-        "textos_gol": {
-          "3": "[shouting] GOOOOOL DO POEIRA! [excited] {A}, aos {m}! O Juventude fez dois, mas o Pombo Atômico decolou: dois a um!"
-        },
-        "gol_decisivo": {
-          "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOOL! É DO BENÍCIO, aos {m}! [excited] O segundo dele no jogo! Prometeu três, entregou dois... e empatou com o líder: três a três!"
-        },
-        "cena_depois": {
-          "tipo": "tatica",
-          "narracao": "E a Tática do Pombo Atômico? Funcionou... pela metade. Com só dois zagueiros, a defesa tomou três gols. Mas com cinco atacantes, o ataque fez três! Empate com o líder, professor Gilberto. O pombo voou!",
-          "texto_tela": [
-            "POMBO ATÔMICO: O BALANÇO"
-          ],
-          "dados": {
-            "formacao": [
-              2,
-              3,
-              5
-            ],
-            "balanco": true
-          }
-        }
-      },
-      "6": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "NN",
-        "intervalo_minimo_gols": 12,
-        "motivo": "fora, contra o Amigos do Churrasco, no Pombo Atômico 2.0 (3-2-5): a zaga reforçada não toma gol",
-        "cena_depois": {
-          "tipo": "tatica",
-          "narracao": "E o Pombo Atômico 2.0? Dessa vez, a defesa não tomou nenhum gol: os seguranças da boate não deixaram ninguém entrar. E o ataque fez dois! Professor Gilberto, o pombo aprendeu a voar!",
-          "texto_tela": [
-            "POMBO ATÔMICO 2.0: O BALANÇO"
-          ],
-          "dados": {
-            "formacao": [
-              3,
-              2,
-              5
-            ],
-            "balanco": true,
-            "carimbos": [
-              [
-                "DEFESA: ZERO GOL",
-                "#2e8b57"
-              ],
-              [
-                "ATAQUE: FEZ 2",
-                "#2e8b57"
-              ]
-            ]
-          }
-        }
-      },
-      "7": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "N",
-        "ultimo_gol_a_partir_do_minuto": 40,
-        "motivo": "em casa contra o Ferro-Velho: 1 a 0, primeiro gol do Kelvin (que pediu nos comentários)",
-        "gol_decisivo": {
-          "artilheiro": "Kelvin",
-          "grito": "[shouting] GOOOOOOL DO KELVIN! [excited] O primeiro gol dele com a camisa do Poeira, aos {m}! Ele pediu nos comentários, e o Poeira entregou: um a zero!"
-        }
-      },
-      "8": {
-        "resultado": "derrota",
-        "marca_gol": true,
-        "sequencia": "ANA",
-        "intervalo_minimo_gols": 12,
-        "ultimo_gol_a_partir_do_minuto": 75,
-        "motivo": "fora, contra o líder Atlético Padaria: derrota apertada, 2 a 1; o Benício cumpre a promessa de um gol por jogo",
-        "gol_decisivo": {
-          "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Ele prometeu um gol por jogo e cumpriu de novo, aos {m}! Tudo igual na casa do líder: um a um!"
-        },
-        "textos_gol": {
-          "3": "Gol do {adv}, aos {m}. O líder desempatou: dois a um. Doeu, mas o Poeira vendeu caro na casa do líder."
-        }
-      },
-      "9": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "NNA",
-        "intervalo_minimo_gols": 10,
-        "motivo": "em casa contra o Leões do Brejo: 2 a 1, o Benício estreia a camisa 7 com gol",
-        "gol_decisivo": {
-          "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Estreou a camisa sete com gol, aos {m}! Mais um jogo, mais um gol: dois a zero!"
-        }
-      },
-      "10": {
-        "resultado": "empate",
-        "marca_gol": true,
-        "sequencia": "AN",
-        "intervalo_minimo_gols": 15,
-        "ultimo_gol_a_partir_do_minuto": 70,
-        "motivo": "fora, contra o líder Grêmio Vila Barro: o ponta Cometa (que aparece uma vez por temporada) marca, e o Benício empata",
-        "textos_gol": {
-          "1": "Gol do {adv}, aos {m}. E adivinha quem fez? O Cometa! Aquele que aparece uma vez por temporada. Resolveu aparecer logo contra a gente!"
-        },
-        "gol_decisivo": {
-          "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Mais um jogo, mais um gol, aos {m}! Tudo igual na casa do líder: um a um!"
-        }
-      },
-      "11": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "NAN",
-        "intervalo_minimo_gols": 12,
-        "ultimo_gol_a_partir_do_minuto": 70,
-        "motivo": "fora, na casa do Veteranos do Bairro: 2 a 1, Benício decide",
-        "gol_decisivo": {
-          "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO BENÍCIO! [excited] Aos {m}, ele desempata na casa dos vovôs! Mais um jogo, mais um gol: dois a um!"
-        }
-      },
-      "12": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "ANN",
-        "intervalo_minimo_gols": 12,
-        "ultimo_gol_a_partir_do_minuto": 80,
-        "motivo": "clássico em casa contra o Estrela da Feira: virada 2 a 1, o reserva Rodrigo Moura entra como Talismã do Banco e decide",
-        "gol_decisivo": {
-          "artilheiro": "Rodrigo Moura",
-          "grito": "[shouting] GOOOOOL DO RODRIGO MOURA! [excited] Entrou no fim e resolveu: é o Talismã do Banco! Aos {m}, virou o clássico: dois a um! O pastel é por conta deles!"
-        }
-      },
-      "13": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "N",
-        "ultimo_gol_a_partir_do_minuto": 78,
-        "motivo": "primeiro jogo à noite, em casa contra o Real Laje: 1 a 0, Kelvin de longe",
-        "gol_decisivo": {
-          "artilheiro": "Kelvin",
-          "grito": "[shouting] GOOOOOL DO KELVIN! [excited] Debaixo dos refletores! Aos {m}, primeiro jogo à noite e primeira vitória à noite: um a zero!"
-        }
-      },
-      "14": {
-        "resultado": "derrota",
-        "marca_gol": true,
-        "sequencia": "A",
-        "ultimo_gol_a_partir_do_minuto": 35,
-        "motivo": "fora, contra o Juventude do Asfalto (vice-líder): derrota por 1 a 0, gol de falta deles"
-      },
-      "15": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "NNAN",
-        "intervalo_minimo_gols": 12,
-        "ultimo_gol_a_partir_do_minuto": 75,
-        "motivo": "inauguração da arquibancada nova, à noite, contra o Amigos do Churrasco: 3 a 1, o goleiro Cacau marca de pênalti na estreia",
-        "gol_decisivo": {
-          "artilheiro": "Cacau",
-          "lance": "penalti",
-          "grito": "[shouting] GOOOOOL DO GOLEIRO! [excited] O Cacau atravessou o campo, bateu o pênalti e fez! Aos {m}, na estreia, o goleiro artilheiro cumpriu a promessa: três a um!"
-        }
-      },
-      "16": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "N",
-        "ultimo_gol_a_partir_do_minuto": 70,
-        "motivo": "fora, no Ferro-Velho: 1 a 0, gol de cabeça do Bujão",
-        "gol_decisivo": {
-          "artilheiro": "Bujão",
-          "lance": "cabeca",
-          "grito": "[shouting] GOOOOOL DO BUJÃO! [excited] Aos {m}, de cabeça, no ferro-velho deles! Primeiro jogo do capitão Benício, e vitória: um a zero!"
-        }
-      },
-      "17": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "NAN",
-        "intervalo_minimo_gols": 12,
-        "ultimo_gol_a_partir_do_minuto": 75,
-        "motivo": "em casa, à noite, contra o líder Atlético Padaria: 2 a 1, Benício decide e o Poeira empata em pontos com o líder",
-        "gol_decisivo": {
-          "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO CAPITÃO! [excited] Aos {m}, o Benício respondeu: tá aqui o seu gol! Dois a um no líder, e o Poeira encostou lá em cima!"
-        }
-      },
-      "18": {
-        "resultado": "vitória",
-        "marca_gol": true,
-        "sequencia": "NAN",
-        "intervalo_minimo_gols": 12,
-        "ultimo_gol_a_partir_do_minuto": 78,
-        "motivo": "última rodada, fora, no Leões do Brejo: 2 a 1, Benício decide; o Atlético Padaria empata e o Poeira é campeão",
-        "outros": {
-          "Grêmio Vila Barro x Atlético Padaria": [
-            1,
-            1
-          ]
-        },
-        "gol_decisivo": {
-          "artilheiro": "Benício",
-          "grito": "[shouting] GOOOOOL DO CAPITÃO! [excited] Aos {m}, no brejo, o Benício faz o gol do título! Dois a um! Agora é rezar pelo outro jogo!"
-        }
-      }
-    },
+    "nome": "Segunda Divisão da Várzea",
+    "rodada": 0,
+    "roteiro": {},
     "times": {
-      "Poeira FC": 34,
-      "Leões do Brejo": 50,
-      "Atlético Padaria": 45,
-      "Ferro-Velho EC": 42,
-      "Amigos do Churrasco FC": 38,
-      "Juventude do Asfalto": 55,
-      "Real Laje": 40,
-      "Estrela da Feira": 47,
-      "Veteranos do Bairro": 35,
-      "Grêmio Vila Barro": 33
+      "Imperial do Morro Alto": 60,
+      "Unidos da Ladeira": 52,
+      "Sport Club Rodoviária": 55,
+      "Mecânica Bigode FC": 48,
+      "Cerâmica Paulistinha": 50,
+      "Fogareiro EC": 44,
+      "Ponte Velha FC": 47,
+      "Asa Delta da Pedreira": 53,
+      "Esporte Clube Fumaça": 42,
+      "Poeira FC": 34
     },
-    "resultados": [
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 2,
-        "gols_visitante": 3,
-        "gols": [
-          {
-            "minuto": 14,
-            "time": "Poeira FC",
-            "autor": "Padeiro"
-          },
-          {
-            "minuto": 43,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 55,
-            "time": "Poeira FC"
-          },
-          {
-            "minuto": 55,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 65,
-            "time": "Grêmio Vila Barro"
-          }
-        ],
-        "rodada": 1
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 11,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 33,
-            "time": "Veteranos do Bairro"
-          }
-        ],
-        "rodada": 1
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Estrela da Feira",
-        "gols_mandante": 3,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 7,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 24,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 28,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 64,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 1
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Real Laje",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 52,
-            "time": "Ferro-Velho EC"
-          }
-        ],
-        "rodada": 1
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Juventude do Asfalto",
-        "gols_mandante": 0,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 60,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 1
-      },
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 5,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 87,
-            "time": "Poeira FC",
-            "autor": "Saci"
-          }
-        ],
-        "rodada": 2
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 56,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 69,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 75,
-            "time": "Grêmio Vila Barro"
-          }
-        ],
-        "rodada": 2
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Leões do Brejo",
-        "gols_mandante": 0,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 3,
-            "time": "Leões do Brejo"
-          }
-        ],
-        "rodada": 2
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Atlético Padaria",
-        "gols_mandante": 0,
-        "gols_visitante": 0,
-        "gols": [],
-        "rodada": 2
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Ferro-Velho EC",
-        "gols_mandante": 4,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 16,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 45,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 58,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 68,
-            "time": "Amigos do Churrasco FC"
-          }
-        ],
-        "rodada": 2
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Poeira FC",
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 28,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 58,
-            "time": "Poeira FC",
-            "autor": "Foguete"
-          },
-          {
-            "minuto": 90,
-            "time": "Poeira FC",
-            "autor": "Benício"
-          }
-        ],
-        "rodada": 3
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Real Laje",
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 41,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 57,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 80,
-            "time": "Veteranos do Bairro"
-          }
-        ],
-        "rodada": 3
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Juventude do Asfalto",
-        "gols_mandante": 0,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 2,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 3
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Amigos do Churrasco FC",
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 6,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 51,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 78,
-            "time": "Leões do Brejo"
-          }
-        ],
-        "rodada": 3
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Ferro-Velho EC",
-        "gols_mandante": 0,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 20,
-            "time": "Ferro-Velho EC"
-          }
-        ],
-        "rodada": 3
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Poeira FC",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 67,
-            "time": "Poeira FC",
-            "autor": "Bujão"
-          },
-          {
-            "minuto": 84,
-            "time": "Real Laje"
-          }
-        ],
-        "rodada": 4
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Estrela da Feira",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 38,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 4
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 0,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 50,
-            "time": "Veteranos do Bairro"
-          }
-        ],
-        "rodada": 4
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 1,
-        "gols_visitante": 3,
-        "gols": [
-          {
-            "minuto": 13,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 14,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 28,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 30,
-            "time": "Ferro-Velho EC"
-          }
-        ],
-        "rodada": 4
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Leões do Brejo",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 60,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 80,
-            "time": "Leões do Brejo"
-          }
-        ],
-        "rodada": 4
-      },
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Juventude do Asfalto",
-        "gols": [
-          {
-            "minuto": 33,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 45,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 54,
-            "time": "Poeira FC",
-            "autor": "Sumido"
-          },
-          {
-            "minuto": 71,
-            "time": "Poeira FC"
-          },
-          {
-            "minuto": 81,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 87,
-            "time": "Poeira FC",
-            "autor": "Benício"
-          }
-        ],
-        "gols_mandante": 3,
-        "gols_visitante": 3,
-        "rodada": 5
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Amigos do Churrasco FC",
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 7,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 18,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 31,
-            "time": "Real Laje"
-          }
-        ],
-        "rodada": 5
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Ferro-Velho EC",
-        "gols_mandante": 0,
-        "gols_visitante": 0,
-        "gols": [],
-        "rodada": 5
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Atlético Padaria",
-        "gols_mandante": 1,
-        "gols_visitante": 3,
-        "gols": [
-          {
-            "minuto": 43,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 65,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 65,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 88,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 5
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Leões do Brejo",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 2,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 87,
-            "time": "Grêmio Vila Barro"
-          }
-        ],
-        "rodada": 5
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Poeira FC",
-        "gols": [
-          {
-            "minuto": 33,
-            "time": "Poeira FC",
-            "autor": "Khauan"
-          },
-          {
-            "minuto": 55,
-            "time": "Poeira FC",
-            "autor": "Bujão"
-          }
-        ],
-        "gols_mandante": 0,
-        "gols_visitante": 2,
-        "rodada": 6
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Juventude do Asfalto",
-        "gols_mandante": 3,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 35,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 38,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 52,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 61,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 6
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Real Laje",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 65,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 6
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Estrela da Feira",
-        "gols_mandante": 1,
-        "gols_visitante": 3,
-        "gols": [
-          {
-            "minuto": 12,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 14,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 21,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 53,
-            "time": "Leões do Brejo"
-          }
-        ],
-        "rodada": 6
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 24,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 33,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 34,
-            "time": "Grêmio Vila Barro"
-          }
-        ],
-        "rodada": 6
-      },
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Ferro-Velho EC",
-        "gols": [
-          {
-            "minuto": 51,
-            "time": "Poeira FC",
-            "autor": "Kelvin"
-          }
-        ],
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "rodada": 7
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Atlético Padaria",
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 51,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 62,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 70,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 7
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Leões do Brejo",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 24,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 7
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 0,
-        "gols_visitante": 0,
-        "gols": [],
-        "rodada": 7
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 2,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 27,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 45,
-            "time": "Estrela da Feira"
-          }
-        ],
-        "rodada": 7
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Poeira FC",
-        "gols": [
-          {
-            "minuto": 26,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 70,
-            "time": "Poeira FC",
-            "autor": "Benício"
-          },
-          {
-            "minuto": 84,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "rodada": 8
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Ferro-Velho EC",
-        "gols_mandante": 2,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 6,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 7,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 15,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 57,
-            "time": "Ferro-Velho EC"
-          }
-        ],
-        "rodada": 8
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Amigos do Churrasco FC",
-        "gols_mandante": 2,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 19,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 82,
-            "time": "Grêmio Vila Barro"
-          }
-        ],
-        "rodada": 8
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Juventude do Asfalto",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 66,
-            "time": "Veteranos do Bairro"
-          }
-        ],
-        "rodada": 8
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Real Laje",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 23,
-            "time": "Estrela da Feira"
-          }
-        ],
-        "rodada": 8
-      },
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Leões do Brejo",
-        "gols": [
-          {
-            "minuto": 30,
-            "time": "Poeira FC",
-            "autor": "Bujão"
-          },
-          {
-            "minuto": 73,
-            "time": "Poeira FC",
-            "autor": "Benício"
-          },
-          {
-            "minuto": 88,
-            "time": "Leões do Brejo"
-          }
-        ],
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "rodada": 9
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 39,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 73,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 90,
-            "time": "Grêmio Vila Barro"
-          }
-        ],
-        "rodada": 9
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 5,
-        "gols_visitante": 3,
-        "gols": [
-          {
-            "minuto": 11,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 16,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 19,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 22,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 31,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 48,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 65,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 65,
-            "time": "Veteranos do Bairro"
-          }
-        ],
-        "rodada": 9
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Estrela da Feira",
-        "gols_mandante": 0,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 24,
-            "time": "Estrela da Feira"
-          }
-        ],
-        "rodada": 9
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Real Laje",
-        "gols_mandante": 4,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 2,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 11,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 45,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 69,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 76,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 9
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Poeira FC",
-        "gols": [
-          {
-            "minuto": 27,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 81,
-            "time": "Poeira FC",
-            "autor": "Benício"
-          }
-        ],
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "rodada": 10
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Leões do Brejo",
-        "gols_mandante": 5,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 21,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 23,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 43,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 47,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 52,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 85,
-            "time": "Veteranos do Bairro"
-          }
-        ],
-        "rodada": 10
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Atlético Padaria",
-        "gols_mandante": 1,
-        "gols_visitante": 3,
-        "gols": [
-          {
-            "minuto": 8,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 26,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 39,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 88,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 10
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Ferro-Velho EC",
-        "gols_mandante": 4,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 3,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 15,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 30,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 59,
-            "time": "Real Laje"
-          }
-        ],
-        "rodada": 10
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Amigos do Churrasco FC",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 5,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 10
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Poeira FC",
-        "gols": [
-          {
-            "minuto": 26,
-            "time": "Poeira FC",
-            "autor": "gol contra"
-          },
-          {
-            "minuto": 39,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 72,
-            "time": "Poeira FC",
-            "autor": "Benício"
-          }
-        ],
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "rodada": 11
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Estrela da Feira",
-        "gols_mandante": 0,
-        "gols_visitante": 0,
-        "gols": [],
-        "rodada": 11
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Real Laje",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 77,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 85,
-            "time": "Leões do Brejo"
-          }
-        ],
-        "rodada": 11
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Juventude do Asfalto",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 15,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 11
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Amigos do Churrasco FC",
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 22,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 47,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 60,
-            "time": "Amigos do Churrasco FC"
-          }
-        ],
-        "rodada": 11
-      },
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Estrela da Feira",
-        "gols": [
-          {
-            "minuto": 27,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 73,
-            "time": "Poeira FC",
-            "autor": "Kelvin"
-          },
-          {
-            "minuto": 90,
-            "time": "Poeira FC",
-            "autor": "Rodrigo Moura"
-          }
-        ],
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "rodada": 12
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 3,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 6,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 16,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 32,
-            "time": "Real Laje"
-          },
-          {
-            "minuto": 84,
-            "time": "Veteranos do Bairro"
-          }
-        ],
-        "rodada": 12
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 2,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 49,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 55,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 12
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Leões do Brejo",
-        "gols_mandante": 2,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 65,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 67,
-            "time": "Amigos do Churrasco FC"
-          }
-        ],
-        "rodada": 12
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Atlético Padaria",
-        "gols_mandante": 0,
-        "gols_visitante": 0,
-        "gols": [],
-        "rodada": 12
-      },
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Real Laje",
-        "gols": [
-          {
-            "minuto": 90,
-            "time": "Poeira FC",
-            "autor": "Kelvin"
-          }
-        ],
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "rodada": 13
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Juventude do Asfalto",
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 63,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 64,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 73,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 13
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Amigos do Churrasco FC",
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 33,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 36,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 84,
-            "time": "Amigos do Churrasco FC"
-          }
-        ],
-        "rodada": 13
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Ferro-Velho EC",
-        "gols_mandante": 0,
-        "gols_visitante": 0,
-        "gols": [],
-        "rodada": 13
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Atlético Padaria",
-        "gols_mandante": 1,
-        "gols_visitante": 4,
-        "gols": [
-          {
-            "minuto": 16,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 17,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 46,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 74,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 78,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 13
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Poeira FC",
-        "gols": [
-          {
-            "minuto": 72,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "rodada": 14
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Real Laje",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 6,
-            "time": "Amigos do Churrasco FC"
-          }
-        ],
-        "rodada": 14
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Estrela da Feira",
-        "gols_mandante": 2,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 6,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 12,
-            "time": "Ferro-Velho EC"
-          }
-        ],
-        "rodada": 14
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 50,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 63,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 14
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 0,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 56,
-            "time": "Grêmio Vila Barro"
-          }
-        ],
-        "rodada": 14
-      },
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Amigos do Churrasco FC",
-        "gols": [
-          {
-            "minuto": 21,
-            "time": "Poeira FC",
-            "autor": "Professor"
-          },
-          {
-            "minuto": 61,
-            "time": "Poeira FC"
-          },
-          {
-            "minuto": 75,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 89,
-            "time": "Poeira FC",
-            "autor": "Cacau"
-          }
-        ],
-        "gols_mandante": 3,
-        "gols_visitante": 1,
-        "rodada": 15
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Ferro-Velho EC",
-        "gols_mandante": 2,
-        "gols_visitante": 3,
-        "gols": [
-          {
-            "minuto": 7,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 11,
-            "time": "Ferro-Velho EC"
-          },
-          {
-            "minuto": 15,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 21,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 43,
-            "time": "Ferro-Velho EC"
-          }
-        ],
-        "rodada": 15
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Atlético Padaria",
-        "gols_mandante": 0,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 11,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 17,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 15
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Leões do Brejo",
-        "gols_mandante": 1,
-        "gols_visitante": 4,
-        "gols": [
-          {
-            "minuto": 32,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 43,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 53,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 55,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 69,
-            "time": "Estrela da Feira"
-          }
-        ],
-        "rodada": 15
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 4,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 33,
-            "time": "Grêmio Vila Barro"
-          }
-        ],
-        "rodada": 15
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Poeira FC",
-        "gols": [
-          {
-            "minuto": 77,
-            "time": "Poeira FC",
-            "autor": "Bujão"
-          }
-        ],
-        "gols_mandante": 0,
-        "gols_visitante": 1,
-        "rodada": 16
-      },
-      {
-        "mandante": "Atlético Padaria",
-        "visitante": "Amigos do Churrasco FC",
-        "gols_mandante": 4,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 18,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 43,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 44,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 57,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 63,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 16
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Juventude do Asfalto",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 41,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 43,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 16
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Real Laje",
-        "gols_mandante": 0,
-        "gols_visitante": 0,
-        "gols": [],
-        "rodada": 16
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Estrela da Feira",
-        "gols_mandante": 0,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 5,
-            "time": "Estrela da Feira"
-          },
-          {
-            "minuto": 14,
-            "time": "Estrela da Feira"
-          }
-        ],
-        "rodada": 16
-      },
-      {
-        "mandante": "Poeira FC",
-        "visitante": "Atlético Padaria",
-        "gols": [
-          {
-            "minuto": 5,
-            "time": "Poeira FC",
-            "autor": "gol contra"
-          },
-          {
-            "minuto": 47,
-            "time": "Atlético Padaria"
-          },
-          {
-            "minuto": 89,
-            "time": "Poeira FC",
-            "autor": "Benício"
-          }
-        ],
-        "gols_mandante": 2,
-        "gols_visitante": 1,
-        "rodada": 17
-      },
-      {
-        "mandante": "Ferro-Velho EC",
-        "visitante": "Leões do Brejo",
-        "gols_mandante": 0,
-        "gols_visitante": 0,
-        "gols": [],
-        "rodada": 17
-      },
-      {
-        "mandante": "Amigos do Churrasco FC",
-        "visitante": "Grêmio Vila Barro",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 85,
-            "time": "Amigos do Churrasco FC"
-          }
-        ],
-        "rodada": 17
-      },
-      {
-        "mandante": "Juventude do Asfalto",
-        "visitante": "Veteranos do Bairro",
-        "gols_mandante": 3,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 13,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 21,
-            "time": "Veteranos do Bairro"
-          },
-          {
-            "minuto": 39,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 55,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 85,
-            "time": "Juventude do Asfalto"
-          }
-        ],
-        "rodada": 17
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Estrela da Feira",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 42,
-            "time": "Real Laje"
-          }
-        ],
-        "rodada": 17
-      },
-      {
-        "mandante": "Leões do Brejo",
-        "visitante": "Poeira FC",
-        "gols": [
-          {
-            "minuto": 35,
-            "time": "Poeira FC",
-            "autor": "Zé Kaun"
-          },
-          {
-            "minuto": 62,
-            "time": "Leões do Brejo"
-          },
-          {
-            "minuto": 81,
-            "time": "Poeira FC",
-            "autor": "Benício"
-          }
-        ],
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "rodada": 18
-      },
-      {
-        "mandante": "Grêmio Vila Barro",
-        "visitante": "Atlético Padaria",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 20,
-            "time": "Grêmio Vila Barro"
-          },
-          {
-            "minuto": 30,
-            "time": "Atlético Padaria"
-          }
-        ],
-        "rodada": 18
-      },
-      {
-        "mandante": "Veteranos do Bairro",
-        "visitante": "Ferro-Velho EC",
-        "gols_mandante": 1,
-        "gols_visitante": 0,
-        "gols": [
-          {
-            "minuto": 81,
-            "time": "Veteranos do Bairro"
-          }
-        ],
-        "rodada": 18
-      },
-      {
-        "mandante": "Estrela da Feira",
-        "visitante": "Amigos do Churrasco FC",
-        "gols_mandante": 1,
-        "gols_visitante": 2,
-        "gols": [
-          {
-            "minuto": 4,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 20,
-            "time": "Amigos do Churrasco FC"
-          },
-          {
-            "minuto": 43,
-            "time": "Estrela da Feira"
-          }
-        ],
-        "rodada": 18
-      },
-      {
-        "mandante": "Real Laje",
-        "visitante": "Juventude do Asfalto",
-        "gols_mandante": 1,
-        "gols_visitante": 1,
-        "gols": [
-          {
-            "minuto": 13,
-            "time": "Juventude do Asfalto"
-          },
-          {
-            "minuto": 43,
-            "time": "Real Laje"
-          }
-        ],
-        "rodada": 18
-      }
-    ],
+    "resultados": [],
     "rival": {
-      "time": "Estrela da Feira",
-      "apelido": "o clássico da feira",
-      "historia": "os dois times dividem a mesma rua; quem perde paga o pastel"
+      "time": "Imperial do Morro Alto",
+      "apelido": "o clássico do morro",
+      "historia": "os ricos do morro de cima, que têm grama sintética e olham o Poeira de cima pra baixo"
     },
     "tabela": [
       {
-        "time": "Poeira FC",
-        "j": 18,
-        "v": 11,
-        "e": 4,
-        "d": 3,
-        "gp": 29,
-        "gc": 19,
-        "pts": 37,
-        "pos": 1,
-        "sg": 10
-      },
-      {
-        "time": "Atlético Padaria",
-        "j": 18,
-        "v": 10,
-        "e": 5,
-        "d": 3,
-        "gp": 30,
-        "gc": 15,
-        "pts": 35,
-        "pos": 2,
-        "sg": 15
-      },
-      {
-        "time": "Juventude do Asfalto",
-        "j": 18,
-        "v": 9,
-        "e": 4,
-        "d": 5,
-        "gp": 24,
-        "gc": 18,
-        "pts": 31,
-        "pos": 3,
-        "sg": 6
-      },
-      {
-        "time": "Grêmio Vila Barro",
-        "j": 18,
-        "v": 6,
-        "e": 8,
-        "d": 4,
-        "gp": 18,
-        "gc": 15,
-        "pts": 26,
-        "pos": 4,
-        "sg": 3
-      },
-      {
-        "time": "Ferro-Velho EC",
-        "j": 18,
-        "v": 7,
-        "e": 5,
-        "d": 6,
-        "gp": 20,
-        "gc": 23,
-        "pts": 26,
-        "pos": 5,
-        "sg": -3
-      },
-      {
-        "time": "Estrela da Feira",
-        "j": 18,
-        "v": 7,
-        "e": 2,
-        "d": 9,
-        "gp": 19,
-        "gc": 23,
-        "pts": 23,
-        "pos": 6,
-        "sg": -4
-      },
-      {
-        "time": "Amigos do Churrasco FC",
-        "j": 18,
-        "v": 7,
+        "time": "Asa Delta da Pedreira",
+        "j": 0,
+        "v": 0,
         "e": 0,
-        "d": 11,
-        "gp": 19,
-        "gc": 24,
-        "pts": 21,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
+        "pos": 1,
+        "sg": 0
+      },
+      {
+        "time": "Cerâmica Paulistinha",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
+        "pos": 2,
+        "sg": 0
+      },
+      {
+        "time": "Esporte Clube Fumaça",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
+        "pos": 3,
+        "sg": 0
+      },
+      {
+        "time": "Fogareiro EC",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
+        "pos": 4,
+        "sg": 0
+      },
+      {
+        "time": "Imperial do Morro Alto",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
+        "pos": 5,
+        "sg": 0
+      },
+      {
+        "time": "Mecânica Bigode FC",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
+        "pos": 6,
+        "sg": 0
+      },
+      {
+        "time": "Poeira FC",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
         "pos": 7,
-        "sg": -5
+        "sg": 0
       },
       {
-        "time": "Real Laje",
-        "j": 18,
-        "v": 4,
-        "e": 5,
-        "d": 9,
-        "gp": 15,
-        "gc": 19,
-        "pts": 17,
+        "time": "Ponte Velha FC",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
         "pos": 8,
-        "sg": -4
+        "sg": 0
       },
       {
-        "time": "Veteranos do Bairro",
-        "j": 18,
-        "v": 4,
-        "e": 4,
-        "d": 10,
-        "gp": 23,
-        "gc": 31,
-        "pts": 16,
+        "time": "Sport Club Rodoviária",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
         "pos": 9,
-        "sg": -8
+        "sg": 0
       },
       {
-        "time": "Leões do Brejo",
-        "j": 18,
-        "v": 3,
-        "e": 7,
-        "d": 8,
-        "gp": 19,
-        "gc": 29,
-        "pts": 16,
+        "time": "Unidos da Ladeira",
+        "j": 0,
+        "v": 0,
+        "e": 0,
+        "d": 0,
+        "gp": 0,
+        "gc": 0,
+        "pts": 0,
         "pos": 10,
-        "sg": -10
+        "sg": 0
       }
     ]
   },
@@ -2880,6 +903,23 @@
         "id": "17999843469019865",
         "permalink": "https://www.instagram.com/reel/DgPTwPlzHeD/"
       }
+    },
+    {
+      "dia": 22,
+      "data": "2026-11-28T07:03:14+00:00",
+      "proxima_decisao": {
+        "pergunta": "O que a gente faz com o dinheiro do caixa? Deixa a sua ideia.",
+        "opcoes": [
+          "Sua ideia aqui?"
+        ]
+      },
+      "post": {
+        "buffer_id": "6b0a7da9d718580fbd67dbab",
+        "video": "https://raw.githubusercontent.com/duducoliveira/poeirafc-videos/main/dia-022.mp4",
+        "agendado_para": "2026-11-28T06:00-03:00",
+        "status": "scheduled",
+        "sem_aprovacao": true
+      }
     }
   ],
   "decisoes": [
@@ -3043,6 +1083,13 @@
       "autor": "joao_paulo2360",
       "curtidas": 0,
       "texto": "Gramado da Segunda Divisão"
+    },
+    {
+      "dia": 22,
+      "acao": "onibus",
+      "autor": "_guigs12",
+      "curtidas": 0,
+      "texto": "Ônibus Cometa Empoeirado"
     }
   ],
   "enquetes": [],
@@ -3454,6 +1501,18 @@
       "valor": -3500.0,
       "descricao": "Gramado da Segunda Divisão",
       "saldo": 4670.0
+    },
+    {
+      "dia": 22,
+      "valor": 92,
+      "descricao": "curtidas do dia 21",
+      "saldo": 4762.0
+    },
+    {
+      "dia": 22,
+      "valor": -4300.0,
+      "descricao": "Ônibus Cometa Empoeirado",
+      "saldo": 462.0
     }
   ],
   "linha_do_tempo": [
@@ -3665,9 +1724,14 @@
       "dia": 21,
       "evento": "A federação exige grama na Segunda Divisão. O que deu pra comprar: grama de rolo de segunda mão, que veio de um condomínio.",
       "autor": "joao_paulo2360"
+    },
+    {
+      "dia": 22,
+      "evento": "Ônibus usado de linha intermunicipal, pras viagens da Segunda Divisão. Nome escolhido pela torcida: Cometa Empoeirado.",
+      "autor": "_guigs12"
     }
   ],
-  "atualizado_em": "2026-11-28T01:12:38+00:00",
+  "atualizado_em": "2026-11-28T07:03:14+00:00",
   "piadas_usadas": [
     "Whisky do Paraguai",
     "Viagra em Idoso",
@@ -3709,16 +1773,145 @@
     "canto"
   ],
   "cameras": {
-    "capa": "aereo",
-    "evolucao": "balcao",
-    "estadio": "arquibancada",
-    "comentarios": "rua",
+    "capa": "campo",
+    "evolucao": "aereo",
+    "estadio": "aereo",
+    "comentarios": "celular",
     "pre_jogo": "chegada",
     "apelido": "close",
     "fim_de_jogo": "tiao",
-    "tabela": "card",
-    "decisao": "mural",
-    "encerramento": "por_do_sol",
+    "tabela": "quadro",
+    "decisao": "rua",
+    "encerramento": "rua",
     "bilheteria": "campo"
-  }
+  },
+  "temporadas": [
+    {
+      "nome": "Terceira Divisão da Várzea",
+      "tabela": [
+        {
+          "time": "Poeira FC",
+          "j": 18,
+          "v": 11,
+          "e": 4,
+          "d": 3,
+          "gp": 29,
+          "gc": 19,
+          "pts": 37,
+          "pos": 1,
+          "sg": 10
+        },
+        {
+          "time": "Atlético Padaria",
+          "j": 18,
+          "v": 10,
+          "e": 5,
+          "d": 3,
+          "gp": 30,
+          "gc": 15,
+          "pts": 35,
+          "pos": 2,
+          "sg": 15
+        },
+        {
+          "time": "Juventude do Asfalto",
+          "j": 18,
+          "v": 9,
+          "e": 4,
+          "d": 5,
+          "gp": 24,
+          "gc": 18,
+          "pts": 31,
+          "pos": 3,
+          "sg": 6
+        },
+        {
+          "time": "Grêmio Vila Barro",
+          "j": 18,
+          "v": 6,
+          "e": 8,
+          "d": 4,
+          "gp": 18,
+          "gc": 15,
+          "pts": 26,
+          "pos": 4,
+          "sg": 3
+        },
+        {
+          "time": "Ferro-Velho EC",
+          "j": 18,
+          "v": 7,
+          "e": 5,
+          "d": 6,
+          "gp": 20,
+          "gc": 23,
+          "pts": 26,
+          "pos": 5,
+          "sg": -3
+        },
+        {
+          "time": "Estrela da Feira",
+          "j": 18,
+          "v": 7,
+          "e": 2,
+          "d": 9,
+          "gp": 19,
+          "gc": 23,
+          "pts": 23,
+          "pos": 6,
+          "sg": -4
+        },
+        {
+          "time": "Amigos do Churrasco FC",
+          "j": 18,
+          "v": 7,
+          "e": 0,
+          "d": 11,
+          "gp": 19,
+          "gc": 24,
+          "pts": 21,
+          "pos": 7,
+          "sg": -5
+        },
+        {
+          "time": "Real Laje",
+          "j": 18,
+          "v": 4,
+          "e": 5,
+          "d": 9,
+          "gp": 15,
+          "gc": 19,
+          "pts": 17,
+          "pos": 8,
+          "sg": -4
+        },
+        {
+          "time": "Veteranos do Bairro",
+          "j": 18,
+          "v": 4,
+          "e": 4,
+          "d": 10,
+          "gp": 23,
+          "gc": 31,
+          "pts": 16,
+          "pos": 9,
+          "sg": -8
+        },
+        {
+          "time": "Leões do Brejo",
+          "j": 18,
+          "v": 3,
+          "e": 7,
+          "d": 8,
+          "gp": 19,
+          "gc": 29,
+          "pts": 16,
+          "pos": 10,
+          "sg": -10
+        }
+      ],
+      "rodadas": 18,
+      "encerrada_no_dia": 22
+    }
+  ]
 }
