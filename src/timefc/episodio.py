@@ -739,6 +739,9 @@ def fechar(estado: dict, briefing: dict) -> tuple[dict, dict]:
     else:
         tab = tabela(times, liga["resultados"])
         pos = next(l["pos"] for l in tab if l["time"] == nome)
+        if briefing.get("nova_liga"):   # apresentação da liga nova: tabela zerada, com o rival em destaque
+            cena("tabela", briefing["nova_liga"].get("apresentacao") or f"Essa é a {e['liga']['nome']}: dez times, todo mundo zerado.",
+                 [e["liga"]["nome"].upper(), "TODO MUNDO ZERADO"], tabela=tab, posicao=pos)
 
     # ================================================================ FECHAMENTO
     if briefing.get("nova_enquete"):
